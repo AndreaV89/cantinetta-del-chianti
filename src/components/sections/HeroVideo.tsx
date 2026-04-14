@@ -48,7 +48,7 @@ export default function HeroVideo() {
         sx={{
           position: "relative",
           zIndex: 2,
-          maxWidth: 1440,
+          maxWidth: 1920,
           width: "100%",
           mx: "auto",
           px: { xs: 3, md: 10 },

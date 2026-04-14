@@ -43,7 +43,7 @@ export default function Navbar() {
     >
       <Toolbar
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           width: "100%",
           mx: "auto",
           px: { xs: 3, md: 6 },

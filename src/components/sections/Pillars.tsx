@@ -23,14 +23,14 @@ export default function Pillars() {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#F8F5F0",
-        borderTop: "1px solid rgba(201, 168, 108, 0.3)",
-        borderBottom: "1px solid rgba(201, 168, 108, 0.3)",
+        backgroundColor: "#3A2E28",
+        borderTop: "1px solid rgba(201, 168, 108, 0.2)",
+        borderBottom: "1px solid rgba(201, 168, 108, 0.2)",
       }}
     >
       <Box
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           mx: "auto",
           px: { xs: 3, md: 10 },
           py: { xs: 6, md: 7 },
@@ -45,7 +45,10 @@ export default function Pillars() {
             sx={{
               px: { md: 6 },
               borderRight: {
-                md: index < pillars.length - 1 ? "1px solid #E0D8CE" : "none",
+                md:
+                  index < pillars.length - 1
+                    ? "1px solid rgba(255,255,255,0.1)"
+                    : "none",
               },
               "&:first-of-type": { pl: { md: 0 } },
               "&:last-of-type": { pr: { md: 0 } },
@@ -57,7 +60,7 @@ export default function Pillars() {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontStyle: "italic",
                 fontSize: "2rem",
-                color: "rgba(201, 168, 108, 0.6)",
+                color: "rgba(201, 168, 108, 0.7)",
                 lineHeight: 1,
                 mb: 2,
               }}
@@ -71,7 +74,7 @@ export default function Pillars() {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: "1rem",
                 fontWeight: 400,
-                color: "#3A2E28",
+                color: "#FFFFFF",
                 mb: 1.5,
               }}
             >
@@ -85,7 +88,7 @@ export default function Pillars() {
                 fontWeight: 300,
                 fontSize: "0.875rem",
                 lineHeight: 1.75,
-                color: "#736156",
+                color: "rgba(255,255,255,0.6)",
               }}
             >
               {pillar.desc}

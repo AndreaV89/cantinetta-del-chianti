@@ -3,7 +3,7 @@ import Pillars from "@/components/sections/Pillars";
 import WineSection from "@/components/sections/WineSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
-import LocationSection from "@/components/sections/LocationSection";
+import QuoteSection from "@/components/sections/QuoteSection";
 import { getViniInEvidenza } from "@/lib/wordpress";
 
 export default async function Home() {
@@ -14,9 +14,9 @@ export default async function Home() {
       <HeroVideo />
       <Pillars />
       <WineSection vini={vini} />
+      <QuoteSection quote="Wine not?" />
       <ServicesSection />
       <AboutSection />
-      <LocationSection />
     </main>
   );
 }

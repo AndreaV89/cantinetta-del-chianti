@@ -31,7 +31,7 @@ export default function ServicesSection() {
     >
       <Box
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           mx: "auto",
           px: { xs: 3, md: 10 },
         }}
@@ -63,27 +63,6 @@ export default function ServicesSection() {
             }}
           >
             I nostri servizi
-          </Typography>
-        </Box>
-
-        {/* Citazione — "Wine not?" */}
-        <Box
-          sx={{
-            mb: 8,
-            pl: 4,
-            borderLeft: "2px solid #C9A86C",
-          }}
-        >
-          <Typography
-            sx={{
-              fontFamily: '"Apple Chancery", Palatino, serif',
-              fontStyle: "italic",
-              fontSize: { xs: "1.5rem", md: "2rem" },
-              color: "#C9A86C",
-              lineHeight: 1.4,
-            }}
-          >
-            Wine not?
           </Typography>
         </Box>
 

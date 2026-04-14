@@ -1,52 +1,44 @@
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <Box
-      component="section"
-      sx={{ backgroundColor: "#FDFAF6", py: { xs: 8, md: 0 } }}
-    >
+    <Box component="section" sx={{ backgroundColor: "#2A1F1A" }}>
       <Box
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           mx: "auto",
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
           minHeight: { md: 580 },
         }}
       >
-        {/* Foto sinistra */}
+        {/* Colonna 1 — Foto */}
         <Box
           sx={{
             position: "relative",
             minHeight: { xs: 300, md: 580 },
-            backgroundColor: "#E8E0D5",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            overflow: "hidden",
           }}
         >
-          {/* Sostituire con <Image> quando il cliente fornisce la foto */}
-          <Typography
-            sx={{
-              fontFamily: '"Apple Chancery", Palatino, serif',
-              fontStyle: "italic",
-              fontSize: "1rem",
-              color: "rgba(115, 97, 86, 0.4)",
-            }}
-          >
-            [ foto locale ]
-          </Typography>
+          <Image
+            src="/images/about.webp"
+            alt="La Cantinetta del Chianti"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
         </Box>
 
-        {/* Testo destra */}
+        {/* Colonna 2 — Testo Chi Siamo */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            px: { xs: 3, md: 8 },
+            px: { xs: 3, md: 7 },
             py: { xs: 6, md: 8 },
+            borderRight: { md: "1px solid rgba(201, 168, 108, 0.15)" },
           }}
         >
           <Typography
@@ -62,7 +54,7 @@ export default function AboutSection() {
             Chi Siamo
           </Typography>
           <Box
-            sx={{ width: 32, height: 1, backgroundColor: "#C9A86C", mb: 3 }}
+            sx={{ width: 32, height: "1px", backgroundColor: "#C9A86C", mb: 3 }}
           />
 
           <Typography
@@ -71,7 +63,7 @@ export default function AboutSection() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#3A2E28",
+              color: "#FFFFFF",
               lineHeight: 1.25,
               mb: 4,
             }}
@@ -86,7 +78,7 @@ export default function AboutSection() {
               fontWeight: 300,
               fontSize: "0.9375rem",
               lineHeight: 1.85,
-              color: "#736156",
+              color: "rgba(255,255,255,0.65)",
               mb: 3,
             }}
           >
@@ -102,7 +94,7 @@ export default function AboutSection() {
               fontWeight: 300,
               fontSize: "0.9375rem",
               lineHeight: 1.85,
-              color: "#736156",
+              color: "rgba(255,255,255,0.65)",
               mb: 5,
             }}
           >
@@ -110,9 +102,8 @@ export default function AboutSection() {
             solo — sei arrivato nel posto giusto.
           </Typography>
 
-          {/* Divider gold */}
           <Box
-            sx={{ width: 48, height: 1, backgroundColor: "#C9A86C", mb: 5 }}
+            sx={{ width: 48, height: "1px", backgroundColor: "#C9A86C", mb: 5 }}
           />
 
           <Typography
@@ -124,15 +115,117 @@ export default function AboutSection() {
               fontSize: "0.8125rem",
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#8B1A2F",
+              color: "#C9A86C",
               textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 1,
-              "&:hover": { gap: 2, transition: "gap 0.2s ease" },
+              "&:hover": { textDecoration: "underline" },
             }}
           >
             Vieni a trovarci →
+          </Typography>
+        </Box>
+
+        {/* Colonna 3 — Info contatti */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            px: { xs: 3, md: 7 },
+            py: { xs: 6, md: 8 },
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.6875rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#C9A86C",
+              mb: 1,
+            }}
+          >
+            Dove Siamo
+          </Typography>
+          <Box
+            sx={{ width: 32, height: "1px", backgroundColor: "#C9A86C", mb: 3 }}
+          />
+
+          <Typography
+            component="h2"
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontSize: { xs: "2rem", md: "2.5rem" },
+              fontWeight: 400,
+              color: "#FFFFFF",
+              lineHeight: 1.25,
+              mb: 5,
+            }}
+          >
+            Vieni a trovarci
+            <br />a Gaiole in Chianti
+          </Typography>
+
+          {[
+            {
+              label: "Indirizzo",
+              value: "Via Roma 12\n53013 Gaiole in Chianti (SI)",
+            },
+            {
+              label: "Orari",
+              value: "Lun – Sab: 09:00 – 19:30\nDomenica: 10:00 – 18:00",
+            },
+            {
+              label: "Contatti",
+              value: "+39 0577 000000\ninfo@lacantinettadelchianti.it",
+            },
+          ].map((item) => (
+            <Box key={item.label} sx={{ mb: 3.5 }}>
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: "0.625rem",
+                  fontWeight: 400,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#C9A86C",
+                  mb: 0.75,
+                }}
+              >
+                {item.label}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: 300,
+                  fontSize: "0.9375rem",
+                  lineHeight: 1.75,
+                  color: "rgba(255,255,255,0.65)",
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {item.value}
+              </Typography>
+            </Box>
+          ))}
+
+          <Typography
+            component="a"
+            href="https://maps.google.com/?q=La+Cantinetta+del+Chianti+Gaiole"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              mt: 1,
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 500,
+              fontSize: "0.8125rem",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "#C9A86C",
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            }}
+          >
+            Ottieni indicazioni →
           </Typography>
         </Box>
       </Box>
