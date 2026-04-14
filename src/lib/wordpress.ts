@@ -20,18 +20,32 @@ function parseFeaturedImage(raw: WPRawPost) {
 
 export async function getVini(): Promise<Vino[]> {
   const res = await fetch(
-    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100`,
-    { next: { revalidate: 3600 } }, // cache 1 ora
+    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&_fields=id,slug,title,featured_media,acf,_links,_embedded`,
+    { next: { revalidate: 3600 } },
   );
   if (!res.ok) return [];
   const data: WPRawPost[] = await res.json();
-  return data.map((item) => ({
-    id: item.id,
-    slug: item.slug,
-    title: item.title.rendered,
-    featuredImage: parseFeaturedImage(item),
-    acf: item.acf as Vino["acf"],
-  }));
+
+  // Fetch individuale per ogni vino per ottenere i campi ACF completi
+  const viniCompleti = await Promise.all(
+    data.map(async (item) => {
+      const resSingle = await fetch(
+        `${WP_URL}/wp-json/wp/v2/vini/${item.id}?_embed`,
+        { next: { revalidate: 3600 } },
+      );
+      if (!resSingle.ok) return null;
+      const single: WPRawPost = await resSingle.json();
+      return {
+        id: single.id,
+        slug: single.slug,
+        title: single.title.rendered,
+        featuredImage: parseFeaturedImage(single),
+        acf: single.acf as Vino["acf"],
+      };
+    }),
+  );
+
+  return viniCompleti.filter(Boolean) as Vino[];
 }
 
 export async function getViniInEvidenza(): Promise<Vino[]> {
@@ -43,18 +57,31 @@ export async function getViniInEvidenza(): Promise<Vino[]> {
 
 export async function getProdotti(): Promise<Prodotto[]> {
   const res = await fetch(
-    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100`,
+    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&_fields=id,slug,title,featured_media,acf,_links,_embedded`,
     { next: { revalidate: 3600 } },
   );
   if (!res.ok) return [];
   const data: WPRawPost[] = await res.json();
-  return data.map((item) => ({
-    id: item.id,
-    slug: item.slug,
-    title: item.title.rendered,
-    featuredImage: parseFeaturedImage(item),
-    acf: item.acf as Prodotto["acf"],
-  }));
+
+  const prodottiCompleti = await Promise.all(
+    data.map(async (item) => {
+      const resSingle = await fetch(
+        `${WP_URL}/wp-json/wp/v2/prodotti/${item.id}?_embed`,
+        { next: { revalidate: 3600 } },
+      );
+      if (!resSingle.ok) return null;
+      const single: WPRawPost = await resSingle.json();
+      return {
+        id: single.id,
+        slug: single.slug,
+        title: single.title.rendered,
+        featuredImage: parseFeaturedImage(single),
+        acf: single.acf as Prodotto["acf"],
+      };
+    }),
+  );
+
+  return prodottiCompleti.filter(Boolean) as Prodotto[];
 }
 
 export async function getProdottiInEvidenza(): Promise<Prodotto[]> {

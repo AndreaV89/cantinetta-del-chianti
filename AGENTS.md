@@ -48,4 +48,15 @@
 ## Note
 
 - I servizi sono statici (no CPT), definiti direttamente nel codice
-- Il catalogo vini completo è gestito tramite PDF s
+- Il catalogo vini completo è gestito tramite PDF scaricabile
+- Apple Chancery non è disponibile su Windows/Android — il fallback è Palatino
+
+## Citazioni e aforismi
+
+Il cliente vuole citazioni sul vino sparse nelle pagine come elementi decorativi.
+
+- Font: Apple Chancery italic
+- Colore: #C9A86C (oro)
+- Posizionamento: tra una sezione e l'altra, o come elementi di sfondo
+- Citazione confermata: "Wine not?"
+- Tono: spiritoso ma elegante, non pacchiano
