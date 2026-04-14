@@ -1,7 +1,9 @@
+import HeroVideo from "@/components/sections/HeroVideo";
+
 export default function Home() {
   return (
     <main>
-      <h1>La Cantinetta del Chianti</h1>
+      <HeroVideo />
     </main>
   );
 }
