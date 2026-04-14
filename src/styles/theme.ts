@@ -124,9 +124,10 @@ const theme = createTheme({
   body {
     background-color: #FDFAF6;
     color: #3A2E28;
+    font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: "Apple Chancery", Palatino, "Palatino Linotype", serif;
   }
       `,
