@@ -1,4 +1,11 @@
-import { Vino, Prodotto, WPRawPost } from "@/types";
+import {
+  Vino,
+  Prodotto,
+  Album,
+  WPRawPost,
+  WPRawAlbum,
+  FotoGallery,
+} from "@/types";
 
 const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
 
@@ -87,4 +94,51 @@ export async function getProdotti(): Promise<Prodotto[]> {
 export async function getProdottiInEvidenza(): Promise<Prodotto[]> {
   const prodotti = await getProdotti();
   return prodotti.filter((p) => p.acf.in_evidenza);
+}
+
+// ─── Album ─────────────────────────────────────────────
+
+export async function getAlbum(): Promise<Album[]> {
+  const res = await fetch(`${WP_URL}/wp-json/wp/v2/album?per_page=100`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) return [];
+  const data: WPRawAlbum[] = await res.json();
+
+  const albumCompleti = await Promise.all(
+    data.map(async (item) => {
+      const resSingle = await fetch(
+        `${WP_URL}/wp-json/wp/v2/album/${item.id}`,
+        { next: { revalidate: 3600 } },
+      );
+
+      if (!resSingle.ok) return null;
+      const single: WPRawAlbum = await resSingle.json();
+      const rawAcf = single.acf as Record<string, unknown>;
+      const photoGallery = rawAcf.photo_gallery as
+        | Record<string, unknown>
+        | undefined;
+      const fotoRaw = photoGallery?.foto as unknown[][] | undefined;
+      const foto =
+        Array.isArray(fotoRaw) && Array.isArray(fotoRaw[0]) ? fotoRaw[0] : [];
+
+      return {
+        id: single.id,
+        slug: single.slug,
+        title: single.title.rendered,
+        acf: {
+          copertina: (rawAcf.copertina as Album["acf"]["copertina"]) || null,
+          descrizione: (rawAcf.descrizione as string) || "",
+          data: (rawAcf.data as string) || "",
+          ordine: (rawAcf.ordine as number) || 0,
+          foto: foto as FotoGallery[],
+        },
+      };
+    }),
+  );
+
+  return albumCompleti
+    .filter(Boolean)
+    .sort((a, b) => (a!.acf.ordine || 0) - (b!.acf.ordine || 0)) as Album[];
 }

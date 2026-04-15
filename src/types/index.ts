@@ -63,3 +63,49 @@ export interface WPRawPost {
     }>;
   };
 }
+
+// ─── Foto (da ACF Photo Gallery) ──────────────────────────
+
+export interface FotoGallery {
+  id: number;
+  title: string;
+  caption: string;
+  alt_text: string;
+  full_image_url: string;
+  thumbnail_image_url: string;
+  large_srcset: string;
+  media_details: {
+    width: number;
+    height: number;
+    sizes: {
+      large?: { source_url: string; width: number; height: number };
+      medium?: { source_url: string; width: number; height: number };
+    };
+  };
+}
+
+// ─── Album ────────────────────────────────────────────────
+
+export interface Album {
+  id: number;
+  slug: string;
+  title: string;
+  acf: {
+    copertina: {
+      url: string;
+      width: number;
+      height: number;
+    } | null;
+    descrizione: string;
+    data: string;
+    ordine: number;
+    foto: FotoGallery[];
+  };
+}
+
+export interface WPRawAlbum {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  acf: Record<string, unknown>;
+}
