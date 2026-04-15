@@ -57,7 +57,7 @@ export async function getViniInEvidenza(): Promise<Vino[]> {
 
 export async function getProdotti(): Promise<Prodotto[]> {
   const res = await fetch(
-    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&_fields=id,slug,title,featured_media,acf,_links,_embedded`,
+    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100`,
     { next: { revalidate: 3600 } },
   );
   if (!res.ok) return [];
