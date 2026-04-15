@@ -60,3 +60,21 @@ Il cliente vuole citazioni sul vino sparse nelle pagine come elementi decorativi
 - Posizionamento: tra una sezione e l'altra, o come elementi di sfondo
 - Citazione confermata: "Wine not?"
 - Tono: spiritoso ma elegante, non pacchiano
+
+## Regola sezioni scure
+
+- Footer: #3A2E28 (il più scuro)
+- Sezione immediatamente sopra il footer: #2A1F1A
+- Sezioni scure intermedie (Pillars, QuoteSection): #3A2E28
+- Mai mettere due sezioni dello stesso colore scuro adiacenti
+
+## Ordine sezioni Home
+
+1. HeroVideo
+2. Pillars (#3A2E28 — scuro)
+3. WineSection (#FDFAF6 — chiaro)
+4. ProductsSection (#F8F5F0 — chiaro alternato)
+5. QuoteSection (#3A2E28 — scuro, separatore)
+6. ServicesSection (#FDFAF6 — chiaro)
+7. AboutSection (#2A1F1A — scuro, pre-footer)
+8. Footer (#3A2E28)
