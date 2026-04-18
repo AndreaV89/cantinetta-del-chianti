@@ -51,7 +51,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
     <Box
       component="section"
       sx={{
-        backgroundColor: isEven ? "#FDFAF6" : "#F8F5F0",
+        backgroundColor: isEven ? "#FEFCFB" : "#F5F0EF",
         py: { xs: 6, md: 8 },
         borderBottom: "1px solid rgba(224, 216, 206, 0.5)",
       }}
@@ -76,7 +76,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 fontSize: "0.6875rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 0.5,
               }}
             >
@@ -89,7 +89,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "1.75rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#3A2E28",
+              color: "#1E1414",
               lineHeight: 1.2,
             }}
           >
@@ -101,7 +101,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 fontFamily: '"DM Sans", sans-serif',
                 fontWeight: 300,
                 fontSize: "0.9375rem",
-                color: "#736156",
+                color: "#5E4444",
                 mt: 1,
               }}
             >
@@ -118,7 +118,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
-              color: "#736156",
+              color: "#5E4444",
               mr: 1,
             }}
           >
@@ -128,9 +128,9 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             onClick={() => scroll("left")}
             size="small"
             sx={{
-              border: "1px solid #E0D8CE",
-              color: "#3A2E28",
-              "&:hover": { borderColor: "#C9A86C", color: "#C9A86C" },
+              border: "1px solid #E5DADA",
+              color: "#1E1414",
+              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
             <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
@@ -139,9 +139,9 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             onClick={() => scroll("right")}
             size="small"
             sx={{
-              border: "1px solid #E0D8CE",
-              color: "#3A2E28",
-              "&:hover": { borderColor: "#C9A86C", color: "#C9A86C" },
+              border: "1px solid #E5DADA",
+              color: "#1E1414",
+              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
             <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
@@ -205,7 +205,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.02)",
-                  boxShadow: "0 8px 24px rgba(58, 46, 40, 0.15)",
+                  boxShadow: "0 8px 24px rgba(30, 20, 20, 0.15)",
                 },
                 // Prima foto dell'album leggermente più grande
                 ...(i === 0 && {
@@ -225,10 +225,10 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  backgroundColor: "rgba(58, 46, 40, 0)",
+                  backgroundColor: "rgba(30, 20, 20, 0)",
                   transition: "background-color 0.3s ease",
                   "&:hover": {
-                    backgroundColor: "rgba(58, 46, 40, 0.15)",
+                    backgroundColor: "rgba(30, 20, 20, 0.15)",
                   },
                 }}
               />

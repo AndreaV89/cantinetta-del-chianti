@@ -62,7 +62,7 @@ export default function HeroVideo() {
             fontWeight: 400,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#C9A86C",
+            color: "#C4A882",
             mb: 1.5,
           }}
         >
@@ -70,7 +70,7 @@ export default function HeroVideo() {
         </Typography>
 
         {/* Linea gold */}
-        <Box sx={{ width: 32, height: 1, backgroundColor: "#C9A86C", mb: 3 }} />
+        <Box sx={{ width: 32, height: 1, backgroundColor: "#C4A882", mb: 3 }} />
 
         {/* Titolo */}
         <Typography
@@ -97,7 +97,7 @@ export default function HeroVideo() {
             fontSize: { xs: "2.75rem", md: "4.5rem" },
             fontWeight: 400,
             lineHeight: 1.15,
-            color: "#C9A86C",
+            color: "#C4A882",
             mb: 4,
           }}
         >
@@ -126,11 +126,11 @@ export default function HeroVideo() {
             variant="contained"
             href="/vini"
             sx={{
-              backgroundColor: "#8B1A2F",
+              backgroundColor: "#6B1A28",
               color: "#FFFFFF",
               px: 4,
               py: 1.5,
-              "&:hover": { backgroundColor: "#7a1728" },
+              "&:hover": { backgroundColor: "#9E3347" },
             }}
           >
             Scopri i vini

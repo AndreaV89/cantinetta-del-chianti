@@ -24,9 +24,9 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#3A2E28",
+        backgroundColor: "#1E1414",
         color: "#FFFFFF",
-        borderTop: "2px solid #C9A86C",
+        borderTop: "2px solid #C4A882",
       }}
     >
       <Box
@@ -45,7 +45,7 @@ export default function Footer() {
             gridTemplateColumns: { xs: "1fr", md: "2fr 1fr 1fr 1fr" },
             gap: { xs: 5, md: 8 },
             pb: 6,
-            borderBottom: "1px solid rgba(201, 168, 108, 0.2)",
+            borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
           }}
         >
           {/* Brand */}
@@ -84,7 +84,7 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 2.5,
               }}
             >
@@ -121,7 +121,7 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 2.5,
               }}
             >
@@ -158,7 +158,7 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 2.5,
               }}
             >
@@ -225,12 +225,12 @@ export default function Footer() {
               href="https://andreavannetti.dev"
               target="_blank"
               sx={{
-                color: "rgba(201, 168, 108, 0.6)",
+                color: "rgba(196, 168, 130, 0.6)",
                 textDecoration: "none",
                 fontSize: "inherit",
                 fontFamily: "inherit",
                 fontWeight: "inherit",
-                "&:hover": { color: "#C9A86C" },
+                "&:hover": { color: "#C4A882" },
               }}
             >
               vannetti.dev

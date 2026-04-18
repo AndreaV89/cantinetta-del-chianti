@@ -11,7 +11,7 @@ export default async function FotoPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#3A2E28",
+          backgroundColor: "#1E1414",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -52,14 +52,14 @@ export default async function FotoPage() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: "#C4A882",
               mb: 1,
             }}
           >
             La Cantinetta in immagini
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C9A86C", mb: 3 }}
+            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
           />
           <Typography
             component="h1"
@@ -92,7 +92,7 @@ export default async function FotoPage() {
       </Box>
 
       {/* Album */}
-      <Box sx={{ backgroundColor: "#FDFAF6" }}>
+      <Box sx={{ backgroundColor: "#FEFCFB" }}>
         {album.length === 0 ? (
           <Box sx={{ py: 12, textAlign: "center" }}>
             <Typography
@@ -116,7 +116,7 @@ export default async function FotoPage() {
       {/* Pre-footer */}
       <Box
         sx={{
-          backgroundColor: "#2A1F1A",
+          backgroundColor: "#2A1414",
           py: { xs: 6, md: 8 },
           textAlign: "center",
         }}
@@ -126,7 +126,7 @@ export default async function FotoPage() {
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
             fontSize: { xs: "1.5rem", md: "2rem" },
-            color: "#C9A86C",
+            color: "#C4A882",
           }}
         >
           Un'immagine vale più di mille parole

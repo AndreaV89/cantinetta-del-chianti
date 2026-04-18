@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <Box component="section" sx={{ backgroundColor: "#2A1F1A" }}>
+    <Box component="section" sx={{ backgroundColor: "#2A1414" }}>
       <Box
         sx={{
           maxWidth: 1920,
@@ -38,7 +38,7 @@ export default function AboutSection() {
             justifyContent: "center",
             px: { xs: 3, md: 7 },
             py: { xs: 6, md: 8 },
-            borderRight: { md: "1px solid rgba(201, 168, 108, 0.15)" },
+            borderRight: { md: "1px solid rgba(196, 168, 130, 0.15)" },
           }}
         >
           <Typography
@@ -47,14 +47,14 @@ export default function AboutSection() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: "#C4A882",
               mb: 1,
             }}
           >
             Chi Siamo
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C9A86C", mb: 3 }}
+            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
           />
 
           <Typography
@@ -103,7 +103,7 @@ export default function AboutSection() {
           </Typography>
 
           <Box
-            sx={{ width: 48, height: "1px", backgroundColor: "#C9A86C", mb: 5 }}
+            sx={{ width: 48, height: "1px", backgroundColor: "#C4A882", mb: 5 }}
           />
 
           <Typography
@@ -115,7 +115,7 @@ export default function AboutSection() {
               fontSize: "0.8125rem",
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: "#C4A882",
               textDecoration: "none",
               "&:hover": { textDecoration: "underline" },
             }}
@@ -140,14 +140,14 @@ export default function AboutSection() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: "#C4A882",
               mb: 1,
             }}
           >
             Dove Siamo
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C9A86C", mb: 3 }}
+            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
           />
 
           <Typography
@@ -187,7 +187,7 @@ export default function AboutSection() {
                   fontWeight: 400,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "#C9A86C",
+                  color: "#C4A882",
                   mb: 0.75,
                 }}
               >
@@ -220,7 +220,7 @@ export default function AboutSection() {
               fontSize: "0.8125rem",
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: "#C4A882",
               textDecoration: "none",
               "&:hover": { textDecoration: "underline" },
             }}

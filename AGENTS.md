@@ -23,11 +23,11 @@
 
 - **Font titoli:** Apple Chancery, Palatino, serif
 - **Font body:** DM Sans, sans-serif
-- **Sfondo:** #FDFAF6 (crema caldo) / #F8F5F0 (sezioni alternate)
-- **Testo:** #3A2E28 (scuro) / #736156 (medio)
-- **Oro:** #C9A86C (accenti, label, divider)
-- **Merlot:** #8B1A2F (CTA, bottoni primari)
-- **Bordo:** #E0D8CE
+- **Sfondo:** #FEFCFB (crema caldo) / #F5F0EF (sezioni alternate)
+- **Testo:** #1E1414 (scuro) / #5E4444 (medio)
+- **Oro:** #C4A882 (accenti, label, divider)
+- **Merlot:** #6B1A28 (CTA, bottoni primari)
+- **Bordo:** #E5DADA
 
 ## Convenzioni
 
@@ -56,25 +56,25 @@
 Il cliente vuole citazioni sul vino sparse nelle pagine come elementi decorativi.
 
 - Font: Apple Chancery italic
-- Colore: #C9A86C (oro)
+- Colore: #C4A882 (oro)
 - Posizionamento: tra una sezione e l'altra, o come elementi di sfondo
 - Citazione confermata: "Wine not?"
 - Tono: spiritoso ma elegante, non pacchiano
 
 ## Regola sezioni scure
 
-- Footer: #3A2E28 (il più scuro)
-- Sezione immediatamente sopra il footer: #2A1F1A
-- Sezioni scure intermedie (Pillars, QuoteSection): #3A2E28
+- Footer: #1E1414 (il più scuro)
+- Sezione immediatamente sopra il footer: #2A1414
+- Sezioni scure intermedie (Pillars, QuoteSection): #1E1414
 - Mai mettere due sezioni dello stesso colore scuro adiacenti
 
 ## Ordine sezioni Home
 
 1. HeroVideo
-2. Pillars (#3A2E28 — scuro)
-3. WineSection (#FDFAF6 — chiaro)
-4. ProductsSection (#F8F5F0 — chiaro alternato)
-5. QuoteSection (#3A2E28 — scuro, separatore)
-6. ServicesSection (#FDFAF6 — chiaro)
-7. AboutSection (#2A1F1A — scuro, pre-footer)
-8. Footer (#3A2E28)
+2. Pillars (#1E1414 — scuro)
+3. WineSection (#FEFCFB — chiaro)
+4. ProductsSection (#F5F0EF — chiaro alternato)
+5. QuoteSection (#1E1414 — scuro, separatore)
+6. ServicesSection (#FEFCFB — chiaro)
+7. AboutSection (#2A1414 — scuro, pre-footer)
+8. Footer (#1E1414)

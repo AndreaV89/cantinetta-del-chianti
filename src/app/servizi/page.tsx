@@ -50,7 +50,7 @@ export default function ServiziPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#3A2E28",
+          backgroundColor: "#1E1414",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -91,14 +91,14 @@ export default function ServiziPage() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: "#C4A882",
               mb: 1,
             }}
           >
             Cosa Offriamo
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C9A86C", mb: 3 }}
+            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
           />
           <Typography
             component="h1"
@@ -131,7 +131,7 @@ export default function ServiziPage() {
       </Box>
 
       {/* Servizi — layout editoriale alternato */}
-      <Box component="section" sx={{ backgroundColor: "#FDFAF6" }}>
+      <Box component="section" sx={{ backgroundColor: "#FEFCFB" }}>
         {servizi.map((servizio, index) => {
           const isEven = index % 2 === 0;
           return (
@@ -187,7 +187,7 @@ export default function ServiziPage() {
                   justifyContent: "center",
                   px: { xs: 3, md: 10 },
                   py: { xs: 6, md: 10 },
-                  backgroundColor: isEven ? "#FDFAF6" : "#F8F5F0",
+                  backgroundColor: isEven ? "#FEFCFB" : "#F5F0EF",
                   direction: "ltr",
                 }}
               >
@@ -197,7 +197,7 @@ export default function ServiziPage() {
                     fontSize: "0.6875rem",
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "#C9A86C",
+                    color: "#C4A882",
                     mb: 1,
                   }}
                 >
@@ -207,7 +207,7 @@ export default function ServiziPage() {
                   sx={{
                     width: 32,
                     height: "1px",
-                    backgroundColor: "#C9A86C",
+                    backgroundColor: "#C4A882",
                     mb: 3,
                   }}
                 />
@@ -218,7 +218,7 @@ export default function ServiziPage() {
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "2rem", md: "2.75rem" },
                     fontWeight: 400,
-                    color: "#3A2E28",
+                    color: "#1E1414",
                     lineHeight: 1.2,
                     mb: 4,
                   }}
@@ -232,7 +232,7 @@ export default function ServiziPage() {
                     fontWeight: 300,
                     fontSize: "1rem",
                     lineHeight: 1.85,
-                    color: "#736156",
+                    color: "#5E4444",
                     mb: 4,
                   }}
                 >
@@ -245,9 +245,9 @@ export default function ServiziPage() {
                     fontFamily: '"DM Sans", sans-serif',
                     fontWeight: 300,
                     fontSize: "0.8125rem",
-                    color: "#C9A86C",
+                    color: "#C4A882",
                     letterSpacing: "0.05em",
-                    borderTop: "1px solid #E0D8CE",
+                    borderTop: "1px solid #E5DADA",
                     pt: 3,
                   }}
                 >
@@ -263,7 +263,7 @@ export default function ServiziPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#2A1F1A",
+          backgroundColor: "#2A1414",
           py: { xs: 8, md: 10 },
           textAlign: "center",
         }}
@@ -274,7 +274,7 @@ export default function ServiziPage() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontStyle: "italic",
               fontSize: { xs: "1.75rem", md: "2.5rem" },
-              color: "#C9A86C",
+              color: "#C4A882",
               mb: 2,
             }}
           >
@@ -301,13 +301,13 @@ export default function ServiziPage() {
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "#FFFFFF",
-              backgroundColor: "#8B1A2F",
+              backgroundColor: "#6B1A28",
               textDecoration: "none",
               px: 5,
               py: 1.75,
               borderRadius: "2px",
               display: "inline-block",
-              "&:hover": { backgroundColor: "#7a1728" },
+              "&:hover": { backgroundColor: "#9E3347" },
             }}
           >
             Contattaci

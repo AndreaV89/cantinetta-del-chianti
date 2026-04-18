@@ -3,22 +3,22 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     background: {
-      default: "#FDFAF6", // crema caldo
-      paper: "#F8F5F0", // sezioni alternate
+      default: "#FEFCFB",
+      paper: "#F5F0EF",
     },
     text: {
-      primary: "#3A2E28", // marrone scuro
-      secondary: "#736156", // marrone medio
+      primary: "#1E1414",
+      secondary: "#5E4444",
     },
     primary: {
-      main: "#8B1A2F", // merlot — CTA, bottoni primari
+      main: "#6B1A28",
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#C9A86C", // oro antico — accenti, label, divider
-      contrastText: "#3A2E28",
+      main: "#C4A882",
+      contrastText: "#1E1414",
     },
-    divider: "#E0D8CE", // bordo sottile
+    divider: "#E5DADA",
   },
 
   typography: {
@@ -94,17 +94,17 @@ const theme = createTheme({
           },
         },
         contained: {
-          backgroundColor: "#8B1A2F",
+          backgroundColor: "#6B1A28",
           color: "#FFFFFF",
           "&:hover": {
-            backgroundColor: "#7a1728",
+            backgroundColor: "#9E3347",
           },
         },
         outlined: {
-          borderColor: "rgba(58, 46, 40, 0.35)",
-          color: "#3A2E28",
+          borderColor: "rgba(30, 20, 20, 0.35)",
+          color: "#1E1414",
           "&:hover": {
-            borderColor: "#3A2E28",
+            borderColor: "#1E1414",
             backgroundColor: "transparent",
           },
         },
@@ -116,21 +116,18 @@ const theme = createTheme({
   * {
     box-sizing: border-box;
   }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
-    background-color: #FDFAF6;
-    color: #3A2E28;
+    background-color: #FEFCFB;
+    color: #1E1414;
     font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: "Apple Chancery", Palatino, "Palatino Linotype", serif;
   }
-      `,
+`,
     },
   },
 });

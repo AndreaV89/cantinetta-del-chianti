@@ -7,12 +7,12 @@ interface ProductsSectionProps {
 }
 
 const categoriaColors: Record<string, string> = {
-  Salumi: "#8B1A2F",
-  Formaggi: "#C9A86C",
-  Conserve: "#736156",
+  Salumi: "#6B1A28",
+  Formaggi: "#C4A882",
+  Conserve: "#5E4444",
   Pasta: "#A0522D",
   Olio: "#6B7C5E",
-  Altro: "#3A2E28",
+  Altro: "#1E1414",
 };
 
 function ProductCard({ prodotto }: { prodotto: Prodotto }) {
@@ -22,13 +22,13 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#FFFFFF",
-        border: "1px solid #E0D8CE",
+        border: "1px solid #E5DADA",
         borderRadius: 1,
         overflow: "hidden",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(58, 46, 40, 0.1)",
+          boxShadow: "0 12px 32px rgba(30, 20, 20, 0.1)",
         },
       }}
     >
@@ -38,7 +38,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
           position: "relative",
           width: "100%",
           aspectRatio: "4/3",
-          backgroundColor: "#F8F5F0",
+          backgroundColor: "#F5F0EF",
         }}
       >
         {prodotto.featuredImage ? (
@@ -81,7 +81,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
           sx={{
             backgroundColor: "transparent",
             border: "none",
-            color: categoriaColors[prodotto.acf.categoria] || "#736156",
+            color: categoriaColors[prodotto.acf.categoria] || "#5E4444",
             fontFamily: '"DM Sans", sans-serif',
             fontSize: "0.625rem",
             fontWeight: 400,
@@ -98,7 +98,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#3A2E28",
+            color: "#1E1414",
             mb: 0.5,
           }}
         >
@@ -111,7 +111,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: "0.8125rem",
-              color: "#736156",
+              color: "#5E4444",
               mb: 1.5,
             }}
           >
@@ -126,7 +126,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
               fontWeight: 300,
               fontSize: "0.8125rem",
               lineHeight: 1.7,
-              color: "#736156",
+              color: "#5E4444",
             }}
           >
             {prodotto.acf.descrizione_breve}
@@ -142,7 +142,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#F8F5F0",
+        backgroundColor: "#F5F0EF",
         py: { xs: 8, md: 12 },
       }}
     >
@@ -170,7 +170,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
                 fontSize: "0.6875rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 1,
               }}
             >
@@ -180,7 +180,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
               sx={{
                 width: 32,
                 height: "1px",
-                backgroundColor: "#C9A86C",
+                backgroundColor: "#C4A882",
                 mb: 2,
               }}
             />
@@ -190,7 +190,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "2rem", md: "2.75rem" },
                 fontWeight: 400,
-                color: "#3A2E28",
+                color: "#1E1414",
                 lineHeight: 1.2,
               }}
             >
@@ -206,7 +206,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
               fontWeight: 300,
               fontSize: "0.9375rem",
               lineHeight: 1.75,
-              color: "#736156",
+              color: "#5E4444",
               maxWidth: 340,
               mt: { xs: 3, md: 0 },
             }}

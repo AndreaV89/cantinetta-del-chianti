@@ -42,7 +42,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
   return (
     <Box
       sx={{
-        backgroundColor: isEven ? "#FDFAF6" : "#F8F5F0",
+        backgroundColor: isEven ? "#FEFCFB" : "#F5F0EF",
         py: { xs: 6, md: 8 },
         borderBottom: "1px solid rgba(224, 216, 206, 0.5)",
       }}
@@ -66,7 +66,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
                 fontSize: "0.6875rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 0.5,
               }}
             >
@@ -79,7 +79,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "1.75rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#3A2E28",
+              color: "#1E1414",
               lineHeight: 1.2,
             }}
           >
@@ -91,7 +91,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
                 fontFamily: '"DM Sans", sans-serif',
                 fontWeight: 300,
                 fontSize: "0.9375rem",
-                color: "#736156",
+                color: "#5E4444",
                 mt: 1,
               }}
             >
@@ -106,7 +106,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
-              color: "#736156",
+              color: "#5E4444",
               mr: 1,
             }}
           >
@@ -118,9 +118,9 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             }
             size="small"
             sx={{
-              border: "1px solid #E0D8CE",
-              color: "#3A2E28",
-              "&:hover": { borderColor: "#C9A86C", color: "#C9A86C" },
+              border: "1px solid #E5DADA",
+              color: "#1E1414",
+              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
             <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
@@ -131,9 +131,9 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             }
             size="small"
             sx={{
-              border: "1px solid #E0D8CE",
-              color: "#3A2E28",
-              "&:hover": { borderColor: "#C9A86C", color: "#C9A86C" },
+              border: "1px solid #E5DADA",
+              color: "#1E1414",
+              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
             <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
@@ -197,7 +197,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.02)",
-                  boxShadow: "0 8px 24px rgba(58, 46, 40, 0.15)",
+                  boxShadow: "0 8px 24px rgba(30, 20, 20, 0.15)",
                 },
               }}
             >
@@ -238,7 +238,7 @@ function VarianteB({ album }: { album: Album[] }) {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#FDFAF6", py: { xs: 6, md: 8 } }}>
+    <Box sx={{ backgroundColor: "#FEFCFB", py: { xs: 6, md: 8 } }}>
       <Box
         sx={{
           maxWidth: 1920,
@@ -300,7 +300,7 @@ function VarianteB({ album }: { album: Album[] }) {
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  backgroundColor: "rgba(201, 168, 108, 0.15)",
+                  backgroundColor: "rgba(196, 168, 130, 0.15)",
                   opacity: 0,
                   transition: "opacity 0.3s ease",
                   display: "flex",
@@ -341,7 +341,7 @@ function VarianteB({ album }: { album: Album[] }) {
                       fontSize: "0.625rem",
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
-                      color: "#C9A86C",
+                      color: "#C4A882",
                       mb: 0.5,
                     }}
                   >
@@ -426,7 +426,7 @@ function VarianteC({ album }: { album: Album[] }) {
 
   // Raggruppa le foto per album e crea blocchi narrativi
   return (
-    <Box sx={{ backgroundColor: "#FDFAF6" }}>
+    <Box sx={{ backgroundColor: "#FEFCFB" }}>
       {album.map((a, albumIndex) => {
         const foto = a.acf.foto || [];
         if (foto.length === 0) return null;
@@ -459,7 +459,7 @@ function VarianteC({ album }: { album: Album[] }) {
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontStyle: "italic",
                   fontSize: { xs: "4rem", md: "8rem" },
-                  color: "rgba(201, 168, 108, 0.15)",
+                  color: "rgba(196, 168, 130, 0.15)",
                   lineHeight: 1,
                   userSelect: "none",
                 }}
@@ -472,7 +472,7 @@ function VarianteC({ album }: { album: Album[] }) {
                   sx={{
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "1.75rem", md: "2.5rem" },
-                    color: "#3A2E28",
+                    color: "#1E1414",
                     lineHeight: 1.2,
                   }}
                 >
@@ -485,7 +485,7 @@ function VarianteC({ album }: { album: Album[] }) {
                       fontSize: "0.75rem",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
-                      color: "#C9A86C",
+                      color: "#C4A882",
                       mt: 0.5,
                     }}
                   >
@@ -564,7 +564,7 @@ function VarianteC({ album }: { album: Album[] }) {
                           sx={{
                             position: "absolute",
                             inset: 0,
-                            backgroundColor: "rgba(201, 168, 108, 0.08)",
+                            backgroundColor: "rgba(196, 168, 130, 0.08)",
                             opacity: 0,
                             transition: "opacity 0.3s ease",
                           }}
@@ -604,7 +604,7 @@ function VarianteLabel({
   return (
     <Box
       sx={{
-        backgroundColor: "#3A2E28",
+        backgroundColor: "#1E1414",
         py: { xs: 5, md: 6 },
         px: { xs: 3, md: 10 },
         display: "flex",
@@ -617,7 +617,7 @@ function VarianteLabel({
           fontFamily: '"Apple Chancery", Palatino, serif',
           fontStyle: "italic",
           fontSize: { xs: "3rem", md: "5rem" },
-          color: "rgba(201, 168, 108, 0.4)",
+          color: "rgba(196, 168, 130, 0.4)",
           lineHeight: 1,
           flexShrink: 0,
         }}
@@ -674,7 +674,7 @@ export default function FotoTestPage() {
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
-          backgroundColor: "#FDFAF6",
+          backgroundColor: "#FEFCFB",
         }}
       >
         <Typography
@@ -682,7 +682,7 @@ export default function FotoTestPage() {
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
             fontSize: "1.5rem",
-            color: "#C9A86C",
+            color: "#C4A882",
           }}
         >
           Caricamento...
@@ -692,11 +692,11 @@ export default function FotoTestPage() {
   }
 
   return (
-    <Box sx={{ backgroundColor: "#FDFAF6" }}>
+    <Box sx={{ backgroundColor: "#FEFCFB" }}>
       {/* Intestazione pagina */}
       <Box
         sx={{
-          backgroundColor: "#2A1F1A",
+          backgroundColor: "#2A1414",
           py: { xs: 8, md: 10 },
           px: { xs: 3, md: 10 },
           textAlign: "center",
@@ -708,7 +708,7 @@ export default function FotoTestPage() {
             fontSize: "0.6875rem",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#C9A86C",
+            color: "#C4A882",
             mb: 2,
           }}
         >

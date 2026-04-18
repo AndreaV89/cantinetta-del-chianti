@@ -23,9 +23,9 @@ export default function Pillars() {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#3A2E28",
-        borderTop: "1px solid rgba(201, 168, 108, 0.2)",
-        borderBottom: "1px solid rgba(201, 168, 108, 0.2)",
+        backgroundColor: "#1E1414",
+        borderTop: "1px solid rgba(196, 168, 130, 0.2)",
+        borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
       }}
     >
       <Box
@@ -60,7 +60,7 @@ export default function Pillars() {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontStyle: "italic",
                 fontSize: "2rem",
-                color: "rgba(201, 168, 108, 0.7)",
+                color: "rgba(196, 168, 130, 0.7)",
                 lineHeight: 1,
                 mb: 2,
               }}

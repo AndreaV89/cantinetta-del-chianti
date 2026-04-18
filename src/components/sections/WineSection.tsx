@@ -7,11 +7,11 @@ interface WineSectionProps {
 }
 
 const tipologiaColors: Record<string, string> = {
-  Rosso: "#8B1A2F",
-  Bianco: "#C9A86C",
+  Rosso: "#6B1A28",
+  Bianco: "#C4A882",
   Rosato: "#D4A5A5",
-  Bollicine: "#736156",
-  Distillato: "#3A2E28",
+  Bollicine: "#5E4444",
+  Distillato: "#1E1414",
 };
 
 function WineCard({ vino }: { vino: Vino }) {
@@ -21,13 +21,13 @@ function WineCard({ vino }: { vino: Vino }) {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#FFFFFF",
-        border: "1px solid #E0D8CE",
+        border: "1px solid #E5DADA",
         borderRadius: 1,
         overflow: "hidden",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(58, 46, 40, 0.1)",
+          boxShadow: "0 12px 32px rgba(30, 20, 20, 0.1)",
         },
       }}
     >
@@ -37,7 +37,7 @@ function WineCard({ vino }: { vino: Vino }) {
           position: "relative",
           width: "100%",
           aspectRatio: "3/4",
-          backgroundColor: "#F8F5F0",
+          backgroundColor: "#F5F0EF",
         }}
       >
         {vino.featuredImage ? (
@@ -80,7 +80,7 @@ function WineCard({ vino }: { vino: Vino }) {
           sx={{
             backgroundColor: "transparent",
             border: "none",
-            color: tipologiaColors[vino.acf.tipologia] || "#736156",
+            color: tipologiaColors[vino.acf.tipologia] || "#5E4444",
             fontFamily: '"DM Sans", sans-serif',
             fontSize: "0.625rem",
             fontWeight: 400,
@@ -97,7 +97,7 @@ function WineCard({ vino }: { vino: Vino }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#3A2E28",
+            color: "#1E1414",
             mb: 0.5,
           }}
         >
@@ -109,7 +109,7 @@ function WineCard({ vino }: { vino: Vino }) {
             fontFamily: '"DM Sans", sans-serif',
             fontWeight: 300,
             fontSize: "0.8125rem",
-            color: "#736156",
+            color: "#5E4444",
             mb: 1.5,
           }}
         >
@@ -124,7 +124,7 @@ function WineCard({ vino }: { vino: Vino }) {
               fontWeight: 300,
               fontSize: "0.8125rem",
               lineHeight: 1.7,
-              color: "#736156",
+              color: "#5E4444",
             }}
           >
             {vino.acf.descrizione_breve}
@@ -140,7 +140,7 @@ export default function WineSection({ vini }: WineSectionProps) {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#FDFAF6",
+        backgroundColor: "#FEFCFB",
         py: { xs: 8, md: 12 },
       }}
     >
@@ -168,14 +168,14 @@ export default function WineSection({ vini }: WineSectionProps) {
                 fontSize: "0.6875rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: "#C4A882",
                 mb: 1,
               }}
             >
               La Cantina
             </Typography>
             <Box
-              sx={{ width: 32, height: 1, backgroundColor: "#C9A86C", mb: 2 }}
+              sx={{ width: 32, height: 1, backgroundColor: "#C4A882", mb: 2 }}
             />
             <Typography
               component="h2"
@@ -183,7 +183,7 @@ export default function WineSection({ vini }: WineSectionProps) {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "2rem", md: "2.75rem" },
                 fontWeight: 400,
-                color: "#3A2E28",
+                color: "#1E1414",
                 lineHeight: 1.2,
               }}
             >
@@ -199,7 +199,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               fontWeight: 300,
               fontSize: "0.9375rem",
               lineHeight: 1.75,
-              color: "#736156",
+              color: "#5E4444",
               maxWidth: 340,
               mt: { xs: 3, md: 0 },
             }}
@@ -253,7 +253,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               fontWeight: 500,
               fontSize: "0.8125rem",
               letterSpacing: "0.05em",
-              color: "#8B1A2F",
+              color: "#6B1A28",
               textDecoration: "none",
               "&:hover": { textDecoration: "underline" },
             }}
