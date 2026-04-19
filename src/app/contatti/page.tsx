@@ -1,47 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
-
-const infoContatti = [
-  {
-    label: "Indirizzo",
-    value: "Via Roma 12\n53013 Gaiole in Chianti (SI)",
-    href: "https://maps.google.com/?q=La+Cantinetta+del+Chianti+Gaiole",
-  },
-  {
-    label: "Telefono",
-    value: "+39 0577 000000",
-    href: "tel:+390577000000",
-  },
-  {
-    label: "Email",
-    value: "info@lacantinettadelchianti.it",
-    href: "mailto:info@lacantinettadelchianti.it",
-  },
-  {
-    label: "Orari",
-    value: "Lun – Sab: 09:00 – 19:30\nDomenica: 10:00 – 18:00",
-    href: null,
-  },
-];
-
-const indicazioni = [
-  {
-    da: "Da Firenze",
-    testo:
-      "Autostrada A1 uscita Valdarno, poi SS408 in direzione Gaiole in Chianti. Circa 45 minuti.",
-  },
-  {
-    da: "Da Siena",
-    testo:
-      "SS408 in direzione nord verso Gaiole in Chianti. Circa 25 minuti attraverso le colline del Chianti.",
-  },
-  {
-    da: "Da Arezzo",
-    testo:
-      "SR69 fino a Montevarchi, poi SS408 in direzione Gaiole in Chianti. Circa 40 minuti.",
-  },
-];
+import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
 
 export default function ContattiPage() {
   return (
@@ -298,28 +258,350 @@ export default function ContattiPage() {
             maxWidth: 1920,
             mx: "auto",
             px: { xs: 3, md: 10 },
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-            gap: { xs: 8, md: 12 },
+            display: "flex",
+            flexDirection: "column",
+            gap: 6,
           }}
         >
-          {/* Info contatti */}
-          <Box>
-            <Typography
-              component="h2"
-              sx={{
-                fontFamily: '"Apple Chancery", Palatino, serif',
-                fontSize: { xs: "1.75rem", md: "2.25rem" },
-                fontWeight: 400,
-                color: "#1E1414",
-                mb: 5,
-              }}
-            >
-              Dove siamo
-            </Typography>
+          {/* Riga superiore: Contatti | Orari */}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+              gap: { xs: 6, md: 12 },
+            }}
+          >
+            {/* Contatti */}
+            <Box>
+              <Typography
+                component="h2"
+                sx={{
+                  fontFamily: '"Apple Chancery", Palatino, serif',
+                  fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontWeight: 400,
+                  color: "#1E1414",
+                  mb: 4,
+                }}
+              >
+                Contatti
+              </Typography>
 
-            {infoContatti.map((item) => (
-              <Box key={item.label} sx={{ mb: 4 }}>
+              {[
+                {
+                  label: "Telefono",
+                  value: "+39 0577 749125",
+                  href: "tel:+390577749125",
+                },
+                {
+                  label: "Cellulare",
+                  value: "+39 333 9687729",
+                  href: "tel:+393339687729",
+                },
+                {
+                  label: "Email",
+                  value: "info@lacantinettadelchianti.it",
+                  href: "mailto:info@lacantinettadelchianti.it",
+                },
+              ].map((item) => (
+                <Box key={item.label} sx={{ mb: 3 }}>
+                  <Typography
+                    sx={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "#C4A882",
+                      mb: 0.75,
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                  <Typography
+                    component="a"
+                    href={item.href}
+                    sx={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "1rem",
+                      lineHeight: 1.75,
+                      color: "#1E1414",
+                      textDecoration: "none",
+                      display: "block",
+                      "&:hover": { color: "#6B1A28" },
+                      transition: "color 0.2s ease",
+                    }}
+                  >
+                    {item.value}
+                  </Typography>
+                </Box>
+              ))}
+              {/* Icone social */}
+              <Box sx={{ display: "flex", gap: 2, mt: 4 }}>
+                {[
+                  {
+                    href: "https://instagram.com",
+                    icon: <FaInstagram size={25} />,
+                  },
+                  {
+                    href: "https://facebook.com",
+                    icon: <FaFacebookF size={25} />,
+                  },
+                  {
+                    href: "https://www.tripadvisor.it/Restaurant_Review-g616196-d2371663-Reviews-La_Cantinetta_del_Chianti-Gaiole_in_Chianti_Tuscany.html",
+                    icon: <FaTripadvisor size={25} />,
+                  },
+                ].map((social, i) => (
+                  <Typography
+                    key={i}
+                    component="a"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{
+                      color: "#5E4444",
+                      display: "flex",
+                      alignItems: "center",
+                      "&:hover": { color: "#6B1A28" },
+                      transition: "color 0.2s ease",
+                    }}
+                  >
+                    {social.icon}
+                  </Typography>
+                ))}
+              </Box>
+            </Box>
+
+            {/* Orari */}
+            <Box>
+              <Typography
+                component="h2"
+                sx={{
+                  fontFamily: '"Apple Chancery", Palatino, serif',
+                  fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontWeight: 400,
+                  color: "#1E1414",
+                  mb: 4,
+                }}
+              >
+                Orari di apertura
+              </Typography>
+
+              {[
+                { label: "Domenica", value: "10:00 – 19:30" },
+                { label: "Lunedì", value: "10:00 – 19:30" },
+                { label: "Martedì", value: "Chiuso" },
+                { label: "Mercoledì", value: "10:00 – 19:30" },
+                { label: "Giovedì", value: "09:45 – 19:30" },
+                { label: "Venerdì", value: "09:45 – 20:00" },
+                { label: "Sabato", value: "10:00 – 20:00" },
+              ].map((item) => (
+                <Box
+                  key={item.label}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    py: 2,
+                    borderBottom: "1px solid #E5DADA",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "0.9375rem",
+                      color: "#5E4444",
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: '"Apple Chancery", Palatino, serif',
+                      fontSize: "1.125rem",
+                      color: "#1E1414",
+                    }}
+                  >
+                    {item.value}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+
+          {/* Divisorio */}
+          <Box sx={{ height: "1px", backgroundColor: "#E5DADA", my: 2 }} />
+
+          {/* Riga inferiore: Indirizzo + Mappa | Indicazioni stradali */}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+              gap: { xs: 6, md: 12 },
+            }}
+          >
+            {/* Indirizzo + Mappa */}
+            <Box>
+              <Typography
+                component="h2"
+                sx={{
+                  fontFamily: '"Apple Chancery", Palatino, serif',
+                  fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontWeight: 400,
+                  color: "#1E1414",
+                  mb: 4,
+                }}
+              >
+                Dove siamo
+              </Typography>
+
+              <Box sx={{ mb: 3 }}>
+                <Typography
+                  sx={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: "0.625rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "#C4A882",
+                    mb: 0.75,
+                  }}
+                >
+                  Indirizzo
+                </Typography>
+                <Typography
+                  component="a"
+                  href="https://maps.google.com/?q=La+Cantinetta+del+Chianti+Gaiole"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 300,
+                    fontSize: "1rem",
+                    lineHeight: 1.75,
+                    color: "#1E1414",
+                    textDecoration: "none",
+                    display: "block",
+                    whiteSpace: "pre-line",
+                    "&:hover": { color: "#6B1A28" },
+                    transition: "color 0.2s ease",
+                  }}
+                >
+                  Via B. Ricasoli 33{"\n"}53013 Gaiole in Chianti (SI)
+                </Typography>
+              </Box>
+
+              <Box
+                component="iframe"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d578.897991629924!2d11.433506595267453!3d43.46839272557919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132bc961d38932bd%3A0x14627c0a7fca0b1a!2sEnoteca%20La%20Cantinetta%20Del%20Chianti%20S.A.S.%20Di%20Azzato%20Riccardo%20Michele!5e1!3m2!1sit!2sit!4v1776623647170!5m2!1sit!2sit"
+                sx={{
+                  width: "100%",
+                  height: 350,
+                  border: "none",
+                  borderRadius: "2px",
+                  mt: 2,
+                  filter: "grayscale(20%)",
+                  display: "block",
+                  lineHeight: 0,
+                }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Box>
+
+            {/* Indicazioni stradali */}
+            <Box>
+              <Typography
+                component="h2"
+                sx={{
+                  fontFamily: '"Apple Chancery", Palatino, serif',
+                  fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontWeight: 400,
+                  color: "#1E1414",
+                  mb: 4,
+                }}
+              >
+                Come arrivare
+              </Typography>
+
+              {[
+                {
+                  da: "Da Firenze",
+                  testo:
+                    "Autostrada A1 uscita Valdarno, poi SS408 in direzione Gaiole in Chianti. Circa 45 minuti.",
+                },
+                {
+                  da: "Da Siena",
+                  testo:
+                    "SS408 in direzione nord verso Gaiole in Chianti. Circa 25 minuti attraverso le colline del Chianti.",
+                },
+                {
+                  da: "Da Arezzo",
+                  testo:
+                    "SR69 fino a Montevarchi, poi SS408 in direzione Gaiole in Chianti. Circa 40 minuti.",
+                },
+              ].map((ind, i) => (
+                <Box
+                  key={ind.da}
+                  sx={{
+                    mb: 3,
+                    pb: 3,
+                    borderBottom: i < 2 ? "1px solid #E5DADA" : "none",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 2,
+                      mb: 1,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: "50%",
+                        backgroundColor: "#C4A882",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        fontFamily: '"Apple Chancery", Palatino, serif',
+                        fontSize: "1.125rem",
+                        color: "#1E1414",
+                      }}
+                    >
+                      {ind.da}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "0.9375rem",
+                      lineHeight: 1.75,
+                      color: "#5E4444",
+                      pl: "22px",
+                    }}
+                  >
+                    {ind.testo}
+                  </Typography>
+                </Box>
+              ))}
+
+              <Box
+                sx={{
+                  backgroundColor: "rgba(196, 168, 130, 0.1)",
+                  border: "1px solid rgba(196, 168, 130, 0.3)",
+                  borderRadius: "2px",
+                  p: 3,
+                  mt: 2,
+                }}
+              >
                 <Typography
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
@@ -331,122 +613,8 @@ export default function ContattiPage() {
                     mb: 1,
                   }}
                 >
-                  {item.label}
+                  Parcheggio
                 </Typography>
-                {item.href ? (
-                  <Typography
-                    component="a"
-                    href={item.href}
-                    target={item.href.startsWith("http") ? "_blank" : undefined}
-                    rel={
-                      item.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    sx={{
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontWeight: 300,
-                      fontSize: "1rem",
-                      lineHeight: 1.75,
-                      color: "#1E1414",
-                      textDecoration: "none",
-                      whiteSpace: "pre-line",
-                      display: "block",
-                      "&:hover": { color: "#6B1A28" },
-                      transition: "color 0.2s ease",
-                    }}
-                  >
-                    {item.value}
-                  </Typography>
-                ) : (
-                  <Typography
-                    sx={{
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontWeight: 300,
-                      fontSize: "1rem",
-                      lineHeight: 1.75,
-                      color: "#1E1414",
-                      whiteSpace: "pre-line",
-                    }}
-                  >
-                    {item.value}
-                  </Typography>
-                )}
-              </Box>
-            ))}
-
-            {/* Mappa */}
-            <Box
-              component="iframe"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.123!2d11.4308!3d43.4667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a2b1234567890%3A0x1234567890abcdef!2sGaiole+in+Chianti!5e0!3m2!1sit!2sit!4v1234567890"
-              sx={{
-                width: "100%",
-                height: 280,
-                border: "none",
-                borderRadius: "2px",
-                mt: 4,
-                filter: "grayscale(20%)",
-                display: "block",
-                lineHeight: 0,
-              }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </Box>
-
-          {/* Indicazioni stradali */}
-          <Box>
-            <Typography
-              component="h2"
-              sx={{
-                fontFamily: '"Apple Chancery", Palatino, serif',
-                fontSize: { xs: "1.75rem", md: "2.25rem" },
-                fontWeight: 400,
-                color: "#1E1414",
-                mb: 5,
-              }}
-            >
-              Come arrivare
-            </Typography>
-
-            {indicazioni.map((ind, i) => (
-              <Box
-                key={ind.da}
-                sx={{
-                  mb: 4,
-                  pb: 4,
-                  borderBottom:
-                    i < indicazioni.length - 1 ? "1px solid #E5DADA" : "none",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    mb: 1.5,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      backgroundColor: "#C4A882",
-                      flexShrink: 0,
-                    }}
-                  />
-                  <Typography
-                    sx={{
-                      fontFamily: '"Apple Chancery", Palatino, serif',
-                      fontSize: "1.125rem",
-                      color: "#1E1414",
-                    }}
-                  >
-                    {ind.da}
-                  </Typography>
-                </Box>
                 <Typography
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
@@ -454,49 +622,12 @@ export default function ContattiPage() {
                     fontSize: "0.9375rem",
                     lineHeight: 1.75,
                     color: "#5E4444",
-                    pl: "22px",
                   }}
                 >
-                  {ind.testo}
+                  Parcheggio gratuito disponibile nel centro del paese, a pochi
+                  passi dalla bottega.
                 </Typography>
               </Box>
-            ))}
-
-            {/* Nota parcheggio */}
-            <Box
-              sx={{
-                backgroundColor: "rgba(196, 168, 130, 0.1)",
-                border: "1px solid rgba(196, 168, 130, 0.3)",
-                borderRadius: "2px",
-                p: 3,
-                mt: 2,
-              }}
-            >
-              <Typography
-                sx={{
-                  fontFamily: '"DM Sans", sans-serif',
-                  fontSize: "0.625rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#C4A882",
-                  mb: 1,
-                }}
-              >
-                Parcheggio
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: '"DM Sans", sans-serif',
-                  fontWeight: 300,
-                  fontSize: "0.9375rem",
-                  lineHeight: 1.75,
-                  color: "#5E4444",
-                }}
-              >
-                Parcheggio gratuito disponibile nel centro del paese, a pochi
-                passi dalla bottega.
-              </Typography>
             </Box>
           </Box>
         </Box>

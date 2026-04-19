@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
 
 const footerLinks = {
   esplora: [
@@ -13,9 +14,21 @@ const footerLinks = {
     { label: "Privacy Policy", href: "/privacy" },
   ],
   social: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "Facebook", href: "https://facebook.com" },
-    { label: "TripAdvisor", href: "https://tripadvisor.com" },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/la.cantinetta_del_chianti/",
+      icon: <FaInstagram size={16} />,
+    },
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/lacantinettadelchianti",
+      icon: <FaFacebookF size={16} />,
+    },
+    {
+      label: "TripAdvisor",
+      href: "https://www.tripadvisor.it/Restaurant_Review-g616196-d2371663-Reviews-La_Cantinetta_del_Chianti-Gaiole_in_Chianti_Tuscany.html",
+      icon: <FaTripadvisor size={16} />,
+    },
   ],
 };
 
@@ -165,11 +178,11 @@ export default function Footer() {
               Seguici
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
-              {footerLinks.social.map((link) => (
+              {footerLinks.social.map((social) => (
                 <Typography
-                  key={link.href}
+                  key={social.label}
                   component="a"
-                  href={link.href}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -178,11 +191,24 @@ export default function Footer() {
                     fontSize: "0.875rem",
                     color: "rgba(255,255,255,0.6)",
                     textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.5,
                     "&:hover": { color: "#FFFFFF" },
                     transition: "color 0.2s ease",
                   }}
                 >
-                  {link.label}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "inherit",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {social.icon}
+                  </Box>
+                  {social.label}
                 </Typography>
               ))}
             </Box>

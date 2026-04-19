@@ -168,15 +168,18 @@ export default function AboutSection() {
           {[
             {
               label: "Indirizzo",
-              value: "Via Roma 12\n53013 Gaiole in Chianti (SI)",
+              value: "Via B. Ricasoli 33\n53013 Gaiole in Chianti (SI)",
             },
             {
               label: "Orari",
-              value: "Lun – Sab: 09:00 – 19:30\nDomenica: 10:00 – 18:00",
+              value:
+                "Dom/Lun/Mer: 10:00–19:30\nGio/Ven: 09:45–20:00\nSab: 10:00–20:00\nMar: Chiuso",
+              href: null,
             },
             {
               label: "Contatti",
-              value: "+39 0577 000000\ninfo@lacantinettadelchianti.it",
+              value:
+                "+39 0577 749125\n+39 333 9687729\ninfo@lacantinettadelchianti.it",
             },
           ].map((item) => (
             <Box key={item.label} sx={{ mb: 3.5 }}>
@@ -210,7 +213,7 @@ export default function AboutSection() {
 
           <Typography
             component="a"
-            href="https://maps.google.com/?q=La+Cantinetta+del+Chianti+Gaiole"
+            href="https://maps.google.com/?cid=1467013816025464602"
             target="_blank"
             rel="noopener noreferrer"
             sx={{
