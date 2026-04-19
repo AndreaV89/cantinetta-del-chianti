@@ -187,9 +187,7 @@ export default function WineSection({ vini }: WineSectionProps) {
                 lineHeight: 1.2,
               }}
             >
-              I nostri vini
-              <br />
-              selezionati
+              Proposta della settimana
             </Typography>
           </Box>
 

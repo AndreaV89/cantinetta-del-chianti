@@ -5,6 +5,7 @@ import ProductsSection from "@/components/sections/ProductsSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
 import QuoteSection from "@/components/sections/QuoteSection";
+import RecensioniSection from "@/components/sections/RecensioniSection";
 import { getViniInEvidenza, getProdottiInEvidenza } from "@/lib/wordpress";
 
 export default async function Home() {
@@ -19,6 +20,7 @@ export default async function Home() {
       <ProductsSection prodotti={prodotti} />
       <QuoteSection quote="Wine not?" />
       <ServicesSection />
+      <RecensioniSection />
       <AboutSection />
     </main>
   );

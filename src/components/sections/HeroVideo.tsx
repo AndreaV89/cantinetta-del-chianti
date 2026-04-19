@@ -116,8 +116,11 @@ export default function HeroVideo() {
             mb: 5,
           }}
         >
-          Vini selezionati, prodotti tipici e aperitivi con vista sulle colline.
-          <br />A Gaiole in Chianti, dal mattino alla sera.
+          {/* Vini selezionati, prodotti tipici e aperitivi con vista sulle colline.
+          <br />A Gaiole in Chianti, dal mattino alla sera. */}
+          Vini e prodotti tipici selezionati con gusto.
+          <br />
+          Fatti tentare dal piacere e vieni a trovarci anche per un aperitivo.
         </Typography>
 
         {/* CTA buttons */}
