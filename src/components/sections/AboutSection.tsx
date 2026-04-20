@@ -179,7 +179,7 @@ export default function AboutSection() {
             {
               label: "Contatti",
               value:
-                "+39 0577 749125\n+39 333 9687729\ninfo@lacantinettadelchianti.it",
+                "+39 0577 749125\n+39 333 9687729\nenoteca@lacantinettadelchianti.it",
             },
           ].map((item) => (
             <Box key={item.label} sx={{ mb: 3.5 }}>

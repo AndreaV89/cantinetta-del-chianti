@@ -219,7 +219,7 @@ export default function ContattiPage() {
             <Box sx={{ mt: 4 }}>
               <Typography
                 component="a"
-                href="https://wa.me/390577000000"
+                href="https://wa.me/393339687729"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
@@ -299,8 +299,8 @@ export default function ContattiPage() {
                 },
                 {
                   label: "Email",
-                  value: "info@lacantinettadelchianti.it",
-                  href: "mailto:info@lacantinettadelchianti.it",
+                  value: "enoteca@lacantinettadelchianti.it",
+                  href: "mailto:enoteca@lacantinettadelchianti.it",
                 },
               ].map((item) => (
                 <Box key={item.label} sx={{ mb: 3 }}>
