@@ -12,7 +12,7 @@ export default function ContattiPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#1E1414",
+          backgroundColor: "#4A0E1E",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -68,6 +68,7 @@ export default function ContattiPage() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2.5rem", md: "4rem" },
               fontWeight: 400,
+              fontStyle: "italic",
               color: "#FFFFFF",
               lineHeight: 1.15,
               mb: 3,
@@ -156,14 +157,15 @@ export default function ContattiPage() {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "2rem", md: "2.75rem" },
                 fontWeight: 400,
-                color: "#1E1414",
+                fontStyle: "italic",
+                color: "#4A0E1E",
                 lineHeight: 1.2,
                 mb: 4,
               }}
             >
-              Come nasceva
+              Come nasce
               <br />
-              La Cantinetta
+              La Cantinetta del Chianti
             </Typography>
 
             {[
@@ -189,7 +191,7 @@ export default function ContattiPage() {
                         fontStyle: "italic",
                         fontSize: "1.25rem",
                         lineHeight: 1.75,
-                        color: "#1E1414",
+                        color: "#4A0E1E",
                       }}
                     >
                       {paragrafo}
@@ -229,7 +231,7 @@ export default function ContattiPage() {
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   color: "#FFFFFF",
-                  backgroundColor: "#6B1A28",
+                  backgroundColor: "#7D1A2C",
                   textDecoration: "none",
                   px: 4,
                   py: 1.75,
@@ -237,7 +239,7 @@ export default function ContattiPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 1.5,
-                  "&:hover": { backgroundColor: "#9E3347" },
+                  "&:hover": { backgroundColor: "#B03050" },
                   transition: "background-color 0.2s ease",
                 }}
               >
@@ -279,7 +281,7 @@ export default function ContattiPage() {
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
                   fontWeight: 400,
-                  color: "#1E1414",
+                  color: "#4A0E1E",
                   mb: 4,
                 }}
               >
@@ -325,10 +327,10 @@ export default function ContattiPage() {
                       fontWeight: 300,
                       fontSize: "1rem",
                       lineHeight: 1.75,
-                      color: "#1E1414",
+                      color: "#4A0E1E",
                       textDecoration: "none",
                       display: "block",
-                      "&:hover": { color: "#6B1A28" },
+                      "&:hover": { color: "#7D1A2C" },
                       transition: "color 0.2s ease",
                     }}
                   >
@@ -362,7 +364,7 @@ export default function ContattiPage() {
                       color: "#5E4444",
                       display: "flex",
                       alignItems: "center",
-                      "&:hover": { color: "#6B1A28" },
+                      "&:hover": { color: "#7D1A2C" },
                       transition: "color 0.2s ease",
                     }}
                   >
@@ -380,7 +382,7 @@ export default function ContattiPage() {
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
                   fontWeight: 400,
-                  color: "#1E1414",
+                  color: "#4A0E1E",
                   mb: 4,
                 }}
               >
@@ -420,7 +422,7 @@ export default function ContattiPage() {
                     sx={{
                       fontFamily: '"Apple Chancery", Palatino, serif',
                       fontSize: "1.125rem",
-                      color: "#1E1414",
+                      color: "#4A0E1E",
                     }}
                   >
                     {item.value}
@@ -449,7 +451,7 @@ export default function ContattiPage() {
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
                   fontWeight: 400,
-                  color: "#1E1414",
+                  color: "#4A0E1E",
                   mb: 4,
                 }}
               >
@@ -480,11 +482,11 @@ export default function ContattiPage() {
                     fontWeight: 300,
                     fontSize: "1rem",
                     lineHeight: 1.75,
-                    color: "#1E1414",
+                    color: "#4A0E1E",
                     textDecoration: "none",
                     display: "block",
                     whiteSpace: "pre-line",
-                    "&:hover": { color: "#6B1A28" },
+                    "&:hover": { color: "#7D1A2C" },
                     transition: "color 0.2s ease",
                   }}
                 >
@@ -519,7 +521,7 @@ export default function ContattiPage() {
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
                   fontWeight: 400,
-                  color: "#1E1414",
+                  color: "#4A0E1E",
                   mb: 4,
                 }}
               >
@@ -572,7 +574,7 @@ export default function ContattiPage() {
                       sx={{
                         fontFamily: '"Apple Chancery", Palatino, serif',
                         fontSize: "1.125rem",
-                        color: "#1E1414",
+                        color: "#4A0E1E",
                       }}
                     >
                       {ind.da}
@@ -636,7 +638,7 @@ export default function ContattiPage() {
       {/* Pre-footer */}
       <Box
         sx={{
-          backgroundColor: "#2A1414",
+          backgroundColor: "#350A16",
           py: { xs: 6, md: 8 },
           textAlign: "center",
         }}
@@ -664,7 +666,7 @@ export default function ContattiPage() {
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "#FFFFFF",
-            backgroundColor: "#6B1A28",
+            backgroundColor: "#7D1A2C",
             textDecoration: "none",
             px: 4,
             py: 1.75,
@@ -672,7 +674,7 @@ export default function ContattiPage() {
             display: "inline-flex",
             alignItems: "center",
             gap: 1.5,
-            "&:hover": { backgroundColor: "#9E3347" },
+            "&:hover": { backgroundColor: "#B03050" },
             transition: "background-color 0.2s ease",
           }}
         >

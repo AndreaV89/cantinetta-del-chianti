@@ -16,12 +16,12 @@ const categorie = [
 ];
 
 const categoriaColors: Record<string, string> = {
-  Salumi: "#6B1A28",
+  Salumi: "#7D1A2C",
   Formaggi: "#C4A882",
   Conserve: "#5E4444",
-  Pasta: "#9E3347",
+  Pasta: "#B03050",
   Olio: "#3D5A3D",
-  Altro: "#1E1414",
+  Altro: "#4A0E1E",
 };
 
 function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
@@ -37,7 +37,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(30, 20, 20, 0.1)",
+          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
         },
       }}
     >
@@ -102,7 +102,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#1E1414",
+            color: "#4A0E1E",
             mb: 0.5,
             flex: 1,
           }}
@@ -144,7 +144,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: "1.125rem",
-              color: "#6B1A28",
+              color: "#7D1A2C",
               mt: "auto",
             }}
           >
@@ -212,14 +212,14 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                   py: 1,
                   borderRadius: "2px",
                   border: "1px solid",
-                  borderColor: isActive ? "#6B1A28" : "#E5DADA",
-                  backgroundColor: isActive ? "#6B1A28" : "transparent",
+                  borderColor: isActive ? "#7D1A2C" : "#E5DADA",
+                  backgroundColor: isActive ? "#7D1A2C" : "transparent",
                   cursor: "pointer",
                   transition: "all 0.2s ease",
                   "&:hover": {
-                    borderColor: "#6B1A28",
+                    borderColor: "#7D1A2C",
                     backgroundColor: isActive
-                      ? "#6B1A28"
+                      ? "#7D1A2C"
                       : "rgba(107, 26, 40, 0.05)",
                   },
                 }}
@@ -230,7 +230,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                     fontSize: "0.75rem",
                     fontWeight: isActive ? 500 : 400,
                     letterSpacing: "0.08em",
-                    color: isActive ? "#FFFFFF" : "#1E1414",
+                    color: isActive ? "#FFFFFF" : "#4A0E1E",
                     userSelect: "none",
                   }}
                 >

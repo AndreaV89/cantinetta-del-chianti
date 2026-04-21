@@ -7,16 +7,16 @@ const theme = createTheme({
       paper: "#F5F0EF",
     },
     text: {
-      primary: "#1E1414",
+      primary: "#4A0E1E",
       secondary: "#5E4444",
     },
     primary: {
-      main: "#6B1A28",
+      main: "#7D1A2C",
       contrastText: "#FFFFFF",
     },
     secondary: {
       main: "#C4A882",
-      contrastText: "#1E1414",
+      contrastText: "#4A0E1E",
     },
     divider: "#E5DADA",
   },
@@ -94,17 +94,17 @@ const theme = createTheme({
           },
         },
         contained: {
-          backgroundColor: "#6B1A28",
+          backgroundColor: "#7D1A2C",
           color: "#FFFFFF",
           "&:hover": {
-            backgroundColor: "#9E3347",
+            backgroundColor: "#B03050",
           },
         },
         outlined: {
-          borderColor: "rgba(30, 20, 20, 0.35)",
-          color: "#1E1414",
+          borderColor: "rgba(74, 14, 30, 0.35)",
+          color: "#4A0E1E",
           "&:hover": {
-            borderColor: "#1E1414",
+            borderColor: "#4A0E1E",
             backgroundColor: "transparent",
           },
         },
@@ -121,7 +121,7 @@ const theme = createTheme({
   }
   body {
     background-color: #FEFCFB;
-    color: #1E1414;
+    color: #4A0E1E;
     font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {

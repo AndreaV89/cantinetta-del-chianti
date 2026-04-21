@@ -85,7 +85,7 @@ export default function HeroVideo() {
             mb: 0,
           }}
         >
-          Il cuore del Chianti,
+          Il cuore del Chianti Classico,
         </Typography>
         <Typography
           component="span"
@@ -116,11 +116,7 @@ export default function HeroVideo() {
             mb: 5,
           }}
         >
-          {/* Vini selezionati, prodotti tipici e aperitivi con vista sulle colline.
-          <br />A Gaiole in Chianti, dal mattino alla sera. */}
-          Vini e prodotti tipici selezionati con gusto.
-          <br />
-          Fatti tentare dal piacere e vieni a trovarci anche per un aperitivo.
+          Tradizione e sapori nel cuore della Cantinetta del Chianti
         </Typography>
 
         {/* CTA buttons */}
@@ -129,14 +125,14 @@ export default function HeroVideo() {
             variant="contained"
             href="/vini"
             sx={{
-              backgroundColor: "#6B1A28",
+              backgroundColor: "#7D1A2C",
               color: "#FFFFFF",
               px: 4,
               py: 1.5,
-              "&:hover": { backgroundColor: "#9E3347" },
+              "&:hover": { backgroundColor: "#B03050" },
             }}
           >
-            Scopri i vini
+            Scopri la nostra selezione
           </Button>
           <Button
             variant="outlined"

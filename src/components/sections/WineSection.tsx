@@ -7,11 +7,11 @@ interface WineSectionProps {
 }
 
 const tipologiaColors: Record<string, string> = {
-  Rosso: "#6B1A28",
+  Rosso: "#7D1A2C",
   Bianco: "#C4A882",
   Rosato: "#D4A5A5",
   Bollicine: "#5E4444",
-  Distillato: "#1E1414",
+  Distillato: "#4A0E1E",
 };
 
 function WineCard({ vino }: { vino: Vino }) {
@@ -27,7 +27,7 @@ function WineCard({ vino }: { vino: Vino }) {
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(30, 20, 20, 0.1)",
+          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
         },
       }}
     >
@@ -97,7 +97,7 @@ function WineCard({ vino }: { vino: Vino }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#1E1414",
+            color: "#4A0E1E",
             mb: 0.5,
           }}
         >
@@ -183,7 +183,7 @@ export default function WineSection({ vini }: WineSectionProps) {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "2rem", md: "2.75rem" },
                 fontWeight: 400,
-                color: "#1E1414",
+                color: "#4A0E1E",
                 lineHeight: 1.2,
               }}
             >
@@ -251,7 +251,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               fontWeight: 500,
               fontSize: "0.8125rem",
               letterSpacing: "0.05em",
-              color: "#6B1A28",
+              color: "#7D1A2C",
               textDecoration: "none",
               "&:hover": { textDecoration: "underline" },
             }}

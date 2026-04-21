@@ -11,7 +11,7 @@ export default async function FotoPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#1E1414",
+          backgroundColor: "#4A0E1E",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -116,7 +116,7 @@ export default async function FotoPage() {
       {/* Pre-footer */}
       <Box
         sx={{
-          backgroundColor: "#2A1414",
+          backgroundColor: "#350A16",
           py: { xs: 6, md: 8 },
           textAlign: "center",
         }}

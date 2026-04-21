@@ -9,12 +9,12 @@ const pillars = [
   {
     num: "02",
     title: "Prodotti Tipici",
-    desc: "Salumi, formaggi, conserve e pasta fresca — tutto ciò che la Toscana sa offrire di meglio.",
+    desc: "Salumi, formaggi, conserve e pasta — tutto ciò che la Toscana sa offrire di meglio.",
   },
   {
     num: "03",
     title: "Aperitivi & Taglieri",
-    desc: "Un tavolo fuori, il sole del Chianti e un calice da assaporare con calma.",
+    desc: "Un tavolo fuori, il sole del Chianti Classico e un calice da assaporare con calma.",
   },
 ];
 
@@ -23,7 +23,7 @@ export default function Pillars() {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#1E1414",
+        backgroundColor: "#4A0E1E",
         borderTop: "1px solid rgba(196, 168, 130, 0.2)",
         borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
       }}

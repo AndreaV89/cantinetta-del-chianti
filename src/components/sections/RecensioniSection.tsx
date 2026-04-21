@@ -48,7 +48,7 @@ export default function RecensioniSection() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.75rem" },
               fontWeight: 400,
-              color: "#1E1414",
+              color: "#4A0E1E",
             }}
           >
             Le recensioni dei nostri ospiti

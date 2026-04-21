@@ -50,7 +50,7 @@ export default function ServiziPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#1E1414",
+          backgroundColor: "#4A0E1E",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -218,7 +218,7 @@ export default function ServiziPage() {
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "2rem", md: "2.75rem" },
                     fontWeight: 400,
-                    color: "#1E1414",
+                    color: "#4A0E1E",
                     lineHeight: 1.2,
                     mb: 4,
                   }}
@@ -263,7 +263,7 @@ export default function ServiziPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#2A1414",
+          backgroundColor: "#350A16",
           py: { xs: 8, md: 10 },
           textAlign: "center",
         }}
@@ -301,13 +301,13 @@ export default function ServiziPage() {
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "#FFFFFF",
-              backgroundColor: "#6B1A28",
+              backgroundColor: "#7D1A2C",
               textDecoration: "none",
               px: 5,
               py: 1.75,
               borderRadius: "2px",
               display: "inline-block",
-              "&:hover": { backgroundColor: "#9E3347" },
+              "&:hover": { backgroundColor: "#B03050" },
             }}
           >
             Contattaci

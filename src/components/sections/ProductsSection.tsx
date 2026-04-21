@@ -7,12 +7,12 @@ interface ProductsSectionProps {
 }
 
 const categoriaColors: Record<string, string> = {
-  Salumi: "#6B1A28",
+  Salumi: "#7D1A2C",
   Formaggi: "#C4A882",
   Conserve: "#5E4444",
   Pasta: "#A0522D",
   Olio: "#6B7C5E",
-  Altro: "#1E1414",
+  Altro: "#4A0E1E",
 };
 
 function ProductCard({ prodotto }: { prodotto: Prodotto }) {
@@ -28,7 +28,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(30, 20, 20, 0.1)",
+          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
         },
       }}
     >
@@ -98,7 +98,7 @@ function ProductCard({ prodotto }: { prodotto: Prodotto }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#1E1414",
+            color: "#4A0E1E",
             mb: 0.5,
           }}
         >
@@ -190,7 +190,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "2rem", md: "2.75rem" },
                 fontWeight: 400,
-                color: "#1E1414",
+                color: "#4A0E1E",
                 lineHeight: 1.2,
               }}
             >

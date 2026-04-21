@@ -59,7 +59,7 @@ export default function ServicesSection() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.75rem" },
               fontWeight: 400,
-              color: "#1E1414",
+              color: "#4A0E1E",
             }}
           >
             I nostri servizi
@@ -89,7 +89,7 @@ export default function ServicesSection() {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "translateY(-4px)",
-                  boxShadow: "0 12px 32px rgba(30, 20, 20, 0.08)",
+                  boxShadow: "0 12px 32px rgba(74, 14, 30, 0.08)",
                 },
               }}
             >
@@ -108,7 +108,7 @@ export default function ServicesSection() {
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: "1.25rem",
-                  color: "#1E1414",
+                  color: "#4A0E1E",
                   lineHeight: 1.35,
                   mb: 2,
                   whiteSpace: "pre-line",

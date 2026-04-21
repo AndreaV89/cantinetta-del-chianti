@@ -4,12 +4,12 @@ export const colors = {
   bgAlt: "#F5F0EF",
 
   // Testi
-  text: "#1E1414",
+  text: "#4A0E1E",
   textLight: "#5E4444",
 
   // Primario — rosso vino
-  merlot: "#6B1A28",
-  merlotHover: "#9E3347",
+  merlot: "#7D1A2C",
+  merlotHover: "#B03050",
 
   // Accento — beige caldo
   beige: "#C4A882",
@@ -20,6 +20,6 @@ export const colors = {
   white: "#FFFFFF",
 
   // Sezioni scure
-  darkA: "#2A1414", // pre-footer
-  darkB: "#1E1414", // footer e sezioni scure
+  darkA: "#350A16", // pre-footer
+  darkB: "#4A0E1E", // footer e sezioni scure
 } as const;

@@ -37,7 +37,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#1E1414",
+        backgroundColor: "#4A0E1E",
         color: "#FFFFFF",
         borderTop: "2px solid #C4A882",
       }}
@@ -83,8 +83,7 @@ export default function Footer() {
                 maxWidth: 260,
               }}
             >
-              Bottega enogastronomica nel cuore del Chianti Classico, a Gaiole
-              in Chianti, Toscana.
+              Bottega del gusto nel cuore del Chianti Classico
             </Typography>
           </Box>
 

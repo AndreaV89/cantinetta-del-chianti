@@ -10,7 +10,7 @@ export default function QuoteSection({ quote, author }: QuoteSectionProps) {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#1E1414",
+        backgroundColor: "#4A0E1E",
         py: { xs: 12, md: 16 },
         position: "relative",
         overflow: "hidden",

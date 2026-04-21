@@ -89,7 +89,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "1.75rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#1E1414",
+              color: "#4A0E1E",
               lineHeight: 1.2,
             }}
           >
@@ -129,7 +129,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             size="small"
             sx={{
               border: "1px solid #E5DADA",
-              color: "#1E1414",
+              color: "#4A0E1E",
               "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
@@ -140,7 +140,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             size="small"
             sx={{
               border: "1px solid #E5DADA",
-              color: "#1E1414",
+              color: "#4A0E1E",
               "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
@@ -205,7 +205,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.02)",
-                  boxShadow: "0 8px 24px rgba(30, 20, 20, 0.15)",
+                  boxShadow: "0 8px 24px rgba(74, 14, 30, 0.15)",
                 },
                 // Prima foto dell'album leggermente più grande
                 ...(i === 0 && {
@@ -225,10 +225,10 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  backgroundColor: "rgba(30, 20, 20, 0)",
+                  backgroundColor: "rgba(74, 14, 30, 0)",
                   transition: "background-color 0.3s ease",
                   "&:hover": {
-                    backgroundColor: "rgba(30, 20, 20, 0.15)",
+                    backgroundColor: "rgba(74, 14, 30, 0.15)",
                   },
                 }}
               />
@@ -244,7 +244,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
         index={lightboxIndex}
         slides={slides}
         styles={{
-          container: { backgroundColor: "rgba(26, 20, 16, 0.97)" },
+          container: { backgroundColor: "rgba(74, 14, 30, 0.97)" },
         }}
       />
     </Box>

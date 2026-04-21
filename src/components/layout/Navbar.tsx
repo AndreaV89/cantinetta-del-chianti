@@ -51,7 +51,7 @@ export default function Navbar() {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.125rem",
-            color: scrolled ? "#1E1414" : "#FFFFFF",
+            color: scrolled ? "#4A0E1E" : "#FFFFFF",
             textDecoration: "none",
             letterSpacing: "0.02em",
             transition: "color 0.3s ease",
@@ -80,7 +80,7 @@ export default function Navbar() {
                 textDecoration: "none",
                 transition: "color 0.2s ease",
                 "&:hover": {
-                  color: scrolled ? "#1E1414" : "#FFFFFF",
+                  color: scrolled ? "#4A0E1E" : "#FFFFFF",
                 },
               }}
             >
@@ -106,7 +106,7 @@ export default function Navbar() {
               letterSpacing: "0.1em",
               color: scrolled ? "#5E4444" : "rgba(255,255,255,0.7)",
               textDecoration: "none",
-              "&:hover": { color: scrolled ? "#1E1414" : "#FFFFFF" },
+              "&:hover": { color: scrolled ? "#4A0E1E" : "#FFFFFF" },
             }}
           >
             IT
@@ -128,7 +128,7 @@ export default function Navbar() {
               letterSpacing: "0.1em",
               color: scrolled ? "#5E4444" : "rgba(255,255,255,0.7)",
               textDecoration: "none",
-              "&:hover": { color: scrolled ? "#1E1414" : "#FFFFFF" },
+              "&:hover": { color: scrolled ? "#4A0E1E" : "#FFFFFF" },
             }}
           >
             EN
@@ -140,7 +140,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           sx={{
             display: { xs: "flex", md: "none" },
-            color: scrolled ? "#1E1414" : "#FFFFFF",
+            color: scrolled ? "#4A0E1E" : "#FFFFFF",
           }}
         >
           {mobileOpen ? <CloseIcon /> : <MenuIcon />}
@@ -170,7 +170,7 @@ export default function Navbar() {
                 fontSize: "0.875rem",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                color: "#1E1414",
+                color: "#4A0E1E",
                 textDecoration: "none",
                 py: 1.5,
                 borderBottom: "1px solid #E5DADA",

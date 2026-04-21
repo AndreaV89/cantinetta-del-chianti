@@ -11,7 +11,7 @@ export default async function ViniPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#1E1414",
+          backgroundColor: "#4A0E1E",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -97,7 +97,7 @@ export default async function ViniPage() {
       {/* Pre-footer */}
       <Box
         sx={{
-          backgroundColor: "#2A1414",
+          backgroundColor: "#350A16",
           py: { xs: 6, md: 8 },
           textAlign: "center",
         }}
@@ -125,13 +125,13 @@ export default async function ViniPage() {
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "#FFFFFF",
-            backgroundColor: "#6B1A28",
+            backgroundColor: "#7D1A2C",
             textDecoration: "none",
             px: 4,
             py: 1.75,
             borderRadius: "2px",
             display: "inline-block",
-            "&:hover": { backgroundColor: "#9E3347" },
+            "&:hover": { backgroundColor: "#B03050" },
           }}
         >
           Chiedici una selezione personalizzata →

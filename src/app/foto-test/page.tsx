@@ -79,7 +79,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "1.75rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#1E1414",
+              color: "#4A0E1E",
               lineHeight: 1.2,
             }}
           >
@@ -119,7 +119,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             size="small"
             sx={{
               border: "1px solid #E5DADA",
-              color: "#1E1414",
+              color: "#4A0E1E",
               "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
@@ -132,7 +132,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             size="small"
             sx={{
               border: "1px solid #E5DADA",
-              color: "#1E1414",
+              color: "#4A0E1E",
               "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
             }}
           >
@@ -197,7 +197,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.02)",
-                  boxShadow: "0 8px 24px rgba(30, 20, 20, 0.15)",
+                  boxShadow: "0 8px 24px rgba(74, 14, 30, 0.15)",
                 },
               }}
             >
@@ -218,7 +218,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
         close={() => setLightboxOpen(false)}
         index={lightboxIndex}
         slides={slides}
-        styles={{ container: { backgroundColor: "rgba(26, 20, 16, 0.97)" } }}
+        styles={{ container: { backgroundColor: "rgba(74, 14, 30, 0.97)" } }}
       />
     </Box>
   );
@@ -385,7 +385,7 @@ function VarianteB({ album }: { album: Album[] }) {
             height: f.media_details.height,
             alt: f.alt_text || f.title,
           }))}
-          styles={{ container: { backgroundColor: "rgba(26, 20, 16, 0.97)" } }}
+          styles={{ container: { backgroundColor: "rgba(74, 14, 30, 0.97)" } }}
         />
       )}
     </Box>
@@ -472,7 +472,7 @@ function VarianteC({ album }: { album: Album[] }) {
                   sx={{
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "1.75rem", md: "2.5rem" },
-                    color: "#1E1414",
+                    color: "#4A0E1E",
                     lineHeight: 1.2,
                   }}
                 >
@@ -584,7 +584,7 @@ function VarianteC({ album }: { album: Album[] }) {
         close={() => setLightboxOpen(false)}
         index={lightboxIndex}
         slides={activeSlides}
-        styles={{ container: { backgroundColor: "rgba(26, 20, 16, 0.97)" } }}
+        styles={{ container: { backgroundColor: "rgba(74, 14, 30, 0.97)" } }}
       />
     </Box>
   );
@@ -604,7 +604,7 @@ function VarianteLabel({
   return (
     <Box
       sx={{
-        backgroundColor: "#1E1414",
+        backgroundColor: "#4A0E1E",
         py: { xs: 5, md: 6 },
         px: { xs: 3, md: 10 },
         display: "flex",
@@ -696,7 +696,7 @@ export default function FotoTestPage() {
       {/* Intestazione pagina */}
       <Box
         sx={{
-          backgroundColor: "#2A1414",
+          backgroundColor: "#350A16",
           py: { xs: 8, md: 10 },
           px: { xs: 3, md: 10 },
           textAlign: "center",

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <Box component="section" sx={{ backgroundColor: "#2A1414" }}>
+    <Box component="section" sx={{ backgroundColor: "#350A16" }}>
       <Box
         sx={{
           maxWidth: 1920,
