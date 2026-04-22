@@ -2,13 +2,14 @@
 
 import { Box, Typography } from "@mui/material";
 import Script from "next/script";
+import { colors } from "@/styles/colors";
 
 export default function RecensioniSection() {
   return (
     <Box
       component="section"
       sx={{
-        backgroundColor: "#F5F0EF",
+        backgroundColor: colors.bgAlt,
         py: { xs: 8, md: 12 },
       }}
     >
@@ -27,7 +28,7 @@ export default function RecensioniSection() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C4A882",
+              color: colors.beige,
               mb: 1,
             }}
           >
@@ -37,7 +38,7 @@ export default function RecensioniSection() {
             sx={{
               width: 32,
               height: "1px",
-              backgroundColor: "#C4A882",
+              backgroundColor: colors.beige,
               mx: "auto",
               mb: 2,
             }}
@@ -48,7 +49,7 @@ export default function RecensioniSection() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.75rem" },
               fontWeight: 400,
-              color: "#4A0E1E",
+              color: colors.dark,
             }}
           >
             Le recensioni dei nostri ospiti

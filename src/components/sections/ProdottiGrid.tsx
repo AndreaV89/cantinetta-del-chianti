@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { Prodotto } from "@/types";
+import { colors } from "@/styles/colors";
 
 const categorie = [
   "Tutti",
@@ -16,12 +17,12 @@ const categorie = [
 ];
 
 const categoriaColors: Record<string, string> = {
-  Salumi: "#7D1A2C",
-  Formaggi: "#C4A882",
-  Conserve: "#5E4444",
-  Pasta: "#B03050",
+  Salumi: colors.merlot,
+  Formaggi: colors.beige,
+  Conserve: colors.textLight,
+  Pasta: colors.merlotHover,
   Olio: "#3D5A3D",
-  Altro: "#4A0E1E",
+  Altro: colors.dark,
 };
 
 function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
@@ -31,7 +32,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#FFFFFF",
-        border: "1px solid #E5DADA",
+        border: `1px solid ${colors.border}`,
         borderRadius: 1,
         overflow: "hidden",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -47,7 +48,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
           position: "relative",
           width: "100%",
           aspectRatio: "4/3",
-          backgroundColor: "#F5F0EF",
+          backgroundColor: colors.bgAlt,
         }}
       >
         {prodotto.featuredImage ? (
@@ -91,7 +92,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
             fontWeight: 400,
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: categoriaColors[prodotto.acf.categoria] || "#5E4444",
+            color: categoriaColors[prodotto.acf.categoria] || colors.textLight,
             mb: 1,
           }}
         >
@@ -102,7 +103,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#4A0E1E",
+            color: colors.dark,
             mb: 0.5,
             flex: 1,
           }}
@@ -116,7 +117,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: "0.8125rem",
-              color: "#5E4444",
+              color: colors.textLight,
               mb: 1.5,
             }}
           >
@@ -131,7 +132,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
               fontWeight: 300,
               fontSize: "0.8125rem",
               lineHeight: 1.7,
-              color: "#5E4444",
+              color: colors.textLight,
               mb: 2,
             }}
           >
@@ -144,7 +145,7 @@ function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: "1.125rem",
-              color: "#7D1A2C",
+              color: colors.merlot,
               mt: "auto",
             }}
           >
@@ -182,7 +183,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
   return (
     <Box
       component="section"
-      sx={{ backgroundColor: "#FEFCFB", py: { xs: 8, md: 10 } }}
+      sx={{ backgroundColor: colors.bg, py: { xs: 8, md: 10 } }}
     >
       <Box sx={{ maxWidth: 1920, mx: "auto", px: { xs: 3, md: 10 } }}>
         {/* Filtri */}
@@ -193,7 +194,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
             gap: 1.5,
             mb: 6,
             pb: 4,
-            borderBottom: "1px solid #E5DADA",
+            borderBottom: `1px solid ${colors.border}`,
           }}
         >
           {categorie.map((c) => {
@@ -212,14 +213,14 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                   py: 1,
                   borderRadius: "2px",
                   border: "1px solid",
-                  borderColor: isActive ? "#7D1A2C" : "#E5DADA",
-                  backgroundColor: isActive ? "#7D1A2C" : "transparent",
+                  borderColor: isActive ? colors.merlot : colors.border,
+                  backgroundColor: isActive ? colors.merlot : "transparent",
                   cursor: "pointer",
                   transition: "all 0.2s ease",
                   "&:hover": {
-                    borderColor: "#7D1A2C",
+                    borderColor: colors.merlot,
                     backgroundColor: isActive
-                      ? "#7D1A2C"
+                      ? colors.merlot
                       : "rgba(107, 26, 40, 0.05)",
                   },
                 }}
@@ -230,7 +231,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                     fontSize: "0.75rem",
                     fontWeight: isActive ? 500 : 400,
                     letterSpacing: "0.08em",
-                    color: isActive ? "#FFFFFF" : "#4A0E1E",
+                    color: isActive ? "#FFFFFF" : colors.dark,
                     userSelect: "none",
                   }}
                 >
@@ -240,7 +241,9 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
                     fontSize: "0.625rem",
-                    color: isActive ? "rgba(255,255,255,0.7)" : "#5E4444",
+                    color: isActive
+                      ? "rgba(255,255,255,0.7)"
+                      : colors.textLight,
                     userSelect: "none",
                   }}
                 >
@@ -258,7 +261,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: "0.875rem",
-              color: "#5E4444",
+              color: colors.textLight,
             }}
           >
             {prodottiFiltrati.length}{" "}

@@ -8,6 +8,7 @@ import "yet-another-react-lightbox/styles.css";
 import { Album, FotoGallery } from "@/types";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { colors } from "@/styles/colors";
 
 // ─── VARIANTE A — Scorrimento orizzontale (attuale) ───────
 
@@ -42,7 +43,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
   return (
     <Box
       sx={{
-        backgroundColor: isEven ? "#FEFCFB" : "#F5F0EF",
+        backgroundColor: isEven ? colors.bg : colors.bgAlt,
         py: { xs: 6, md: 8 },
         borderBottom: "1px solid rgba(224, 216, 206, 0.5)",
       }}
@@ -66,7 +67,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
                 fontSize: "0.6875rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#C4A882",
+                color: colors.beige,
                 mb: 0.5,
               }}
             >
@@ -79,7 +80,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "1.75rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#4A0E1E",
+              color: colors.dark,
               lineHeight: 1.2,
             }}
           >
@@ -91,7 +92,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
                 fontFamily: '"DM Sans", sans-serif',
                 fontWeight: 300,
                 fontSize: "0.9375rem",
-                color: "#5E4444",
+                color: colors.textLight,
                 mt: 1,
               }}
             >
@@ -106,7 +107,7 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
-              color: "#5E4444",
+              color: colors.textLight,
               mr: 1,
             }}
           >
@@ -118,9 +119,9 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             }
             size="small"
             sx={{
-              border: "1px solid #E5DADA",
-              color: "#4A0E1E",
-              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
+              border: `1px solid ${colors.border}`,
+              color: colors.dark,
+              "&:hover": { borderColor: colors.beige, color: colors.beige },
             }}
           >
             <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
@@ -131,9 +132,9 @@ function AlbumStripA({ album, index }: { album: Album; index: number }) {
             }
             size="small"
             sx={{
-              border: "1px solid #E5DADA",
-              color: "#4A0E1E",
-              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
+              border: `1px solid ${colors.border}`,
+              color: colors.dark,
+              "&:hover": { borderColor: colors.beige, color: colors.beige },
             }}
           >
             <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
@@ -238,7 +239,7 @@ function VarianteB({ album }: { album: Album[] }) {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#FEFCFB", py: { xs: 6, md: 8 } }}>
+    <Box sx={{ backgroundColor: colors.bg, py: { xs: 6, md: 8 } }}>
       <Box
         sx={{
           maxWidth: 1920,
@@ -341,7 +342,7 @@ function VarianteB({ album }: { album: Album[] }) {
                       fontSize: "0.625rem",
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
-                      color: "#C4A882",
+                      color: colors.beige,
                       mb: 0.5,
                     }}
                   >
@@ -426,7 +427,7 @@ function VarianteC({ album }: { album: Album[] }) {
 
   // Raggruppa le foto per album e crea blocchi narrativi
   return (
-    <Box sx={{ backgroundColor: "#FEFCFB" }}>
+    <Box sx={{ backgroundColor: colors.bg }}>
       {album.map((a, albumIndex) => {
         const foto = a.acf.foto || [];
         if (foto.length === 0) return null;
@@ -472,7 +473,7 @@ function VarianteC({ album }: { album: Album[] }) {
                   sx={{
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "1.75rem", md: "2.5rem" },
-                    color: "#4A0E1E",
+                    color: colors.dark,
                     lineHeight: 1.2,
                   }}
                 >
@@ -485,7 +486,7 @@ function VarianteC({ album }: { album: Album[] }) {
                       fontSize: "0.75rem",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
-                      color: "#C4A882",
+                      color: colors.beige,
                       mt: 0.5,
                     }}
                   >
@@ -604,7 +605,7 @@ function VarianteLabel({
   return (
     <Box
       sx={{
-        backgroundColor: "#4A0E1E",
+        backgroundColor: colors.dark,
         py: { xs: 5, md: 6 },
         px: { xs: 3, md: 10 },
         display: "flex",
@@ -674,7 +675,7 @@ export default function FotoTestPage() {
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
-          backgroundColor: "#FEFCFB",
+          backgroundColor: colors.bg,
         }}
       >
         <Typography
@@ -682,7 +683,7 @@ export default function FotoTestPage() {
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
             fontSize: "1.5rem",
-            color: "#C4A882",
+            color: colors.beige,
           }}
         >
           Caricamento...
@@ -692,11 +693,11 @@ export default function FotoTestPage() {
   }
 
   return (
-    <Box sx={{ backgroundColor: "#FEFCFB" }}>
+    <Box sx={{ backgroundColor: colors.bg }}>
       {/* Intestazione pagina */}
       <Box
         sx={{
-          backgroundColor: "#350A16",
+          backgroundColor: colors.darkDeep,
           py: { xs: 8, md: 10 },
           px: { xs: 3, md: 10 },
           textAlign: "center",
@@ -708,7 +709,7 @@ export default function FotoTestPage() {
             fontSize: "0.6875rem",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#C4A882",
+            color: colors.beige,
             mb: 2,
           }}
         >

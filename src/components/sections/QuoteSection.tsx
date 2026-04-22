@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { colors } from "@/styles/colors";
 
 interface QuoteSectionProps {
   quote: string;
@@ -10,7 +11,7 @@ export default function QuoteSection({ quote, author }: QuoteSectionProps) {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#4A0E1E",
+        backgroundColor: colors.dark,
         py: { xs: 12, md: 16 },
         position: "relative",
         overflow: "hidden",
@@ -58,7 +59,7 @@ export default function QuoteSection({ quote, author }: QuoteSectionProps) {
             fontSize: { xs: "2.5rem", md: "4rem" },
             fontWeight: 400,
             lineHeight: 1.3,
-            color: "#C4A882",
+            color: colors.beige,
             mb: author ? 3 : 0,
           }}
         >

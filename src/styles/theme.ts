@@ -94,10 +94,10 @@ const theme = createTheme({
           },
         },
         contained: {
-          backgroundColor: "#7D1A2C",
+          backgroundColor: "colors.merlot",
           color: "#FFFFFF",
           "&:hover": {
-            backgroundColor: "#B03050",
+            backgroundColor: "colors.merlotHover",
           },
         },
         outlined: {
@@ -120,7 +120,7 @@ const theme = createTheme({
     scroll-behavior: smooth;
   }
   body {
-    background-color: #FEFCFB;
+    background-color: colors.bg;
     color: #4A0E1E;
     font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   }

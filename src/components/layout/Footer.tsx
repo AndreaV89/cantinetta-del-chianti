@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
+import { colors } from "@/styles/colors";
 
 const footerLinks = {
   esplora: [
@@ -37,9 +38,9 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#4A0E1E",
+        backgroundColor: colors.dark,
         color: "#FFFFFF",
-        borderTop: "2px solid #C4A882",
+        borderTop: `2px solid ${colors.beige}`,
       }}
     >
       <Box
@@ -96,7 +97,7 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C4A882",
+                color: colors.beige,
                 mb: 2.5,
               }}
             >
@@ -133,7 +134,7 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C4A882",
+                color: colors.beige,
                 mb: 2.5,
               }}
             >
@@ -170,7 +171,7 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C4A882",
+                color: colors.beige,
                 mb: 2.5,
               }}
             >
@@ -255,7 +256,7 @@ export default function Footer() {
                 fontSize: "inherit",
                 fontFamily: "inherit",
                 fontWeight: "inherit",
-                "&:hover": { color: "#C4A882" },
+                "&:hover": { color: colors.beige },
               }}
             >
               vannetti.dev

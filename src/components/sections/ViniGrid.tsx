@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { Vino } from "@/types";
+import { colors } from "@/styles/colors";
 
 const tipologie = [
   "Tutti",
@@ -15,11 +16,11 @@ const tipologie = [
 ];
 
 const tipologiaColors: Record<string, string> = {
-  Rosso: "#7D1A2C",
-  Bianco: "#C4A882",
+  Rosso: colors.merlot,
+  Bianco: colors.beige,
   Rosato: "#C4768A",
-  Bollicine: "#5E4444",
-  Distillato: "#4A0E1E",
+  Bollicine: colors.textLight,
+  Distillato: colors.dark,
 };
 
 function VinoCard({ vino }: { vino: Vino }) {
@@ -29,7 +30,7 @@ function VinoCard({ vino }: { vino: Vino }) {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#FFFFFF",
-        border: "1px solid #E5DADA",
+        border: `1px solid ${colors.border}`,
         borderRadius: 1,
         overflow: "hidden",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -45,7 +46,7 @@ function VinoCard({ vino }: { vino: Vino }) {
           position: "relative",
           width: "100%",
           aspectRatio: "3/4",
-          backgroundColor: "#F5F0EF",
+          backgroundColor: colors.bgAlt,
         }}
       >
         {vino.featuredImage ? (
@@ -97,7 +98,7 @@ function VinoCard({ vino }: { vino: Vino }) {
               fontWeight: 400,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: tipologiaColors[vino.acf.tipologia] || "#5E4444",
+              color: tipologiaColors[vino.acf.tipologia] || colors.textLight,
             }}
           >
             {vino.acf.tipologia}
@@ -107,7 +108,7 @@ function VinoCard({ vino }: { vino: Vino }) {
               sx={{
                 fontFamily: '"DM Sans", sans-serif',
                 fontSize: "0.75rem",
-                color: "#5E4444",
+                color: colors.textLight,
               }}
             >
               {vino.acf.annata}
@@ -119,7 +120,7 @@ function VinoCard({ vino }: { vino: Vino }) {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.25rem",
-            color: "#4A0E1E",
+            color: colors.dark,
             mb: 0.5,
             flex: 1,
           }}
@@ -132,7 +133,7 @@ function VinoCard({ vino }: { vino: Vino }) {
             fontFamily: '"DM Sans", sans-serif',
             fontWeight: 300,
             fontSize: "0.8125rem",
-            color: "#5E4444",
+            color: colors.textLight,
             mb: 1.5,
           }}
         >
@@ -147,7 +148,7 @@ function VinoCard({ vino }: { vino: Vino }) {
               fontWeight: 300,
               fontSize: "0.8125rem",
               lineHeight: 1.7,
-              color: "#5E4444",
+              color: colors.textLight,
               mb: 2,
             }}
           >
@@ -184,7 +185,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
   return (
     <Box
       component="section"
-      sx={{ backgroundColor: "#FEFCFB", py: { xs: 8, md: 10 } }}
+      sx={{ backgroundColor: colors.bg, py: { xs: 8, md: 10 } }}
     >
       <Box
         sx={{
@@ -201,7 +202,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
             gap: 1.5,
             mb: 6,
             pb: 4,
-            borderBottom: "1px solid #E5DADA",
+            borderBottom: `1px solid ${colors.border}`,
           }}
         >
           {tipologie.map((t) => {
@@ -220,14 +221,14 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                   py: 1,
                   borderRadius: "2px",
                   border: "1px solid",
-                  borderColor: isActive ? "#7D1A2C" : "#E5DADA",
-                  backgroundColor: isActive ? "#7D1A2C" : "transparent",
+                  borderColor: isActive ? colors.merlot : colors.border,
+                  backgroundColor: isActive ? colors.merlot : "transparent",
                   cursor: "pointer",
                   transition: "all 0.2s ease",
                   "&:hover": {
-                    borderColor: "#7D1A2C",
+                    borderColor: colors.merlot,
                     backgroundColor: isActive
-                      ? "#7D1A2C"
+                      ? colors.merlot
                       : "rgba(107, 26, 40, 0.05)",
                   },
                 }}
@@ -238,7 +239,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                     fontSize: "0.75rem",
                     fontWeight: isActive ? 500 : 400,
                     letterSpacing: "0.08em",
-                    color: isActive ? "#FFFFFF" : "#4A0E1E",
+                    color: isActive ? "#FFFFFF" : colors.dark,
                     userSelect: "none",
                   }}
                 >
@@ -248,7 +249,9 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
                     fontSize: "0.625rem",
-                    color: isActive ? "rgba(255,255,255,0.7)" : "#5E4444",
+                    color: isActive
+                      ? "rgba(255,255,255,0.7)"
+                      : colors.textLight,
                     userSelect: "none",
                   }}
                 >
@@ -266,7 +269,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: "0.875rem",
-              color: "#5E4444",
+              color: colors.textLight,
             }}
           >
             {viniFiltrati.length} {viniFiltrati.length === 1 ? "vino" : "vini"}
@@ -312,7 +315,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
           sx={{
             mt: 8,
             pt: 6,
-            borderTop: "1px solid #E5DADA",
+            borderTop: `1px solid ${colors.border}`,
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: { md: "center" },
@@ -325,7 +328,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
               sx={{
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "1.5rem", md: "1.75rem" },
-                color: "#4A0E1E",
+                color: colors.dark,
                 mb: 0.5,
               }}
             >
@@ -336,7 +339,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                 fontFamily: '"DM Sans", sans-serif',
                 fontWeight: 300,
                 fontSize: "0.9375rem",
-                color: "#5E4444",
+                color: colors.textLight,
               }}
             >
               Abbiamo oltre 200 etichette disponibili in bottega.
@@ -352,16 +355,16 @@ export default function ViniGrid({ vini }: ViniGridProps) {
               fontSize: "0.8125rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#7D1A2C",
+              color: colors.merlot,
               textDecoration: "none",
-              border: "1px solid #7D1A2C",
+              border: `1px solid ${colors.merlot}`,
               px: 4,
               py: 1.75,
               borderRadius: "2px",
               display: "inline-block",
               flexShrink: 0,
               "&:hover": {
-                backgroundColor: "#7D1A2C",
+                backgroundColor: colors.merlot,
                 color: "#FFFFFF",
               },
               transition: "all 0.2s ease",

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { getAlbum } from "@/lib/wordpress";
 import AlbumStrip from "@/components/sections/AlbumStrip";
+import { colors } from "@/styles/colors";
 
 export default async function FotoPage() {
   const album = await getAlbum();
@@ -11,7 +12,7 @@ export default async function FotoPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#4A0E1E",
+          backgroundColor: colors.dark,
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -52,14 +53,19 @@ export default async function FotoPage() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C4A882",
+              color: "colors.beige",
               mb: 1,
             }}
           >
             La Cantinetta in immagini
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
+            sx={{
+              width: 32,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 3,
+            }}
           />
           <Typography
             component="h1"
@@ -92,7 +98,7 @@ export default async function FotoPage() {
       </Box>
 
       {/* Album */}
-      <Box sx={{ backgroundColor: "#FEFCFB" }}>
+      <Box sx={{ backgroundColor: colors.bg }}>
         {album.length === 0 ? (
           <Box sx={{ py: 12, textAlign: "center" }}>
             <Typography
@@ -116,7 +122,7 @@ export default async function FotoPage() {
       {/* Pre-footer */}
       <Box
         sx={{
-          backgroundColor: "#350A16",
+          backgroundColor: colors.darkDeep,
           py: { xs: 6, md: 8 },
           textAlign: "center",
         }}
@@ -126,10 +132,10 @@ export default async function FotoPage() {
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
             fontSize: { xs: "1.5rem", md: "2rem" },
-            color: "#C4A882",
+            color: colors.beige,
           }}
         >
-          Un'immagine vale più di mille parole
+          Un&#39;immagine vale più di mille parole
         </Typography>
       </Box>
     </>

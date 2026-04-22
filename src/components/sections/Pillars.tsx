@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { colors } from "@/styles/colors";
 
 const pillars = [
   {
@@ -23,7 +24,7 @@ export default function Pillars() {
     <Box
       component="section"
       sx={{
-        backgroundColor: "#4A0E1E",
+        backgroundColor: colors.dark,
         borderTop: "1px solid rgba(196, 168, 130, 0.2)",
         borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
       }}

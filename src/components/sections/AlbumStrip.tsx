@@ -8,6 +8,7 @@ import "yet-another-react-lightbox/styles.css";
 import { Album } from "@/types";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { colors } from "@/styles/colors";
 
 interface AlbumStripProps {
   album: Album;
@@ -51,7 +52,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
     <Box
       component="section"
       sx={{
-        backgroundColor: isEven ? "#FEFCFB" : "#F5F0EF",
+        backgroundColor: isEven ? colors.bg : colors.bgAlt,
         py: { xs: 6, md: 8 },
         borderBottom: "1px solid rgba(224, 216, 206, 0.5)",
       }}
@@ -76,7 +77,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 fontSize: "0.6875rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#C4A882",
+                color: colors.beige,
                 mb: 0.5,
               }}
             >
@@ -89,7 +90,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "1.75rem", md: "2.5rem" },
               fontWeight: 400,
-              color: "#4A0E1E",
+              color: colors.dark,
               lineHeight: 1.2,
             }}
           >
@@ -101,7 +102,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 fontFamily: '"DM Sans", sans-serif',
                 fontWeight: 300,
                 fontSize: "0.9375rem",
-                color: "#5E4444",
+                color: colors.textLight,
                 mt: 1,
               }}
             >
@@ -118,7 +119,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
-              color: "#5E4444",
+              color: colors.textLight,
               mr: 1,
             }}
           >
@@ -128,9 +129,9 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             onClick={() => scroll("left")}
             size="small"
             sx={{
-              border: "1px solid #E5DADA",
-              color: "#4A0E1E",
-              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
+              border: `1px solid ${colors.border}`,
+              color: colors.dark,
+              "&:hover": { borderColor: colors.beige, color: colors.beige },
             }}
           >
             <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
@@ -139,9 +140,9 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
             onClick={() => scroll("right")}
             size="small"
             sx={{
-              border: "1px solid #E5DADA",
-              color: "#4A0E1E",
-              "&:hover": { borderColor: "#C4A882", color: "#C4A882" },
+              border: `1px solid ${colors.border}`,
+              color: colors.dark,
+              "&:hover": { borderColor: colors.beige, color: colors.beige },
             }}
           >
             <ArrowForwardIosIcon sx={{ fontSize: 14 }} />

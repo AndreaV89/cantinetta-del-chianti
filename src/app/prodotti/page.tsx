@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { getProdotti } from "@/lib/wordpress";
 import ProdottiGrid from "@/components/sections/ProdottiGrid";
+import { colors } from "@/styles/colors";
 
 export default async function ProdottiPage() {
   const prodotti = await getProdotti();
@@ -11,7 +12,7 @@ export default async function ProdottiPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#4A0E1E",
+          backgroundColor: colors.dark,
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -52,14 +53,19 @@ export default async function ProdottiPage() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C4A882",
+              color: colors.beige,
               mb: 1,
             }}
           >
             La Bottega
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
+            sx={{
+              width: 32,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 3,
+            }}
           />
           <Typography
             component="h1"
@@ -97,7 +103,7 @@ export default async function ProdottiPage() {
       {/* Pre-footer */}
       <Box
         sx={{
-          backgroundColor: "#350A16",
+          backgroundColor: colors.darkDeep,
           py: { xs: 6, md: 8 },
           textAlign: "center",
         }}
@@ -107,7 +113,7 @@ export default async function ProdottiPage() {
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
             fontSize: { xs: "1.5rem", md: "2rem" },
-            color: "#C4A882",
+            color: colors.beige,
             mb: 4,
           }}
         >
@@ -125,13 +131,13 @@ export default async function ProdottiPage() {
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "#FFFFFF",
-            backgroundColor: "#7D1A2C",
+            backgroundColor: colors.merlot,
             textDecoration: "none",
             px: 4,
             py: 1.75,
             borderRadius: "2px",
             display: "inline-block",
-            "&:hover": { backgroundColor: "#B03050" },
+            "&:hover": { backgroundColor: colors.merlotHover },
           }}
         >
           Scrivici su WhatsApp →

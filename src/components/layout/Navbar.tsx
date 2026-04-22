@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { colors } from "@/styles/colors";
 
 const navLinks = [
   { label: "Vini", href: "/vini" },
@@ -30,7 +31,7 @@ export default function Navbar() {
       sx={{
         backgroundColor: scrolled ? "rgba(253, 250, 246, 0.96)" : "transparent",
         backdropFilter: scrolled ? "blur(8px)" : "none",
-        borderBottom: scrolled ? "1px solid #E5DADA" : "none",
+        borderBottom: scrolled ? `1px solid ${colors.border}` : "none",
         transition: "all 0.3s ease",
       }}
     >
@@ -51,7 +52,7 @@ export default function Navbar() {
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.125rem",
-            color: scrolled ? "#4A0E1E" : "#FFFFFF",
+            color: scrolled ? colors.dark : "#FFFFFF",
             textDecoration: "none",
             letterSpacing: "0.02em",
             transition: "color 0.3s ease",
@@ -76,11 +77,11 @@ export default function Navbar() {
                 fontWeight: 400,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: scrolled ? "#5E4444" : "rgba(255,255,255,0.85)",
+                color: scrolled ? colors.textLight : "rgba(255,255,255,0.85)",
                 textDecoration: "none",
                 transition: "color 0.2s ease",
                 "&:hover": {
-                  color: scrolled ? "#4A0E1E" : "#FFFFFF",
+                  color: scrolled ? colors.dark : "#FFFFFF",
                 },
               }}
             >
@@ -104,9 +105,9 @@ export default function Navbar() {
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
-              color: scrolled ? "#5E4444" : "rgba(255,255,255,0.7)",
+              color: scrolled ? colors.textLight : "rgba(255,255,255,0.7)",
               textDecoration: "none",
-              "&:hover": { color: scrolled ? "#4A0E1E" : "#FFFFFF" },
+              "&:hover": { color: scrolled ? colors.dark : "#FFFFFF" },
             }}
           >
             IT
@@ -114,7 +115,7 @@ export default function Navbar() {
           <Typography
             sx={{
               fontSize: "0.75rem",
-              color: scrolled ? "#E5DADA" : "rgba(255,255,255,0.3)",
+              color: scrolled ? colors.border : "rgba(255,255,255,0.3)",
             }}
           >
             /
@@ -126,9 +127,9 @@ export default function Navbar() {
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
-              color: scrolled ? "#5E4444" : "rgba(255,255,255,0.7)",
+              color: scrolled ? colors.textLight : "rgba(255,255,255,0.7)",
               textDecoration: "none",
-              "&:hover": { color: scrolled ? "#4A0E1E" : "#FFFFFF" },
+              "&:hover": { color: scrolled ? colors.dark : "#FFFFFF" },
             }}
           >
             EN
@@ -140,7 +141,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           sx={{
             display: { xs: "flex", md: "none" },
-            color: scrolled ? "#4A0E1E" : "#FFFFFF",
+            color: scrolled ? colors.dark : "#FFFFFF",
           }}
         >
           {mobileOpen ? <CloseIcon /> : <MenuIcon />}
@@ -153,8 +154,8 @@ export default function Navbar() {
           sx={{
             display: { xs: "flex", md: "none" },
             flexDirection: "column",
-            backgroundColor: "#FEFCFB",
-            borderTop: "1px solid #E5DADA",
+            backgroundColor: colors.bg,
+            borderTop: `1px solid ${colors.border}`,
             px: 3,
             py: 2,
             gap: 1,
@@ -170,10 +171,10 @@ export default function Navbar() {
                 fontSize: "0.875rem",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                color: "#4A0E1E",
+                color: colors.dark,
                 textDecoration: "none",
                 py: 1.5,
-                borderBottom: "1px solid #E5DADA",
+                borderBottom: `1px solid ${colors.border}`,
               }}
             >
               {link.label}
@@ -183,14 +184,14 @@ export default function Navbar() {
             <Typography
               component="a"
               href="/it"
-              sx={{ fontSize: "0.75rem", color: "#5E4444" }}
+              sx={{ fontSize: "0.75rem", color: colors.textLight }}
             >
               IT
             </Typography>
             <Typography
               component="a"
               href="/en"
-              sx={{ fontSize: "0.75rem", color: "#5E4444" }}
+              sx={{ fontSize: "0.75rem", color: colors.textLight }}
             >
               EN
             </Typography>

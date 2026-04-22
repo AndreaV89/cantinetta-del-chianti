@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
+import { colors } from "@/styles/colors";
 
 const servizi = [
   {
@@ -50,7 +51,7 @@ export default function ServiziPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#4A0E1E",
+          backgroundColor: colors.dark,
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 12 },
           position: "relative",
@@ -91,14 +92,19 @@ export default function ServiziPage() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C4A882",
+              color: colors.beige,
               mb: 1,
             }}
           >
             Cosa Offriamo
           </Typography>
           <Box
-            sx={{ width: 32, height: "1px", backgroundColor: "#C4A882", mb: 3 }}
+            sx={{
+              width: 32,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 3,
+            }}
           />
           <Typography
             component="h1"
@@ -125,13 +131,14 @@ export default function ServiziPage() {
             }}
           >
             Dalla degustazione guidata alla selezione personalizzata — tutto
-            quello che serve per vivere al meglio l'esperienza del vino toscano.
+            quello che serve per vivere al meglio l&#39;esperienza del vino
+            toscano.
           </Typography>
         </Box>
       </Box>
 
       {/* Servizi — layout editoriale alternato */}
-      <Box component="section" sx={{ backgroundColor: "#FEFCFB" }}>
+      <Box component="section" sx={{ backgroundColor: colors.bg }}>
         {servizi.map((servizio, index) => {
           const isEven = index % 2 === 0;
           return (
@@ -187,7 +194,7 @@ export default function ServiziPage() {
                   justifyContent: "center",
                   px: { xs: 3, md: 10 },
                   py: { xs: 6, md: 10 },
-                  backgroundColor: isEven ? "#FEFCFB" : "#F5F0EF",
+                  backgroundColor: isEven ? colors.bg : colors.bgAlt,
                   direction: "ltr",
                 }}
               >
@@ -197,7 +204,7 @@ export default function ServiziPage() {
                     fontSize: "0.6875rem",
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "#C4A882",
+                    color: colors.beige,
                     mb: 1,
                   }}
                 >
@@ -207,7 +214,7 @@ export default function ServiziPage() {
                   sx={{
                     width: 32,
                     height: "1px",
-                    backgroundColor: "#C4A882",
+                    backgroundColor: colors.beige,
                     mb: 3,
                   }}
                 />
@@ -218,7 +225,7 @@ export default function ServiziPage() {
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "2rem", md: "2.75rem" },
                     fontWeight: 400,
-                    color: "#4A0E1E",
+                    color: colors.dark,
                     lineHeight: 1.2,
                     mb: 4,
                   }}
@@ -232,7 +239,7 @@ export default function ServiziPage() {
                     fontWeight: 300,
                     fontSize: "1rem",
                     lineHeight: 1.85,
-                    color: "#5E4444",
+                    color: colors.textLight,
                     mb: 4,
                   }}
                 >
@@ -245,9 +252,9 @@ export default function ServiziPage() {
                     fontFamily: '"DM Sans", sans-serif',
                     fontWeight: 300,
                     fontSize: "0.8125rem",
-                    color: "#C4A882",
+                    color: colors.beige,
                     letterSpacing: "0.05em",
-                    borderTop: "1px solid #E5DADA",
+                    borderTop: `1px solid ${colors.border}`,
                     pt: 3,
                   }}
                 >
@@ -263,7 +270,7 @@ export default function ServiziPage() {
       <Box
         component="section"
         sx={{
-          backgroundColor: "#350A16",
+          backgroundColor: colors.darkDeep,
           py: { xs: 8, md: 10 },
           textAlign: "center",
         }}
@@ -274,7 +281,7 @@ export default function ServiziPage() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontStyle: "italic",
               fontSize: { xs: "1.75rem", md: "2.5rem" },
-              color: "#C4A882",
+              color: colors.beige,
               mb: 2,
             }}
           >
@@ -301,13 +308,13 @@ export default function ServiziPage() {
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "#FFFFFF",
-              backgroundColor: "#7D1A2C",
+              backgroundColor: colors.merlot,
               textDecoration: "none",
               px: 5,
               py: 1.75,
               borderRadius: "2px",
               display: "inline-block",
-              "&:hover": { backgroundColor: "#B03050" },
+              "&:hover": { backgroundColor: colors.merlotHover },
             }}
           >
             Contattaci

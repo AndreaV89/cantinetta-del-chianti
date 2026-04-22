@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { colors } from "@/styles/colors";
 
 const servizi = [
   {
@@ -27,7 +28,7 @@ export default function ServicesSection() {
   return (
     <Box
       component="section"
-      sx={{ backgroundColor: "#F5F0EF", py: { xs: 8, md: 12 } }}
+      sx={{ backgroundColor: colors.bgAlt, py: { xs: 8, md: 12 } }}
     >
       <Box
         sx={{
@@ -44,14 +45,19 @@ export default function ServicesSection() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C4A882",
+              color: colors.beige,
               mb: 1,
             }}
           >
             Cosa Offriamo
           </Typography>
           <Box
-            sx={{ width: 32, height: 1, backgroundColor: "#C4A882", mb: 2 }}
+            sx={{
+              width: 32,
+              height: 1,
+              backgroundColor: colors.beige,
+              mb: 2,
+            }}
           />
           <Typography
             component="h2"
@@ -59,7 +65,7 @@ export default function ServicesSection() {
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.75rem" },
               fontWeight: 400,
-              color: "#4A0E1E",
+              color: colors.dark,
             }}
           >
             I nostri servizi
@@ -83,7 +89,7 @@ export default function ServicesSection() {
               key={servizio.title}
               sx={{
                 backgroundColor: "rgba(255,255,255,0.7)",
-                border: "1px solid #E5DADA",
+                border: `1px solid ${colors.border}`,
                 borderRadius: 1,
                 p: 4,
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -96,7 +102,7 @@ export default function ServicesSection() {
               <Typography
                 sx={{
                   fontSize: "1.375rem",
-                  color: "#C4A882",
+                  color: colors.beige,
                   mb: 2.5,
                   lineHeight: 1,
                 }}
@@ -108,7 +114,7 @@ export default function ServicesSection() {
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: "1.25rem",
-                  color: "#4A0E1E",
+                  color: colors.dark,
                   lineHeight: 1.35,
                   mb: 2,
                   whiteSpace: "pre-line",
@@ -123,7 +129,7 @@ export default function ServicesSection() {
                   fontWeight: 300,
                   fontSize: "0.875rem",
                   lineHeight: 1.75,
-                  color: "#5E4444",
+                  color: colors.textLight,
                 }}
               >
                 {servizio.desc}
