@@ -327,6 +327,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
             <Typography
               sx={{
                 fontFamily: '"Apple Chancery", Palatino, serif',
+                fontStyle: "italic",
                 fontSize: { xs: "1.5rem", md: "1.75rem" },
                 color: colors.dark,
                 mb: 0.5,

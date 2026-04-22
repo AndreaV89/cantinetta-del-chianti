@@ -68,14 +68,16 @@ export default function AboutSection() {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.5rem" },
+              fontStyle: "italic",
               fontWeight: 400,
               color: "#FFFFFF",
               lineHeight: 1.25,
               mb: 4,
             }}
           >
-            Una storia di vino
-            <br />e territorio
+            Non solo vino.
+            <br />
+            Ma cultura del gusto
           </Typography>
 
           <Typography
@@ -88,10 +90,9 @@ export default function AboutSection() {
               mb: 3,
             }}
           >
-            Benvenuto a La Cantinetta, nel paese di Gaiole in Chianti. Una
-            bottega specializzata che seleziona con cura le migliori etichette
-            del territorio, con una passione autentica per la cultura
-            enogastronomica toscana.
+            A Gaiole in Chianti, nel cuore del Chianti Classico, La Cantinetta
+            del Chianti è una piccola enoteca e bottega dedicata alla selezione
+            di vini ed eccellenze enogastronomiche del territorio.
           </Typography>
 
           <Typography
@@ -104,8 +105,10 @@ export default function AboutSection() {
               mb: 5,
             }}
           >
-            Se stai cercando i vini buoni e i cibi gustosi del Chianti — e non
-            solo — sei arrivato nel posto giusto.
+            Una realtà che nasce dalla passione per la qualità, l’autenticità e
+            il legame profondo con la Toscana, con l’obiettivo di offrire
+            esperienze che raccontino il territorio attraverso i suoi vini e i
+            suoi sapori.
           </Typography>
 
           <Box
@@ -171,6 +174,7 @@ export default function AboutSection() {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.5rem" },
+              fontStyle: "italic",
               fontWeight: 400,
               color: "#FFFFFF",
               lineHeight: 1.25,

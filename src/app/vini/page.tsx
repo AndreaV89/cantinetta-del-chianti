@@ -72,6 +72,7 @@ export default async function ViniPage() {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2.5rem", md: "4rem" },
+              fontStyle: "italic",
               fontWeight: 400,
               color: "#FFFFFF",
               lineHeight: 1.15,

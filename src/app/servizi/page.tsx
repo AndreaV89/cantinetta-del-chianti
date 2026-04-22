@@ -6,8 +6,10 @@ import { colors } from "@/styles/colors";
 const servizi = [
   {
     num: "01",
-    title: "Degustazioni Guidate",
-    desc: "Percorsi di degustazione pensati per scoprire il meglio del Chianti Classico e delle sue espressioni. Ti guidiamo attraverso una selezione di etichette scelte, con abbinamenti curati e storie di produttori locali.",
+    title: "Viaggio nel Vino",
+    desc: [
+      "Proponiamo degustazioni guidate che vi accompagneranno in un viaggio alla scoperta del vino, tra territori, profumi e tradizioni.",
+    ],
     info: "Su prenotazione · Minimo 2 persone · IT / EN",
     image:
       "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80",
@@ -15,8 +17,12 @@ const servizi = [
   },
   {
     num: "02",
-    title: "Selezioni Personalizzate",
-    desc: "Costruiamo insieme una selezione di vini su misura — che sia un regalo, una cena speciale o il primo acquisto per la tua cantina. Ti aiutiamo a scegliere le etichette giuste in base al tuo gusto e al tuo budget.",
+    title: "L'Arte della Scelta",
+    desc: [
+      "Realizziamo selezioni personalizzate, pensate per ogni esigenza: dal regalo perfetto alla bottiglia ideale per una cena tra amici, fino alla creazione di una cantina privata.",
+      "Vi affianchiamo nella scelta con cura e competenza, suggerendo le etichette più adatte anche in base al vostro budget, per rendere ogni esperienza unica e soddisfacente.",
+      "Le nostre selezioni possono essere spedite su richiesta, per portare direttamente a casa vostra il vino scelto insieme a noi.",
+    ],
     info: "Consulenza gratuita · Confezioni regalo · Spedizione in Italia",
     image:
       "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=1200&q=80",
@@ -24,8 +30,10 @@ const servizi = [
   },
   {
     num: "03",
-    title: "Degustazioni a Domicilio",
-    desc: "Portiamo l'esperienza della Cantinetta direttamente a casa tua. Una selezione di vini, un tagliere di prodotti tipici e una guida alla degustazione per rendere speciale ogni occasione.",
+    title: "Vino a Casa Vostra",
+    desc: [
+      "Portiamo l'esperienza della degustazione direttamente a casa vostra, trasformando ogni occasione in un momento unico da vivere e condividere in un'atmosfera intima e accogliente.",
+    ],
     info: "Entro 30km · Minimo 4 persone · 48h di anticipo",
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80",
@@ -33,8 +41,11 @@ const servizi = [
   },
   {
     num: "04",
-    title: "Aperitivi con Taglieri",
-    desc: "Un tavolo fuori, il sole del Chianti e un calice da assaporare con calma. Salumi e formaggi del territorio, abbinati a una selezione di vini locali. Il modo migliore per vivere Gaiole in Chianti.",
+    title: "L'Aperitivo in Chianti Classico",
+    desc: [
+      "Un tavolo all'aperto, il sole del Chianti Classico e un calice da assaporare con calma. Taglieri di salumi e formaggi del territorio si accompagnano a una selezione di vini locali, insieme a prodotti tipici come giardiniera e specialità sott'olio.",
+      "Un modo autentico e rilassato per vivere il cuore del Chianti Classico.",
+    ],
     info: "Tutti i giorni · Prenotazione consigliata in alta stagione",
     image:
       "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=1200&q=80",
@@ -111,6 +122,7 @@ export default function ServiziPage() {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2.5rem", md: "4rem" },
+              fontStyle: "italic",
               fontWeight: 400,
               color: "#FFFFFF",
               lineHeight: 1.15,
@@ -224,6 +236,7 @@ export default function ServiziPage() {
                   sx={{
                     fontFamily: '"Apple Chancery", Palatino, serif',
                     fontSize: { xs: "2rem", md: "2.75rem" },
+                    fontStyle: "italic",
                     fontWeight: 400,
                     color: colors.dark,
                     lineHeight: 1.2,
@@ -233,18 +246,22 @@ export default function ServiziPage() {
                   {servizio.title}
                 </Typography>
 
-                <Typography
-                  sx={{
-                    fontFamily: '"DM Sans", sans-serif',
-                    fontWeight: 300,
-                    fontSize: "1rem",
-                    lineHeight: 1.85,
-                    color: colors.textLight,
-                    mb: 4,
-                  }}
-                >
-                  {servizio.desc}
-                </Typography>
+                {/* Descrizione */}
+                {servizio.desc.map((paragrafo, i) => (
+                  <Typography
+                    key={i}
+                    sx={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "1rem",
+                      lineHeight: 1.85,
+                      color: colors.textLight,
+                      mb: i < servizio.desc.length - 1 ? 2 : 0,
+                    }}
+                  >
+                    {paragrafo}
+                  </Typography>
+                ))}
 
                 {/* Info tag */}
                 <Typography

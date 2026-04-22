@@ -82,6 +82,7 @@ export default function HeroVideo() {
             fontFamily:
               '"Apple Chancery", Palatino, "Palatino Linotype", serif',
             fontSize: { xs: "2.75rem", md: "4.5rem" },
+            fontStyle: "italic",
             fontWeight: 400,
             lineHeight: 1.15,
             color: "#FFFFFF",

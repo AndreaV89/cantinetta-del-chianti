@@ -1,4 +1,4 @@
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { Vino } from "@/types";
 import { colors } from "@/styles/colors";
@@ -6,14 +6,6 @@ import { colors } from "@/styles/colors";
 interface WineSectionProps {
   vini: Vino[];
 }
-
-const tipologiaColors: Record<string, string> = {
-  Rosso: colors.merlot,
-  Bianco: colors.beige,
-  Rosato: "#D4A5A5",
-  Bollicine: colors.textLight,
-  Distillato: colors.dark,
-};
 
 function WineCard({ vino }: { vino: Vino }) {
   return (
@@ -254,6 +246,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               sx={{
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontSize: { xs: "2rem", md: "2.75rem" },
+                fontStyle: "italic",
                 fontWeight: 400,
                 color: colors.dark,
                 lineHeight: 1.2,

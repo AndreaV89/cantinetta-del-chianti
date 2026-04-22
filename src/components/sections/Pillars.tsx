@@ -73,7 +73,8 @@ export default function Pillars() {
             <Typography
               sx={{
                 fontFamily: '"Apple Chancery", Palatino, serif',
-                fontSize: "1rem",
+                fontSize: "2rem",
+                fontStyle: "italic",
                 fontWeight: 400,
                 color: "#FFFFFF",
                 mb: 1.5,

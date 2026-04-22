@@ -381,6 +381,7 @@ export default function ContattiPage() {
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontStyle: "italic",
                   fontWeight: 400,
                   color: colors.dark,
                   mb: 4,
@@ -482,6 +483,7 @@ export default function ContattiPage() {
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontStyle: "italic",
                   fontWeight: 400,
                   color: colors.dark,
                   mb: 4,
@@ -551,6 +553,7 @@ export default function ContattiPage() {
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontStyle: "italic",
                   fontWeight: 400,
                   color: colors.dark,
                   mb: 4,
@@ -621,6 +624,7 @@ export default function ContattiPage() {
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontSize: { xs: "1.75rem", md: "2.25rem" },
+                  fontStyle: "italic",
                   fontWeight: 400,
                   color: colors.dark,
                   mb: 4,

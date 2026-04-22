@@ -64,6 +64,7 @@ export default function ServicesSection() {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.75rem" },
+              fontStyle: "italic",
               fontWeight: 400,
               color: colors.dark,
             }}
