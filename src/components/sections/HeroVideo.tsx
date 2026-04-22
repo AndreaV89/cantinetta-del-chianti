@@ -139,7 +139,7 @@ export default function HeroVideo() {
           </Button>
           <Button
             variant="outlined"
-            href="/contatti"
+            href="/chi-siamo"
             sx={{
               borderColor: "rgba(255,255,255,0.45)",
               color: "#FFFFFF",

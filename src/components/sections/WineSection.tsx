@@ -21,14 +21,14 @@ function WineCard({ vino }: { vino: Vino }) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: colors.white,
         border: `1px solid ${colors.border}`,
         borderRadius: 1,
         overflow: "hidden",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
+          transform: "translateY(-6px)",
+          boxShadow: `0 16px 40px rgba(74, 14, 30, 0.12)`,
         },
       }}
     >
@@ -63,68 +63,132 @@ function WineCard({ vino }: { vino: Vino }) {
               sx={{
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontStyle: "italic",
-                fontSize: "1rem",
-                color: "rgba(115, 97, 86, 0.4)",
+                fontSize: "3rem",
+                color: `rgba(196, 168, 130, 0.25)`,
               }}
             >
-              🍷
+              ◆
             </Typography>
           </Box>
         )}
+
+        {/* Badge tipologia */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 16,
+            left: 16,
+            px: 1.5,
+            py: 0.5,
+            backgroundColor: colors.dark,
+            borderRadius: "2px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.625rem",
+              fontWeight: 500,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: colors.beige,
+            }}
+          >
+            {vino.acf.tipologia}
+          </Typography>
+        </Box>
       </Box>
 
       {/* Info */}
-      <Box sx={{ p: 2.5 }}>
-        <Chip
-          label={vino.acf.tipologia}
-          size="small"
+      <Box sx={{ p: 3, display: "flex", flexDirection: "column", gap: 1.5 }}>
+        {/* Nome + annata */}
+        <Box
           sx={{
-            backgroundColor: "transparent",
-            border: "none",
-            color: tipologiaColors[vino.acf.tipologia] || colors.textLight,
-            fontFamily: '"DM Sans", sans-serif',
-            fontSize: "0.625rem",
-            fontWeight: 400,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            px: 0,
-            mb: 1,
-            height: "auto",
-            "& .MuiChip-label": { px: 0 },
-          }}
-        />
-
-        <Typography
-          sx={{
-            fontFamily: '"Apple Chancery", Palatino, serif',
-            fontSize: "1.25rem",
-            color: colors.dark,
-            mb: 0.5,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
           }}
         >
-          {vino.title}
-        </Typography>
+          <Typography
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontSize: "1.5rem",
+              lineHeight: 1.2,
+              color: colors.text,
+              flex: 1,
+            }}
+          >
+            {vino.title}
+          </Typography>
+          {vino.acf.annata > 0 && (
+            <Typography
+              sx={{
+                fontFamily: '"Apple Chancery", Palatino, serif',
+                fontStyle: "italic",
+                fontSize: "1.125rem",
+                color: colors.beige,
+                ml: 1,
+                flexShrink: 0,
+              }}
+            >
+              {vino.acf.annata}
+            </Typography>
+          )}
+        </Box>
 
-        <Typography
-          sx={{
-            fontFamily: '"DM Sans", sans-serif',
-            fontWeight: 300,
-            fontSize: "0.8125rem",
-            color: colors.textLight,
-            mb: 1.5,
-          }}
-        >
-          {vino.acf.denominazione}
-          {vino.acf.annata ? ` · ${vino.acf.annata}` : ""}
-        </Typography>
+        {/* Produttore */}
+        {vino.acf.produttore && (
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.875rem",
+              color: colors.textLight,
+              fontStyle: "italic",
+            }}
+          >
+            {vino.acf.produttore}
+          </Typography>
+        )}
 
+        {/* Denominazione */}
+        {vino.acf.denominazione && (
+          <Box
+            sx={{
+              display: "inline-block",
+              px: 1.5,
+              py: 0.5,
+              backgroundColor: `rgba(196, 168, 130, 0.1)`,
+              borderRadius: "2px",
+              alignSelf: "flex-start",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.625rem",
+                fontWeight: 400,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: colors.beige,
+              }}
+            >
+              {vino.acf.denominazione}
+            </Typography>
+          </Box>
+        )}
+
+        {/* Divisore */}
+        <Box sx={{ height: "1px", backgroundColor: colors.border }} />
+
+        {/* Descrizione */}
         {vino.acf.descrizione_breve && (
           <Typography
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
-              fontSize: "0.8125rem",
-              lineHeight: 1.7,
+              fontSize: "0.875rem",
+              lineHeight: 1.8,
               color: colors.textLight,
             }}
           >
@@ -137,6 +201,8 @@ function WineCard({ vino }: { vino: Vino }) {
 }
 
 export default function WineSection({ vini }: WineSectionProps) {
+  const viniToShow = vini.slice(0, 3);
+
   return (
     <Box
       component="section"
@@ -235,12 +301,11 @@ export default function WineSection({ vini }: WineSectionProps) {
                 xs: "1fr",
                 sm: "1fr 1fr",
                 md: "repeat(3, 1fr)",
-                lg: "repeat(4, 1fr)",
               },
-              gap: 3,
+              gap: 4,
             }}
           >
-            {vini.map((vino) => (
+            {viniToShow.map((vino) => (
               <WineCard key={vino.id} vino={vino} />
             ))}
           </Box>

@@ -300,7 +300,7 @@ export default function ServiziPage() {
           </Typography>
           <Typography
             component="a"
-            href="/contatti"
+            href="/chi-siamo"
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,

@@ -32,7 +32,6 @@ export interface Prodotto {
   id: number;
   slug: string;
   title: string;
-  featuredImage: WPImage | null;
   acf: {
     categoria: "Salumi" | "Formaggi" | "Conserve" | "Pasta" | "Olio" | "Altro";
     produttore: string;

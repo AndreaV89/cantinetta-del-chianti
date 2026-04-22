@@ -27,8 +27,9 @@ function parseFeaturedImage(raw: WPRawPost) {
 
 export async function getVini(): Promise<Vino[]> {
   const res = await fetch(
-    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&_fields=id,slug,title,featured_media,acf,_links,_embedded`,
-    { next: { revalidate: 3600 } },
+    // `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&_fields=id,slug,title,featured_media,acf,_links,_embedded`,
+    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100`,
+    { next: { revalidate: 0 } },
   );
   if (!res.ok) return [];
   const data: WPRawPost[] = await res.json();
@@ -38,9 +39,10 @@ export async function getVini(): Promise<Vino[]> {
     data.map(async (item) => {
       const resSingle = await fetch(
         `${WP_URL}/wp-json/wp/v2/vini/${item.id}?_embed`,
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 0 } },
       );
       if (!resSingle.ok) return null;
+
       const single: WPRawPost = await resSingle.json();
       return {
         id: single.id,
@@ -65,7 +67,7 @@ export async function getViniInEvidenza(): Promise<Vino[]> {
 export async function getProdotti(): Promise<Prodotto[]> {
   const res = await fetch(
     `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100`,
-    { next: { revalidate: 3600 } },
+    { next: { revalidate: 0 } },
   );
   if (!res.ok) return [];
   const data: WPRawPost[] = await res.json();
@@ -74,7 +76,7 @@ export async function getProdotti(): Promise<Prodotto[]> {
     data.map(async (item) => {
       const resSingle = await fetch(
         `${WP_URL}/wp-json/wp/v2/prodotti/${item.id}?_embed`,
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 0 } },
       );
       if (!resSingle.ok) return null;
       const single: WPRawPost = await resSingle.json();
@@ -110,7 +112,7 @@ export async function getAlbum(): Promise<Album[]> {
     data.map(async (item) => {
       const resSingle = await fetch(
         `${WP_URL}/wp-json/wp/v2/album/${item.id}`,
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 0 } },
       );
 
       if (!resSingle.ok) return null;

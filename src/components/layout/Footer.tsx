@@ -10,7 +10,7 @@ const footerLinks = {
     { label: "Foto", href: "/foto" },
   ],
   info: [
-    { label: "Chi Siamo", href: "/#chi-siamo" },
+    { label: "Chi Siamo", href: "/chi-siamo" },
     { label: "Contattaci", href: "/contatti" },
     { label: "Privacy Policy", href: "/privacy" },
   ],

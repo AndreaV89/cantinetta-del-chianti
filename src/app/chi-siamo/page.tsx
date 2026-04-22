@@ -256,6 +256,101 @@ export default function ContattiPage() {
         </Box>
       </Box>
 
+      {/* La nostra filosofia */}
+      <Box
+        component="section"
+        sx={{
+          backgroundColor: colors.dark,
+          py: { xs: 10, md: 14 },
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Watermark */}
+        <Typography
+          aria-hidden
+          sx={{
+            position: "absolute",
+            bottom: "-0.1em",
+            right: "-0.05em",
+            fontFamily: '"Apple Chancery", Palatino, serif',
+            fontStyle: "italic",
+            fontSize: { xs: "8rem", md: "18rem" },
+            lineHeight: 1,
+            color: "rgba(255,255,255,0.03)",
+            userSelect: "none",
+            pointerEvents: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Filosofia
+        </Typography>
+
+        <Box
+          sx={{
+            maxWidth: 860,
+            mx: "auto",
+            px: { xs: 3, md: 6 },
+            position: "relative",
+            zIndex: 1,
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            component="h2"
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "2rem", md: "3rem" },
+              fontWeight: 400,
+              color: colors.beige,
+              lineHeight: 1.3,
+              mb: 6,
+            }}
+          >
+            La nostra filosofia
+          </Typography>
+
+          <Box
+            sx={{
+              width: 48,
+              height: "1px",
+              backgroundColor: `rgba(196, 168, 130, 0.3)`,
+              mx: "auto",
+              mb: 6,
+            }}
+          />
+
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.9,
+              color: "rgba(255,255,255,0.7)",
+              mb: 4,
+            }}
+          >
+            La nostra selezione è il risultato di una ricerca attenta e
+            continua, guidata dal desiderio di valorizzare produttori locali e
+            realtà che condividono i nostri stessi valori.
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.9,
+              color: "rgba(255,255,255,0.7)",
+            }}
+          >
+            Ogni scelta è pensata per accompagnare il cliente in un percorso
+            semplice, autentico e su misura.
+          </Typography>
+        </Box>
+      </Box>
+
       {/* Info contatti + indicazioni */}
       <Box
         component="section"

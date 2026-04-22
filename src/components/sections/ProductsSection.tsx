@@ -1,141 +1,10 @@
-import { Box, Typography, Chip } from "@mui/material";
-import Image from "next/image";
+import { Box, Typography } from "@mui/material";
 import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
+import ProdottoCard from "@/components/ui/ProdottoCard";
 
 interface ProductsSectionProps {
   prodotti: Prodotto[];
-}
-
-const categoriaColors: Record<string, string> = {
-  Salumi: colors.merlot,
-  Formaggi: colors.beige,
-  Conserve: colors.textLight,
-  Pasta: "#A0522D",
-  Olio: "#6B7C5E",
-  Altro: colors.dark,
-};
-
-function ProductCard({ prodotto }: { prodotto: Prodotto }) {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "#FFFFFF",
-        border: `1px solid ${colors.border}`,
-        borderRadius: 1,
-        overflow: "hidden",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
-        },
-      }}
-    >
-      {/* Immagine */}
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "4/3",
-          backgroundColor: colors.bgAlt,
-        }}
-      >
-        {prodotto.featuredImage ? (
-          <Image
-            src={prodotto.featuredImage.url}
-            alt={prodotto.featuredImage.alt || prodotto.title}
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        ) : (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: '"Apple Chancery", Palatino, serif',
-                fontStyle: "italic",
-                fontSize: "2rem",
-                color: "rgba(115, 97, 86, 0.3)",
-              }}
-            >
-              🧀
-            </Typography>
-          </Box>
-        )}
-      </Box>
-
-      {/* Info */}
-      <Box sx={{ p: 2.5 }}>
-        <Chip
-          label={prodotto.acf.categoria}
-          size="small"
-          sx={{
-            backgroundColor: "transparent",
-            border: "none",
-            color: categoriaColors[prodotto.acf.categoria] || colors.textLight,
-            fontFamily: '"DM Sans", sans-serif',
-            fontSize: "0.625rem",
-            fontWeight: 400,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            px: 0,
-            mb: 1,
-            height: "auto",
-            "& .MuiChip-label": { px: 0 },
-          }}
-        />
-
-        <Typography
-          sx={{
-            fontFamily: '"Apple Chancery", Palatino, serif',
-            fontSize: "1.25rem",
-            color: colors.dark,
-            mb: 0.5,
-          }}
-        >
-          {prodotto.title}
-        </Typography>
-
-        {prodotto.acf.produttore && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              color: colors.textLight,
-              mb: 1.5,
-            }}
-          >
-            {prodotto.acf.produttore}
-          </Typography>
-        )}
-
-        {prodotto.acf.descrizione_breve && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              lineHeight: 1.7,
-              color: colors.textLight,
-            }}
-          >
-            {prodotto.acf.descrizione_breve}
-          </Typography>
-        )}
-      </Box>
-    </Box>
-  );
 }
 
 export default function ProductsSection({ prodotti }: ProductsSectionProps) {
@@ -245,7 +114,7 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
             }}
           >
             {prodotti.map((prodotto) => (
-              <ProductCard key={prodotto.id} prodotto={prodotto} />
+              <ProdottoCard key={prodotto.id} prodotto={prodotto} />
             ))}
           </Box>
         )}

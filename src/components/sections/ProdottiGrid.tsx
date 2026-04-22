@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import Image from "next/image";
 import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
+import ProdottoCard from "@/components/ui/ProdottoCard";
 
 const categorie = [
   "Tutti",
@@ -15,147 +15,6 @@ const categorie = [
   "Olio",
   "Altro",
 ];
-
-const categoriaColors: Record<string, string> = {
-  Salumi: colors.merlot,
-  Formaggi: colors.beige,
-  Conserve: colors.textLight,
-  Pasta: colors.merlotHover,
-  Olio: "#3D5A3D",
-  Altro: colors.dark,
-};
-
-function ProdottoCard({ prodotto }: { prodotto: Prodotto }) {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "#FFFFFF",
-        border: `1px solid ${colors.border}`,
-        borderRadius: 1,
-        overflow: "hidden",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
-        },
-      }}
-    >
-      {/* Immagine */}
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "4/3",
-          backgroundColor: colors.bgAlt,
-        }}
-      >
-        {prodotto.featuredImage ? (
-          <Image
-            src={prodotto.featuredImage.url}
-            alt={prodotto.featuredImage.alt || prodotto.title}
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 768px) 100vw, 25vw"
-          />
-        ) : (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: '"Apple Chancery", Palatino, serif',
-                fontStyle: "italic",
-                fontSize: "2rem",
-                color: "rgba(94, 68, 68, 0.25)",
-              }}
-            >
-              🧀
-            </Typography>
-          </Box>
-        )}
-      </Box>
-
-      {/* Info */}
-      <Box sx={{ p: 2.5, flex: 1, display: "flex", flexDirection: "column" }}>
-        <Typography
-          sx={{
-            fontFamily: '"DM Sans", sans-serif',
-            fontSize: "0.625rem",
-            fontWeight: 400,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: categoriaColors[prodotto.acf.categoria] || colors.textLight,
-            mb: 1,
-          }}
-        >
-          {prodotto.acf.categoria}
-        </Typography>
-
-        <Typography
-          sx={{
-            fontFamily: '"Apple Chancery", Palatino, serif',
-            fontSize: "1.25rem",
-            color: colors.dark,
-            mb: 0.5,
-            flex: 1,
-          }}
-        >
-          {prodotto.title}
-        </Typography>
-
-        {prodotto.acf.produttore && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              color: colors.textLight,
-              mb: 1.5,
-            }}
-          >
-            {prodotto.acf.produttore}
-          </Typography>
-        )}
-
-        {prodotto.acf.descrizione_breve && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              lineHeight: 1.7,
-              color: colors.textLight,
-              mb: 2,
-            }}
-          >
-            {prodotto.acf.descrizione_breve}
-          </Typography>
-        )}
-
-        {prodotto.acf.prezzo > 0 && (
-          <Typography
-            sx={{
-              fontFamily: '"Apple Chancery", Palatino, serif',
-              fontSize: "1.125rem",
-              color: colors.merlot,
-              mt: "auto",
-            }}
-          >
-            € {Number(prodotto.acf.prezzo).toFixed(2)}
-          </Typography>
-        )}
-      </Box>
-    </Box>
-  );
-}
 
 interface ProdottiGridProps {
   prodotti: Prodotto[];

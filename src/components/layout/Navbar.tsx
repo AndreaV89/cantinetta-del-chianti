@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Prodotti", href: "/prodotti" },
   { label: "Servizi", href: "/servizi" },
   { label: "Foto", href: "/foto" },
-  { label: "Contatti", href: "/contatti" },
+  { label: "Chi Siamo", href: "/chi-siamo" },
 ];
 
 export default function Navbar() {
