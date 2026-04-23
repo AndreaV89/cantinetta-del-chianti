@@ -175,11 +175,11 @@ export default function ContattiPage() {
             </Typography>
 
             {[
-              "Era la primavera dell'anno 2000, quando ho avuto il piacere di conoscere questo meraviglioso territorio del Chianti Classico.",
-              "Sono partito dalla Basilicata per avere un colloquio di lavoro presso una struttura agrituristica. Man mano che mi avvicinavo alla Toscana, mi rendevo sempre più conto di quanto fosse incantevole questo territorio di colline dolci e vigneti straordinari.",
-              'Appena sono giunto a Gaiole in Chianti ho capito di essere arrivato in un "Paradiso"...',
-              'Ho lavorato tre anni in Agriturismo come responsabile di sala, dopodiché stimolato dal piacere di degustare il "Nettare" toscano, ho deciso di cambiare lavoro.',
-              'Nel 2003 ho rilevato l\'Enoteca "La Cantinetta del Chianti".',
+              "Era la primavera del 2000 quando ho avuto il piacere di scoprire per la prima volta il meraviglioso territorio del Chianti Classico.",
+              "Partito dalla Basilicata per un colloquio di lavoro presso una struttura agrituristica, man mano che mi avvicinavo alla Toscana mi rendevo sempre più conto di quanto quel paesaggio fosse unico: colline dolci, vigneti straordinari e un’armonia difficile da dimenticare.",
+              "Arrivato a Gaiole in Chianti, ho avuto la sensazione chiara di essere giunto in un luogo speciale, quasi un “paradiso”.",
+              "Ho lavorato per tre anni in un agriturismo come responsabile di sala. Poi, stimolato dalla passione per il vino e dal piacere della degustazione del “nettare” toscano, ho deciso di cambiare strada.",
+              "Nel 2003 ho rilevato l\’enoteca La Cantinetta del Chianti, dando inizio a un percorso fatto di passione, ricerca e amore per questo territorio che ancora oggi porto avanti ogni giorno.",
             ].map((paragrafo, i) => {
               if (paragrafo.includes("Paradiso")) {
                 return (

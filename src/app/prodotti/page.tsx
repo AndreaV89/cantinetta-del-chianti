@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 import { getProdotti } from "@/lib/wordpress";
 import ProdottiGrid from "@/components/sections/ProdottiGrid";
 import { colors } from "@/styles/colors";
@@ -27,7 +28,7 @@ export default async function ProdottiPage() {
             right: "-0.05em",
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
-            fontSize: { xs: "8rem", md: "16rem" },
+            fontSize: { xs: "6rem", md: "14rem" },
             lineHeight: 1,
             color: "rgba(255,255,255,0.03)",
             userSelect: "none",
@@ -37,7 +38,6 @@ export default async function ProdottiPage() {
         >
           Prodotti
         </Typography>
-
         <Box
           sx={{
             maxWidth: 1920,
@@ -92,13 +92,92 @@ export default async function ProdottiPage() {
               maxWidth: 500,
             }}
           >
-            Salumi, formaggi, conserve e molto altro — il meglio della
-            tradizione enogastronomica toscana.
+            Il meglio della tradizione enogastronomica toscana e non solo —
+            selezionato con cura per voi.
           </Typography>
         </Box>
       </Box>
 
-      {/* Griglia prodotti con filtri */}
+      {/* Sezione esperienza con foto di sfondo */}
+      <Box
+        component="section"
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          py: { xs: 12, md: 18 },
+        }}
+      >
+        {/* Foto sfondo */}
+        <Image
+          src="/images/tagliere.jpg"
+          alt="Tagliere di salumi e formaggi"
+          fill
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          sizes="100vw"
+        />
+        {/* Overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "rgba(26, 8, 16, 0.60)",
+          }}
+        />
+
+        <Box
+          sx={{
+            maxWidth: 860,
+            mx: "auto",
+            px: { xs: 3, md: 6 },
+            position: "relative",
+            zIndex: 1,
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: { xs: "1rem", md: "1.0625rem" },
+              lineHeight: 1.9,
+              color: "rgba(255,255,255,0.8)",
+              mb: 3,
+            }}
+          >
+            Accanto a una ricercata selezione di vini, proponiamo ai nostri
+            clienti un&#39;accurata scelta di prodotti tipici, locali e non:
+            olio extravergine d&#39;oliva, aceto balsamico, birre artigianali,
+            formaggi, zuppe, salumi, salse, paté, specialità sott&#39;olio,
+            zafferano, pasta, riso, miele, tè, confetture, mostarde, cantuccini,
+            cioccolato, caffè, panbriacone e molte altre eccellenze.
+          </Typography>
+
+          <Box
+            sx={{
+              width: 48,
+              height: "1px",
+              backgroundColor: "rgba(196, 168, 130, 0.5)",
+              mx: "auto",
+              mb: 4,
+            }}
+          />
+
+          <Typography
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "1.375rem", md: "2rem" },
+              color: colors.beige,
+              lineHeight: 1.5,
+            }}
+          >
+            Accomodatevi nel nostro giardino, scegliete un calice e lasciatevi
+            tentare dalle nostre delizie.
+          </Typography>
+        </Box>
+      </Box>
+
+      {/* Griglia prodotti */}
       <ProdottiGrid prodotti={prodotti} />
 
       {/* Pre-footer */}
@@ -122,7 +201,7 @@ export default async function ProdottiPage() {
         </Typography>
         <Typography
           component="a"
-          href="https://wa.me/390577000000"
+          href="https://wa.me/393339687729"
           target="_blank"
           rel="noopener noreferrer"
           sx={{

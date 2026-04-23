@@ -3,6 +3,14 @@ import Image from "next/image";
 import { Vino } from "@/types";
 import { colors } from "@/styles/colors";
 
+const tipologiaColors: Record<string, string> = {
+  Rosso: colors.merlot,
+  Bianco: colors.beige,
+  Rosato: "#C4768A",
+  Bollicine: colors.textLight,
+  Distillato: colors.text,
+};
+
 interface WineSectionProps {
   vini: Vino[];
 }
@@ -72,7 +80,13 @@ function WineCard({ vino }: { vino: Vino }) {
             left: 16,
             px: 1.5,
             py: 0.5,
-            backgroundColor: colors.dark,
+            backgroundColor: (() => {
+              const key = vino.acf.tipologia
+                ? vino.acf.tipologia.charAt(0).toUpperCase() +
+                  vino.acf.tipologia.slice(1).toLowerCase()
+                : "";
+              return tipologiaColors[key] || colors.dark;
+            })(),
             borderRadius: "2px",
           }}
         >
@@ -83,7 +97,7 @@ function WineCard({ vino }: { vino: Vino }) {
               fontWeight: 500,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: colors.beige,
+              color: "#FFFFFF",
             }}
           >
             {vino.acf.tipologia}

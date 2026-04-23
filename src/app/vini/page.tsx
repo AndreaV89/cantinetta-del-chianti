@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 import { getVini } from "@/lib/wordpress";
 import ViniGrid from "@/components/sections/ViniGrid";
 import { colors } from "@/styles/colors";
@@ -37,7 +38,6 @@ export default async function ViniPage() {
         >
           Vini
         </Typography>
-
         <Box
           sx={{
             maxWidth: 1920,
@@ -98,6 +98,160 @@ export default async function ViniPage() {
         </Box>
       </Box>
 
+      {/* Sezione numeri con foto di sfondo */}
+      {/* Sezione numeri */}
+      <Box
+        component="section"
+        sx={{
+          backgroundColor: colors.bgAlt,
+          py: { xs: 8, md: 10 },
+          borderBottom: `1px solid ${colors.border}`,
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: 1920,
+            mx: "auto",
+            px: { xs: 3, md: 20 },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(3, 1fr)" },
+            gap: { xs: 4, md: 6 },
+          }}
+        >
+          {[
+            { num: "200+", label: "Etichette selezionate" },
+            { num: "8", label: "Regioni italiane" },
+            { num: "6", label: "Paesi nel mondo" },
+          ].map((stat) => (
+            <Box key={stat.num} sx={{ textAlign: "center" }}>
+              <Typography
+                sx={{
+                  fontFamily: '"Apple Chancery", Palatino, serif',
+                  fontStyle: "italic",
+                  fontSize: { xs: "3rem", md: "4.5rem" },
+                  lineHeight: 1,
+                  color: colors.merlot,
+                  mb: 1,
+                }}
+              >
+                {stat.num}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: 300,
+                  fontSize: { xs: "0.8125rem", md: "0.9375rem" },
+                  letterSpacing: "0.08em",
+                  color: colors.textLight,
+                  textTransform: "uppercase",
+                }}
+              >
+                {stat.label}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      {/* Sezione testo con foto di sfondo */}
+      <Box
+        component="section"
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          py: { xs: 12, md: 18 },
+        }}
+      >
+        {/* Foto sfondo */}
+        <Image
+          src="/images/vigna-sfondo-testo.jpeg"
+          alt="Vigneti al tramonto"
+          fill
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          sizes="100vw"
+        />
+        {/* Overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "rgba(26, 8, 16, 0.65)",
+          }}
+        />
+
+        <Box
+          sx={{
+            maxWidth: 860,
+            mx: "auto",
+            px: { xs: 3, md: 6 },
+            position: "relative",
+            zIndex: 1,
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: { xs: "1rem", md: "1.0625rem" },
+              lineHeight: 1.9,
+              color: "rgba(255,255,255,0.75)",
+              mb: 3,
+            }}
+          >
+            Dalla passione per il vino nasce La Cantinetta del Chianti, un luogo
+            dove ogni bottiglia racconta una storia. Un mosaico di grandi
+            etichette accuratamente selezionate, pensato per offrire ai nostri
+            clienti una scelta che spazia dall&#39;eccellenza al sublime. Un
+            viaggio ideale attraverso l&#39;Italia del vino: dalla Toscana alla
+            Sicilia, passando per le prestigiose terre di Piemonte, Lombardia,
+            Veneto e Friuli. Ogni calice è un&#39;esperienza sensoriale che
+            esalta il piacere dell&#39;olfatto e celebra l&#39;apoteosi del
+            gusto.
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: { xs: "1rem", md: "1.0625rem" },
+              lineHeight: 1.9,
+              color: "rgba(255,255,255,0.75)",
+              mb: 6,
+            }}
+          >
+            Lo sguardo si apre oltre i confini italiani, con una selezione
+            internazionale che abbraccia le grandi tradizioni enologiche e dei
+            distillati: dalla raffinatezza della Francia e della Germania, al
+            carattere della Spagna, fino all&#39;eccellenza dei whisky di Scozia
+            e Irlanda e ai celebri bourbon americani. Senza dimenticare
+            l&#39;Argentina, terra di vini intensi e sorprendenti.
+          </Typography>
+
+          <Box
+            sx={{
+              width: 48,
+              height: "1px",
+              backgroundColor: `rgba(196, 168, 130, 0.4)`,
+              mx: "auto",
+              mb: 6,
+            }}
+          />
+
+          <Typography
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "1.5rem", md: "2.25rem" },
+              color: colors.beige,
+              lineHeight: 1.4,
+            }}
+          >
+            Lasciati guidare in un viaggio di gusto
+          </Typography>
+        </Box>
+      </Box>
+
       {/* Griglia vini con filtri */}
       <ViniGrid vini={vini} />
 
@@ -122,7 +276,7 @@ export default async function ViniPage() {
         </Typography>
         <Typography
           component="a"
-          href="https://wa.me/390577000000"
+          href="https://wa.me/393339687729"
           target="_blank"
           rel="noopener noreferrer"
           sx={{

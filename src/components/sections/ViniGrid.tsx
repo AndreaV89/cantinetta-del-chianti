@@ -168,7 +168,11 @@ export default function ViniGrid({ vini }: ViniGridProps) {
   const [filtro, setFiltro] = useState("Tutti");
 
   const viniFiltrati =
-    filtro === "Tutti" ? vini : vini.filter((v) => v.acf.tipologia === filtro);
+    filtro === "Tutti"
+      ? vini
+      : vini.filter(
+          (v) => v.acf.tipologia?.toLowerCase() === filtro.toLowerCase(),
+        );
 
   // Conta per tipologia
   const conteggi = tipologie.reduce(
