@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Vini", href: "/vini" },
   { label: "Prodotti", href: "/prodotti" },
   { label: "Servizi", href: "/servizi" },
-  { label: "Foto", href: "/foto" },
+  { label: "Storie", href: "/storie" },
   { label: "Chi Siamo", href: "/chi-siamo" },
 ];
 

@@ -7,7 +7,7 @@ const footerLinks = {
     { label: "I Nostri Vini", href: "/vini" },
     { label: "Prodotti Tipici", href: "/prodotti" },
     { label: "Servizi", href: "/servizi" },
-    { label: "Foto", href: "/foto" },
+    { label: "Storie", href: "/storie" },
   ],
   info: [
     { label: "Chi Siamo", href: "/chi-siamo" },
