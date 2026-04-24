@@ -3,6 +3,13 @@ import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
 import { colors } from "@/styles/colors";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Chi Siamo",
+  description:
+    "La storia di Riccardo e de La Cantinetta del Chianti a Gaiole in Chianti. Dal 2003 nel cuore del Chianti Classico.",
+};
 
 export default function ContattiPage() {
   return (

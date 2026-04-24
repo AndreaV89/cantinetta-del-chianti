@@ -3,6 +3,13 @@ import { getAlbum } from "@/lib/wordpress";
 import AlbumStrip from "@/components/sections/AlbumStrip";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Storie",
+  description:
+    "Le storie di La Cantinetta del Chianti — il territorio, il Gallo Nero, la galleria fotografica delle colline toscane.",
+};
 
 export default async function FotoPage() {
   const album = await getAlbum();

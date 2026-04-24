@@ -2,6 +2,13 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import { colors } from "@/styles/colors";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Servizi",
+  description:
+    "Degustazioni guidate, selezioni personalizzate, degustazioni a domicilio e aperitivi con taglieri nel giardino del Chianti Classico.",
+};
 
 const servizi = [
   {
@@ -23,7 +30,7 @@ const servizi = [
       "Vi affianchiamo nella scelta con cura e competenza, suggerendo le etichette più adatte anche in base al vostro budget, per rendere ogni esperienza unica e soddisfacente.",
       "Le nostre selezioni possono essere spedite su richiesta, per portare direttamente a casa vostra il vino scelto insieme a noi.",
     ],
-    info: "Consulenza gratuita · Confezioni regalo · Spedizione in Italia",
+    info: "Consulenza gratuita · Confezioni regalo · Spedizione in tutto il mondo",
     image:
       "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=1200&q=80",
     alt: "Selezione bottiglie di vino",

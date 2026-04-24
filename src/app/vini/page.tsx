@@ -3,6 +3,13 @@ import Image from "next/image";
 import { getVini } from "@/lib/wordpress";
 import ViniGrid from "@/components/sections/ViniGrid";
 import { colors } from "@/styles/colors";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "I Nostri Vini",
+  description:
+    "Oltre 200 etichette selezionate dal Chianti e dal mondo. Chianti Classico, Supertuscan, vini italiani e internazionali. Scopri la nostra selezione.",
+};
 
 export default async function ViniPage() {
   const vini = await getVini();

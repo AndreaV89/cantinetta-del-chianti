@@ -3,6 +3,13 @@ import Image from "next/image";
 import { getProdotti } from "@/lib/wordpress";
 import ProdottiGrid from "@/components/sections/ProdottiGrid";
 import { colors } from "@/styles/colors";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Prodotti Tipici",
+  description:
+    "Salumi, formaggi, olio EVO, aceto balsamico e molte altre eccellenze toscane. Prodotti tipici locali selezionati con cura.",
+};
 
 export default async function ProdottiPage() {
   const prodotti = await getProdotti();
