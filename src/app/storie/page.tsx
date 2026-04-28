@@ -113,7 +113,7 @@ export default async function FotoPage() {
             maxWidth: 1920,
             mx: "auto",
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gridTemplateColumns: { xs: "1fr", md: "2fr 3fr" },
             minHeight: { md: 560 },
           }}
         >
@@ -121,7 +121,7 @@ export default async function FotoPage() {
           <Box
             sx={{
               position: "relative",
-              minHeight: { xs: 300, md: 560 },
+              minHeight: { xs: 400, md: 700 },
               overflow: "hidden",
             }}
           >
