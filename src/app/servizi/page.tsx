@@ -18,8 +18,7 @@ const servizi = [
       "Proponiamo degustazioni guidate che vi accompagneranno in un viaggio alla scoperta del vino, tra territori, profumi e tradizioni.",
     ],
     info: "Su prenotazione · Minimo 2 persone · IT / EN",
-    image:
-      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80",
+    image: "/images/viaggio-nel-vino.jpg",
     alt: "Degustazione di vini",
   },
   {
@@ -31,8 +30,7 @@ const servizi = [
       "Le nostre selezioni possono essere spedite su richiesta, per portare direttamente a casa vostra il vino scelto insieme a noi.",
     ],
     info: "Consulenza gratuita · Confezioni regalo · Spedizione in tutto il mondo",
-    image:
-      "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=1200&q=80",
+    image: "/images/arte-della-scelta.jpg",
     alt: "Selezione bottiglie di vino",
   },
   {
@@ -42,8 +40,7 @@ const servizi = [
       "Portiamo l'esperienza della degustazione direttamente a casa vostra, trasformando ogni occasione in un momento unico da vivere e condividere in un'atmosfera intima e accogliente.",
     ],
     info: "Entro 30km · Minimo 4 persone · 48h di anticipo",
-    image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80",
+    image: "/images/vino-a-casa-vostra.jpg",
     alt: "Tavola apparecchiata per degustazione",
   },
   {
