@@ -23,7 +23,7 @@ export default function AboutSection() {
           }}
         >
           <Image
-            src="/images/about.jpg"
+            src="/images/about.webp"
             alt="La Cantinetta del Chianti"
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}
