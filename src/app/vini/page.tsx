@@ -4,6 +4,8 @@ import { getVini } from "@/lib/wordpress";
 import ViniGrid from "@/components/sections/ViniGrid";
 import { colors } from "@/styles/colors";
 import type { Metadata } from "next";
+import CantineSection from "@/components/sections/CantineSection";
+import { getCantine } from "@/lib/wordpress";
 
 export const metadata: Metadata = {
   title: "I Nostri Vini",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ViniPage() {
-  const vini = await getVini();
+  const [vini, cantine] = await Promise.all([getVini(), getCantine()]);
 
   return (
     <>
@@ -105,7 +107,6 @@ export default async function ViniPage() {
         </Box>
       </Box>
 
-      {/* Sezione numeri con foto di sfondo */}
       {/* Sezione numeri */}
       <Box
         component="section"
@@ -258,6 +259,9 @@ export default async function ViniPage() {
           </Typography>
         </Box>
       </Box>
+
+      {/* Sezione cantine */}
+      <CantineSection cantine={cantine} />
 
       {/* Griglia vini con filtri */}
       <ViniGrid vini={vini} />

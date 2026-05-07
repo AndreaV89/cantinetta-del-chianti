@@ -1,6 +1,8 @@
 import {
   Vino,
   Prodotto,
+  Cantina,
+  CantinaRaw,
   Album,
   WPRawPost,
   WPRawAlbum,
@@ -143,4 +145,34 @@ export async function getAlbum(): Promise<Album[]> {
   return albumCompleti
     .filter(Boolean)
     .sort((a, b) => (a!.acf.ordine || 0) - (b!.acf.ordine || 0)) as Album[];
+}
+
+// ─── Cantine ─────────────────────────────────────────────
+
+export async function getCantine(): Promise<Cantina[]> {
+  const baseUrl = process.env.NEXT_PUBLIC_WP_URL;
+  const options = { cache: "no-store" as const };
+
+  const [page1, page2] = await Promise.all([
+    fetch(`${baseUrl}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(
+      (r) => r.json(),
+    ),
+    fetch(`${baseUrl}/wp-json/wp/v2/cantine?per_page=100&page=2`, options).then(
+      (r) => r.json(),
+    ),
+  ]);
+
+  const all = [...page1, ...(Array.isArray(page2) ? page2 : [])];
+
+  return all.map((c: CantinaRaw) => ({
+    id: c.id,
+    nome: c.title.rendered.replace(/&#(\d+);/g, (_, code) =>
+      String.fromCharCode(parseInt(code)),
+    ),
+    tipologia: c.acf.tipologia,
+    nazione_vino: c.acf.nazione_vino || null,
+    nazione_superalcolico: c.acf.nazione_superalcolici || null,
+    regione: c.acf.regione || null,
+    zona_toscana: c.acf.zona_toscana || null,
+  }));
 }

@@ -41,6 +41,30 @@ export interface Prodotto {
   };
 }
 
+// ─── Cantina ─────────────────────────────────────────────
+
+export interface Cantina {
+  id: number;
+  nome: string;
+  tipologia: "vino" | "superalcolico";
+  nazione_vino: string | null;
+  nazione_superalcolico: string | null;
+  regione: string | null;
+  zona_toscana: string | null;
+}
+
+export interface CantinaRaw {
+  id: number;
+  title: { rendered: string };
+  acf: {
+    tipologia: "vino" | "superalcolico";
+    nazione_vino: string | false;
+    nazione_superalcolici: string | false;
+    regione: string | false;
+    zona_toscana: string | false;
+  };
+}
+
 // ─── WordPress raw response ────────────────────────────────
 // Quello che arriva dalla REST API prima del parsing
 
