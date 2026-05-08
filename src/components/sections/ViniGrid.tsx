@@ -180,7 +180,9 @@ export default function ViniGrid({ vini }: ViniGridProps) {
       acc[t] =
         t === "Tutti"
           ? vini.length
-          : vini.filter((v) => v.acf.tipologia === t).length;
+          : vini.filter(
+              (v) => v.acf.tipologia?.toLowerCase() === t.toLowerCase(),
+            ).length;
       return acc;
     },
     {} as Record<string, number>,
@@ -198,6 +200,47 @@ export default function ViniGrid({ vini }: ViniGridProps) {
           px: { xs: 3, md: 10 },
         }}
       >
+        {/* Intestazione sezione */}
+        <Box sx={{ mb: 6 }}>
+          <Typography
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "1.75rem", md: "2.25rem" },
+              color: colors.dark,
+              mb: 1,
+            }}
+          >
+            I nostri vini in evidenza
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.9375rem",
+              color: colors.textLight,
+            }}
+          >
+            Una selezione delle etichette disponibili in bottega — il catalogo
+            completo ne conta oltre 200.
+          </Typography>
+        </Box>
+
+        {/* Risultati */}
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.875rem",
+              color: colors.textLight,
+            }}
+          >
+            {viniFiltrati.length} {viniFiltrati.length === 1 ? "vino" : "vini"}
+            {filtro !== "Tutti" ? ` · ${filtro}` : ""}
+          </Typography>
+        </Box>
+
         {/* Filtri */}
         <Box
           sx={{
@@ -317,7 +360,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
         {/* CTA catalogo */}
         <Box
           sx={{
-            mt: 8,
+            mt: 4,
             pt: 6,
             borderTop: `1px solid ${colors.border}`,
             display: "flex",
@@ -337,7 +380,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                 mb: 0.5,
               }}
             >
-              Vuoi vedere il catalogo completo?
+              Vuoi scoprire tutte le etichette?
             </Typography>
             <Typography
               sx={{
@@ -347,7 +390,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                 color: colors.textLight,
               }}
             >
-              Abbiamo oltre 200 etichette disponibili in bottega.
+              Oltre 200 vini ti aspettano in bottega.
             </Typography>
           </Box>
           <Typography
