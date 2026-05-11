@@ -26,14 +26,18 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
   const prodottiFiltrati =
     filtro === "Tutti"
       ? prodotti
-      : prodotti.filter((p) => p.acf.categoria === filtro);
+      : prodotti.filter(
+          (p) => p.acf.categoria?.toLowerCase() === filtro.toLowerCase(),
+        );
 
   const conteggi = categorie.reduce(
     (acc, c) => {
       acc[c] =
         c === "Tutti"
           ? prodotti.length
-          : prodotti.filter((p) => p.acf.categoria === c).length;
+          : prodotti.filter(
+              (p) => p.acf.categoria?.toLowerCase() === c.toLowerCase(),
+            ).length;
       return acc;
     },
     {} as Record<string, number>,
