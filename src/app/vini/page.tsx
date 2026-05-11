@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 export default async function ViniPage() {
   const [vini, cantine] = await Promise.all([getVini(), getCantine()]);
+  const viniNonInEvidenza = vini.filter((v) => !v.acf.in_evidenza);
 
   return (
     <>
@@ -264,7 +265,7 @@ export default async function ViniPage() {
       <CantineSection cantine={cantine} />
 
       {/* Griglia vini con filtri */}
-      <ViniGrid vini={vini} />
+      <ViniGrid vini={viniNonInEvidenza} />
 
       {/* Pre-footer */}
       <Box

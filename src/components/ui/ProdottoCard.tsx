@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
+import Image from "next/image";
 
 const categoriaColors: Record<string, string> = {
   Salumi: colors.merlot,
@@ -40,6 +41,26 @@ export default function ProdottoCard({ prodotto }: ProdottoCardProps) {
             categoriaColors[prodotto.acf.categoria] || colors.beige,
         }}
       />
+
+      {/* Immagine in evidenza */}
+      {prodotto.featuredImage && (
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            aspectRatio: "4/3",
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src={prodotto.featuredImage.url}
+            alt={prodotto.featuredImage.alt || prodotto.title}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 20vw"
+          />
+        </Box>
+      )}
 
       <Box
         sx={{

@@ -322,8 +322,7 @@ export default function WineSection({ vini }: WineSectionProps) {
         <Box sx={{ mt: 6, display: "flex", alignItems: "center", gap: 2 }}>
           <Typography
             component="a"
-            href="/catalogo-vini.pdf"
-            target="_blank"
+            href="/vini"
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,
@@ -334,7 +333,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               "&:hover": { textDecoration: "underline" },
             }}
           >
-            Scarica il catalogo completo →
+            Scopri la nostra selezione →
           </Typography>
         </Box>
       </Box>

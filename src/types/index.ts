@@ -20,7 +20,6 @@ export interface Vino {
     denominazione: string;
     tipologia: "Rosso" | "Bianco" | "Rosato" | "Bollicine" | "Distillato";
     annata: number;
-    prezzo: number;
     descrizione_breve: string;
     in_evidenza: boolean;
   };
@@ -35,7 +34,6 @@ export interface Prodotto {
   acf: {
     categoria: "Salumi" | "Formaggi" | "Conserve" | "Pasta" | "Olio" | "Altro";
     produttore: string;
-    prezzo: number;
     descrizione_breve: string;
     in_evidenza: boolean;
   };

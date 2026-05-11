@@ -358,7 +358,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
         )}
 
         {/* CTA catalogo */}
-        <Box
+        {/* <Box
           sx={{
             mt: 4,
             pt: 6,
@@ -420,7 +420,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
           >
             Scarica il catalogo PDF →
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
