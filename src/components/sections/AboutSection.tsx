@@ -233,7 +233,7 @@ export default function AboutSection() {
 
           <Typography
             component="a"
-            href="https://maps.google.com/?cid=1467013816025464602"
+            href="https://www.google.com/maps/dir/?api=1&destination=Via+B.+Ricasoli+33,+53013+Gaiole+in+Chianti+SI,+Italia"
             target="_blank"
             rel="noopener noreferrer"
             sx={{

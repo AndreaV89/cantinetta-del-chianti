@@ -1,13 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
-import ProdottoCard from "@/components/ui/ProdottoCard";
+import Button from "@mui/material/Button";
+import Link from "next/link";
 
-interface ProductsSectionProps {
-  prodotti: Prodotto[];
-}
-
-export default function ProductsSection({ prodotti }: ProductsSectionProps) {
+export default function ProductsSection() {
   return (
     <Box
       component="section"
@@ -87,38 +83,60 @@ export default function ProductsSection({ prodotti }: ProductsSectionProps) {
           </Typography>
         </Box>
 
-        {/* Cards */}
-        {prodotti.length === 0 ? (
+        {/* CTA */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: { xs: "flex-start", md: "center" },
+            justifyContent: "space-between",
+            gap: 4,
+            borderTop: `1px solid ${colors.border}`,
+            pt: 6,
+          }}
+        >
           <Typography
             sx={{
-              fontFamily: '"Apple Chancery", Palatino, serif',
-              fontStyle: "italic",
-              fontSize: "1.25rem",
-              color: "rgba(115, 97, 86, 0.5)",
-              textAlign: "center",
-              py: 8,
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.8,
+              color: colors.textLight,
+              maxWidth: 520,
             }}
           >
-            I prodotti arrivano presto...
+            Oltre ai vini, la nostra bottega raccoglie il meglio della
+            tradizione toscana: salumi artigianali, formaggi stagionati,
+            conserve, pasta e olio extravergine selezionati con la stessa cura
+            che riserviamo alla cantina.
           </Typography>
-        ) : (
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                sm: "1fr 1fr",
-                md: "repeat(3, 1fr)",
-                lg: "repeat(4, 1fr)",
-              },
-              gap: 3,
-            }}
-          >
-            {prodotti.map((prodotto) => (
-              <ProdottoCard key={prodotto.id} prodotto={prodotto} />
-            ))}
-          </Box>
-        )}
+
+          <Link href="/prodotti" style={{ textDecoration: "none" }}>
+            <Button
+              variant="outlined"
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.75rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: colors.merlot,
+                borderColor: colors.merlot,
+                borderRadius: 0,
+                px: 4,
+                py: 1.5,
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+                "&:hover": {
+                  backgroundColor: colors.merlot,
+                  borderColor: colors.merlot,
+                  color: colors.white,
+                },
+              }}
+            >
+              Scopri i prodotti
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

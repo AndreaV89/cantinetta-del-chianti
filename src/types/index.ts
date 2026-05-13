@@ -42,14 +42,55 @@ export interface Prodotto {
 
 // ─── Cantina ─────────────────────────────────────────────
 
+export type ZonaToscana =
+  | "chianti_classico"
+  | "montalcino"
+  | "montepulciano"
+  | "bolgheri"
+  | "isola_di_capraia"
+  | "isola_d_elba"
+  | "isola_di_gorgona"
+  | "san_gimignano";
+
+export type RegioneItalia =
+  | "toscana"
+  | "piemonte"
+  | "valle_d_aosta"
+  | "liguria"
+  | "lombardia"
+  | "trentino_alto_adige"
+  | "friuli_venezia_giulia"
+  | "veneto"
+  | "emilia_romagna"
+  | "marche"
+  | "umbria"
+  | "lazio"
+  | "abruzzo"
+  | "molise"
+  | "campania"
+  | "basilicata"
+  | "calabria"
+  | "puglia"
+  | "sicilia"
+  | "sardegna";
+
+export type ZonaFrancia =
+  | "bordeaux"
+  | "borgogne"
+  | "champagne"
+  | "loira"
+  | "jura"
+  | "valle_du_rhone";
+
 export interface Cantina {
   id: number;
   nome: string;
   tipologia: "vino" | "superalcolico";
   nazione_vino: string | null;
   nazione_superalcolico: string | null;
-  regione: string | null;
-  zona_toscana: string | null;
+  regione: RegioneItalia | null;
+  zona_toscana: ZonaToscana | null;
+  zona_francia: ZonaFrancia | null;
 }
 
 export interface CantinaRaw {
@@ -61,6 +102,7 @@ export interface CantinaRaw {
     nazione_superalcolici: string | false;
     regione: string | false;
     zona_toscana: string | false;
+    zona_francia: string | false;
   };
 }
 

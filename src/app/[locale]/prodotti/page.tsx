@@ -127,7 +127,7 @@ export default async function ProdottiPage() {
           sx={{
             position: "absolute",
             inset: 0,
-            backgroundColor: "rgba(26, 8, 16, 0.60)",
+            backgroundColor: "rgba(26, 8, 16, 0.35)",
           }}
         />
 
@@ -145,7 +145,7 @@ export default async function ProdottiPage() {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
-              fontSize: { xs: "1rem", md: "1.0625rem" },
+              fontSize: { xs: "1rem", md: "1.4rem" },
               lineHeight: 1.9,
               color: "rgba(255,255,255,0.8)",
               mb: 3,

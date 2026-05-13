@@ -7,9 +7,28 @@ import {
   WPRawPost,
   WPRawAlbum,
   FotoGallery,
+  RegioneItalia,
+  ZonaFrancia,
+  ZonaToscana,
 } from "@/types";
 
 const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
+
+// ─── Helper: decodifica entità HTML ───────────────────────
+export function decodeHtmlEntities(text: string): string {
+  return text
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8216;/g, "'")
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&#8211;/g, "–")
+    .replace(/&#8212;/g, "—")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
 
 // ─── Helper: parsing immagine featured ────────────────────
 
@@ -172,7 +191,8 @@ export async function getCantine(): Promise<Cantina[]> {
     tipologia: c.acf.tipologia,
     nazione_vino: c.acf.nazione_vino || null,
     nazione_superalcolico: c.acf.nazione_superalcolici || null,
-    regione: c.acf.regione || null,
-    zona_toscana: c.acf.zona_toscana || null,
+    regione: (c.acf.regione || null) as RegioneItalia | null,
+    zona_toscana: (c.acf.zona_toscana || null) as ZonaToscana | null,
+    zona_francia: (c.acf.zona_francia || null) as ZonaFrancia | null,
   }));
 }

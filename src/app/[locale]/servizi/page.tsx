@@ -18,7 +18,7 @@ const servizi = [
       "Proponiamo degustazioni guidate che vi accompagneranno in un viaggio alla scoperta del vino, tra territori, profumi e tradizioni.",
     ],
     info: "Su prenotazione · Minimo 2 persone · IT / EN",
-    image: "/images/viaggio-nel-vino.jpg",
+    image: "/images/viaggio-nel-vino.jpeg",
     alt: "Degustazione di vini",
   },
   {
@@ -51,8 +51,7 @@ const servizi = [
       "Un modo autentico e rilassato per vivere il cuore del Chianti Classico.",
     ],
     info: "Tutti i giorni · Prenotazione consigliata in alta stagione",
-    image:
-      "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=1200&q=80",
+    image: "/images/aperitivo-in-chianti-classico.jpg",
     alt: "Tagliere con salumi e formaggi",
   },
 ];

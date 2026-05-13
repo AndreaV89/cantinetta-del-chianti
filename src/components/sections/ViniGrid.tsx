@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { Vino } from "@/types";
 import { colors } from "@/styles/colors";
+import { decodeHtmlEntities } from "@/lib/wordpress";
 
 const tipologie = [
   "Tutti",
@@ -22,6 +23,14 @@ const tipologiaColors: Record<string, string> = {
   Bollicine: colors.textLight,
   Distillato: colors.dark,
 };
+
+const ORDINE_TIPOLOGIE = [
+  "rosso",
+  "bianco",
+  "rosato",
+  "bollicine",
+  "distillato",
+];
 
 function VinoCard({ vino }: { vino: Vino }) {
   return (
@@ -125,7 +134,7 @@ function VinoCard({ vino }: { vino: Vino }) {
             flex: 1,
           }}
         >
-          {vino.title}
+          {decodeHtmlEntities(vino.title)}
         </Typography>
 
         <Typography
@@ -167,12 +176,20 @@ interface ViniGridProps {
 export default function ViniGrid({ vini }: ViniGridProps) {
   const [filtro, setFiltro] = useState("Tutti");
 
-  const viniFiltrati =
+  const viniFiltrati = (
     filtro === "Tutti"
       ? vini
       : vini.filter(
           (v) => v.acf.tipologia?.toLowerCase() === filtro.toLowerCase(),
-        );
+        )
+  ).sort((a, b) => {
+    const tipoA = a.acf.tipologia?.toLowerCase() ?? "";
+    const tipoB = b.acf.tipologia?.toLowerCase() ?? "";
+    const indexA = ORDINE_TIPOLOGIE.indexOf(tipoA);
+    const indexB = ORDINE_TIPOLOGIE.indexOf(tipoB);
+    if (indexA !== indexB) return indexA - indexB;
+    return a.title.localeCompare(b.title, "it");
+  });
 
   // Conta per tipologia
   const conteggi = tipologie.reduce(

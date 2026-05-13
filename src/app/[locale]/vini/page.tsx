@@ -129,8 +129,8 @@ export default async function ViniPage() {
         >
           {[
             { num: "200+", label: "Etichette selezionate" },
-            { num: "8", label: "Regioni italiane" },
-            { num: "6", label: "Paesi nel mondo" },
+            { num: "14", label: "Regioni italiane" },
+            { num: "7", label: "Paesi nel mondo" },
           ].map((stat) => (
             <Box key={stat.num} sx={{ textAlign: "center" }}>
               <Typography
@@ -184,7 +184,7 @@ export default async function ViniPage() {
           sx={{
             position: "absolute",
             inset: 0,
-            backgroundColor: "rgba(26, 8, 16, 0.65)",
+            backgroundColor: "rgba(26, 8, 16, 0.45)",
           }}
         />
 
@@ -202,7 +202,7 @@ export default async function ViniPage() {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
-              fontSize: { xs: "1rem", md: "1.0625rem" },
+              fontSize: { xs: "1rem", md: "1.3rem" },
               lineHeight: 1.9,
               color: "rgba(255,255,255,0.75)",
               mb: 3,
@@ -223,7 +223,7 @@ export default async function ViniPage() {
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
-              fontSize: { xs: "1rem", md: "1.0625rem" },
+              fontSize: { xs: "1rem", md: "1.3rem" },
               lineHeight: 1.9,
               color: "rgba(255,255,255,0.75)",
               mb: 6,

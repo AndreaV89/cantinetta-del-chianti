@@ -6,18 +6,17 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
 import QuoteSection from "@/components/sections/QuoteSection";
 import RecensioniSection from "@/components/sections/RecensioniSection";
-import { getViniInEvidenza, getProdottiInEvidenza } from "@/lib/wordpress";
+import { getViniInEvidenza } from "@/lib/wordpress";
 
 export default async function Home() {
   const vini = await getViniInEvidenza();
-  const prodotti = await getProdottiInEvidenza();
 
   return (
     <main>
       <HeroVideo />
       <Pillars />
       <WineSection vini={vini} />
-      <ProductsSection prodotti={prodotti} />
+      <ProductsSection />
       <QuoteSection quote="Wine not?" />
       <ServicesSection />
       <RecensioniSection />

@@ -138,6 +138,25 @@ export default function ServicesSection() {
             </Box>
           ))}
         </Box>
+
+        {/* CTA servizi */}
+        <Box sx={{ mt: 6, display: "flex", alignItems: "center", gap: 2 }}>
+          <Typography
+            component="a"
+            href="/servizi"
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 500,
+              fontSize: "0.8125rem",
+              letterSpacing: "0.05em",
+              color: colors.merlot,
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            }}
+          >
+            Scopri tutti i nostri servizi →
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

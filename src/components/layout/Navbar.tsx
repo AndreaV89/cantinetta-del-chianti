@@ -1,22 +1,34 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { colors } from "@/styles/colors";
 
-const navLinks = [
-  { label: "Vini", href: "/vini" },
-  { label: "Prodotti", href: "/prodotti" },
-  { label: "Servizi", href: "/servizi" },
-  { label: "Storie", href: "/storie" },
-  { label: "Chi Siamo", href: "/chi-siamo" },
-];
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
+
+  const navLinks = [
+    { label: "Vini", href: `/${locale}/vini` },
+    { label: "Prodotti", href: `/${locale}/prodotti` },
+    { label: "Servizi", href: `/${locale}/servizi` },
+    { label: "Storie", href: `/${locale}/storie` },
+    { label: "Chi Siamo", href: `/${locale}/chi-siamo` },
+  ];
+
+  const switchLocale = (newLocale: string) => {
+    const segments = pathname.split("/");
+    segments[1] = newLocale;
+    router.push(segments.join("/"));
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -48,7 +60,7 @@ export default function Navbar() {
         {/* Logo */}
         <Typography
           component="a"
-          href="/"
+          href={`/${locale}`}
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontSize: "1.125rem",
@@ -99,14 +111,17 @@ export default function Navbar() {
           }}
         >
           <Typography
-            component="a"
-            href="/it"
+            onClick={() => switchLocale("it")}
+            component="button"
             sx={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
               color: scrolled ? colors.textLight : "rgba(255,255,255,0.7)",
-              textDecoration: "none",
               "&:hover": { color: scrolled ? colors.dark : "#FFFFFF" },
             }}
           >
@@ -121,14 +136,17 @@ export default function Navbar() {
             /
           </Typography>
           <Typography
-            component="a"
-            href="/en"
+            onClick={() => switchLocale("en")}
+            component="button"
             sx={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
               color: scrolled ? colors.textLight : "rgba(255,255,255,0.7)",
-              textDecoration: "none",
               "&:hover": { color: scrolled ? colors.dark : "#FFFFFF" },
             }}
           >
@@ -182,16 +200,30 @@ export default function Navbar() {
           ))}
           <Box sx={{ display: "flex", gap: 2, pt: 1 }}>
             <Typography
-              component="a"
-              href="/it"
-              sx={{ fontSize: "0.75rem", color: colors.textLight }}
+              component="button"
+              onClick={() => switchLocale("it")}
+              sx={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                fontSize: "0.75rem",
+                color: colors.textLight,
+              }}
             >
               IT
             </Typography>
             <Typography
-              component="a"
-              href="/en"
-              sx={{ fontSize: "0.75rem", color: colors.textLight }}
+              component="button"
+              onClick={() => switchLocale("en")}
+              sx={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                fontSize: "0.75rem",
+                color: colors.textLight,
+              }}
             >
               EN
             </Typography>

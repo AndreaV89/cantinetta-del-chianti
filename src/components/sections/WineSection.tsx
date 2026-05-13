@@ -46,7 +46,7 @@ function WineCard({ vino }: { vino: Vino }) {
             src={vino.featuredImage.url}
             alt={vino.featuredImage.alt || vino.title}
             fill
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         ) : (
@@ -266,7 +266,7 @@ export default function WineSection({ vini }: WineSectionProps) {
                 lineHeight: 1.2,
               }}
             >
-              Proposta della settimana
+              Proposta della settimana..
             </Typography>
           </Box>
 

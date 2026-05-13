@@ -188,7 +188,7 @@ export default function ContattiPage() {
               "Ho lavorato per tre anni in un agriturismo come responsabile di sala. Poi, stimolato dalla passione per il vino e dal piacere della degustazione del “nettare” toscano, ho deciso di cambiare strada.",
               "Nel 2003 ho rilevato l\’enoteca La Cantinetta del Chianti, dando inizio a un percorso fatto di passione, ricerca e amore per questo territorio che ancora oggi porto avanti ogni giorno.",
             ].map((paragrafo, i) => {
-              if (paragrafo.includes("Paradiso")) {
+              if (paragrafo.includes("paradiso")) {
                 return (
                   <Box
                     key={i}
@@ -202,7 +202,7 @@ export default function ContattiPage() {
                       sx={{
                         fontFamily: '"Apple Chancery", Palatino, serif',
                         fontStyle: "italic",
-                        fontSize: "1.25rem",
+                        fontSize: "1.35rem",
                         lineHeight: 1.75,
                         color: colors.dark,
                       }}
@@ -219,7 +219,7 @@ export default function ContattiPage() {
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
                     fontWeight: 300,
-                    fontSize: "1rem",
+                    fontSize: "1.125rem",
                     lineHeight: 1.85,
                     color: colors.textLight,
                     mb: 2.5,
@@ -451,11 +451,11 @@ export default function ContattiPage() {
               <Box sx={{ display: "flex", gap: 2, mt: 4 }}>
                 {[
                   {
-                    href: "https://instagram.com",
+                    href: "https://www.instagram.com/la.cantinetta_del_chianti/",
                     icon: <FaInstagram size={25} />,
                   },
                   {
-                    href: "https://facebook.com",
+                    href: "https://www.facebook.com/lacantinettadelchianti",
                     icon: <FaFacebookF size={25} />,
                   },
                   {

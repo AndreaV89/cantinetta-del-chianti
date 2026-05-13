@@ -9,25 +9,97 @@ import {
 } from "@mui/material";
 import { FaChevronDown } from "react-icons/fa";
 import { colors } from "@/styles/colors";
-import type { Cantina } from "@/types";
+import type { Cantina, ZonaToscana, ZonaFrancia, RegioneItalia } from "@/types";
 
 interface Props {
   cantine: Cantina[];
 }
 
+const REGIONI_ITALIA: { key: RegioneItalia; label: string }[] = [
+  { key: "toscana", label: "Toscana" },
+  { key: "piemonte", label: "Piemonte" },
+  { key: "valle_d_aosta", label: "Valle d'Aosta" },
+  { key: "liguria", label: "Liguria" },
+  { key: "lombardia", label: "Lombardia" },
+  { key: "trentino_alto_adige", label: "Trentino-Alto Adige" },
+  { key: "friuli_venezia_giulia", label: "Friuli Venezia Giulia" },
+  { key: "veneto", label: "Veneto" },
+  { key: "emilia_romagna", label: "Emilia Romagna" },
+  { key: "marche", label: "Marche" },
+  { key: "umbria", label: "Umbria" },
+  { key: "lazio", label: "Lazio" },
+  { key: "abruzzo", label: "Abruzzo" },
+  { key: "molise", label: "Molise" },
+  { key: "campania", label: "Campania" },
+  { key: "basilicata", label: "Basilicata" },
+  { key: "calabria", label: "Calabria" },
+  { key: "puglia", label: "Puglia" },
+  { key: "sicilia", label: "Sicilia" },
+  { key: "sardegna", label: "Sardegna" },
+];
+
+const ZONE_TOSCANA: { key: ZonaToscana; label: string }[] = [
+  { key: "chianti_classico", label: "Chianti Classico" },
+  { key: "montalcino", label: "Montalcino" },
+  { key: "montepulciano", label: "Montepulciano" },
+  { key: "bolgheri", label: "Bolgheri" },
+  { key: "isola_di_capraia", label: "Isola di Capraia" },
+  { key: "isola_d_elba", label: "Isola d'Elba" },
+  { key: "isola_di_gorgona", label: "Isola di Gorgona" },
+  { key: "san_gimignano", label: "San Gimignano" },
+];
+
+const ZONE_FRANCIA: { key: ZonaFrancia; label: string }[] = [
+  { key: "bordeaux", label: "Bordeaux" },
+  { key: "borgogne", label: "Borgogne" },
+  { key: "champagne", label: "Champagne" },
+  { key: "loira", label: "Loira" },
+  { key: "jura", label: "Jura" },
+  { key: "valle_du_rhone", label: "Valle del Rodano" },
+];
+
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 function NomiCantine({ cantine }: { cantine: Cantina[] }) {
   return (
-    <Typography
-      sx={{
-        fontFamily: '"DM Sans", sans-serif',
-        fontWeight: 300,
-        fontSize: { xs: "0.875rem", md: "0.9375rem" },
-        lineHeight: 1.8,
-        color: colors.textLight,
-      }}
-    >
-      {cantine.map((c) => c.nome).join(", ")}
-    </Typography>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+      {cantine.map((c) => (
+        <Typography
+          key={c.id}
+          sx={{
+            fontFamily: '"DM Sans", sans-serif',
+            fontWeight: 300,
+            fontSize: { xs: "1rem", md: "1.0625rem" },
+            lineHeight: 1.8,
+            color: colors.textLight,
+          }}
+        >
+          {c.nome}
+        </Typography>
+      ))}
+    </Box>
+  );
+}
+
+function ZonaBlock({ label, cantine }: { label: string; cantine: Cantina[] }) {
+  if (cantine.length === 0) return null;
+  return (
+    <Box sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          fontFamily: '"Apple Chancery", Palatino, serif',
+          fontStyle: "italic",
+          fontSize: { xs: "1.125rem", md: "1.375rem" },
+          color: colors.text,
+          mb: 1,
+        }}
+      >
+        {label}
+      </Typography>
+      <NomiCantine cantine={cantine} />
+    </Box>
   );
 }
 
@@ -51,9 +123,13 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function StyledAccordion({
   label,
   cantine,
+  children,
+  featured,
 }: {
   label: string;
   cantine: Cantina[];
+  children?: React.ReactNode;
+  featured?: boolean;
 }) {
   return (
     <Accordion
@@ -73,15 +149,17 @@ function StyledAccordion({
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
-            fontSize: { xs: "1.25rem", md: "1.5rem" },
-            color: colors.text,
+            fontSize: featured
+              ? { xs: "1.75rem", md: "2.25rem" }
+              : { xs: "1.5rem", md: "1.75rem" },
+            color: featured ? colors.merlot : colors.text,
           }}
         >
           {label}
         </Typography>
       </AccordionSummary>
       <AccordionDetails sx={{ px: 0, pb: 3 }}>
-        <NomiCantine cantine={cantine} />
+        {children ?? <NomiCantine cantine={cantine} />}
       </AccordionDetails>
     </Accordion>
   );
@@ -92,18 +170,22 @@ export default function CantineSection({ cantine }: Props) {
   const superalcolici = cantine.filter((c) => c.tipologia === "superalcolico");
 
   // Gruppi vini
-  const chiantiClassico = vini.filter(
+  const viniItalia = vini.filter((c) => c.nazione_vino === "italia");
+  const viniFrancia = vini.filter((c) => c.nazione_vino === "francia");
+  const viniRestoMondo = vini.filter(
+    (c) => !["italia", "francia"].includes(c.nazione_vino ?? ""),
+  );
+  const chiantiClassico = viniItalia.filter(
     (c) => c.zona_toscana === "chianti_classico",
   );
-  const toscana = vini.filter(
+  const altreZoneToscane = ZONE_TOSCANA.filter(
+    (z) => z.key !== "chianti_classico",
+  );
+  const viniToscanaNonChianti = viniItalia.filter(
     (c) => c.regione === "toscana" && c.zona_toscana !== "chianti_classico",
   );
-  const italia = vini.filter(
-    (c) => c.nazione_vino === "italia" && c.regione !== "toscana",
-  );
-  const francia = vini.filter((c) => c.nazione_vino === "francia");
-  const restoMondo = vini.filter(
-    (c) => !["italia", "francia"].includes(c.nazione_vino ?? ""),
+  const viniItaliaNonToscana = viniItalia.filter(
+    (c) => c.regione !== "toscana",
   );
 
   // Gruppi superalcolici
@@ -155,43 +237,75 @@ export default function CantineSection({ cantine }: Props) {
 
         {/* Chianti Classico in evidenza */}
         {chiantiClassico.length > 0 && (
-          <Box sx={{ mb: { xs: 6, md: 8 } }}>
-            <Typography
-              sx={{
-                fontFamily: '"Apple Chancery", Palatino, serif',
-                fontStyle: "italic",
-                fontSize: { xs: "1.5rem", md: "2rem" },
-                color: colors.merlot,
-                mb: 2,
-              }}
-            >
-              Chianti Classico
-            </Typography>
-            <Box
-              sx={{
-                width: 32,
-                height: "1px",
-                backgroundColor: colors.beige,
-                mb: 2,
-              }}
-            />
-            <NomiCantine cantine={chiantiClassico} />
-          </Box>
+          <StyledAccordion
+            label="Chianti Classico"
+            cantine={chiantiClassico}
+            featured
+          />
         )}
 
         {/* Accordion vini */}
         <Box sx={{ mb: { xs: 8, md: 12 } }}>
-          {toscana.length > 0 && (
-            <StyledAccordion label="Toscana" cantine={toscana} />
+          {/* Toscana */}
+          {viniToscanaNonChianti.length > 0 && (
+            <StyledAccordion label="Toscana" cantine={[]}>
+              {altreZoneToscane.map(({ key, label }) => (
+                <ZonaBlock
+                  key={key}
+                  label={label}
+                  cantine={viniToscanaNonChianti.filter(
+                    (c) => c.zona_toscana === key,
+                  )}
+                />
+              ))}
+            </StyledAccordion>
           )}
-          {italia.length > 0 && (
-            <StyledAccordion label="Italia" cantine={italia} />
+
+          {/* Italia */}
+          {viniItaliaNonToscana.length > 0 && (
+            <StyledAccordion label="Italia" cantine={[]}>
+              {REGIONI_ITALIA.filter((r) => r.key !== "toscana").map(
+                ({ key, label }) => (
+                  <ZonaBlock
+                    key={key}
+                    label={label}
+                    cantine={viniItaliaNonToscana.filter(
+                      (c) => c.regione === key,
+                    )}
+                  />
+                ),
+              )}
+            </StyledAccordion>
           )}
-          {francia.length > 0 && (
-            <StyledAccordion label="Francia" cantine={francia} />
+
+          {/* Francia */}
+          {viniFrancia.length > 0 && (
+            <StyledAccordion label="Francia" cantine={[]}>
+              {ZONE_FRANCIA.map(({ key, label }) => (
+                <ZonaBlock
+                  key={key}
+                  label={label}
+                  cantine={viniFrancia.filter((c) => c.zona_francia === key)}
+                />
+              ))}
+            </StyledAccordion>
           )}
-          {restoMondo.length > 0 && (
-            <StyledAccordion label="Resto del mondo" cantine={restoMondo} />
+
+          {/* Resto del mondo */}
+          {viniRestoMondo.length > 0 && (
+            <StyledAccordion label="Resto del mondo" cantine={[]}>
+              {Array.from(
+                new Set(viniRestoMondo.map((c) => c.nazione_vino)),
+              ).map((nazione) => (
+                <ZonaBlock
+                  key={nazione}
+                  label={capitalize(nazione ?? "")}
+                  cantine={viniRestoMondo.filter(
+                    (c) => c.nazione_vino === nazione,
+                  )}
+                />
+              ))}
+            </StyledAccordion>
           )}
         </Box>
 
