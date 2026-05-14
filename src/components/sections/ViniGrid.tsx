@@ -131,7 +131,6 @@ function VinoCard({ vino }: { vino: Vino }) {
             fontSize: "1.25rem",
             color: colors.dark,
             mb: 0.5,
-            flex: 1,
           }}
         >
           {decodeHtmlEntities(vino.title)}
@@ -159,6 +158,7 @@ function VinoCard({ vino }: { vino: Vino }) {
               lineHeight: 1.7,
               color: colors.textLight,
               mb: 2,
+              flex: 1,
             }}
           >
             {vino.acf.descrizione_breve}

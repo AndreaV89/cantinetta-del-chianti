@@ -97,7 +97,7 @@ Il cliente vuole citazioni sul vino sparse nelle pagine come elementi decorativi
 
 ### Contenuti
 
-- [ ] Sostituire foto placeholder Unsplash nella pagina Servizi con foto reali
+- [x] Sostituire foto placeholder Unsplash nella pagina Servizi con foto reali
 - [x] Aggiungere video hero reale in `public/videos/hero.mp4`
 - [ ] Aggiornare indirizzo esatto in AboutSection, LocationSection e pagina Contatti
 - [x] Aggiornare telefono/email reali ovunque - da verificare a fine progetto
@@ -121,4 +121,4 @@ Il cliente vuole citazioni sul vino sparse nelle pagine come elementi decorativi
 
 - [ ] Configurare `next-intl` per IT/EN
 - [ ] Tradurre tutti i testi statici
-- [ ] Configurare Polylang in WordPress per vini e prodotti
+- [ ] Configurare WPML in WordPress per vini e prodotti

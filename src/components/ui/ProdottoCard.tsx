@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import { Box, Typography } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
 import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
@@ -14,134 +18,183 @@ const categoriaColors: Record<string, string> = {
 
 interface ProdottoCardProps {
   prodotto: Prodotto;
+  isFeatured?: boolean;
 }
 
-export default function ProdottoCard({ prodotto }: ProdottoCardProps) {
+export default function ProdottoCard({ prodotto, isFeatured = false }: ProdottoCardProps) {
+  const [hovered, setHovered] = useState(false);
+  const hasDescrizione = Boolean(prodotto.acf.descrizione_breve);
+  const hasProduttore = Boolean(prodotto.acf.produttore);
+  const accentColor = categoriaColors[prodotto.acf.categoria] || colors.beige;
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: colors.white,
-        border: `1px solid ${colors.border}`,
-        borderRadius: 1,
-        overflow: "hidden",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: `0 12px 32px rgba(74, 14, 30, 0.08)`,
-        },
-      }}
-    >
-      {/* Fascia colorata top */}
-      <Box
-        sx={{
-          height: 4,
-          backgroundColor:
-            categoriaColors[prodotto.acf.categoria] || colors.beige,
+    // Wrapper Box gestisce altezza responsive — motion.div anima scale/shadow
+    <Box sx={{ height: { xs: 480, md: 520 } }}>
+      <motion.div
+        onHoverStart={() => setHovered(true)}
+        onHoverEnd={() => setHovered(false)}
+        animate={{
+          boxShadow:
+            "0 8px 32px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.1)",
         }}
-      />
-
-      {/* Immagine in evidenza */}
-      {prodotto.featuredImage && (
-        <Box
-          sx={{
-            position: "relative",
-            width: "100%",
-            aspectRatio: "4/3",
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            src={prodotto.featuredImage.url}
-            alt={prodotto.featuredImage.alt || prodotto.title}
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 20vw"
-          />
-        </Box>
-      )}
-
-      <Box
-        sx={{
-          p: 3,
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: 1.5,
+        whileHover={{
+          scale: 1.02,
+          boxShadow:
+            "0 28px 72px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,255,255,0.18)",
+        }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        style={{
+          position: "relative",
+          height: "100%",
+          borderRadius: "24px",
+          overflow: "hidden",
+          cursor: "default",
         }}
       >
-        {/* Tag categoria */}
+        {/* Immagine o fallback */}
+        <motion.div
+          animate={{ scale: hovered ? 1.07 : 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          style={{ position: "absolute", inset: 0 }}
+        >
+          {prodotto.featuredImage ? (
+            <Image
+              src={prodotto.featuredImage.url}
+              alt={prodotto.featuredImage.alt || prodotto.title}
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 600px) 80vw, (max-width: 900px) 33vw, 420px"
+            />
+          ) : (
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                background: `linear-gradient(135deg, ${colors.dark} 0%, ${colors.darkDeep} 100%)`,
+              }}
+            />
+          )}
+        </motion.div>
+
+        {/* Gradiente scuro dal basso */}
         <Box
           sx={{
-            display: "inline-block",
-            px: 1.5,
-            py: 0.5,
-            backgroundColor: `rgba(196, 168, 130, 0.12)`,
-            borderRadius: "2px",
-            alignSelf: "flex-start",
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.22) 48%, transparent 72%)",
+            zIndex: 1,
           }}
-        >
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontSize: "0.625rem",
-              fontWeight: 500,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: colors.beige,
-            }}
-          >
-            {prodotto.acf.categoria}
-          </Typography>
-        </Box>
+        />
 
-        {/* Nome */}
-        <Typography
+        {/* Fascia categoria in cima */}
+        <Box
           sx={{
-            fontFamily: '"Apple Chancery", Palatino, serif',
-            fontSize: "1.375rem",
-            lineHeight: 1.3,
-            color: colors.text,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "5px",
+            backgroundColor: accentColor,
+            zIndex: 3,
+          }}
+        />
+
+        {/* Testo — ancorato in basso */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            p: { xs: 3, md: 3.5 },
+            zIndex: 2,
           }}
         >
-          {prodotto.title}
-        </Typography>
+          {/*
+           * layout=true: quando la descrizione appare/scompare,
+           * Framer Motion anima smoothly lo spostamento verso l'alto
+           * invece di saltare di scatto.
+           */}
+          <motion.div layout transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}>
+            {/* Categoria */}
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.6875rem",
+                fontWeight: 500,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.55)",
+                mb: 0.75,
+              }}
+            >
+              {prodotto.acf.categoria}
+            </Typography>
 
-        {/* Produttore */}
-        {prodotto.acf.produttore && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              color: colors.textLight,
-              fontStyle: "italic",
-            }}
-          >
-            {prodotto.acf.produttore}
-          </Typography>
-        )}
+            {/* Titolo */}
+            <Typography
+              sx={{
+                fontFamily: '"Apple Chancery", Palatino, serif',
+                fontSize: { xs: "1.5rem", md: "1.75rem" },
+                lineHeight: 1.2,
+                color: "#FFFFFF",
+                mb: hasProduttore ? 1 : 0,
+              }}
+            >
+              {prodotto.title}
+            </Typography>
 
-        {/* Divisore */}
-        <Box sx={{ height: "1px", backgroundColor: colors.border }} />
+            {/* Produttore — sempre visibile */}
+            {hasProduttore && (
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: 300,
+                  fontSize: "0.8125rem",
+                  color: "rgba(255,255,255,0.6)",
+                  fontStyle: "italic",
+                }}
+              >
+                {prodotto.acf.produttore}
+              </Typography>
+            )}
+          </motion.div>
 
-        {/* Descrizione */}
-        {prodotto.acf.descrizione_breve && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              lineHeight: 1.75,
-              color: colors.textLight,
-              flex: 1,
-            }}
-          >
-            {prodotto.acf.descrizione_breve}
-          </Typography>
-        )}
-      </Box>
+          {/* Descrizione — solo sulla card in evidenza al hover */}
+          <AnimatePresence>
+            {isFeatured && hovered && hasDescrizione && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                style={{ overflow: "hidden" }}
+              >
+                <Box
+                  sx={{
+                    mt: 1.5,
+                    pt: 1.5,
+                    borderTop: "1px solid rgba(255,255,255,0.15)",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "0.8125rem",
+                      lineHeight: 1.7,
+                      color: "rgba(255,255,255,0.72)",
+                    }}
+                  >
+                    {prodotto.acf.descrizione_breve}
+                  </Typography>
+                </Box>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </Box>
+      </motion.div>
     </Box>
   );
 }
