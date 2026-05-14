@@ -12,7 +12,14 @@ const footerLinks = {
   info: [
     { label: "Chi Siamo", href: "/chi-siamo" },
     { label: "Contattaci", href: "/contatti" },
-    { label: "Privacy Policy", href: "/privacy" },
+    {
+      label: "Privacy Policy",
+      href: "https://www.iubenda.com/privacy-policy/89647461",
+    },
+    {
+      label: "Cookie Policy",
+      href: "https://www.iubenda.com/privacy-policy/89647461/cookie-policy",
+    },
   ],
   social: [
     {

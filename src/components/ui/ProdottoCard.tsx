@@ -7,13 +7,18 @@ import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
 
-const categoriaColors: Record<string, string> = {
-  Salumi: colors.merlot,
-  Formaggi: colors.beige,
-  Conserve: colors.textLight,
-  Pasta: colors.merlotHover,
-  Olio: "#5C7A5C",
-  Altro: colors.text,
+const CATEGORIA_COLORS: Record<string, string> = {
+  antipasti_sfiziosita: colors.merlot,
+  la_dispensa: colors.beige,
+  olio_aceto_condimenti: colors.textLight,
+  dolci_confetture: colors.dark,
+};
+
+const CATEGORIA_LABELS: Record<string, string> = {
+  antipasti_sfiziosita: "Antipasti e Sfiziosità",
+  la_dispensa: "La Dispensa",
+  olio_aceto_condimenti: "Olio, Aceto e Condimenti",
+  dolci_confetture: "Dolci e Confetture",
 };
 
 interface ProdottoCardProps {
@@ -21,11 +26,14 @@ interface ProdottoCardProps {
   isFeatured?: boolean;
 }
 
-export default function ProdottoCard({ prodotto, isFeatured = false }: ProdottoCardProps) {
+export default function ProdottoCard({
+  prodotto,
+  isFeatured = false,
+}: ProdottoCardProps) {
   const [hovered, setHovered] = useState(false);
   const hasDescrizione = Boolean(prodotto.acf.descrizione_breve);
   const hasProduttore = Boolean(prodotto.acf.produttore);
-  const accentColor = categoriaColors[prodotto.acf.categoria] || colors.beige;
+  const accentColor = CATEGORIA_COLORS[prodotto.acf.categoria] || colors.beige;
 
   return (
     // Wrapper Box gestisce altezza responsive — motion.div anima scale/shadow
@@ -116,7 +124,10 @@ export default function ProdottoCard({ prodotto, isFeatured = false }: ProdottoC
            * Framer Motion anima smoothly lo spostamento verso l'alto
            * invece di saltare di scatto.
            */}
-          <motion.div layout transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}>
+          <motion.div
+            layout
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+          >
             {/* Categoria */}
             <Typography
               sx={{
@@ -129,7 +140,8 @@ export default function ProdottoCard({ prodotto, isFeatured = false }: ProdottoC
                 mb: 0.75,
               }}
             >
-              {prodotto.acf.categoria}
+              {CATEGORIA_LABELS[prodotto.acf.categoria] ||
+                prodotto.acf.categoria}
             </Typography>
 
             {/* Titolo */}

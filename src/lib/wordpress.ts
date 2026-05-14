@@ -47,35 +47,34 @@ function parseFeaturedImage(raw: WPRawPost) {
 // ─── Vini ─────────────────────────────────────────────────
 
 export async function getVini(): Promise<Vino[]> {
-  const res = await fetch(
-    // `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&_fields=id,slug,title,featured_media,acf,_links,_embedded`,
-    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100`,
-    { next: { revalidate: 0 } },
-  );
-  if (!res.ok) return [];
-  const data: WPRawPost[] = await res.json();
-
-  // Fetch individuale per ogni vino per ottenere i campi ACF completi
-  const viniCompleti = await Promise.all(
-    data.map(async (item) => {
-      const resSingle = await fetch(
-        `${WP_URL}/wp-json/wp/v2/vini/${item.id}?_embed`,
-        { next: { revalidate: 0 } },
-      );
-      if (!resSingle.ok) return null;
-
-      const single: WPRawPost = await resSingle.json();
-      return {
-        id: single.id,
-        slug: single.slug,
-        title: single.title.rendered,
-        featuredImage: parseFeaturedImage(single),
-        acf: single.acf as Vino["acf"],
-      };
+  const [listRes, acfRes] = await Promise.all([
+    fetch(`${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100`, {
+      next: { revalidate: 0 },
     }),
-  );
+    fetch(`${WP_URL}/wp-json/acf/v3/vini?per_page=100`, {
+      next: { revalidate: 0 },
+    }),
+  ]);
 
-  return viniCompleti.filter(Boolean) as Vino[];
+  if (!listRes.ok) return [];
+  const listData: WPRawPost[] = await listRes.json();
+
+  // Mappa id → acf fields dall'endpoint ACF
+  const acfMap: Record<number, Vino["acf"]> = {};
+  if (acfRes.ok) {
+    const acfData = await acfRes.json();
+    for (const item of acfData.posts ?? acfData) {
+      acfMap[item.id] = item.acf;
+    }
+  }
+
+  return listData.map((item) => ({
+    id: item.id,
+    slug: item.slug,
+    title: decodeHtmlEntities(item.title.rendered),
+    featuredImage: parseFeaturedImage(item),
+    acf: acfMap[item.id] ?? (item.acf as Vino["acf"]),
+  }));
 }
 
 export async function getViniInEvidenza(): Promise<Vino[]> {
@@ -86,32 +85,34 @@ export async function getViniInEvidenza(): Promise<Vino[]> {
 // ─── Prodotti ─────────────────────────────────────────────
 
 export async function getProdotti(): Promise<Prodotto[]> {
-  const res = await fetch(
-    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100`,
-    { next: { revalidate: 0 } },
-  );
-  if (!res.ok) return [];
-  const data: WPRawPost[] = await res.json();
-
-  const prodottiCompleti = await Promise.all(
-    data.map(async (item) => {
-      const resSingle = await fetch(
-        `${WP_URL}/wp-json/wp/v2/prodotti/${item.id}?_embed`,
-        { next: { revalidate: 0 } },
-      );
-      if (!resSingle.ok) return null;
-      const single: WPRawPost = await resSingle.json();
-      return {
-        id: single.id,
-        slug: single.slug,
-        title: single.title.rendered,
-        featuredImage: parseFeaturedImage(single),
-        acf: single.acf as Prodotto["acf"],
-      };
+  const [listRes, acfRes] = await Promise.all([
+    fetch(`${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100`, {
+      next: { revalidate: 0 },
     }),
-  );
+    fetch(`${WP_URL}/wp-json/acf/v3/prodotti?per_page=100`, {
+      next: { revalidate: 0 },
+    }),
+  ]);
 
-  return prodottiCompleti.filter(Boolean) as Prodotto[];
+  if (!listRes.ok) return [];
+  const listData: WPRawPost[] = await listRes.json();
+
+  // Mappa id → acf fields dall'endpoint ACF
+  const acfMap: Record<number, Prodotto["acf"]> = {};
+  if (acfRes.ok) {
+    const acfData = await acfRes.json();
+    for (const item of acfData.posts ?? acfData) {
+      acfMap[item.id] = item.acf;
+    }
+  }
+
+  return listData.map((item) => ({
+    id: item.id,
+    slug: item.slug,
+    title: decodeHtmlEntities(item.title.rendered),
+    featuredImage: parseFeaturedImage(item),
+    acf: acfMap[item.id] ?? (item.acf as Prodotto["acf"]),
+  }));
 }
 
 export async function getProdottiInEvidenza(): Promise<Prodotto[]> {

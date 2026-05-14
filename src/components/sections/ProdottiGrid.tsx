@@ -11,13 +11,19 @@ import ProdottoCard from "@/components/ui/ProdottoCard";
 
 const categorie = [
   "Tutti",
-  "Salumi",
-  "Formaggi",
-  "Conserve",
-  "Pasta",
-  "Olio",
-  "Altro",
+  "antipasti_sfiziosita",
+  "la_dispensa",
+  "olio_aceto_condimenti",
+  "dolci_confetture",
 ];
+
+const CATEGORIE_LABELS: Record<string, string> = {
+  Tutti: "Tutti",
+  antipasti_sfiziosita: "Antipasti e Sfiziosità",
+  la_dispensa: "La Dispensa",
+  olio_aceto_condimenti: "Olio, Aceto e Condimenti",
+  dolci_confetture: "Dolci e Confetture",
+};
 
 const CARD_GAP = 28;
 const SIDE_SCALE = 0.87;
@@ -147,7 +153,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                       userSelect: "none",
                     }}
                   >
-                    {c}
+                    {CATEGORIE_LABELS[c] || c}
                   </Typography>
                   <Typography
                     sx={{
@@ -187,7 +193,9 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
           >
             {prodottiFiltrati.length}{" "}
             {prodottiFiltrati.length === 1 ? "prodotto" : "prodotti"}
-            {filtro !== "Tutti" ? ` · ${filtro}` : ""}
+            {filtro !== "Tutti"
+              ? ` · ${CATEGORIE_LABELS[filtro] || filtro}`
+              : ""}
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
@@ -281,7 +289,8 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                     >
                       {prodottiFiltrati.map((prodotto, i) => {
                         const pos = i - activeIndex;
-                        const isVisible = Math.abs(pos) <= Math.floor(visibleN / 2) + 1;
+                        const isVisible =
+                          Math.abs(pos) <= Math.floor(visibleN / 2) + 1;
                         return (
                           <motion.div
                             key={prodotto.id}
@@ -296,7 +305,10 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                             transition={SPRING}
                             style={{ flexShrink: 0, width: cardW }}
                           >
-                            <ProdottoCard prodotto={prodotto} isFeatured={i === activeIndex} />
+                            <ProdottoCard
+                              prodotto={prodotto}
+                              isFeatured={i === activeIndex}
+                            />
                           </motion.div>
                         );
                       })}

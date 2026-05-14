@@ -33,7 +33,11 @@ export interface Prodotto {
   title: string;
   featuredImage: WPImage | null;
   acf: {
-    categoria: "Salumi" | "Formaggi" | "Conserve" | "Pasta" | "Olio" | "Altro";
+    categoria:
+      | "antipasti_sfiziosita"
+      | "la_dispensa"
+      | "olio_aceto_condimenti"
+      | "dolci_confetture";
     produttore: string;
     descrizione_breve: string;
     in_evidenza: boolean;

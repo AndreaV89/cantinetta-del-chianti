@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import ThemeRegistry from "@/components/ui/ThemeRegistry";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Script from "next/script";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -48,7 +49,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={dmSans.variable}>
-      <body>
+      <body suppressHydrationWarning>
+        <Script
+          src="https://embeds.iubenda.com/widgets/7f37be2a-d15a-43fc-b7b3-21f55555d4aa.js"
+          strategy="afterInteractive"
+        />
         <NextIntlClientProvider messages={messages}>
           <ThemeRegistry>
             <Navbar />
