@@ -127,13 +127,10 @@ export async function getProdottiInEvidenza(
 
 // ─── Album ─────────────────────────────────────────────
 
-export async function getAlbum(locale = "it"): Promise<Album[]> {
-  const res = await fetch(
-    `${WP_URL}/wp-json/wp/v2/album?per_page=100&lang=${locale}`,
-    {
-      next: { revalidate: 3600 },
-    },
-  );
+export async function getAlbum(): Promise<Album[]> {
+  const res = await fetch(`${WP_URL}/wp-json/wp/v2/album?per_page=100`, {
+    next: { revalidate: 3600 },
+  });
 
   if (!res.ok) return [];
   const data: WPRawAlbum[] = await res.json();
@@ -146,6 +143,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
       );
 
       if (!resSingle.ok) return null;
+
       const single: WPRawAlbum = await resSingle.json();
       const rawAcf = single.acf as Record<string, unknown>;
       const photoGallery = rawAcf.photo_gallery as
@@ -158,7 +156,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
       return {
         id: single.id,
         slug: single.slug,
-        title: single.title.rendered,
+        title: decodeHtmlEntities(single.title.rendered),
         acf: {
           copertina: (rawAcf.copertina as Album["acf"]["copertina"]) || null,
           descrizione: (rawAcf.descrizione as string) || "",

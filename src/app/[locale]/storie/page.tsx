@@ -20,14 +20,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function FotoPage({
-  params,
-}: {
+export default async function FotoPage({}: {
   params: Promise<{ locale: string }>;
 }) {
   const t = await getTranslations("storiePage");
-  const { locale } = await params;
-  const album = await getAlbum(locale);
+  const album = await getAlbum();
 
   return (
     <>

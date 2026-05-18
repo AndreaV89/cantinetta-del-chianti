@@ -33,6 +33,10 @@ export async function generateMetadata({
       locale: locale === "it" ? "it_IT" : "en_GB",
       type: "website",
     },
+    icons: {
+      icon: "/favicon.svg",
+      apple: "/favicon.svg",
+    },
   };
 }
 

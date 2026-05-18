@@ -71,21 +71,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
           justifyContent: "space-between",
         }}
       >
-        <Box>
-          {album.acf.data && (
-            <Typography
-              sx={{
-                fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.6875rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: colors.beige,
-                mb: 0.5,
-              }}
-            >
-              {album.acf.data}
-            </Typography>
-          )}
+        <Box sx={{ maxWidth: 600 }}>
           <Typography
             component="h2"
             sx={{
@@ -94,10 +80,12 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
               fontWeight: 400,
               color: colors.dark,
               lineHeight: 1.2,
+              mb: 1,
             }}
           >
             {album.title}
           </Typography>
+
           {album.acf.descrizione && (
             <Typography
               sx={{
@@ -105,10 +93,24 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 fontWeight: 300,
                 fontSize: "0.9375rem",
                 color: colors.textLight,
-                mt: 1,
+                mb: 1,
               }}
             >
               {album.acf.descrizione}
+            </Typography>
+          )}
+
+          {album.acf.data && (
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.75rem",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: colors.beige,
+              }}
+            >
+              {album.acf.data.replace(/(\d{4})(\d{2})(\d{2})/, "$3/$2/$1")}
             </Typography>
           )}
         </Box>
