@@ -1,1 +1,356 @@
-{}
+{
+  "nav": {
+    "vini": "Wines",
+    "prodotti": "Products",
+    "servizi": "Services",
+    "storie": "Stories",
+    "chiSiamo": "About Us"
+  },
+  "footer": {
+    "tagline": "A taste boutique in the heart of Chianti Classico",
+    "esplora": "Explore",
+    "info": "Info",
+    "seguici": "Follow us",
+    "links": {
+      "vini": "Our Wines",
+      "prodotti": "Local Products",
+      "servizi": "Services",
+      "storie": "Stories",
+      "chiSiamo": "About Us",
+      "contattaci": "Contact Us"
+    },
+    "copyright": "Gaiole in Chianti, Siena",
+    "credit": "Design & development by"
+  },
+  "hero": {
+    "location": "Gaiole in Chianti, Tuscany",
+    "title1": "The heart of Chianti Classico,",
+    "title2": "in every sip.",
+    "subtitle": "Tradition and flavours at the heart of La Cantinetta del Chianti",
+    "ctaVini": "Discover our selection",
+    "ctaChiSiamo": "About us"
+  },
+  "pillars": {
+    "01": {
+      "title": "Local Wines",
+      "desc": "Chianti Classico, Supertuscans and artisan labels selected directly from local producers."
+    },
+    "02": {
+      "title": "Typical Products",
+      "desc": "Cured meats, cheeses, preserves and pasta — the very best Tuscany has to offer."
+    },
+    "03": {
+      "title": "Aperitivo & Boards",
+      "desc": "A table outside, the Chianti Classico sun and a glass to savour at leisure."
+    }
+  },
+  "wineSection": {
+    "label": "The Cellar",
+    "title": "Wine of the week..",
+    "subtitle": "A curated selection for quality, character and story — from local Chianti producers.",
+    "empty": "Wines coming soon...",
+    "cta": "Discover our selection →"
+  },
+  "productsSection": {
+    "label": "The Shop",
+    "title": "Typical products\nof the territory",
+    "subtitle": "Cured meats, cheeses, preserves and much more — the best of Tuscan food and wine tradition.",
+    "body": "Beyond wines, our shop brings together the finest of Tuscan tradition: artisan cured meats, aged cheeses, preserves, pasta and extra virgin olive oil selected with the same care we give to our cellar.",
+    "cta": "Discover the products"
+  },
+  "recensioni": {
+    "label": "What they say about us",
+    "title": "Reviews from our guests"
+  },
+  "servicesSection": {
+    "label": "What We Offer",
+    "title": "Our services",
+    "cta": "Discover all our services →",
+    "items": {
+      "degustazioni": {
+        "title": "Guided\nTastings",
+        "desc": "Tasting experiences to discover the best of Chianti Classico, with curated pairings."
+      },
+      "selezioni": {
+        "title": "Personalised\nSelections",
+        "desc": "We build a bespoke wine selection together — for a gift, a special dinner or your cellar."
+      },
+      "domicilio": {
+        "title": "Tastings\nat Home",
+        "desc": "We bring the experience to you. Wine selection, charcuterie board and tasting guide."
+      },
+      "aperitivi": {
+        "title": "Aperitivo\nwith Boards",
+        "desc": "A table outside, local cured meats and cheeses and a glass of Chianti at sunset."
+      }
+    }
+  },
+  "aboutSection": {
+    "chiSiamo": {
+      "label": "About Us",
+      "title": "Not just wine.\nBut a culture of taste",
+      "body1": "In Gaiole in Chianti, at the heart of Chianti Classico, La Cantinetta del Chianti is a small wine shop and deli dedicated to selecting wines and gastronomic excellence from the territory.",
+      "body2": "A place born from a passion for quality, authenticity and a deep connection with Tuscany, with the aim of offering experiences that tell the story of the land through its wines and flavours.",
+      "cta": "Come and visit us →"
+    },
+    "doveSiamo": {
+      "label": "Find Us",
+      "title": "Come and find us\nin Gaiole in Chianti",
+      "indirizzo": {
+        "label": "Address",
+        "value": "Via B. Ricasoli 33\n53013 Gaiole in Chianti (SI)"
+      },
+      "orari": {
+        "label": "Opening Hours",
+        "value": "Sun/Mon/Wed: 10:00–19:30\nThu/Fri: 09:45–20:00\nSat: 10:00–20:00\nTue: Closed"
+      },
+      "contatti": {
+        "label": "Contacts",
+        "value": "+39 0577 749125\n+39 333 9687729\nenoteca@lacantinettadelchianti.it"
+      },
+      "directions": "Get directions →"
+    }
+  },
+  "albumStrip": {
+    "foto": "photos"
+  },
+  "categorieLabels": {
+    "antipasti_sfiziosita": "Appetisers & Snacks",
+    "la_dispensa": "The Pantry",
+    "olio_aceto_condimenti": "Oil, Vinegar & Condiments",
+    "dolci_confetture": "Sweets & Preserves"
+  },
+  "viniGrid": {
+    "tutti": "All",
+    "title": "Our featured wines",
+    "subtitle": "A selection of labels available in the shop — the full catalogue counts over 200.",
+    "vino": "wine",
+    "vini": "wines",
+    "empty": "No wines in this category"
+  },
+  "tipologie": {
+    "rosso": "Red",
+    "bianco": "White",
+    "rosato": "Rosé",
+    "bollicine": "Sparkling",
+    "distillato": "Spirits"
+  },
+  "viniPage": {
+    "metadata": {
+      "title": "Our Wines",
+      "description": "Over 200 labels selected from Chianti and the world. Chianti Classico, Supertuscans, Italian and international wines."
+    },
+    "hero": {
+      "label": "The Cellar",
+      "watermark": "Wines",
+      "title": "Our wines",
+      "subtitle": "A curated selection of labels from Chianti and Tuscany, chosen for quality, character and story."
+    },
+    "numeri": {
+      "etichette": { "num": "200+", "label": "Selected labels" },
+      "regioni": { "num": "14", "label": "Italian regions" },
+      "paesi": { "num": "7", "label": "Countries worldwide" }
+    },
+    "testo": {
+      "body1": "Born from a passion for wine, La Cantinetta del Chianti is a place where every bottle tells a story. A mosaic of great labels carefully selected to offer our customers a choice spanning from excellence to the sublime. An ideal journey through Italy's wine regions: from Tuscany to Sicily, through the prestigious lands of Piedmont, Lombardy, Veneto and Friuli. Every glass is a sensory experience that elevates the pleasure of the nose and celebrates the apotheosis of taste.",
+      "body2": "Our gaze extends beyond Italian borders, with an international selection embracing the great winemaking and spirits traditions: from the refinement of France and Germany, to the character of Spain, to the excellence of Scotch and Irish whiskies and celebrated American bourbons. Not forgetting Argentina, land of intense and surprising wines.",
+      "quote": "Let yourself be guided on a journey of taste"
+    },
+    "prefooter": {
+      "title": "Can't find what you're looking for?",
+      "cta": "Ask us for a personalised selection →"
+    }
+  },
+  "cantineSection": {
+    "label": "Our selection",
+    "title": "Our wineries",
+    "restoMondo": "Rest of the world",
+    "spiritsLabel": "Spirits & Liqueurs",
+    "spiritsTitle": "Spirits & Liqueurs",
+    "usa": "USA & Caribbean Islands"
+  },
+  "prodottiPage": {
+    "metadata": {
+      "title": "Typical Products",
+      "description": "Cured meats, cheeses, extra virgin olive oil, balsamic vinegar and many other Tuscan specialities. Carefully selected local products."
+    },
+    "hero": {
+      "label": "The Shop",
+      "watermark": "Products",
+      "title": "Typical products",
+      "subtitle": "The best of Tuscan food and wine tradition and beyond — carefully selected for you."
+    },
+    "testo": {
+      "body": "Alongside a carefully curated wine selection, we offer our customers a wide choice of local and artisan products: extra virgin olive oil, balsamic vinegar, craft beers, cheeses, soups, cured meats, sauces, pâtés, preserved specialities, saffron, pasta, rice, honey, tea, jams, mustards, cantuccini, chocolate, coffee, panbriacone and many other fine products.",
+      "quote": "Take a seat in our garden, choose a glass and let yourself be tempted by our delicacies."
+    },
+    "prefooter": {
+      "title": "Looking for something specific?",
+      "cta": "Message us on WhatsApp →"
+    }
+  },
+  "prodottiGrid": {
+    "tutti": "All",
+    "prodotto": "product",
+    "prodotti": "products",
+    "empty": "No products in this category"
+  },
+  "serviziPage": {
+    "metadata": {
+      "title": "Services",
+      "description": "Guided tastings, personalised selections, home tastings and aperitivo with boards in the Chianti Classico garden."
+    },
+    "hero": {
+      "label": "What We Offer",
+      "watermark": "Services",
+      "title": "Our services",
+      "subtitle": "From guided tastings to personalised selections — everything you need to make the most of the Tuscan wine experience."
+    },
+    "servizi": {
+      "01": {
+        "title": "A Journey Through Wine",
+        "desc": [
+          "We offer guided tastings that will take you on a journey of discovery through wine, territories, aromas and traditions."
+        ],
+        "info": "By reservation · Minimum 2 people · IT / EN"
+      },
+      "02": {
+        "title": "The Art of Choice",
+        "desc": [
+          "We create personalised selections tailored to every need: from the perfect gift to the ideal bottle for a dinner with friends, to building a private cellar.",
+          "We guide you through the selection with care and expertise, suggesting the most suitable labels also based on your budget, to make every experience unique and satisfying.",
+          "Our selections can be shipped on request, to bring the wine you chose with us directly to your door."
+        ],
+        "info": "Free consultation · Gift packaging · Worldwide shipping"
+      },
+      "03": {
+        "title": "Wine at Your Home",
+        "desc": [
+          "We bring the tasting experience directly to your home, turning every occasion into a unique moment to enjoy and share in an intimate and welcoming atmosphere."
+        ],
+        "info": "Within 30km · Minimum 4 people · 48h notice"
+      },
+      "04": {
+        "title": "Aperitivo in Chianti Classico",
+        "desc": [
+          "A table outdoors, the Chianti Classico sun and a glass to savour at leisure. Boards of local cured meats and cheeses are paired with a selection of local wines, along with typical products such as giardiniera and preserved specialities.",
+          "An authentic and relaxed way to experience the heart of Chianti Classico."
+        ],
+        "info": "Every day · Booking recommended in high season"
+      }
+    },
+    "cta": {
+      "title": "Would you like to book or find out more?",
+      "subtitle": "Write or call us — we will get back to you as soon as possible.",
+      "button": "Contact us"
+    }
+  },
+  "storiePage": {
+    "metadata": {
+      "title": "Stories",
+      "description": "The stories of La Cantinetta del Chianti — the territory, the Black Rooster, the photographic gallery of the Tuscan hills."
+    },
+    "hero": {
+      "label": "La Cantinetta in images",
+      "watermark": "Stories",
+      "title": "Our Stories",
+      "subtitle": "Stories of land, people and passion — and a photographic gallery of Chianti."
+    },
+    "galloNero": {
+      "label": "The territory",
+      "title": "The legend\nof the Black Rooster",
+      "p1": "The Black Rooster, historic symbol of Chianti Classico, has told the story of this land for centuries.",
+      "p2": "Legend has it that Florence and Siena decided to settle their borders through a challenge between knights, whose departure would be signalled by the first crow of a rooster. The Florentines chose a black rooster kept without food, which crowed before dawn, allowing their knight to set off early and advance as far as Fonterutoli, just a few kilometres from Siena.",
+      "p3": "Since then, the Black Rooster has become the symbol of Chianti and its historic tradition."
+    },
+    "libro": {
+      "label": "A special recognition",
+      "title": "20 friends,\n40 recipes",
+      "p1": "Being part of \"20 amici 40 ricette\" is a true pleasure for me.",
+      "p2": "My heartfelt thanks to John Bersani for involving me in this wonderful project and for dedicating a space to me among these pages: a gesture that unites friendship, passion and love for the table.",
+      "p3": "A toast to all of this 🍷",
+      "cta": "Discover the book →"
+    },
+    "galleria": {
+      "label": "Our photos",
+      "title": "Photo Gallery",
+      "empty": "Photos coming soon..."
+    },
+    "prefooter": "A picture is worth a thousand words"
+  },
+  "chiSiamoPage": {
+    "metadata": {
+      "title": "About Us",
+      "description": "The story of Riccardo and La Cantinetta del Chianti in Gaiole in Chianti. Since 2003 in the heart of Chianti Classico."
+    },
+    "hero": {
+      "label": "We are here",
+      "watermark": "Contacts",
+      "title": "Come and visit us",
+      "subtitle": "Message us on WhatsApp or come directly to the shop — we are waiting for you in Gaiole in Chianti."
+    },
+    "storia": {
+      "label": "Our story",
+      "title": "The story of\nLa Cantinetta del Chianti",
+      "p1": "It was the spring of 2000 when I had the pleasure of discovering the wonderful territory of Chianti Classico for the first time.",
+      "p2": "Having left Basilicata for a job interview at an agriturismo, as I approached Tuscany I became increasingly aware of how unique that landscape was: gentle hills, extraordinary vineyards and a harmony that was hard to forget.",
+      "p3": "Arriving in Gaiole in Chianti, I had the clear feeling of having arrived somewhere special, almost a \"paradise\".",
+      "p4": "I worked for three years at an agriturismo as restaurant manager. Then, driven by a passion for wine and the pleasure of tasting Tuscan \"nectar\", I decided to change direction.",
+      "p5": "In 2003 I took over La Cantinetta del Chianti, beginning a journey of passion, research and love for this territory that I continue to pursue every day.",
+      "whatsapp": "Message us on WhatsApp →"
+    },
+    "filosofia": {
+      "watermark": "Philosophy",
+      "title": "Our philosophy",
+      "p1": "Our selection is the result of careful and continuous research, guided by the desire to promote local producers and those who share our values.",
+      "p2": "Every choice is designed to accompany the customer on a simple, authentic and tailored journey."
+    },
+    "contatti": {
+      "title": "Contacts",
+      "telefono": "Phone",
+      "cellulare": "Mobile",
+      "email": "Email"
+    },
+    "orari": {
+      "title": "Opening hours",
+      "domenica": "Sunday",
+      "lunedi": "Monday",
+      "martedi": "Tuesday",
+      "mercoledi": "Wednesday",
+      "giovedi": "Thursday",
+      "venerdi": "Friday",
+      "sabato": "Saturday",
+      "chiuso": "Closed"
+    },
+    "doveSiamo": {
+      "title": "Where we are",
+      "indirizzo": "Address"
+    },
+    "comeArrivare": {
+      "title": "How to get here",
+      "firenze": {
+        "da": "From Florence",
+        "testo": "Motorway A1 exit Valdarno, then SS408 towards Gaiole in Chianti. About 45 minutes."
+      },
+      "siena": {
+        "da": "From Siena",
+        "testo": "SS408 northbound towards Gaiole in Chianti. About 25 minutes through the Chianti hills."
+      },
+      "arezzo": {
+        "da": "From Arezzo",
+        "testo": "SR69 to Montevarchi, then SS408 towards Gaiole in Chianti. About 40 minutes."
+      },
+      "parcheggio": "Parking",
+      "parcheggioDesc": "Free parking available in the village centre, a few steps from the shop."
+    },
+    "prefooter": {
+      "title": "We look forward to seeing you in Gaiole in Chianti",
+      "cta": "Message us on WhatsApp →"
+    }
+  },
+  "metadata": {
+    "title": "La Cantinetta del Chianti — Wine Shop in Gaiole in Chianti",
+    "description": "Wine shop in Gaiole in Chianti since 2003. Selected wines, Tuscan typical products, guided tastings and aperitivo in the heart of Chianti Classico.",
+    "keywords": "wine shop,Chianti,wines,Gaiole in Chianti,Chianti Classico,tasting,Tuscan products"
+  }
+}

@@ -6,19 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const CATEGORIA_COLORS: Record<string, string> = {
   antipasti_sfiziosita: colors.merlot,
   la_dispensa: colors.beige,
   olio_aceto_condimenti: colors.textLight,
   dolci_confetture: colors.dark,
-};
-
-const CATEGORIA_LABELS: Record<string, string> = {
-  antipasti_sfiziosita: "Antipasti e Sfiziosità",
-  la_dispensa: "La Dispensa",
-  olio_aceto_condimenti: "Olio, Aceto e Condimenti",
-  dolci_confetture: "Dolci e Confetture",
 };
 
 interface ProdottoCardProps {
@@ -34,9 +28,9 @@ export default function ProdottoCard({
   const hasDescrizione = Boolean(prodotto.acf.descrizione_breve);
   const hasProduttore = Boolean(prodotto.acf.produttore);
   const accentColor = CATEGORIA_COLORS[prodotto.acf.categoria] || colors.beige;
+  const t = useTranslations("categorieLabels");
 
   return (
-    // Wrapper Box gestisce altezza responsive — motion.div anima scale/shadow
     <Box sx={{ height: { xs: 480, md: 520 } }}>
       <motion.div
         onHoverStart={() => setHovered(true)}
@@ -140,7 +134,7 @@ export default function ProdottoCard({
                 mb: 0.75,
               }}
             >
-              {CATEGORIA_LABELS[prodotto.acf.categoria] ||
+              {t(prodotto.acf.categoria as keyof typeof CATEGORIA_COLORS) ||
                 prodotto.acf.categoria}
             </Typography>
 

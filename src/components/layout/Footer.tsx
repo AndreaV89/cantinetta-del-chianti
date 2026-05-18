@@ -1,46 +1,54 @@
 import { Box, Typography } from "@mui/material";
 import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
 import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-const footerLinks = {
-  esplora: [
-    { label: "I Nostri Vini", href: "/vini" },
-    { label: "Prodotti Tipici", href: "/prodotti" },
-    { label: "Servizi", href: "/servizi" },
-    { label: "Storie", href: "/storie" },
-  ],
-  info: [
-    { label: "Chi Siamo", href: "/chi-siamo" },
-    { label: "Contattaci", href: "/contatti" },
-    {
-      label: "Privacy Policy",
-      href: "https://www.iubenda.com/privacy-policy/89647461",
-    },
-    {
-      label: "Cookie Policy",
-      href: "https://www.iubenda.com/privacy-policy/89647461/cookie-policy",
-    },
-  ],
-  social: [
-    {
-      label: "Instagram",
-      href: "https://www.instagram.com/la.cantinetta_del_chianti/",
-      icon: <FaInstagram size={16} />,
-    },
-    {
-      label: "Facebook",
-      href: "https://www.facebook.com/lacantinettadelchianti",
-      icon: <FaFacebookF size={16} />,
-    },
-    {
-      label: "TripAdvisor",
-      href: "https://www.tripadvisor.it/Restaurant_Review-g616196-d2371663-Reviews-La_Cantinetta_del_Chianti-Gaiole_in_Chianti_Tuscany.html",
-      icon: <FaTripadvisor size={16} />,
-    },
-  ],
-};
+export default async function Footer() {
+  const t = await getTranslations("footer");
+  const locale = await getLocale();
 
-export default function Footer() {
+  const footerLinks = {
+    esplora: [
+      { label: t("links.vini"), href: `/${locale}/vini` },
+      { label: t("links.prodotti"), href: `/${locale}/prodotti` },
+      { label: t("links.servizi"), href: `/${locale}/servizi` },
+      { label: t("links.storie"), href: `/${locale}/storie` },
+    ],
+    info: [
+      { label: t("links.chiSiamo"), href: `/${locale}/chi-siamo` },
+      {
+        label: t("links.contattaci"),
+        href: "https://wa.me/39XXXXXXXXXX",
+        target: "_blank",
+      },
+      {
+        label: "Privacy Policy",
+        href: "https://www.iubenda.com/privacy-policy/89647461",
+      },
+      {
+        label: "Cookie Policy",
+        href: "https://www.iubenda.com/privacy-policy/89647461/cookie-policy",
+      },
+    ],
+    social: [
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/la.cantinetta_del_chianti/",
+        icon: <FaInstagram size={16} />,
+      },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/lacantinettadelchianti",
+        icon: <FaFacebookF size={16} />,
+      },
+      {
+        label: "TripAdvisor",
+        href: "https://www.tripadvisor.it/Restaurant_Review-g616196-d2371663-Reviews-La_Cantinetta_del_Chianti-Gaiole_in_Chianti_Tuscany.html",
+        icon: <FaTripadvisor size={16} />,
+      },
+    ],
+  };
+
   return (
     <Box
       component="footer"
@@ -91,7 +99,7 @@ export default function Footer() {
                 maxWidth: 260,
               }}
             >
-              Bottega del gusto nel cuore del Chianti Classico
+              {t("tagline")}
             </Typography>
           </Box>
 
@@ -108,12 +116,12 @@ export default function Footer() {
                 mb: 2.5,
               }}
             >
-              Esplora
+              {t("esplora")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {footerLinks.esplora.map((link) => (
                 <Typography
-                  key={link.href}
+                  key={link.label}
                   component="a"
                   href={link.href}
                   sx={{
@@ -145,14 +153,22 @@ export default function Footer() {
                 mb: 2.5,
               }}
             >
-              Info
+              {t("info")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {footerLinks.info.map((link) => (
                 <Typography
-                  key={link.href}
+                  key={link.label}
                   component="a"
                   href={link.href}
+                  target={
+                    link.href.startsWith("https://wa.me") ? "_blank" : undefined
+                  }
+                  rel={
+                    link.href.startsWith("https://wa.me")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
                     fontWeight: 300,
@@ -182,7 +198,7 @@ export default function Footer() {
                 mb: 2.5,
               }}
             >
-              Seguici
+              {t("seguici")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {footerLinks.social.map((social) => (
@@ -241,8 +257,8 @@ export default function Footer() {
               color: "rgba(255,255,255,0.3)",
             }}
           >
-            © {new Date().getFullYear()} La Cantinetta del Chianti · Gaiole in
-            Chianti, Siena
+            © {new Date().getFullYear()} La Cantinetta del Chianti ·{" "}
+            {t("copyright")}
           </Typography>
           <Typography
             sx={{
@@ -252,7 +268,7 @@ export default function Footer() {
               color: "rgba(255,255,255,0.3)",
             }}
           >
-            Design & sviluppo by{" "}
+            {t("credit")}{" "}
             <Typography
               component="a"
               href="https://andreavannetti.dev"

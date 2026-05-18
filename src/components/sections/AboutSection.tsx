@@ -1,8 +1,24 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export default function AboutSection() {
+export default async function AboutSection() {
+  const t = await getTranslations("aboutSection");
+  const locale = await getLocale();
+
+  const infoItems = [
+    {
+      label: t("doveSiamo.indirizzo.label"),
+      value: t("doveSiamo.indirizzo.value"),
+    },
+    { label: t("doveSiamo.orari.label"), value: t("doveSiamo.orari.value") },
+    {
+      label: t("doveSiamo.contatti.label"),
+      value: t("doveSiamo.contatti.value"),
+    },
+  ];
+
   return (
     <Box component="section" sx={{ backgroundColor: colors.darkDeep }}>
       <Box
@@ -52,7 +68,7 @@ export default function AboutSection() {
               mb: 1,
             }}
           >
-            Chi Siamo
+            {t("chiSiamo.label")}
           </Typography>
           <Box
             sx={{
@@ -73,11 +89,10 @@ export default function AboutSection() {
               color: "#FFFFFF",
               lineHeight: 1.25,
               mb: 4,
+              whiteSpace: "pre-line",
             }}
           >
-            Non solo vino.
-            <br />
-            Ma cultura del gusto
+            {t("chiSiamo.title")}
           </Typography>
 
           <Typography
@@ -90,9 +105,7 @@ export default function AboutSection() {
               mb: 3,
             }}
           >
-            A Gaiole in Chianti, nel cuore del Chianti Classico, La Cantinetta
-            del Chianti è una piccola enoteca e bottega dedicata alla selezione
-            di vini ed eccellenze enogastronomiche del territorio.
+            {t("chiSiamo.body1")}
           </Typography>
 
           <Typography
@@ -105,10 +118,7 @@ export default function AboutSection() {
               mb: 5,
             }}
           >
-            Una realtà che nasce dalla passione per la qualità, l’autenticità e
-            il legame profondo con la Toscana, con l’obiettivo di offrire
-            esperienze che raccontino il territorio attraverso i suoi vini e i
-            suoi sapori.
+            {t("chiSiamo.body2")}
           </Typography>
 
           <Box
@@ -122,7 +132,7 @@ export default function AboutSection() {
 
           <Typography
             component="a"
-            href="/chi-siamo"
+            href={`/${locale}/chi-siamo`}
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,
@@ -134,7 +144,7 @@ export default function AboutSection() {
               "&:hover": { textDecoration: "underline" },
             }}
           >
-            Vieni a trovarci →
+            {t("chiSiamo.cta")}
           </Typography>
         </Box>
 
@@ -158,7 +168,7 @@ export default function AboutSection() {
               mb: 1,
             }}
           >
-            Dove Siamo
+            {t("doveSiamo.label")}
           </Typography>
           <Box
             sx={{
@@ -181,27 +191,10 @@ export default function AboutSection() {
               mb: 5,
             }}
           >
-            Vieni a trovarci
-            <br />a Gaiole in Chianti
+            {t("doveSiamo.title")}
           </Typography>
 
-          {[
-            {
-              label: "Indirizzo",
-              value: "Via B. Ricasoli 33\n53013 Gaiole in Chianti (SI)",
-            },
-            {
-              label: "Orari",
-              value:
-                "Dom/Lun/Mer: 10:00–19:30\nGio/Ven: 09:45–20:00\nSab: 10:00–20:00\nMar: Chiuso",
-              href: null,
-            },
-            {
-              label: "Contatti",
-              value:
-                "+39 0577 749125\n+39 333 9687729\nenoteca@lacantinettadelchianti.it",
-            },
-          ].map((item) => (
+          {infoItems.map((item) => (
             <Box key={item.label} sx={{ mb: 3.5 }}>
               <Typography
                 sx={{
@@ -248,7 +241,7 @@ export default function AboutSection() {
               "&:hover": { textDecoration: "underline" },
             }}
           >
-            Ottieni indicazioni →
+            {t("doveSiamo.directions")}
           </Typography>
         </Box>
       </Box>

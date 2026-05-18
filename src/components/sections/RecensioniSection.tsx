@@ -3,8 +3,11 @@
 import { Box, Typography } from "@mui/material";
 import Script from "next/script";
 import { colors } from "@/styles/colors";
+import { useTranslations } from "next-intl";
 
 export default function RecensioniSection() {
+  const t = useTranslations("recensioni");
+
   return (
     <Box
       component="section"
@@ -32,7 +35,7 @@ export default function RecensioniSection() {
               mb: 1,
             }}
           >
-            Cosa dicono di noi
+            {t("label")}
           </Typography>
           <Box
             sx={{
@@ -53,7 +56,7 @@ export default function RecensioniSection() {
               color: colors.dark,
             }}
           >
-            Le recensioni dei nostri ospiti
+            {t("title")}
           </Typography>
         </Box>
 

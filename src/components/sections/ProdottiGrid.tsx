@@ -8,22 +8,14 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Prodotto } from "@/types";
 import { colors } from "@/styles/colors";
 import ProdottoCard from "@/components/ui/ProdottoCard";
+import { useTranslations } from "next-intl";
 
-const categorie = [
-  "Tutti",
+const CATEGORIA_ORDER = [
   "antipasti_sfiziosita",
   "la_dispensa",
   "olio_aceto_condimenti",
   "dolci_confetture",
 ];
-
-const CATEGORIE_LABELS: Record<string, string> = {
-  Tutti: "Tutti",
-  antipasti_sfiziosita: "Antipasti e Sfiziosità",
-  la_dispensa: "La Dispensa",
-  olio_aceto_condimenti: "Olio, Aceto e Condimenti",
-  dolci_confetture: "Dolci e Confetture",
-};
 
 const CARD_GAP = 28;
 const SIDE_SCALE = 0.87;
@@ -35,27 +27,49 @@ interface ProdottiGridProps {
 }
 
 export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
-  const [filtro, setFiltro] = useState("Tutti");
+  const t = useTranslations("prodottiGrid");
+  const tCat = useTranslations("categorieLabels");
+  const [filtro, setFiltro] = useState(t("tutti"));
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardW, setCardW] = useState(360);
   const [visibleN, setVisibleN] = useState(3);
   const measureRef = useRef<HTMLDivElement>(null);
 
-  const prodottiFiltrati =
-    filtro === "Tutti"
-      ? prodotti
-      : prodotti.filter(
-          (p) => p.acf.categoria?.toLowerCase() === filtro.toLowerCase(),
-        );
+  const categorieMap: Record<string, string> = {
+    [tCat("antipasti_sfiziosita")]: "antipasti_sfiziosita",
+    [tCat("la_dispensa")]: "la_dispensa",
+    [tCat("olio_aceto_condimenti")]: "olio_aceto_condimenti",
+    [tCat("dolci_confetture")]: "dolci_confetture",
+  };
+
+  const categorie = [
+    t("tutti"),
+    tCat("antipasti_sfiziosita"),
+    tCat("la_dispensa"),
+    tCat("olio_aceto_condimenti"),
+    tCat("dolci_confetture"),
+  ];
+
+  const prodottiFiltrati = (() => {
+    const lista =
+      filtro === t("tutti")
+        ? [...prodotti].sort(
+            (a, b) =>
+              CATEGORIA_ORDER.indexOf(a.acf.categoria) -
+              CATEGORIA_ORDER.indexOf(b.acf.categoria),
+          )
+        : prodotti.filter((p) => p.acf.categoria === categorieMap[filtro]);
+    return lista;
+  })();
 
   const conteggi = categorie.reduce(
     (acc, c) => {
+      const chiave = categorieMap[c];
       acc[c] =
-        c === "Tutti"
+        c === t("tutti")
           ? prodotti.length
-          : prodotti.filter(
-              (p) => p.acf.categoria?.toLowerCase() === c.toLowerCase(),
-            ).length;
+          : prodotti.filter((p) => p.acf.categoria?.toLowerCase() === chiave)
+              .length;
       return acc;
     },
     {} as Record<string, number>,
@@ -117,7 +131,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
           >
             {categorie.map((c) => {
               const count = conteggi[c];
-              if (count === 0 && c !== "Tutti") return null;
+              if (count === 0 && c !== t("tutti")) return null;
               const isActive = filtro === c;
               return (
                 <Box
@@ -153,7 +167,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                       userSelect: "none",
                     }}
                   >
-                    {CATEGORIE_LABELS[c] || c}
+                    {c}
                   </Typography>
                   <Typography
                     sx={{
@@ -192,10 +206,8 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
             }}
           >
             {prodottiFiltrati.length}{" "}
-            {prodottiFiltrati.length === 1 ? "prodotto" : "prodotti"}
-            {filtro !== "Tutti"
-              ? ` · ${CATEGORIE_LABELS[filtro] || filtro}`
-              : ""}
+            {prodottiFiltrati.length === 1 ? t("prodotto") : t("prodotti")}
+            {filtro !== t("tutti") ? ` · ${filtro}` : ""}
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
@@ -255,7 +267,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                 color: "rgba(94, 68, 68, 0.4)",
               }}
             >
-              Nessun prodotto in questa categoria
+              {t("empty")}
             </Typography>
           </Box>
         ) : (

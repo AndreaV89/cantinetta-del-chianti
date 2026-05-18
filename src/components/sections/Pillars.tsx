@@ -1,25 +1,16 @@
 import { Box, Typography } from "@mui/material";
 import { colors } from "@/styles/colors";
+import { getTranslations } from "next-intl/server";
 
-const pillars = [
-  {
-    num: "01",
-    title: "Vini del Territorio",
-    desc: "Chianti Classico, Supertuscan e etichette artigianali selezionate direttamente dai produttori locali.",
-  },
-  {
-    num: "02",
-    title: "Prodotti Tipici",
-    desc: "Salumi, formaggi, conserve e pasta — tutto ciò che la Toscana sa offrire di meglio.",
-  },
-  {
-    num: "03",
-    title: "Aperitivi & Taglieri",
-    desc: "Un tavolo fuori, il sole del Chianti Classico e un calice da assaporare con calma.",
-  },
-];
+export default async function Pillars() {
+  const t = await getTranslations("pillars");
 
-export default function Pillars() {
+  const pillars = [
+    { num: "01", title: t("01.title"), desc: t("01.desc") },
+    { num: "02", title: t("02.title"), desc: t("02.desc") },
+    { num: "03", title: t("03.title"), desc: t("03.desc") },
+  ];
+
   return (
     <Box
       component="section"

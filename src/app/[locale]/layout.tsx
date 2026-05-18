@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -6,6 +5,7 @@ import ThemeRegistry from "@/components/ui/ThemeRegistry";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Script from "next/script";
+import { getTranslations } from "next-intl/server";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -14,28 +14,27 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "La Cantinetta del Chianti — Enoteca a Gaiole in Chianti",
-    template: "%s | La Cantinetta del Chianti",
-  },
-  description:
-    "Enoteca a Gaiole in Chianti dal 2003. Vini selezionati, prodotti tipici toscani, degustazioni guidate e aperitivi nel cuore del Chianti Classico.",
-  keywords: [
-    "enoteca",
-    "Chianti",
-    "vini",
-    "Gaiole in Chianti",
-    "Chianti Classico",
-    "degustazione",
-    "prodotti tipici toscani",
-  ],
-  openGraph: {
-    siteName: "La Cantinetta del Chianti",
-    locale: "it_IT",
-    type: "website",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: {
+      default: t("title"),
+      template: `%s | La Cantinetta del Chianti`,
+    },
+    description: t("description"),
+    keywords: t("keywords").split(","),
+    openGraph: {
+      siteName: "La Cantinetta del Chianti",
+      locale: locale === "it" ? "it_IT" : "en_GB",
+      type: "website",
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,

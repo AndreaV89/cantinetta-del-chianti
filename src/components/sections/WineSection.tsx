@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { Vino } from "@/types";
 import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
 const tipologiaColors: Record<string, string> = {
   Rosso: colors.merlot,
@@ -206,7 +207,9 @@ function WineCard({ vino }: { vino: Vino }) {
   );
 }
 
-export default function WineSection({ vini }: WineSectionProps) {
+export default async function WineSection({ vini }: WineSectionProps) {
+  const t = await getTranslations("wineSection");
+  const locale = await getLocale();
   const viniToShow = vini.slice(0, 3);
 
   return (
@@ -245,7 +248,7 @@ export default function WineSection({ vini }: WineSectionProps) {
                 mb: 1,
               }}
             >
-              La Cantina
+              {t("label")}
             </Typography>
             <Box
               sx={{
@@ -266,7 +269,7 @@ export default function WineSection({ vini }: WineSectionProps) {
                 lineHeight: 1.2,
               }}
             >
-              Proposta della settimana..
+              {t("title")}
             </Typography>
           </Box>
 
@@ -281,8 +284,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               mt: { xs: 3, md: 0 },
             }}
           >
-            Una selezione curata per qualità, carattere e storia — dai
-            produttori locali del Chianti.
+            {t("subtitle")}
           </Typography>
         </Box>
 
@@ -298,7 +300,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               py: 8,
             }}
           >
-            I vini arrivano presto...
+            {t("empty")}
           </Typography>
         ) : (
           <Box
@@ -322,7 +324,7 @@ export default function WineSection({ vini }: WineSectionProps) {
         <Box sx={{ mt: 6, display: "flex", alignItems: "center", gap: 2 }}>
           <Typography
             component="a"
-            href="/vini"
+            href={`/${locale}/vini`}
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,
@@ -333,7 +335,7 @@ export default function WineSection({ vini }: WineSectionProps) {
               "&:hover": { textDecoration: "underline" },
             }}
           >
-            Scopri la nostra selezione →
+            {t("cta")}
           </Typography>
         </Box>
       </Box>

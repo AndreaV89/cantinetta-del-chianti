@@ -1,17 +1,27 @@
+// Storie page
+
 import { Box, Typography } from "@mui/material";
 import { getAlbum } from "@/lib/wordpress";
 import AlbumStrip from "@/components/sections/AlbumStrip";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Storie",
-  description:
-    "Le storie di La Cantinetta del Chianti — il territorio, il Gallo Nero, la galleria fotografica delle colline toscane.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "storiePage.metadata" });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function FotoPage() {
+  const t = await getTranslations("storiePage");
   const album = await getAlbum();
 
   return (
@@ -43,7 +53,7 @@ export default async function FotoPage() {
             whiteSpace: "nowrap",
           }}
         >
-          Storie
+          {t("hero.watermark")}
         </Typography>
 
         <Box
@@ -65,7 +75,7 @@ export default async function FotoPage() {
               mb: 1,
             }}
           >
-            La Cantinetta in immagini
+            {t("hero.label")}
           </Typography>
           <Box
             sx={{
@@ -88,7 +98,7 @@ export default async function FotoPage() {
               maxWidth: 700,
             }}
           >
-            Le Nostre Storie
+            {t("hero.title")}
           </Typography>
           <Typography
             sx={{
@@ -100,8 +110,7 @@ export default async function FotoPage() {
               maxWidth: 500,
             }}
           >
-            Storie di territorio, persone e passione — e una galleria
-            fotografica del Chianti.
+            {t("hero.subtitle")}
           </Typography>
         </Box>
       </Box>
@@ -155,7 +164,7 @@ export default async function FotoPage() {
                 mb: 1,
               }}
             >
-              Il territorio
+              {t("galloNero.label")}
             </Typography>
             <Box
               sx={{
@@ -175,32 +184,29 @@ export default async function FotoPage() {
                 color: colors.text,
                 lineHeight: 1.2,
                 mb: 4,
+                whiteSpace: "pre-line",
               }}
             >
-              La leggenda
-              <br />
-              del Gallo Nero
+              {t("galloNero.title")}
             </Typography>
 
-            {[
-              "Il Gallo Nero, simbolo storico del Chianti Classico, racconta da secoli l'identità di queste terre.",
-              "La leggenda narra che Firenze e Siena decisero di stabilire i propri confini attraverso una sfida tra cavalieri, la cui partenza sarebbe stata segnata dal primo canto del gallo. I fiorentini scelsero un gallo nero tenuto a digiuno, che cantò prima dell'alba, permettendo al loro cavaliere di partire in anticipo e avanzare fino a Fonterutoli, a pochi chilometri da Siena.",
-              "Da allora, il Gallo Nero è diventato il simbolo del Chianti e della sua storica tradizione.",
-            ].map((paragrafo, i) => (
-              <Typography
-                key={i}
-                sx={{
-                  fontFamily: '"DM Sans", sans-serif',
-                  fontWeight: 300,
-                  fontSize: "1rem",
-                  lineHeight: 1.85,
-                  color: colors.textLight,
-                  mb: i < 2 ? 2.5 : 0,
-                }}
-              >
-                {paragrafo}
-              </Typography>
-            ))}
+            {[t("galloNero.p1"), t("galloNero.p2"), t("galloNero.p3")].map(
+              (paragrafo, i) => (
+                <Typography
+                  key={i}
+                  sx={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 300,
+                    fontSize: "1rem",
+                    lineHeight: 1.85,
+                    color: colors.textLight,
+                    mb: i < 2 ? 2.5 : 0,
+                  }}
+                >
+                  {paragrafo}
+                </Typography>
+              ),
+            )}
           </Box>
         </Box>
       </Box>
@@ -237,7 +243,7 @@ export default async function FotoPage() {
                 mb: 1,
               }}
             >
-              Un riconoscimento speciale
+              {t("libro.label")}
             </Typography>
             <Box
               sx={{
@@ -257,32 +263,29 @@ export default async function FotoPage() {
                 color: "#FFFFFF",
                 lineHeight: 1.2,
                 mb: 4,
+                whiteSpace: "pre-line",
               }}
             >
-              20 amici,
-              <br />
-              40 ricette
+              {t("libro.title")}
             </Typography>
 
-            {[
-              'Essere parte di "20 amici 40 ricette" è per me un vero piacere.',
-              "Grazie di cuore a John Bersani per avermi coinvolto in questo bellissimo progetto e per avermi dedicato uno spazio tra queste pagine: un gesto che unisce amicizia, passione e amore per la tavola.",
-              "Un brindisi a tutto questo 🍷",
-            ].map((paragrafo, i) => (
-              <Typography
-                key={i}
-                sx={{
-                  fontFamily: '"DM Sans", sans-serif',
-                  fontWeight: 300,
-                  fontSize: "1rem",
-                  lineHeight: 1.85,
-                  color: "rgba(255,255,255,0.7)",
-                  mb: i < 2 ? 2.5 : 0,
-                }}
-              >
-                {paragrafo}
-              </Typography>
-            ))}
+            {[t("libro.p1"), t("libro.p2"), t("libro.p3")].map(
+              (paragrafo, i) => (
+                <Typography
+                  key={i}
+                  sx={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 300,
+                    fontSize: "1rem",
+                    lineHeight: 1.85,
+                    color: "rgba(255,255,255,0.7)",
+                    mb: i < 2 ? 2.5 : 0,
+                  }}
+                >
+                  {paragrafo}
+                </Typography>
+              ),
+            )}
 
             {/* CTA libro */}
             <Typography
@@ -310,7 +313,7 @@ export default async function FotoPage() {
                 transition: "border-color 0.2s ease",
               }}
             >
-              Scopri il libro →
+              {t("libro.cta")}
             </Typography>
           </Box>
 
@@ -360,7 +363,7 @@ export default async function FotoPage() {
               mb: 1,
             }}
           >
-            Le nostre foto
+            {t("galleria.label")}
           </Typography>
           <Box
             sx={{
@@ -379,7 +382,7 @@ export default async function FotoPage() {
               color: colors.text,
             }}
           >
-            Galleria Fotografica
+            {t("galleria.title")}
           </Typography>
         </Box>
         {album.length === 0 ? (
@@ -392,7 +395,7 @@ export default async function FotoPage() {
                 color: "rgba(115, 97, 86, 0.5)",
               }}
             >
-              Le foto arrivano presto...
+              {t("galleria.empty")}
             </Typography>
           </Box>
         ) : (
@@ -418,7 +421,7 @@ export default async function FotoPage() {
             color: colors.beige,
           }}
         >
-          Un&#39;immagine vale più di mille parole
+          {t("prefooter")}
         </Typography>
       </Box>
     </>

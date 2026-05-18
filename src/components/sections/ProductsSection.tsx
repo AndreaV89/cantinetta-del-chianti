@@ -2,8 +2,11 @@ import { Box, Typography } from "@mui/material";
 import { colors } from "@/styles/colors";
 import Button from "@mui/material/Button";
 import Link from "next/link";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export default function ProductsSection() {
+export default async function ProductsSection() {
+  const t = await getTranslations("productsSection");
+  const locale = await getLocale();
   return (
     <Box
       component="section"
@@ -40,7 +43,7 @@ export default function ProductsSection() {
                 mb: 1,
               }}
             >
-              La Bottega
+              {t("label")}
             </Typography>
             <Box
               sx={{
@@ -59,11 +62,10 @@ export default function ProductsSection() {
                 fontWeight: 400,
                 color: colors.dark,
                 lineHeight: 1.2,
+                whiteSpace: "pre-line",
               }}
             >
-              Prodotti tipici
-              <br />
-              del territorio
+              {t("title")}
             </Typography>
           </Box>
 
@@ -78,8 +80,7 @@ export default function ProductsSection() {
               mt: { xs: 3, md: 0 },
             }}
           >
-            Salumi, formaggi, conserve e molto altro — il meglio della
-            tradizione enogastronomica toscana.
+            {t("subtitle")}
           </Typography>
         </Box>
 
@@ -105,13 +106,10 @@ export default function ProductsSection() {
               maxWidth: 520,
             }}
           >
-            Oltre ai vini, la nostra bottega raccoglie il meglio della
-            tradizione toscana: salumi artigianali, formaggi stagionati,
-            conserve, pasta e olio extravergine selezionati con la stessa cura
-            che riserviamo alla cantina.
+            {t("body")}
           </Typography>
 
-          <Link href="/prodotti" style={{ textDecoration: "none" }}>
+          <Link href={`/${locale}/prodotti`} style={{ textDecoration: "none" }}>
             <Button
               variant="outlined"
               sx={{
@@ -133,7 +131,7 @@ export default function ProductsSection() {
                 },
               }}
             >
-              Scopri i prodotti
+              {t("cta")}
             </Button>
           </Link>
         </Box>

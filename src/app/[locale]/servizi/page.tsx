@@ -1,66 +1,71 @@
+// Servizi page
+
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
 import { colors } from "@/styles/colors";
-import type { Metadata } from "next";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Servizi",
-  description:
-    "Degustazioni guidate, selezioni personalizzate, degustazioni a domicilio e aperitivi con taglieri nel giardino del Chianti Classico.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: "serviziPage.metadata",
+  });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
-const servizi = [
-  {
-    num: "01",
-    title: "Viaggio nel Vino",
-    desc: [
-      "Proponiamo degustazioni guidate che vi accompagneranno in un viaggio alla scoperta del vino, tra territori, profumi e tradizioni.",
-    ],
-    info: "Su prenotazione · Minimo 2 persone · IT / EN",
-    image: "/images/viaggio-nel-vino.jpeg",
-    alt: "Degustazione di vini",
-  },
-  {
-    num: "02",
-    title: "L'Arte della Scelta",
-    desc: [
-      "Realizziamo selezioni personalizzate, pensate per ogni esigenza: dal regalo perfetto alla bottiglia ideale per una cena tra amici, fino alla creazione di una cantina privata.",
-      "Vi affianchiamo nella scelta con cura e competenza, suggerendo le etichette più adatte anche in base al vostro budget, per rendere ogni esperienza unica e soddisfacente.",
-      "Le nostre selezioni possono essere spedite su richiesta, per portare direttamente a casa vostra il vino scelto insieme a noi.",
-    ],
-    info: "Consulenza gratuita · Confezioni regalo · Spedizione in tutto il mondo",
-    image: "/images/arte-della-scelta.jpg",
-    alt: "Selezione bottiglie di vino",
-  },
-  {
-    num: "03",
-    title: "Vino a Casa Vostra",
-    desc: [
-      "Portiamo l'esperienza della degustazione direttamente a casa vostra, trasformando ogni occasione in un momento unico da vivere e condividere in un'atmosfera intima e accogliente.",
-    ],
-    info: "Entro 30km · Minimo 4 persone · 48h di anticipo",
-    image: "/images/vino-a-casa-vostra.jpg",
-    alt: "Tavola apparecchiata per degustazione",
-  },
-  {
-    num: "04",
-    title: "L'Aperitivo in Chianti Classico",
-    desc: [
-      "Un tavolo all'aperto, il sole del Chianti Classico e un calice da assaporare con calma. Taglieri di salumi e formaggi del territorio si accompagnano a una selezione di vini locali, insieme a prodotti tipici come giardiniera e specialità sott'olio.",
-      "Un modo autentico e rilassato per vivere il cuore del Chianti Classico.",
-    ],
-    info: "Tutti i giorni · Prenotazione consigliata in alta stagione",
-    image: "/images/aperitivo-in-chianti-classico.jpg",
-    alt: "Tagliere con salumi e formaggi",
-  },
-];
+export default async function ServiziPage() {
+  const t = await getTranslations("serviziPage");
+  const locale = await getLocale();
 
-export default function ServiziPage() {
+  const servizi = [
+    {
+      num: "01",
+      title: t("servizi.01.title"),
+      desc: [t("servizi.01.desc.0")],
+      info: t("servizi.01.info"),
+      image: "/images/viaggio-nel-vino.jpeg",
+      alt: "Degustazione di vini",
+    },
+    {
+      num: "02",
+      title: t("servizi.02.title"),
+      desc: [
+        t("servizi.02.desc.0"),
+        t("servizi.02.desc.1"),
+        t("servizi.02.desc.2"),
+      ],
+      info: t("servizi.02.info"),
+      image: "/images/arte-della-scelta.jpg",
+      alt: "Selezione bottiglie di vino",
+    },
+    {
+      num: "03",
+      title: t("servizi.03.title"),
+      desc: [t("servizi.03.desc.0")],
+      info: t("servizi.03.info"),
+      image: "/images/vino-a-casa-vostra.jpg",
+      alt: "Tavola apparecchiata per degustazione",
+    },
+    {
+      num: "04",
+      title: t("servizi.04.title"),
+      desc: [t("servizi.04.desc.0"), t("servizi.04.desc.1")],
+      info: t("servizi.04.info"),
+      image: "/images/aperitivo-in-chianti-classico.jpg",
+      alt: "Tagliere con salumi e formaggi",
+    },
+  ];
+
   return (
     <>
-      <Navbar />
-
       {/* Hero */}
       <Box
         component="section"
@@ -88,7 +93,7 @@ export default function ServiziPage() {
             whiteSpace: "nowrap",
           }}
         >
-          Servizi
+          {t("hero.watermark")}
         </Typography>
 
         <Box
@@ -110,7 +115,7 @@ export default function ServiziPage() {
               mb: 1,
             }}
           >
-            Cosa Offriamo
+            {t("hero.label")}
           </Typography>
           <Box
             sx={{
@@ -133,7 +138,7 @@ export default function ServiziPage() {
               maxWidth: 700,
             }}
           >
-            I nostri servizi
+            {t("hero.title")}
           </Typography>
           <Typography
             sx={{
@@ -145,9 +150,7 @@ export default function ServiziPage() {
               maxWidth: 560,
             }}
           >
-            Dalla degustazione guidata alla selezione personalizzata — tutto
-            quello che serve per vivere al meglio l&#39;esperienza del vino
-            toscano.
+            {t("hero.subtitle")}
           </Typography>
         </Box>
       </Box>
@@ -305,7 +308,7 @@ export default function ServiziPage() {
               mb: 2,
             }}
           >
-            Vuoi prenotare o avere più informazioni?
+            {t("cta.title")}
           </Typography>
           <Typography
             sx={{
@@ -316,11 +319,11 @@ export default function ServiziPage() {
               mb: 5,
             }}
           >
-            Scrivici o chiamaci — risponderemo il prima possibile.
+            {t("cta.subtitle")}
           </Typography>
           <Typography
             component="a"
-            href="/chi-siamo"
+            href={`/${locale}/chi-siamo`}
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,
@@ -337,7 +340,7 @@ export default function ServiziPage() {
               "&:hover": { backgroundColor: colors.merlotHover },
             }}
           >
-            Contattaci
+            {t("cta.button")}
           </Typography>
         </Box>
       </Box>

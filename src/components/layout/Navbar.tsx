@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -11,17 +11,17 @@ import { colors } from "@/styles/colors";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
 
   const navLinks = [
-    { label: "Vini", href: `/${locale}/vini` },
-    { label: "Prodotti", href: `/${locale}/prodotti` },
-    { label: "Servizi", href: `/${locale}/servizi` },
-    { label: "Storie", href: `/${locale}/storie` },
-    { label: "Chi Siamo", href: `/${locale}/chi-siamo` },
+    { label: t("vini"), href: `/${locale}/vini` },
+    { label: t("prodotti"), href: `/${locale}/prodotti` },
+    { label: t("servizi"), href: `/${locale}/servizi` },
+    { label: t("storie"), href: `/${locale}/storie` },
+    { label: t("chiSiamo"), href: `/${locale}/chi-siamo` },
   ];
 
   const switchLocale = (newLocale: string) => {

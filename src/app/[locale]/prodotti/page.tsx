@@ -1,17 +1,30 @@
+// Pagina Prodotti
+
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { getProdotti } from "@/lib/wordpress";
 import ProdottiGrid from "@/components/sections/ProdottiGrid";
 import { colors } from "@/styles/colors";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Prodotti Tipici",
-  description:
-    "Salumi, formaggi, olio EVO, aceto balsamico e molte altre eccellenze toscane. Prodotti tipici locali selezionati con cura.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: "prodottiPage.metadata",
+  });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function ProdottiPage() {
+  const t = await getTranslations("prodottiPage");
   const prodotti = await getProdotti();
 
   return (
@@ -43,7 +56,7 @@ export default async function ProdottiPage() {
             whiteSpace: "nowrap",
           }}
         >
-          Prodotti
+          {t("hero.watermark")}
         </Typography>
         <Box
           sx={{
@@ -64,7 +77,7 @@ export default async function ProdottiPage() {
               mb: 1,
             }}
           >
-            La Bottega
+            {t("hero.label")}
           </Typography>
           <Box
             sx={{
@@ -87,7 +100,7 @@ export default async function ProdottiPage() {
               maxWidth: 700,
             }}
           >
-            Prodotti tipici
+            {t("hero.title")}
           </Typography>
           <Typography
             sx={{
@@ -99,8 +112,7 @@ export default async function ProdottiPage() {
               maxWidth: 500,
             }}
           >
-            Il meglio della tradizione enogastronomica toscana e non solo —
-            selezionato con cura per voi.
+            {t("hero.subtitle")}
           </Typography>
         </Box>
       </Box>
@@ -151,12 +163,7 @@ export default async function ProdottiPage() {
               mb: 3,
             }}
           >
-            Accanto a una ricercata selezione di vini, proponiamo ai nostri
-            clienti un&#39;accurata scelta di prodotti tipici, locali e non:
-            olio extravergine d&#39;oliva, aceto balsamico, birre artigianali,
-            formaggi, zuppe, salumi, salse, paté, specialità sott&#39;olio,
-            zafferano, pasta, riso, miele, tè, confetture, mostarde, cantuccini,
-            cioccolato, caffè, panbriacone e molte altre eccellenze.
+            {t("testo.body")}
           </Typography>
 
           <Box
@@ -178,8 +185,7 @@ export default async function ProdottiPage() {
               lineHeight: 1.5,
             }}
           >
-            Accomodatevi nel nostro giardino, scegliete un calice e lasciatevi
-            tentare dalle nostre delizie.
+            {t("testo.quote")}
           </Typography>
         </Box>
       </Box>
@@ -204,7 +210,7 @@ export default async function ProdottiPage() {
             mb: 4,
           }}
         >
-          Cerchi qualcosa di specifico?
+          {t("prefooter.title")}
         </Typography>
         <Typography
           component="a"
@@ -227,7 +233,7 @@ export default async function ProdottiPage() {
             "&:hover": { backgroundColor: colors.merlotHover },
           }}
         >
-          Scrivici su WhatsApp →
+          {t("prefooter.cta")}
         </Typography>
       </Box>
     </>

@@ -10,6 +10,7 @@ import {
 import { FaChevronDown } from "react-icons/fa";
 import { colors } from "@/styles/colors";
 import type { Cantina, ZonaToscana, ZonaFrancia, RegioneItalia } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   cantine: Cantina[];
@@ -166,6 +167,7 @@ function StyledAccordion({
 }
 
 export default function CantineSection({ cantine }: Props) {
+  const t = useTranslations("cantineSection");
   const vini = cantine.filter((c) => c.tipologia === "vino");
   const superalcolici = cantine.filter((c) => c.tipologia === "superalcolico");
 
@@ -212,7 +214,7 @@ export default function CantineSection({ cantine }: Props) {
     >
       <Box sx={{ maxWidth: 1920, mx: "auto", px: { xs: 3, md: 10 } }}>
         {/* Titolo sezione */}
-        <SectionLabel>La nostra selezione</SectionLabel>
+        <SectionLabel>{t("label")}</SectionLabel>
         <Box
           sx={{
             width: 32,
@@ -232,7 +234,7 @@ export default function CantineSection({ cantine }: Props) {
             mb: { xs: 6, md: 8 },
           }}
         >
-          Le nostre cantine
+          {t("title")}
         </Typography>
 
         {/* Chianti Classico in evidenza */}
@@ -293,7 +295,7 @@ export default function CantineSection({ cantine }: Props) {
 
           {/* Resto del mondo */}
           {viniRestoMondo.length > 0 && (
-            <StyledAccordion label="Resto del mondo" cantine={[]}>
+            <StyledAccordion label={t("restoMondo")} cantine={[]}>
               {Array.from(
                 new Set(viniRestoMondo.map((c) => c.nazione_vino)),
               ).map((nazione) => (
@@ -312,7 +314,7 @@ export default function CantineSection({ cantine }: Props) {
         {/* Superalcolici */}
         {superalcolici.length > 0 && (
           <>
-            <SectionLabel>Spirits & Liquori</SectionLabel>
+            <SectionLabel>{t("spiritsLabel")}</SectionLabel>
             <Box
               sx={{
                 width: 32,
@@ -332,7 +334,7 @@ export default function CantineSection({ cantine }: Props) {
                 mb: { xs: 4, md: 6 },
               }}
             >
-              Superalcolici & Liquori
+              {t("spiritsTitle")}
             </Typography>
             {superItalia.length > 0 && (
               <StyledAccordion label="Italia" cantine={superItalia} />
@@ -347,10 +349,7 @@ export default function CantineSection({ cantine }: Props) {
               <StyledAccordion label="Irlanda" cantine={superIrlanda} />
             )}
             {superUsa.length > 0 && (
-              <StyledAccordion
-                label="USA & Isole Caraibiche"
-                cantine={superUsa}
-              />
+              <StyledAccordion label={t("usa")} cantine={superUsa} />
             )}
           </>
         )}

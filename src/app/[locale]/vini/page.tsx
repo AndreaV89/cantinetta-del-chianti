@@ -1,21 +1,37 @@
+// Pagina Vini
+
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { getVini } from "@/lib/wordpress";
 import ViniGrid from "@/components/sections/ViniGrid";
 import { colors } from "@/styles/colors";
-import type { Metadata } from "next";
 import CantineSection from "@/components/sections/CantineSection";
 import { getCantine } from "@/lib/wordpress";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "I Nostri Vini",
-  description:
-    "Oltre 200 etichette selezionate dal Chianti e dal mondo. Chianti Classico, Supertuscan, vini italiani e internazionali. Scopri la nostra selezione.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "viniPage.metadata" });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function ViniPage() {
+  const t = await getTranslations("viniPage");
   const [vini, cantine] = await Promise.all([getVini(), getCantine()]);
   const viniNonInEvidenza = vini.filter((v) => !v.acf.in_evidenza);
+
+  const stats = [
+    { num: t("numeri.etichette.num"), label: t("numeri.etichette.label") },
+    { num: t("numeri.regioni.num"), label: t("numeri.regioni.label") },
+    { num: t("numeri.paesi.num"), label: t("numeri.paesi.label") },
+  ];
 
   return (
     <>
@@ -46,7 +62,7 @@ export default async function ViniPage() {
             whiteSpace: "nowrap",
           }}
         >
-          Vini
+          {t("hero.watermark")}
         </Typography>
         <Box
           sx={{
@@ -67,7 +83,7 @@ export default async function ViniPage() {
               mb: 1,
             }}
           >
-            La Cantina
+            {t("hero.label")}
           </Typography>
           <Box
             sx={{
@@ -90,7 +106,7 @@ export default async function ViniPage() {
               maxWidth: 700,
             }}
           >
-            I nostri vini
+            {t("hero.title")}
           </Typography>
           <Typography
             sx={{
@@ -102,8 +118,7 @@ export default async function ViniPage() {
               maxWidth: 500,
             }}
           >
-            Una selezione curata di etichette del Chianti e della Toscana,
-            scelte per qualità, carattere e storia.
+            {t("hero.subtitle")}
           </Typography>
         </Box>
       </Box>
@@ -127,11 +142,7 @@ export default async function ViniPage() {
             gap: { xs: 4, md: 6 },
           }}
         >
-          {[
-            { num: "200+", label: "Etichette selezionate" },
-            { num: "14", label: "Regioni italiane" },
-            { num: "7", label: "Paesi nel mondo" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <Box key={stat.num} sx={{ textAlign: "center" }}>
               <Typography
                 sx={{
@@ -208,15 +219,7 @@ export default async function ViniPage() {
               mb: 3,
             }}
           >
-            Dalla passione per il vino nasce La Cantinetta del Chianti, un luogo
-            dove ogni bottiglia racconta una storia. Un mosaico di grandi
-            etichette accuratamente selezionate, pensato per offrire ai nostri
-            clienti una scelta che spazia dall&#39;eccellenza al sublime. Un
-            viaggio ideale attraverso l&#39;Italia del vino: dalla Toscana alla
-            Sicilia, passando per le prestigiose terre di Piemonte, Lombardia,
-            Veneto e Friuli. Ogni calice è un&#39;esperienza sensoriale che
-            esalta il piacere dell&#39;olfatto e celebra l&#39;apoteosi del
-            gusto.
+            {t("testo.body1")}
           </Typography>
 
           <Typography
@@ -229,12 +232,7 @@ export default async function ViniPage() {
               mb: 6,
             }}
           >
-            Lo sguardo si apre oltre i confini italiani, con una selezione
-            internazionale che abbraccia le grandi tradizioni enologiche e dei
-            distillati: dalla raffinatezza della Francia e della Germania, al
-            carattere della Spagna, fino all&#39;eccellenza dei whisky di Scozia
-            e Irlanda e ai celebri bourbon americani. Senza dimenticare
-            l&#39;Argentina, terra di vini intensi e sorprendenti.
+            {t("testo.body2")}
           </Typography>
 
           <Box
@@ -256,7 +254,7 @@ export default async function ViniPage() {
               lineHeight: 1.4,
             }}
           >
-            Lasciati guidare in un viaggio di gusto
+            {t("testo.quote")}
           </Typography>
         </Box>
       </Box>
@@ -284,7 +282,7 @@ export default async function ViniPage() {
             mb: 4,
           }}
         >
-          Non trovi quello che cerchi?
+          {t("prefooter.title")}
         </Typography>
         <Typography
           component="a"
@@ -307,7 +305,7 @@ export default async function ViniPage() {
             "&:hover": { backgroundColor: colors.merlotHover },
           }}
         >
-          Chiedici una selezione personalizzata →
+          {t("prefooter.cta")}
         </Typography>
       </Box>
     </>

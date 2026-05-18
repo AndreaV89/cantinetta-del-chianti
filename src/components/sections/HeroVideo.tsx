@@ -1,7 +1,11 @@
 import { Box, Typography, Button } from "@mui/material";
 import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export default function HeroVideo() {
+export default async function HeroVideo() {
+  const t = await getTranslations("hero");
+  const locale = await getLocale();
+
   return (
     <Box
       component="section"
@@ -67,7 +71,7 @@ export default function HeroVideo() {
             mb: 1.5,
           }}
         >
-          Gaiole in Chianti, Toscana
+          {t("location")}
         </Typography>
 
         {/* Linea gold */}
@@ -89,7 +93,7 @@ export default function HeroVideo() {
             mb: 0,
           }}
         >
-          Il cuore del Chianti Classico,
+          {t("title1")}
         </Typography>
         <Typography
           component="span"
@@ -105,7 +109,7 @@ export default function HeroVideo() {
             mb: 4,
           }}
         >
-          in ogni sorso.
+          {t("title2")}
         </Typography>
 
         {/* Subtitle */}
@@ -120,14 +124,14 @@ export default function HeroVideo() {
             mb: 5,
           }}
         >
-          Tradizione e sapori nel cuore della Cantinetta del Chianti
+          {t("subtitle")}
         </Typography>
 
         {/* CTA buttons */}
         <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
           <Button
             variant="contained"
-            href="/vini"
+            href={`/${locale}/vini`}
             sx={{
               backgroundColor: colors.merlot,
               color: "#FFFFFF",
@@ -136,11 +140,11 @@ export default function HeroVideo() {
               "&:hover": { backgroundColor: colors.merlotHover },
             }}
           >
-            Scopri la nostra selezione
+            {t("ctaVini")}
           </Button>
           <Button
             variant="outlined"
-            href="/chi-siamo"
+            href={`/${locale}/chi-siamo`}
             sx={{
               borderColor: "rgba(255,255,255,0.45)",
               color: "#FFFFFF",
@@ -152,7 +156,7 @@ export default function HeroVideo() {
               },
             }}
           >
-            Chi siamo
+            {t("ctaChiSiamo")}
           </Button>
         </Box>
       </Box>

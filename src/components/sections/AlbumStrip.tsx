@@ -9,6 +9,7 @@ import { Album } from "@/types";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { colors } from "@/styles/colors";
+import { useTranslations } from "next-intl";
 
 interface AlbumStripProps {
   album: Album;
@@ -22,6 +23,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeftRef = useRef(0);
+  const t = useTranslations("albumStrip");
 
   const foto = album.acf.foto || [];
   const isEven = index % 2 === 0;
@@ -123,7 +125,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
               mr: 1,
             }}
           >
-            {foto.length} foto
+            {foto.length} {t("foto")}
           </Typography>
           <IconButton
             onClick={() => scroll("left")}

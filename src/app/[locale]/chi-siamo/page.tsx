@@ -1,21 +1,77 @@
+// Chi siamo page
+
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
 import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
 import { colors } from "@/styles/colors";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Chi Siamo",
-  description:
-    "La storia di Riccardo e de La Cantinetta del Chianti a Gaiole in Chianti. Dal 2003 nel cuore del Chianti Classico.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: "chiSiamoPage.metadata",
+  });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
-export default function ContattiPage() {
+export default async function ContattiPage() {
+  const t = await getTranslations("chiSiamoPage");
+
+  const paragrafi = [
+    t("storia.p1"),
+    t("storia.p2"),
+    t("storia.p3"),
+    t("storia.p4"),
+    t("storia.p5"),
+  ];
+
+  const contattiItems = [
+    {
+      label: t("contatti.telefono"),
+      value: "+39 0577 749125",
+      href: "tel:+390577749125",
+    },
+    {
+      label: t("contatti.cellulare"),
+      value: "+39 333 9687729",
+      href: "tel:+393339687729",
+    },
+    {
+      label: t("contatti.email"),
+      value: "enoteca@lacantinettadelchianti.it",
+      href: "mailto:enoteca@lacantinettadelchianti.it",
+    },
+  ];
+
+  const orariItems = [
+    { label: t("orari.domenica"), value: "10:00 – 19:30" },
+    { label: t("orari.lunedi"), value: "10:00 – 19:30" },
+    { label: t("orari.martedi"), value: t("orari.chiuso") },
+    { label: t("orari.mercoledi"), value: "10:00 – 19:30" },
+    { label: t("orari.giovedi"), value: "09:45 – 19:30" },
+    { label: t("orari.venerdi"), value: "09:45 – 20:00" },
+    { label: t("orari.sabato"), value: "10:00 – 20:00" },
+  ];
+
+  const indicazioni = [
+    {
+      da: t("comeArrivare.firenze.da"),
+      testo: t("comeArrivare.firenze.testo"),
+    },
+    { da: t("comeArrivare.siena.da"), testo: t("comeArrivare.siena.testo") },
+    { da: t("comeArrivare.arezzo.da"), testo: t("comeArrivare.arezzo.testo") },
+  ];
+
   return (
     <>
-      <Navbar />
-
       {/* Hero */}
       <Box
         component="section"
@@ -43,7 +99,7 @@ export default function ContattiPage() {
             whiteSpace: "nowrap",
           }}
         >
-          Contatti
+          {t("hero.watermark")}
         </Typography>
 
         <Box
@@ -65,7 +121,7 @@ export default function ContattiPage() {
               mb: 1,
             }}
           >
-            Siamo qui
+            {t("hero.label")}
           </Typography>
           <Box
             sx={{
@@ -88,7 +144,7 @@ export default function ContattiPage() {
               maxWidth: 700,
             }}
           >
-            Vieni a trovarci
+            {t("hero.title")}
           </Typography>
           <Typography
             sx={{
@@ -100,8 +156,7 @@ export default function ContattiPage() {
               maxWidth: 500,
             }}
           >
-            Scrivici su WhatsApp o passa direttamente in bottega — a Gaiole in
-            Chianti ti aspettiamo.
+            {t("hero.subtitle")}
           </Typography>
         </Box>
       </Box>
@@ -153,7 +208,7 @@ export default function ContattiPage() {
                 mb: 1,
               }}
             >
-              La nostra storia
+              {t("storia.label")}
             </Typography>
             <Box
               sx={{
@@ -174,20 +229,13 @@ export default function ContattiPage() {
                 color: colors.dark,
                 lineHeight: 1.2,
                 mb: 4,
+                whiteSpace: "pre-line",
               }}
             >
-              Come nasce
-              <br />
-              La Cantinetta del Chianti
+              {t("storia.title")}
             </Typography>
 
-            {[
-              "Era la primavera del 2000 quando ho avuto il piacere di scoprire per la prima volta il meraviglioso territorio del Chianti Classico.",
-              "Partito dalla Basilicata per un colloquio di lavoro presso una struttura agrituristica, man mano che mi avvicinavo alla Toscana mi rendevo sempre più conto di quanto quel paesaggio fosse unico: colline dolci, vigneti straordinari e un’armonia difficile da dimenticare.",
-              "Arrivato a Gaiole in Chianti, ho avuto la sensazione chiara di essere giunto in un luogo speciale, quasi un “paradiso”.",
-              "Ho lavorato per tre anni in un agriturismo come responsabile di sala. Poi, stimolato dalla passione per il vino e dal piacere della degustazione del “nettare” toscano, ho deciso di cambiare strada.",
-              "Nel 2003 ho rilevato l\’enoteca La Cantinetta del Chianti, dando inizio a un percorso fatto di passione, ricerca e amore per questo territorio che ancora oggi porto avanti ogni giorno.",
-            ].map((paragrafo, i) => {
+            {paragrafi.map((paragrafo, i) => {
               if (paragrafo.includes("paradiso")) {
                 return (
                   <Box
@@ -256,7 +304,7 @@ export default function ContattiPage() {
                   transition: "background-color 0.2s ease",
                 }}
               >
-                Scrivici su WhatsApp →
+                {t("storia.whatsapp")}
               </Typography>
             </Box>
           </Box>
@@ -290,7 +338,7 @@ export default function ContattiPage() {
             whiteSpace: "nowrap",
           }}
         >
-          Filosofia
+          {t("filosofia.watermark")}
         </Typography>
 
         <Box
@@ -315,7 +363,7 @@ export default function ContattiPage() {
               mb: 6,
             }}
           >
-            La nostra filosofia
+            {t("filosofia.title")}
           </Typography>
 
           <Box
@@ -338,9 +386,7 @@ export default function ContattiPage() {
               mb: 4,
             }}
           >
-            La nostra selezione è il risultato di una ricerca attenta e
-            continua, guidata dal desiderio di valorizzare produttori locali e
-            realtà che condividono i nostri stessi valori.
+            {t("filosofia.p1")}
           </Typography>
 
           <Typography
@@ -352,8 +398,7 @@ export default function ContattiPage() {
               color: "rgba(255,255,255,0.7)",
             }}
           >
-            Ogni scelta è pensata per accompagnare il cliente in un percorso
-            semplice, autentico e su misura.
+            {t("filosofia.p2")}
           </Typography>
         </Box>
       </Box>
@@ -394,26 +439,10 @@ export default function ContattiPage() {
                   mb: 4,
                 }}
               >
-                Contatti
+                {t("contatti.title")}
               </Typography>
 
-              {[
-                {
-                  label: "Telefono",
-                  value: "+39 0577 749125",
-                  href: "tel:+390577749125",
-                },
-                {
-                  label: "Cellulare",
-                  value: "+39 333 9687729",
-                  href: "tel:+393339687729",
-                },
-                {
-                  label: "Email",
-                  value: "enoteca@lacantinettadelchianti.it",
-                  href: "mailto:enoteca@lacantinettadelchianti.it",
-                },
-              ].map((item) => (
+              {contattiItems.map((item) => (
                 <Box key={item.label} sx={{ mb: 3 }}>
                   <Typography
                     sx={{
@@ -496,18 +525,10 @@ export default function ContattiPage() {
                   mb: 4,
                 }}
               >
-                Orari di apertura
+                {t("orari.title")}
               </Typography>
 
-              {[
-                { label: "Domenica", value: "10:00 – 19:30" },
-                { label: "Lunedì", value: "10:00 – 19:30" },
-                { label: "Martedì", value: "Chiuso" },
-                { label: "Mercoledì", value: "10:00 – 19:30" },
-                { label: "Giovedì", value: "09:45 – 19:30" },
-                { label: "Venerdì", value: "09:45 – 20:00" },
-                { label: "Sabato", value: "10:00 – 20:00" },
-              ].map((item) => (
+              {orariItems.map((item) => (
                 <Box
                   key={item.label}
                   sx={{
@@ -566,7 +587,7 @@ export default function ContattiPage() {
                   mb: 4,
                 }}
               >
-                Dove siamo
+                {t("doveSiamo.title")}
               </Typography>
 
               <Box sx={{ mb: 3 }}>
@@ -581,7 +602,7 @@ export default function ContattiPage() {
                     mb: 0.75,
                   }}
                 >
-                  Indirizzo
+                  {t("doveSiamo.indirizzo")}
                 </Typography>
                 <Typography
                   component="a"
@@ -607,10 +628,10 @@ export default function ContattiPage() {
 
               <Box
                 component="iframe"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d578.897991629924!2d11.433506595267453!3d43.46839272557919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132bc961d38932bd%3A0x14627c0a7fca0b1a!2sEnoteca%20La%20Cantinetta%20Del%20Chianti%20S.A.S.%20Di%20Azzato%20Riccardo%20Michele!5e1!3m2!1sit!2sit!4v1776623647170!5m2!1sit!2sit"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1454.5219861959454!2d11.432594559854813!3d43.46827196535392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132bc961d38932bd%3A0x14627c0a7fca0b1a!2sEnoteca%20La%20Cantinetta%20Del%20Chianti%20S.A.S.%20Di%20Azzato%20Riccardo%20Michele!5e0!3m2!1sit!2sit!4v1779113785632!5m2!1sit!2sit"
                 sx={{
                   width: "100%",
-                  height: 350,
+                  height: 400,
                   border: "none",
                   borderRadius: "2px",
                   mt: 2,
@@ -637,26 +658,10 @@ export default function ContattiPage() {
                   mb: 4,
                 }}
               >
-                Come arrivare
+                {t("comeArrivare.title")}
               </Typography>
 
-              {[
-                {
-                  da: "Da Firenze",
-                  testo:
-                    "Autostrada A1 uscita Valdarno, poi SS408 in direzione Gaiole in Chianti. Circa 45 minuti.",
-                },
-                {
-                  da: "Da Siena",
-                  testo:
-                    "SS408 in direzione nord verso Gaiole in Chianti. Circa 25 minuti attraverso le colline del Chianti.",
-                },
-                {
-                  da: "Da Arezzo",
-                  testo:
-                    "SR69 fino a Montevarchi, poi SS408 in direzione Gaiole in Chianti. Circa 40 minuti.",
-                },
-              ].map((ind, i) => (
+              {indicazioni.map((ind, i) => (
                 <Box
                   key={ind.da}
                   sx={{
@@ -727,7 +732,7 @@ export default function ContattiPage() {
                     mb: 1,
                   }}
                 >
-                  Parcheggio
+                  {t("comeArrivare.parcheggio")}
                 </Typography>
                 <Typography
                   sx={{
@@ -738,8 +743,7 @@ export default function ContattiPage() {
                     color: colors.textLight,
                   }}
                 >
-                  Parcheggio gratuito disponibile nel centro del paese, a pochi
-                  passi dalla bottega.
+                  {t("comeArrivare.parcheggioDesc")}
                 </Typography>
               </Box>
             </Box>
@@ -764,7 +768,7 @@ export default function ContattiPage() {
             mb: 4,
           }}
         >
-          Ti aspettiamo a Gaiole in Chianti
+          {t("prefooter.title")}
         </Typography>
         <Typography
           component="a"
@@ -790,7 +794,7 @@ export default function ContattiPage() {
             transition: "background-color 0.2s ease",
           }}
         >
-          Scrivici su WhatsApp →
+          {t("prefooter.cta")}
         </Typography>
       </Box>
     </>

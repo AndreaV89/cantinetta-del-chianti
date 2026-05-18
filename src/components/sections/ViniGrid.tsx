@@ -6,15 +6,7 @@ import Image from "next/image";
 import { Vino } from "@/types";
 import { colors } from "@/styles/colors";
 import { decodeHtmlEntities } from "@/lib/wordpress";
-
-const tipologie = [
-  "Tutti",
-  "Rosso",
-  "Bianco",
-  "Rosato",
-  "Bollicine",
-  "Distillato",
-];
+import { useTranslations } from "next-intl";
 
 const tipologiaColors: Record<string, string> = {
   Rosso: colors.merlot,
@@ -32,7 +24,13 @@ const ORDINE_TIPOLOGIE = [
   "distillato",
 ];
 
-function VinoCard({ vino }: { vino: Vino }) {
+function VinoCard({
+  vino,
+  tTipo,
+}: {
+  vino: Vino;
+  tTipo: (key: string) => string;
+}) {
   return (
     <Box
       sx={{
@@ -110,7 +108,8 @@ function VinoCard({ vino }: { vino: Vino }) {
               color: tipologiaColors[vino.acf.tipologia] || colors.textLight,
             }}
           >
-            {vino.acf.tipologia}
+            {tTipo(vino.acf.tipologia?.toLowerCase() ?? "") ||
+              vino.acf.tipologia}
           </Typography>
           {vino.acf.annata > 0 && (
             <Typography
@@ -174,13 +173,47 @@ interface ViniGridProps {
 }
 
 export default function ViniGrid({ vini }: ViniGridProps) {
-  const [filtro, setFiltro] = useState("Tutti");
+  const t = useTranslations("viniGrid");
+  const tTipo = useTranslations("tipologie");
+  const [filtro, setFiltro] = useState(t("tutti"));
+
+  const tipologie = [
+    t("tutti"),
+    tTipo("rosso"),
+    tTipo("bianco"),
+    tTipo("rosato"),
+    tTipo("bollicine"),
+    tTipo("distillato"),
+  ];
+
+  const tipologieMap: Record<string, string> = {
+    [tTipo("rosso")]: "rosso",
+    [tTipo("bianco")]: "bianco",
+    [tTipo("rosato")]: "rosato",
+    [tTipo("bollicine")]: "bollicine",
+    [tTipo("distillato")]: "distillato",
+  };
+
+  const conteggi = tipologie.reduce(
+    (acc, tipo) => {
+      const chiave = tipologieMap[tipo];
+      acc[tipo] =
+        tipo === t("tutti")
+          ? vini.length
+          : vini.filter((v) => v.acf.tipologia?.toLowerCase() === chiave)
+              .length;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
   const viniFiltrati = (
-    filtro === "Tutti"
+    filtro === t("tutti")
       ? vini
       : vini.filter(
-          (v) => v.acf.tipologia?.toLowerCase() === filtro.toLowerCase(),
+          (v) =>
+            v.acf.tipologia?.toLowerCase() ===
+            (tipologieMap[filtro] ?? filtro.toLowerCase()),
         )
   ).sort((a, b) => {
     const tipoA = a.acf.tipologia?.toLowerCase() ?? "";
@@ -190,20 +223,6 @@ export default function ViniGrid({ vini }: ViniGridProps) {
     if (indexA !== indexB) return indexA - indexB;
     return a.title.localeCompare(b.title, "it");
   });
-
-  // Conta per tipologia
-  const conteggi = tipologie.reduce(
-    (acc, t) => {
-      acc[t] =
-        t === "Tutti"
-          ? vini.length
-          : vini.filter(
-              (v) => v.acf.tipologia?.toLowerCase() === t.toLowerCase(),
-            ).length;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
 
   return (
     <Box
@@ -228,7 +247,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
               mb: 1,
             }}
           >
-            I nostri vini in evidenza
+            {t("title")}
           </Typography>
           <Typography
             sx={{
@@ -238,8 +257,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
               color: colors.textLight,
             }}
           >
-            Una selezione delle etichette disponibili in bottega — il catalogo
-            completo ne conta oltre 200.
+            {t("subtitle")}
           </Typography>
         </Box>
 
@@ -269,14 +287,14 @@ export default function ViniGrid({ vini }: ViniGridProps) {
             borderBottom: `1px solid ${colors.border}`,
           }}
         >
-          {tipologie.map((t) => {
-            const count = conteggi[t];
-            if (count === 0 && t !== "Tutti") return null;
-            const isActive = filtro === t;
+          {tipologie.map((tipo) => {
+            const count = conteggi[tipo];
+            if (count === 0 && tipo !== t("tutti")) return null;
+            const isActive = filtro === tipo;
             return (
               <Box
-                key={t}
-                onClick={() => setFiltro(t)}
+                key={tipo}
+                onClick={() => setFiltro(tipo)}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -307,7 +325,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                     userSelect: "none",
                   }}
                 >
-                  {t}
+                  {tipo}
                 </Typography>
                 <Typography
                   sx={{
@@ -336,8 +354,9 @@ export default function ViniGrid({ vini }: ViniGridProps) {
               color: colors.textLight,
             }}
           >
-            {viniFiltrati.length} {viniFiltrati.length === 1 ? "vino" : "vini"}
-            {filtro !== "Tutti" ? ` · ${filtro}` : ""}
+            {viniFiltrati.length}{" "}
+            {viniFiltrati.length === 1 ? t("vino") : t("vini")}
+            {filtro !== t("tutti") ? ` · ${filtro}` : ""}
           </Typography>
         </Box>
 
@@ -352,7 +371,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                 color: "rgba(94, 68, 68, 0.4)",
               }}
             >
-              Nessun vino in questa categoria
+              {t("empty")}
             </Typography>
           </Box>
         ) : (
@@ -369,7 +388,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
             }}
           >
             {viniFiltrati.map((vino) => (
-              <VinoCard key={vino.id} vino={vino} />
+              <VinoCard key={vino.id} vino={vino} tTipo={tTipo} />
             ))}
           </Box>
         )}

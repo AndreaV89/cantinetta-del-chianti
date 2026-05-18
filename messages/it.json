@@ -1,1 +1,356 @@
-{}
+{
+  "nav": {
+    "vini": "Vini",
+    "prodotti": "Prodotti",
+    "servizi": "Servizi",
+    "storie": "Storie",
+    "chiSiamo": "Chi Siamo"
+  },
+  "footer": {
+    "tagline": "Bottega del gusto nel cuore del Chianti Classico",
+    "esplora": "Esplora",
+    "info": "Info",
+    "seguici": "Seguici",
+    "links": {
+      "vini": "I Nostri Vini",
+      "prodotti": "Prodotti Tipici",
+      "servizi": "Servizi",
+      "storie": "Storie",
+      "chiSiamo": "Chi Siamo",
+      "contattaci": "Contattaci"
+    },
+    "copyright": "Gaiole in Chianti, Siena",
+    "credit": "Design & sviluppo by"
+  },
+  "hero": {
+    "location": "Gaiole in Chianti, Toscana",
+    "title1": "Il cuore del Chianti Classico,",
+    "title2": "in ogni sorso.",
+    "subtitle": "Tradizione e sapori nel cuore della Cantinetta del Chianti",
+    "ctaVini": "Scopri la nostra selezione",
+    "ctaChiSiamo": "Chi siamo"
+  },
+  "pillars": {
+    "01": {
+      "title": "Vini del Territorio",
+      "desc": "Chianti Classico, Supertuscan e etichette artigianali selezionate direttamente dai produttori locali."
+    },
+    "02": {
+      "title": "Prodotti Tipici",
+      "desc": "Salumi, formaggi, conserve e pasta — tutto ciò che la Toscana sa offrire di meglio."
+    },
+    "03": {
+      "title": "Aperitivi & Taglieri",
+      "desc": "Un tavolo fuori, il sole del Chianti Classico e un calice da assaporare con calma."
+    }
+  },
+  "wineSection": {
+    "label": "La Cantina",
+    "title": "Proposta della settimana..",
+    "subtitle": "Una selezione curata per qualità, carattere e storia — dai produttori locali del Chianti.",
+    "empty": "I vini arrivano presto...",
+    "cta": "Scopri la nostra selezione →"
+  },
+  "productsSection": {
+    "label": "La Bottega",
+    "title": "Prodotti tipici\ndel territorio",
+    "subtitle": "Salumi, formaggi, conserve e molto altro — il meglio della tradizione enogastronomica toscana.",
+    "body": "Oltre ai vini, la nostra bottega raccoglie il meglio della tradizione toscana: salumi artigianali, formaggi stagionati, conserve, pasta e olio extravergine selezionati con la stessa cura che riserviamo alla cantina.",
+    "cta": "Scopri i prodotti"
+  },
+  "recensioni": {
+    "label": "Cosa dicono di noi",
+    "title": "Le recensioni dei nostri ospiti"
+  },
+  "servicesSection": {
+    "label": "Cosa Offriamo",
+    "title": "I nostri servizi",
+    "cta": "Scopri tutti i nostri servizi →",
+    "items": {
+      "degustazioni": {
+        "title": "Degustazioni\nGuidate",
+        "desc": "Percorsi di degustazione per scoprire il meglio del Chianti Classico, con abbinamenti curati."
+      },
+      "selezioni": {
+        "title": "Selezioni\nPersonalizzate",
+        "desc": "Costruiamo insieme una selezione di vini su misura — per un regalo, una cena speciale o la tua cantina."
+      },
+      "domicilio": {
+        "title": "Degustazioni\na Domicilio",
+        "desc": "Portiamo l'esperienza a casa tua. Selezione di vini, tagliere e guida alla degustazione."
+      },
+      "aperitivi": {
+        "title": "Aperitivi\ncon Taglieri",
+        "desc": "Un tavolo fuori, salumi e formaggi del territorio e un calice del Chianti al tramonto."
+      }
+    }
+  },
+  "aboutSection": {
+    "chiSiamo": {
+      "label": "Chi Siamo",
+      "title": "Non solo vino.\nMa cultura del gusto",
+      "body1": "A Gaiole in Chianti, nel cuore del Chianti Classico, La Cantinetta del Chianti è una piccola enoteca e bottega dedicata alla selezione di vini ed eccellenze enogastronomiche del territorio.",
+      "body2": "Una realtà che nasce dalla passione per la qualità, l'autenticità e il legame profondo con la Toscana, con l'obiettivo di offrire esperienze che raccontino il territorio attraverso i suoi vini e i suoi sapori.",
+      "cta": "Vieni a trovarci →"
+    },
+    "doveSiamo": {
+      "label": "Dove Siamo",
+      "title": "Vieni a trovarci\na Gaiole in Chianti",
+      "indirizzo": {
+        "label": "Indirizzo",
+        "value": "Via B. Ricasoli 33\n53013 Gaiole in Chianti (SI)"
+      },
+      "orari": {
+        "label": "Orari",
+        "value": "Dom/Lun/Mer: 10:00–19:30\nGio/Ven: 09:45–20:00\nSab: 10:00–20:00\nMar: Chiuso"
+      },
+      "contatti": {
+        "label": "Contatti",
+        "value": "+39 0577 749125\n+39 333 9687729\nenoteca@lacantinettadelchianti.it"
+      },
+      "directions": "Ottieni indicazioni →"
+    }
+  },
+  "albumStrip": {
+    "foto": "foto"
+  },
+  "categorieLabels": {
+    "antipasti_sfiziosita": "Antipasti e Sfiziosità",
+    "la_dispensa": "La Dispensa",
+    "olio_aceto_condimenti": "Olio, Aceto e Condimenti",
+    "dolci_confetture": "Dolci e Confetture"
+  },
+  "viniGrid": {
+    "tutti": "Tutti",
+    "title": "I nostri vini in evidenza",
+    "subtitle": "Una selezione delle etichette disponibili in bottega — il catalogo completo ne conta oltre 200.",
+    "vino": "vino",
+    "vini": "vini",
+    "empty": "Nessun vino in questa categoria"
+  },
+  "tipologie": {
+    "rosso": "Rosso",
+    "bianco": "Bianco",
+    "rosato": "Rosato",
+    "bollicine": "Bollicine",
+    "distillato": "Distillato"
+  },
+  "viniPage": {
+    "metadata": {
+      "title": "I Nostri Vini",
+      "description": "Oltre 200 etichette selezionate dal Chianti e dal mondo. Chianti Classico, Supertuscan, vini italiani e internazionali."
+    },
+    "hero": {
+      "label": "La Cantina",
+      "watermark": "Vini",
+      "title": "I nostri vini",
+      "subtitle": "Una selezione curata di etichette del Chianti e della Toscana, scelte per qualità, carattere e storia."
+    },
+    "numeri": {
+      "etichette": { "num": "200+", "label": "Etichette selezionate" },
+      "regioni": { "num": "14", "label": "Regioni italiane" },
+      "paesi": { "num": "7", "label": "Paesi nel mondo" }
+    },
+    "testo": {
+      "body1": "Dalla passione per il vino nasce La Cantinetta del Chianti, un luogo dove ogni bottiglia racconta una storia. Un mosaico di grandi etichette accuratamente selezionate, pensato per offrire ai nostri clienti una scelta che spazia dall'eccellenza al sublime. Un viaggio ideale attraverso l'Italia del vino: dalla Toscana alla Sicilia, passando per le prestigiose terre di Piemonte, Lombardia, Veneto e Friuli. Ogni calice è un'esperienza sensoriale che esalta il piacere dell'olfatto e celebra l'apoteosi del gusto.",
+      "body2": "Lo sguardo si apre oltre i confini italiani, con una selezione internazionale che abbraccia le grandi tradizioni enologiche e dei distillati: dalla raffinatezza della Francia e della Germania, al carattere della Spagna, fino all'eccellenza dei whisky di Scozia e Irlanda e ai celebri bourbon americani. Senza dimenticare l'Argentina, terra di vini intensi e sorprendenti.",
+      "quote": "Lasciati guidare in un viaggio di gusto"
+    },
+    "prefooter": {
+      "title": "Non trovi quello che cerchi?",
+      "cta": "Chiedici una selezione personalizzata →"
+    }
+  },
+  "cantineSection": {
+    "label": "La nostra selezione",
+    "title": "Le nostre cantine",
+    "restoMondo": "Resto del mondo",
+    "spiritsLabel": "Spirits & Liquori",
+    "spiritsTitle": "Superalcolici & Liquori",
+    "usa": "USA & Isole Caraibiche"
+  },
+  "prodottiPage": {
+    "metadata": {
+      "title": "Prodotti Tipici",
+      "description": "Salumi, formaggi, olio EVO, aceto balsamico e molte altre eccellenze toscane. Prodotti tipici locali selezionati con cura."
+    },
+    "hero": {
+      "label": "La Bottega",
+      "watermark": "Prodotti",
+      "title": "Prodotti tipici",
+      "subtitle": "Il meglio della tradizione enogastronomica toscana e non solo — selezionato con cura per voi."
+    },
+    "testo": {
+      "body": "Accanto a una ricercata selezione di vini, proponiamo ai nostri clienti un'accurata scelta di prodotti tipici, locali e non: olio extravergine d'oliva, aceto balsamico, birre artigianali, formaggi, zuppe, salumi, salse, paté, specialità sott'olio, zafferano, pasta, riso, miele, tè, confetture, mostarde, cantuccini, cioccolato, caffè, panbriacone e molte altre eccellenze.",
+      "quote": "Accomodatevi nel nostro giardino, scegliete un calice e lasciatevi tentare dalle nostre delizie."
+    },
+    "prefooter": {
+      "title": "Cerchi qualcosa di specifico?",
+      "cta": "Scrivici su WhatsApp →"
+    }
+  },
+  "prodottiGrid": {
+    "tutti": "Tutti",
+    "prodotto": "prodotto",
+    "prodotti": "prodotti",
+    "empty": "Nessun prodotto in questa categoria"
+  },
+  "serviziPage": {
+    "metadata": {
+      "title": "Servizi",
+      "description": "Degustazioni guidate, selezioni personalizzate, degustazioni a domicilio e aperitivi con taglieri nel giardino del Chianti Classico."
+    },
+    "hero": {
+      "label": "Cosa Offriamo",
+      "watermark": "Servizi",
+      "title": "I nostri servizi",
+      "subtitle": "Dalla degustazione guidata alla selezione personalizzata — tutto quello che serve per vivere al meglio l'esperienza del vino toscano."
+    },
+    "servizi": {
+      "01": {
+        "title": "Viaggio nel Vino",
+        "desc": [
+          "Proponiamo degustazioni guidate che vi accompagneranno in un viaggio alla scoperta del vino, tra territori, profumi e tradizioni."
+        ],
+        "info": "Su prenotazione · Minimo 2 persone · IT / EN"
+      },
+      "02": {
+        "title": "L'Arte della Scelta",
+        "desc": [
+          "Realizziamo selezioni personalizzate, pensate per ogni esigenza: dal regalo perfetto alla bottiglia ideale per una cena tra amici, fino alla creazione di una cantina privata.",
+          "Vi affianchiamo nella scelta con cura e competenza, suggerendo le etichette più adatte anche in base al vostro budget, per rendere ogni esperienza unica e soddisfacente.",
+          "Le nostre selezioni possono essere spedite su richiesta, per portare direttamente a casa vostra il vino scelto insieme a noi."
+        ],
+        "info": "Consulenza gratuita · Confezioni regalo · Spedizione in tutto il mondo"
+      },
+      "03": {
+        "title": "Vino a Casa Vostra",
+        "desc": [
+          "Portiamo l'esperienza della degustazione direttamente a casa vostra, trasformando ogni occasione in un momento unico da vivere e condividere in un'atmosfera intima e accogliente."
+        ],
+        "info": "Entro 30km · Minimo 4 persone · 48h di anticipo"
+      },
+      "04": {
+        "title": "L'Aperitivo in Chianti Classico",
+        "desc": [
+          "Un tavolo all'aperto, il sole del Chianti Classico e un calice da assaporare con calma. Taglieri di salumi e formaggi del territorio si accompagnano a una selezione di vini locali, insieme a prodotti tipici come giardiniera e specialità sott'olio.",
+          "Un modo autentico e rilassato per vivere il cuore del Chianti Classico."
+        ],
+        "info": "Tutti i giorni · Prenotazione consigliata in alta stagione"
+      }
+    },
+    "cta": {
+      "title": "Vuoi prenotare o avere più informazioni?",
+      "subtitle": "Scrivici o chiamaci — risponderemo il prima possibile.",
+      "button": "Contattaci"
+    }
+  },
+  "storiePage": {
+    "metadata": {
+      "title": "Storie",
+      "description": "Le storie di La Cantinetta del Chianti — il territorio, il Gallo Nero, la galleria fotografica delle colline toscane."
+    },
+    "hero": {
+      "label": "La Cantinetta in immagini",
+      "watermark": "Storie",
+      "title": "Le Nostre Storie",
+      "subtitle": "Storie di territorio, persone e passione — e una galleria fotografica del Chianti."
+    },
+    "galloNero": {
+      "label": "Il territorio",
+      "title": "La leggenda\ndel Gallo Nero",
+      "p1": "Il Gallo Nero, simbolo storico del Chianti Classico, racconta da secoli l'identità di queste terre.",
+      "p2": "La leggenda narra che Firenze e Siena decisero di stabilire i propri confini attraverso una sfida tra cavalieri, la cui partenza sarebbe stata segnata dal primo canto del gallo. I fiorentini scelsero un gallo nero tenuto a digiuno, che cantò prima dell'alba, permettendo al loro cavaliere di partire in anticipo e avanzare fino a Fonterutoli, a pochi chilometri da Siena.",
+      "p3": "Da allora, il Gallo Nero è diventato il simbolo del Chianti e della sua storica tradizione."
+    },
+    "libro": {
+      "label": "Un riconoscimento speciale",
+      "title": "20 amici,\n40 ricette",
+      "p1": "Essere parte di \"20 amici 40 ricette\" è per me un vero piacere.",
+      "p2": "Grazie di cuore a John Bersani per avermi coinvolto in questo bellissimo progetto e per avermi dedicato uno spazio tra queste pagine: un gesto che unisce amicizia, passione e amore per la tavola.",
+      "p3": "Un brindisi a tutto questo 🍷",
+      "cta": "Scopri il libro →"
+    },
+    "galleria": {
+      "label": "Le nostre foto",
+      "title": "Galleria Fotografica",
+      "empty": "Le foto arrivano presto..."
+    },
+    "prefooter": "Un'immagine vale più di mille parole"
+  },
+  "chiSiamoPage": {
+    "metadata": {
+      "title": "Chi Siamo",
+      "description": "La storia di Riccardo e de La Cantinetta del Chianti a Gaiole in Chianti. Dal 2003 nel cuore del Chianti Classico."
+    },
+    "hero": {
+      "label": "Siamo qui",
+      "watermark": "Contatti",
+      "title": "Vieni a trovarci",
+      "subtitle": "Scrivici su WhatsApp o passa direttamente in bottega — a Gaiole in Chianti ti aspettiamo."
+    },
+    "storia": {
+      "label": "La nostra storia",
+      "title": "Come nasce\nLa Cantinetta del Chianti",
+      "p1": "Era la primavera del 2000 quando ho avuto il piacere di scoprire per la prima volta il meraviglioso territorio del Chianti Classico.",
+      "p2": "Partito dalla Basilicata per un colloquio di lavoro presso una struttura agrituristica, man mano che mi avvicinavo alla Toscana mi rendevo sempre più conto di quanto quel paesaggio fosse unico: colline dolci, vigneti straordinari e un'armonia difficile da dimenticare.",
+      "p3": "Arrivato a Gaiole in Chianti, ho avuto la sensazione chiara di essere giunto in un luogo speciale, quasi un \"paradiso\".",
+      "p4": "Ho lavorato per tre anni in un agriturismo come responsabile di sala. Poi, stimolato dalla passione per il vino e dal piacere della degustazione del \"nettare\" toscano, ho deciso di cambiare strada.",
+      "p5": "Nel 2003 ho rilevato l'enoteca La Cantinetta del Chianti, dando inizio a un percorso fatto di passione, ricerca e amore per questo territorio che ancora oggi porto avanti ogni giorno.",
+      "whatsapp": "Scrivici su WhatsApp →"
+    },
+    "filosofia": {
+      "watermark": "Filosofia",
+      "title": "La nostra filosofia",
+      "p1": "La nostra selezione è il risultato di una ricerca attenta e continua, guidata dal desiderio di valorizzare produttori locali e realtà che condividono i nostri stessi valori.",
+      "p2": "Ogni scelta è pensata per accompagnare il cliente in un percorso semplice, autentico e su misura."
+    },
+    "contatti": {
+      "title": "Contatti",
+      "telefono": "Telefono",
+      "cellulare": "Cellulare",
+      "email": "Email"
+    },
+    "orari": {
+      "title": "Orari di apertura",
+      "domenica": "Domenica",
+      "lunedi": "Lunedì",
+      "martedi": "Martedì",
+      "mercoledi": "Mercoledì",
+      "giovedi": "Giovedì",
+      "venerdi": "Venerdì",
+      "sabato": "Sabato",
+      "chiuso": "Chiuso"
+    },
+    "doveSiamo": {
+      "title": "Dove siamo",
+      "indirizzo": "Indirizzo"
+    },
+    "comeArrivare": {
+      "title": "Come arrivare",
+      "firenze": {
+        "da": "Da Firenze",
+        "testo": "Autostrada A1 uscita Valdarno, poi SS408 in direzione Gaiole in Chianti. Circa 45 minuti."
+      },
+      "siena": {
+        "da": "Da Siena",
+        "testo": "SS408 in direzione nord verso Gaiole in Chianti. Circa 25 minuti attraverso le colline del Chianti."
+      },
+      "arezzo": {
+        "da": "Da Arezzo",
+        "testo": "SR69 fino a Montevarchi, poi SS408 in direzione Gaiole in Chianti. Circa 40 minuti."
+      },
+      "parcheggio": "Parcheggio",
+      "parcheggioDesc": "Parcheggio gratuito disponibile nel centro del paese, a pochi passi dalla bottega."
+    },
+    "prefooter": {
+      "title": "Ti aspettiamo a Gaiole in Chianti",
+      "cta": "Scrivici su WhatsApp →"
+    }
+  },
+  "metadata": {
+    "title": "La Cantinetta del Chianti — Enoteca a Gaiole in Chianti",
+    "description": "Enoteca a Gaiole in Chianti dal 2003. Vini selezionati, prodotti tipici toscani, degustazioni guidate e aperitivi nel cuore del Chianti Classico.",
+    "keywords": "enoteca,Chianti,vini,Gaiole in Chianti,Chianti Classico,degustazione,prodotti tipici toscani"
+  }
+}

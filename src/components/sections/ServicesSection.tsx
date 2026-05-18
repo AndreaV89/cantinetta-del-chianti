@@ -1,30 +1,34 @@
 import { Box, Typography } from "@mui/material";
 import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-const servizi = [
-  {
-    icon: "◆",
-    title: "Degustazioni\nGuidate",
-    desc: "Percorsi di degustazione per scoprire il meglio del Chianti Classico, con abbinamenti curati.",
-  },
-  {
-    icon: "◇",
-    title: "Selezioni\nPersonalizzate",
-    desc: "Costruiamo insieme una selezione di vini su misura — per un regalo, una cena speciale o la tua cantina.",
-  },
-  {
-    icon: "○",
-    title: "Degustazioni\na Domicilio",
-    desc: "Portiamo l'esperienza a casa tua. Selezione di vini, tagliere e guida alla degustazione.",
-  },
-  {
-    icon: "◈",
-    title: "Aperitivi\ncon Taglieri",
-    desc: "Un tavolo fuori, salumi e formaggi del territorio e un calice del Chianti al tramonto.",
-  },
-];
+export default async function ServicesSection() {
+  const t = await getTranslations("servicesSection");
+  const locale = await getLocale();
 
-export default function ServicesSection() {
+  const servizi = [
+    {
+      icon: "◆",
+      title: t("items.degustazioni.title"),
+      desc: t("items.degustazioni.desc"),
+    },
+    {
+      icon: "◇",
+      title: t("items.selezioni.title"),
+      desc: t("items.selezioni.desc"),
+    },
+    {
+      icon: "○",
+      title: t("items.domicilio.title"),
+      desc: t("items.domicilio.desc"),
+    },
+    {
+      icon: "◈",
+      title: t("items.aperitivi.title"),
+      desc: t("items.aperitivi.desc"),
+    },
+  ];
+
   return (
     <Box
       component="section"
@@ -49,7 +53,7 @@ export default function ServicesSection() {
               mb: 1,
             }}
           >
-            Cosa Offriamo
+            {t("label")}
           </Typography>
           <Box
             sx={{
@@ -69,7 +73,7 @@ export default function ServicesSection() {
               color: colors.dark,
             }}
           >
-            I nostri servizi
+            {t("title")}
           </Typography>
         </Box>
 
@@ -87,7 +91,7 @@ export default function ServicesSection() {
         >
           {servizi.map((servizio) => (
             <Box
-              key={servizio.title}
+              key={servizio.icon}
               sx={{
                 backgroundColor: "rgba(255,255,255,0.7)",
                 border: `1px solid ${colors.border}`,
@@ -143,7 +147,7 @@ export default function ServicesSection() {
         <Box sx={{ mt: 6, display: "flex", alignItems: "center", gap: 2 }}>
           <Typography
             component="a"
-            href="/servizi"
+            href={`/${locale}/servizi`}
             sx={{
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,
@@ -154,7 +158,7 @@ export default function ServicesSection() {
               "&:hover": { textDecoration: "underline" },
             }}
           >
-            Scopri tutti i nostri servizi →
+            {t("cta")}
           </Typography>
         </Box>
       </Box>
