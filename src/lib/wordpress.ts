@@ -127,10 +127,13 @@ export async function getProdottiInEvidenza(
 
 // ─── Album ─────────────────────────────────────────────
 
-export async function getAlbum(): Promise<Album[]> {
-  const res = await fetch(`${WP_URL}/wp-json/wp/v2/album?per_page=100`, {
-    next: { revalidate: 3600 },
-  });
+export async function getAlbum(locale = "it"): Promise<Album[]> {
+  const res = await fetch(
+    `${WP_URL}/wp-json/wp/v2/album?per_page=100&lang=${locale}`,
+    {
+      next: { revalidate: 0 },
+    },
+  );
 
   if (!res.ok) return [];
   const data: WPRawAlbum[] = await res.json();
@@ -138,7 +141,7 @@ export async function getAlbum(): Promise<Album[]> {
   const albumCompleti = await Promise.all(
     data.map(async (item) => {
       const resSingle = await fetch(
-        `${WP_URL}/wp-json/wp/v2/album/${item.id}`,
+        `${WP_URL}/wp-json/wp/v2/album/${item.id}?lang=${locale}`,
         { next: { revalidate: 0 } },
       );
 
