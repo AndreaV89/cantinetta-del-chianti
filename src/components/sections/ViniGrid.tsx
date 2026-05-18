@@ -24,13 +24,7 @@ const ORDINE_TIPOLOGIE = [
   "distillato",
 ];
 
-function VinoCard({
-  vino,
-  tTipo,
-}: {
-  vino: Vino;
-  tTipo: (key: string) => string;
-}) {
+function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
   return (
     <Box
       sx={{
@@ -108,8 +102,7 @@ function VinoCard({
               color: tipologiaColors[vino.acf.tipologia] || colors.textLight,
             }}
           >
-            {tTipo(vino.acf.tipologia?.toLowerCase() ?? "") ||
-              vino.acf.tipologia}
+            {vino.acf.tipologia}
           </Typography>
           {vino.acf.annata > 0 && (
             <Typography
@@ -194,14 +187,22 @@ export default function ViniGrid({ vini }: ViniGridProps) {
     [tTipo("distillato")]: "distillato",
   };
 
+  console.log(
+    "vini tipologie:",
+    vini.map((v) => v.acf.tipologia),
+  );
+
   const conteggi = tipologie.reduce(
     (acc, tipo) => {
-      const chiave = tipologieMap[tipo];
       acc[tipo] =
         tipo === t("tutti")
           ? vini.length
-          : vini.filter((v) => v.acf.tipologia?.toLowerCase() === chiave)
-              .length;
+          : vini.filter((v) => {
+              const tipologia = v.acf.tipologia?.toLowerCase() ?? "";
+              const chiave = tipologieMap[tipo];
+              // matcha sia "rosso" (IT) che "red" (EN da WordPress)
+              return tipologia === chiave || tipologia === tipo.toLowerCase();
+            }).length;
       return acc;
     },
     {} as Record<string, number>,
@@ -210,11 +211,11 @@ export default function ViniGrid({ vini }: ViniGridProps) {
   const viniFiltrati = (
     filtro === t("tutti")
       ? vini
-      : vini.filter(
-          (v) =>
-            v.acf.tipologia?.toLowerCase() ===
-            (tipologieMap[filtro] ?? filtro.toLowerCase()),
-        )
+      : vini.filter((v) => {
+          const tipologia = v.acf.tipologia?.toLowerCase() ?? "";
+          const chiave = tipologieMap[filtro] ?? filtro.toLowerCase();
+          return tipologia === chiave || tipologia === filtro.toLowerCase();
+        })
   ).sort((a, b) => {
     const tipoA = a.acf.tipologia?.toLowerCase() ?? "";
     const tipoB = b.acf.tipologia?.toLowerCase() ?? "";

@@ -22,9 +22,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ViniPage() {
+export default async function ViniPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations("viniPage");
-  const [vini, cantine] = await Promise.all([getVini(), getCantine()]);
+  const [vini, cantine] = await Promise.all([getVini(locale), getCantine()]);
   const viniNonInEvidenza = vini.filter((v) => !v.acf.in_evidenza);
 
   const stats = [

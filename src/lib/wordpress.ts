@@ -46,12 +46,12 @@ function parseFeaturedImage(raw: WPRawPost) {
 
 // ─── Vini ─────────────────────────────────────────────────
 
-export async function getVini(): Promise<Vino[]> {
+export async function getVini(locale = "it"): Promise<Vino[]> {
   const [listRes, acfRes] = await Promise.all([
-    fetch(`${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100`, {
+    fetch(`${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&lang=${locale}`, {
       next: { revalidate: 0 },
     }),
-    fetch(`${WP_URL}/wp-json/acf/v3/vini?per_page=100`, {
+    fetch(`${WP_URL}/wp-json/acf/v3/vini?per_page=100&lang=${locale}`, {
       next: { revalidate: 0 },
     }),
   ]);
@@ -77,19 +77,22 @@ export async function getVini(): Promise<Vino[]> {
   }));
 }
 
-export async function getViniInEvidenza(): Promise<Vino[]> {
-  const vini = await getVini();
+export async function getViniInEvidenza(locale = "it"): Promise<Vino[]> {
+  const vini = await getVini(locale);
   return vini.filter((v) => v.acf.in_evidenza);
 }
 
 // ─── Prodotti ─────────────────────────────────────────────
 
-export async function getProdotti(): Promise<Prodotto[]> {
+export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
   const [listRes, acfRes] = await Promise.all([
-    fetch(`${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100`, {
-      next: { revalidate: 0 },
-    }),
-    fetch(`${WP_URL}/wp-json/acf/v3/prodotti?per_page=100`, {
+    fetch(
+      `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&lang=${locale}`,
+      {
+        next: { revalidate: 0 },
+      },
+    ),
+    fetch(`${WP_URL}/wp-json/acf/v3/prodotti?per_page=100&lang=${locale}`, {
       next: { revalidate: 0 },
     }),
   ]);
@@ -115,17 +118,22 @@ export async function getProdotti(): Promise<Prodotto[]> {
   }));
 }
 
-export async function getProdottiInEvidenza(): Promise<Prodotto[]> {
-  const prodotti = await getProdotti();
+export async function getProdottiInEvidenza(
+  locale = "it",
+): Promise<Prodotto[]> {
+  const prodotti = await getProdotti(locale);
   return prodotti.filter((p) => p.acf.in_evidenza);
 }
 
 // ─── Album ─────────────────────────────────────────────
 
-export async function getAlbum(): Promise<Album[]> {
-  const res = await fetch(`${WP_URL}/wp-json/wp/v2/album?per_page=100`, {
-    next: { revalidate: 3600 },
-  });
+export async function getAlbum(locale = "it"): Promise<Album[]> {
+  const res = await fetch(
+    `${WP_URL}/wp-json/wp/v2/album?per_page=100&lang=${locale}`,
+    {
+      next: { revalidate: 3600 },
+    },
+  );
 
   if (!res.ok) return [];
   const data: WPRawAlbum[] = await res.json();
@@ -170,14 +178,13 @@ export async function getAlbum(): Promise<Album[]> {
 // ─── Cantine ─────────────────────────────────────────────
 
 export async function getCantine(): Promise<Cantina[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_WP_URL;
   const options = { cache: "no-store" as const };
 
   const [page1, page2] = await Promise.all([
-    fetch(`${baseUrl}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(
+    fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(
       (r) => r.json(),
     ),
-    fetch(`${baseUrl}/wp-json/wp/v2/cantine?per_page=100&page=2`, options).then(
+    fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=2`, options).then(
       (r) => r.json(),
     ),
   ]);

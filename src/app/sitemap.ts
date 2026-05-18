@@ -2,43 +2,23 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://lacantinettadelchianti.it";
+  const locales = ["it", "en"];
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/vini`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/prodotti`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/servizi`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/storie`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/chi-siamo`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+  const routes = [
+    { path: "", changeFrequency: "weekly" as const, priority: 1 },
+    { path: "/vini", changeFrequency: "weekly" as const, priority: 0.9 },
+    { path: "/prodotti", changeFrequency: "weekly" as const, priority: 0.8 },
+    { path: "/servizi", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/storie", changeFrequency: "monthly" as const, priority: 0.6 },
+    { path: "/chi-siamo", changeFrequency: "monthly" as const, priority: 0.7 },
   ];
+
+  return locales.flatMap((locale) =>
+    routes.map((route) => ({
+      url: `${baseUrl}/${locale}${route.path}`,
+      lastModified: new Date(),
+      changeFrequency: route.changeFrequency,
+      priority: locale === "it" ? route.priority : route.priority - 0.1,
+    })),
+  );
 }

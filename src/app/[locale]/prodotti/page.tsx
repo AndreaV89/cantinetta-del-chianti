@@ -23,9 +23,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProdottiPage() {
+export default async function ProdottiPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations("prodottiPage");
-  const prodotti = await getProdotti();
+  const prodotti = await getProdotti(locale);
 
   return (
     <>
