@@ -410,24 +410,146 @@ export default async function FotoPage({
         )}
       </Box>
 
-      {/* Pre-footer */}
+      {/* Pre-footer CTA */}
+
       <Box
+        component="section"
         sx={{
           backgroundColor: colors.darkDeep,
-          py: { xs: 6, md: 8 },
-          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+          minHeight: { xs: "auto", md: 520 },
+          display: "flex",
+          alignItems: "stretch",
         }}
       >
-        <Typography
+        {/* Video sfondo (destra) */}
+        <Box
+          component="video"
+          autoPlay
+          muted
+          loop
+          playsInline
           sx={{
-            fontFamily: '"Apple Chancery", Palatino, serif',
-            fontStyle: "italic",
-            fontSize: { xs: "1.5rem", md: "2rem" },
-            color: colors.beige,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: { xs: "100%", md: "50%" },
+            objectFit: "cover",
+            objectPosition: "center",
+            display: "block",
           }}
         >
-          {t("prefooter")}
-        </Typography>
+          <source src="/videos/storie-prefooter.mp4" type="video/mp4" />
+        </Box>
+
+        {/* Overlay gradiente: copre tutto su mobile, solo metà destra su desktop */}
+        <Box
+          aria-hidden
+          sx={{
+            position: "absolute",
+            inset: 0,
+            background: {
+              xs: `linear-gradient(to bottom, ${colors.darkDeep} 40%, rgba(53,10,22,0.5) 100%)`,
+              md: `linear-gradient(to left, ${colors.darkDeep} 50%, rgba(53,10,22,0.8) 55%, transparent 100%)`,
+            },
+            zIndex: 1,
+          }}
+        />
+
+        {/* Testo */}
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            width: { xs: "100%", md: "45%" },
+            ml: { md: "auto" },
+            px: { xs: 3, md: 10 },
+            py: { xs: 8, md: 10 },
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.6875rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: colors.beige,
+              mb: 1,
+            }}
+          >
+            {t("prefooter.label")}
+          </Typography>
+          <Box
+            sx={{
+              width: 32,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 3,
+            }}
+          />
+
+          <Typography
+            component="h2"
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "2rem", md: "2.75rem" },
+              fontWeight: 400,
+              color: "#FFFFFF",
+              lineHeight: 1.2,
+              mb: 4,
+              whiteSpace: "pre-line",
+              maxWidth: 480,
+            }}
+          >
+            {t("prefooter.title")}
+          </Typography>
+
+          <Typography
+            component="a"
+            href="/chi-siamo"
+            sx={{
+              display: "inline-block",
+              alignSelf: "flex-start",
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 500,
+              fontSize: "0.8125rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: colors.dark,
+              backgroundColor: colors.beige,
+              px: 4,
+              py: 1.5,
+              textDecoration: "none",
+              "&:hover": { backgroundColor: colors.beigeLight },
+              transition: "background-color 0.2s ease",
+            }}
+          >
+            {t("prefooter.cta")}
+          </Typography>
+
+          {/* Citazione */}
+          <Typography
+            sx={{
+              mt: 5,
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              color: "rgba(196, 168, 130, 0.65)",
+              lineHeight: 1.7,
+              borderLeft: `2px solid rgba(196, 168, 130, 0.25)`,
+              pl: 2.5,
+              maxWidth: 400,
+            }}
+          >
+            {t("prefooter.quote")}
+          </Typography>
+        </Box>
       </Box>
     </>
   );

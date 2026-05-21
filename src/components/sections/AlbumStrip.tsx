@@ -188,6 +188,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
         }}
       >
         {foto.map((f, i) => {
+          console.log("foto", i, f);
           const isPortrait = f.media_details.height > f.media_details.width;
           const imgUrl =
             f.media_details.sizes?.large?.source_url || f.full_image_url;
@@ -237,6 +238,31 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                   },
                 }}
               />
+              {f.caption && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 8,
+                    right: 10,
+                    backgroundColor: "rgba(74, 14, 30, 0.65)",
+                    backdropFilter: "blur(4px)",
+                    px: 1.5,
+                    py: 0.5,
+                    borderRadius: "2px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: '"Apple Chancery", Palatino, serif',
+                      fontSize: "0.8rem",
+                      color: colors.white,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {f.caption}
+                  </Typography>
+                </Box>
+              )}
             </Box>
           );
         })}

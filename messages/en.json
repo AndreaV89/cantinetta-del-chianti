@@ -276,7 +276,12 @@
       "title": "Photo Gallery",
       "empty": "Photos coming soon..."
     },
-    "prefooter": "A picture is worth a thousand words"
+    "prefooter": {
+      "label": "Live the experience",
+      "title": "Want to create your own\nunforgettable memories?",
+      "cta": "Come visit us",
+      "quote": "«A picture is worth a thousand words.»"
+    }
   },
   "chiSiamoPage": {
     "metadata": {

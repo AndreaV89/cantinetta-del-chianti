@@ -276,7 +276,12 @@
       "title": "Galleria Fotografica",
       "empty": "Le foto arrivano presto..."
     },
-    "prefooter": "Un'immagine vale più di mille parole"
+    "prefooter": {
+      "label": "Vivi l'esperienza",
+      "title": "Vuoi vivere anche tu\nmomenti indimenticabili?",
+      "cta": "Vieni a trovarci",
+      "quote": "«Un'immagine vale più di mille parole.»"
+    }
   },
   "chiSiamoPage": {
     "metadata": {

@@ -48,12 +48,18 @@ function parseFeaturedImage(raw: WPRawPost) {
 
 export async function getVini(locale = "it"): Promise<Vino[]> {
   const [listRes, acfRes] = await Promise.all([
-    fetch(`${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&lang=${locale}`, {
-      next: { revalidate: 0 },
-    }),
-    fetch(`${WP_URL}/wp-json/acf/v3/vini?per_page=100&lang=${locale}`, {
-      next: { revalidate: 0 },
-    }),
+    fetch(
+      `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+      {
+        next: { revalidate: 0 },
+      },
+    ),
+    fetch(
+      `${WP_URL}/wp-json/acf/v3/vini?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+      {
+        next: { revalidate: 0 },
+      },
+    ),
   ]);
 
   if (!listRes.ok) return [];
@@ -87,14 +93,17 @@ export async function getViniInEvidenza(locale = "it"): Promise<Vino[]> {
 export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
   const [listRes, acfRes] = await Promise.all([
     fetch(
-      `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&lang=${locale}`,
+      `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
       {
         next: { revalidate: 0 },
       },
     ),
-    fetch(`${WP_URL}/wp-json/acf/v3/prodotti?per_page=100&lang=${locale}`, {
-      next: { revalidate: 0 },
-    }),
+    fetch(
+      `${WP_URL}/wp-json/acf/v3/prodotti?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+      {
+        next: { revalidate: 0 },
+      },
+    ),
   ]);
 
   if (!listRes.ok) return [];

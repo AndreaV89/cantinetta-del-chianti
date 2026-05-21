@@ -217,12 +217,13 @@ export default function ViniGrid({ vini }: ViniGridProps) {
           return tipologia === chiave || tipologia === filtro.toLowerCase();
         })
   ).sort((a, b) => {
-    const tipoA = a.acf.tipologia?.toLowerCase() ?? "";
-    const tipoB = b.acf.tipologia?.toLowerCase() ?? "";
-    const indexA = ORDINE_TIPOLOGIE.indexOf(tipoA);
-    const indexB = ORDINE_TIPOLOGIE.indexOf(tipoB);
-    if (indexA !== indexB) return indexA - indexB;
-    return a.title.localeCompare(b.title, "it");
+    const indexA = ORDINE_TIPOLOGIE.indexOf(
+      a.acf.tipologia?.toLowerCase() ?? "",
+    );
+    const indexB = ORDINE_TIPOLOGIE.indexOf(
+      b.acf.tipologia?.toLowerCase() ?? "",
+    );
+    return indexA - indexB;
   });
 
   return (
@@ -394,7 +395,7 @@ export default function ViniGrid({ vini }: ViniGridProps) {
           </Box>
         )}
 
-        {/* CTA catalogo */}
+        {/* CTA catalogo --- Momentaneamente tolto */}
         {/* <Box
           sx={{
             mt: 4,
