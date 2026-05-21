@@ -33,6 +33,7 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
     width: f.media_details.width,
     height: f.media_details.height,
     alt: f.alt_text || f.title,
+    description: f.caption || "",
   }));
 
   const scroll = (dir: "left" | "right") => {
@@ -242,21 +243,22 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                 <Box
                   sx={{
                     position: "absolute",
-                    bottom: 8,
-                    right: 10,
-                    backgroundColor: "rgba(74, 14, 30, 0.65)",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: "rgba(74, 14, 30, 0.72)",
                     backdropFilter: "blur(4px)",
-                    px: 1.5,
-                    py: 0.5,
-                    borderRadius: "2px",
+                    px: 2,
+                    py: 1,
                   }}
                 >
                   <Typography
                     sx={{
                       fontFamily: '"Apple Chancery", Palatino, serif',
-                      fontSize: "0.8rem",
+                      fontSize: "1.125rem",
                       color: colors.white,
-                      lineHeight: 1.3,
+                      lineHeight: 1.4,
+                      textAlign: "center",
                     }}
                   >
                     {f.caption}
