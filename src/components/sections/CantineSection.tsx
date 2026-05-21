@@ -44,10 +44,10 @@ const ZONE_TOSCANA: { key: ZonaToscana; label: string }[] = [
   { key: "montalcino", label: "Montalcino" },
   { key: "montepulciano", label: "Montepulciano" },
   { key: "bolgheri", label: "Bolgheri" },
+  { key: "san_gimignano", label: "San Gimignano" },
   { key: "isola_di_capraia", label: "Isola di Capraia" },
   { key: "isola_d_elba", label: "Isola d'Elba" },
   { key: "isola_di_gorgona", label: "Isola di Gorgona" },
-  { key: "san_gimignano", label: "San Gimignano" },
 ];
 
 const ZONE_FRANCIA: { key: ZonaFrancia; label: string }[] = [

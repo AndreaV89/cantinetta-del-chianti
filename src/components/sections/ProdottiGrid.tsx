@@ -75,7 +75,6 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
     {} as Record<string, number>,
   );
 
-  // Responsive card width based on measured available width
   useEffect(() => {
     const update = () => {
       const el = measureRef.current;
@@ -106,7 +105,6 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
 
   const step = cardW + CARD_GAP;
   const containerW = visibleN * cardW + (visibleN - 1) * CARD_GAP;
-  // Center the active card: trackX = step * ((N-1)/2 - activeIndex)
   const trackX = step * ((visibleN - 1) / 2 - activeIndex);
 
   return (
@@ -117,7 +115,6 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
       <Box sx={{ maxWidth: 1920, mx: "auto" }}>
         {/* Filtri */}
         <Box sx={{ px: { xs: 3, md: 10 }, mb: 6 }}>
-          {/* Width measurement anchor (zero height) */}
           <Box ref={measureRef} sx={{ width: "100%", height: 0 }} />
 
           <Box
@@ -187,7 +184,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
           </Box>
         </Box>
 
-        {/* Conteggio + Navigazione */}
+        {/* Conteggio */}
         <Box
           sx={{
             px: { xs: 3, md: 10 },
@@ -210,50 +207,16 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
             {filtro !== t("tutti") ? ` · ${filtro}` : ""}
           </Typography>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-            <Typography
-              sx={{
-                fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.75rem",
-                letterSpacing: "0.06em",
-                color: colors.textLight,
-              }}
-            >
-              {activeIndex + 1} / {prodottiFiltrati.length}
-            </Typography>
-
-            {(["left", "right"] as const).map((dir) => {
-              const enabled = dir === "left" ? canPrev : canNext;
-              return (
-                <IconButton
-                  key={dir}
-                  onClick={() =>
-                    dir === "left"
-                      ? setActiveIndex((i) => Math.max(0, i - 1))
-                      : setActiveIndex((i) => Math.min(maxIndex, i + 1))
-                  }
-                  disabled={!enabled}
-                  size="small"
-                  sx={{
-                    width: 34,
-                    height: 34,
-                    border: "1px solid",
-                    borderColor: enabled ? colors.merlot : colors.border,
-                    borderRadius: "2px",
-                    color: enabled ? colors.merlot : colors.textLight,
-                    opacity: enabled ? 1 : 0.35,
-                    transition: "all 0.2s ease",
-                    "& svg": { fontSize: "1rem" },
-                    "&:hover:not(:disabled)": {
-                      backgroundColor: "rgba(125, 26, 44, 0.06)",
-                    },
-                  }}
-                >
-                  {dir === "left" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
-              );
-            })}
-          </Box>
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.75rem",
+              letterSpacing: "0.06em",
+              color: colors.textLight,
+            }}
+          >
+            {activeIndex + 1} / {prodottiFiltrati.length}
+          </Typography>
         </Box>
 
         {/* Carosello */}
@@ -272,61 +235,115 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
           </Box>
         ) : (
           <Box>
-            {/* Clip solo asse X per non tagliare le ombre verticali */}
-            <Box
-              sx={{
-                overflowX: "clip",
-                overflowY: "visible",
-                py: 2,
-              }}
-            >
-              <Box
+            <Box sx={{ position: "relative" }}>
+              {/* Freccia sinistra */}
+              <IconButton
+                onClick={() => setActiveIndex((i) => Math.max(0, i - 1))}
+                disabled={!canPrev}
                 sx={{
-                  width: containerW,
-                  mx: "auto",
+                  position: "absolute",
+                  left: { xs: 8, md: 32 },
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  zIndex: 10,
+                  width: { xs: 40, md: 52 },
+                  height: { xs: 40, md: 52 },
+                  backgroundColor: canPrev ? colors.merlot : "rgba(0,0,0,0.15)",
+                  border: "none",
+                  borderRadius: "4px",
+                  color: "#FFFFFF",
+                  opacity: canPrev ? 1 : 0.3,
+                  transition: "all 0.2s ease",
+                  "& svg": { fontSize: "1.5rem" },
+                  "&:hover:not(:disabled)": {
+                    backgroundColor: colors.merlotHover,
+                  },
                 }}
               >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={filtro}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
+                <ChevronLeftIcon />
+              </IconButton>
+
+              {/* Freccia destra */}
+              <IconButton
+                onClick={() => setActiveIndex((i) => Math.min(maxIndex, i + 1))}
+                disabled={!canNext}
+                sx={{
+                  position: "absolute",
+                  right: { xs: 8, md: 32 },
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  zIndex: 10,
+                  width: { xs: 40, md: 52 },
+                  height: { xs: 40, md: 52 },
+                  backgroundColor: canNext ? colors.merlot : "rgba(0,0,0,0.15)",
+                  border: "none",
+                  borderRadius: "4px",
+                  color: "#FFFFFF",
+                  opacity: canNext ? 1 : 0.3,
+                  transition: "all 0.2s ease",
+                  "& svg": { fontSize: "1.5rem" },
+                  "&:hover:not(:disabled)": {
+                    backgroundColor: colors.merlotHover,
+                  },
+                }}
+              >
+                <ChevronRightIcon />
+              </IconButton>
+              <Box
+                sx={{
+                  overflowX: "clip",
+                  overflowY: "visible",
+                  py: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    width: containerW,
+                    mx: "auto",
+                  }}
+                >
+                  <AnimatePresence mode="wait">
                     <motion.div
-                      animate={{ x: trackX }}
-                      transition={SPRING}
-                      style={{ display: "flex", gap: CARD_GAP }}
+                      key={filtro}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
                     >
-                      {prodottiFiltrati.map((prodotto, i) => {
-                        const pos = i - activeIndex;
-                        const isVisible =
-                          Math.abs(pos) <= Math.floor(visibleN / 2) + 1;
-                        return (
-                          <motion.div
-                            key={prodotto.id}
-                            animate={{
-                              scale: pos === 0 ? 1 : SIDE_SCALE,
-                              opacity: isVisible
-                                ? pos === 0
-                                  ? 1
-                                  : SIDE_OPACITY
-                                : 0,
-                            }}
-                            transition={SPRING}
-                            style={{ flexShrink: 0, width: cardW }}
-                          >
-                            <ProdottoCard
-                              prodotto={prodotto}
-                              isFeatured={i === activeIndex}
-                            />
-                          </motion.div>
-                        );
-                      })}
+                      <motion.div
+                        animate={{ x: trackX }}
+                        transition={SPRING}
+                        style={{ display: "flex", gap: CARD_GAP }}
+                      >
+                        {prodottiFiltrati.map((prodotto, i) => {
+                          const pos = i - activeIndex;
+                          const isVisible =
+                            Math.abs(pos) <= Math.floor(visibleN / 2) + 1;
+                          return (
+                            <motion.div
+                              key={prodotto.id}
+                              animate={{
+                                scale: pos === 0 ? 1 : SIDE_SCALE,
+                                opacity: isVisible
+                                  ? pos === 0
+                                    ? 1
+                                    : SIDE_OPACITY
+                                  : 0,
+                              }}
+                              transition={SPRING}
+                              style={{ flexShrink: 0, width: cardW }}
+                            >
+                              <ProdottoCard
+                                prodotto={prodotto}
+                                isFeatured={i === activeIndex}
+                              />
+                            </motion.div>
+                          );
+                        })}
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                </AnimatePresence>
+                  </AnimatePresence>
+                </Box>
               </Box>
             </Box>
 

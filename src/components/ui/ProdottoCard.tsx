@@ -79,26 +79,20 @@ export default function ProdottoCard({
         </motion.div>
 
         {/* Gradiente scuro dal basso */}
-        <Box
-          sx={{
+        {/* Gradiente scuro dal basso */}
+        <motion.div
+          animate={{
+            opacity: hovered ? 1 : 0.82,
+          }}
+          transition={{ duration: 0.35 }}
+          style={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.22) 48%, transparent 72%)",
+            background: hovered
+              ? "linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.97) 45%, rgba(0,0,0,0.4) 70%, transparent 100%)"
+              : "linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.75) 35%, rgba(0,0,0,0.2) 60%, transparent 100%)",
             zIndex: 1,
-          }}
-        />
-
-        {/* Fascia categoria in cima */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "5px",
-            backgroundColor: accentColor,
-            zIndex: 3,
+            transition: "background 0.35s ease",
           }}
         />
 
@@ -122,21 +116,34 @@ export default function ProdottoCard({
             layout
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
           >
-            {/* Categoria */}
-            <Typography
+            {/* Badge categoria */}
+            <Box
               sx={{
-                fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.6875rem",
-                fontWeight: 500,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.55)",
-                mb: 0.75,
+                display: "inline-flex",
+                alignItems: "center",
+                px: 1.25,
+                py: 0.4,
+                mb: 1.25,
+                borderRadius: "2px",
+                backgroundColor: accentColor,
+                border: `1px solid ${accentColor}`,
               }}
             >
-              {t(prodotto.acf.categoria as keyof typeof CATEGORIA_COLORS) ||
-                prodotto.acf.categoria}
-            </Typography>
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: "0.6rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#FFFFFF",
+                  lineHeight: 1,
+                }}
+              >
+                {t(prodotto.acf.categoria as keyof typeof CATEGORIA_COLORS) ||
+                  prodotto.acf.categoria}
+              </Typography>
+            </Box>
 
             {/* Titolo */}
             <Typography
