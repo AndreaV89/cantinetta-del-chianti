@@ -167,7 +167,70 @@
     "restoMondo": "Resto del mondo",
     "spiritsLabel": "Spirits & Liquori",
     "spiritsTitle": "Superalcolici & Liquori",
-    "usa": "USA & Isole Caraibiche"
+    "usa": "USA & Isole Caraibiche",
+    "nazioni": {
+      "spagna": "Spagna",
+      "portogallo": "Portogallo",
+      "germania": "Germania",
+      "austria": "Austria",
+      "svizzera": "Svizzera",
+      "grecia": "Grecia",
+      "slovenia": "Slovenia",
+      "croazia": "Croazia",
+      "argentina": "Argentina",
+      "cile": "Cile",
+      "usa": "Stati Uniti",
+      "australia": "Australia",
+      "nuova_zelanda": "Nuova Zelanda",
+      "sudafrica": "Sudafrica"
+    },
+    "regioniItalia": {
+      "toscana": "Toscana",
+      "piemonte": "Piemonte",
+      "valle_d_aosta": "Valle d'Aosta",
+      "liguria": "Liguria",
+      "lombardia": "Lombardia",
+      "trentino_alto_adige": "Trentino-Alto Adige",
+      "friuli_venezia_giulia": "Friuli Venezia Giulia",
+      "veneto": "Veneto",
+      "emilia_romagna": "Emilia Romagna",
+      "marche": "Marche",
+      "umbria": "Umbria",
+      "lazio": "Lazio",
+      "abruzzo": "Abruzzo",
+      "molise": "Molise",
+      "campania": "Campania",
+      "basilicata": "Basilicata",
+      "calabria": "Calabria",
+      "puglia": "Puglia",
+      "sicilia": "Sicilia",
+      "sardegna": "Sardegna"
+    },
+    "zoneToscana": {
+      "chianti_classico": "Chianti Classico",
+      "montalcino": "Montalcino",
+      "montepulciano": "Montepulciano",
+      "bolgheri": "Bolgheri",
+      "san_gimignano": "San Gimignano",
+      "isola_di_capraia": "Isola di Capraia",
+      "isola_d_elba": "Isola d'Elba",
+      "isola_di_gorgona": "Isola di Gorgona"
+    },
+    "zoneFrancia": {
+      "bordeaux": "Bordeaux",
+      "borgogne": "Borgogna",
+      "champagne": "Champagne",
+      "loira": "Loira",
+      "jura": "Jura",
+      "valle_du_rhone": "Valle del Rodano"
+    },
+    "nazioniAccordion": {
+      "toscana": "Toscana",
+      "italia": "Italia",
+      "francia": "Francia",
+      "scozia": "Scozia",
+      "irlanda": "Irlanda"
+    }
   },
   "prodottiPage": {
     "metadata": {

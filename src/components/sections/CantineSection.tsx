@@ -16,52 +16,48 @@ interface Props {
   cantine: Cantina[];
 }
 
-const REGIONI_ITALIA: { key: RegioneItalia; label: string }[] = [
-  { key: "toscana", label: "Toscana" },
-  { key: "piemonte", label: "Piemonte" },
-  { key: "valle_d_aosta", label: "Valle d'Aosta" },
-  { key: "liguria", label: "Liguria" },
-  { key: "lombardia", label: "Lombardia" },
-  { key: "trentino_alto_adige", label: "Trentino-Alto Adige" },
-  { key: "friuli_venezia_giulia", label: "Friuli Venezia Giulia" },
-  { key: "veneto", label: "Veneto" },
-  { key: "emilia_romagna", label: "Emilia Romagna" },
-  { key: "marche", label: "Marche" },
-  { key: "umbria", label: "Umbria" },
-  { key: "lazio", label: "Lazio" },
-  { key: "abruzzo", label: "Abruzzo" },
-  { key: "molise", label: "Molise" },
-  { key: "campania", label: "Campania" },
-  { key: "basilicata", label: "Basilicata" },
-  { key: "calabria", label: "Calabria" },
-  { key: "puglia", label: "Puglia" },
-  { key: "sicilia", label: "Sicilia" },
-  { key: "sardegna", label: "Sardegna" },
+const REGIONI_ITALIA: { key: RegioneItalia }[] = [
+  { key: "toscana" },
+  { key: "piemonte" },
+  { key: "valle_d_aosta" },
+  { key: "liguria" },
+  { key: "lombardia" },
+  { key: "trentino_alto_adige" },
+  { key: "friuli_venezia_giulia" },
+  { key: "veneto" },
+  { key: "emilia_romagna" },
+  { key: "marche" },
+  { key: "umbria" },
+  { key: "lazio" },
+  { key: "abruzzo" },
+  { key: "molise" },
+  { key: "campania" },
+  { key: "basilicata" },
+  { key: "calabria" },
+  { key: "puglia" },
+  { key: "sicilia" },
+  { key: "sardegna" },
 ];
 
-const ZONE_TOSCANA: { key: ZonaToscana; label: string }[] = [
-  { key: "chianti_classico", label: "Chianti Classico" },
-  { key: "montalcino", label: "Montalcino" },
-  { key: "montepulciano", label: "Montepulciano" },
-  { key: "bolgheri", label: "Bolgheri" },
-  { key: "san_gimignano", label: "San Gimignano" },
-  { key: "isola_di_capraia", label: "Isola di Capraia" },
-  { key: "isola_d_elba", label: "Isola d'Elba" },
-  { key: "isola_di_gorgona", label: "Isola di Gorgona" },
+const ZONE_TOSCANA: { key: ZonaToscana }[] = [
+  { key: "chianti_classico" },
+  { key: "montalcino" },
+  { key: "montepulciano" },
+  { key: "bolgheri" },
+  { key: "san_gimignano" },
+  { key: "isola_di_capraia" },
+  { key: "isola_d_elba" },
+  { key: "isola_di_gorgona" },
 ];
 
-const ZONE_FRANCIA: { key: ZonaFrancia; label: string }[] = [
-  { key: "bordeaux", label: "Bordeaux" },
-  { key: "borgogne", label: "Borgogne" },
-  { key: "champagne", label: "Champagne" },
-  { key: "loira", label: "Loira" },
-  { key: "jura", label: "Jura" },
-  { key: "valle_du_rhone", label: "Valle del Rodano" },
+const ZONE_FRANCIA: { key: ZonaFrancia }[] = [
+  { key: "bordeaux" },
+  { key: "borgogne" },
+  { key: "champagne" },
+  { key: "loira" },
+  { key: "jura" },
+  { key: "valle_du_rhone" },
 ];
-
-function capitalize(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
 
 function NomiCantine({ cantine }: { cantine: Cantina[] }) {
   return (
@@ -168,6 +164,13 @@ function StyledAccordion({
 
 export default function CantineSection({ cantine }: Props) {
   const t = useTranslations("cantineSection");
+  const tNazione = (key: string) => {
+    try {
+      return t(`nazioni.${key}` as Parameters<typeof t>[0]);
+    } catch {
+      return key.replace(/_/g, " ");
+    }
+  };
   const vini = cantine.filter((c) => c.tipologia === "vino");
   const superalcolici = cantine.filter((c) => c.tipologia === "superalcolico");
 
@@ -250,11 +253,11 @@ export default function CantineSection({ cantine }: Props) {
         <Box sx={{ mb: { xs: 8, md: 12 } }}>
           {/* Toscana */}
           {viniToscanaNonChianti.length > 0 && (
-            <StyledAccordion label="Toscana" cantine={[]}>
-              {altreZoneToscane.map(({ key, label }) => (
+            <StyledAccordion label={t("nazioniAccordion.toscana")} cantine={[]}>
+              {altreZoneToscane.map(({ key }) => (
                 <ZonaBlock
                   key={key}
-                  label={label}
+                  label={t(`zoneToscana.${key}`)}
                   cantine={viniToscanaNonChianti.filter(
                     (c) => c.zona_toscana === key,
                   )}
@@ -265,12 +268,12 @@ export default function CantineSection({ cantine }: Props) {
 
           {/* Italia */}
           {viniItaliaNonToscana.length > 0 && (
-            <StyledAccordion label="Italia" cantine={[]}>
+            <StyledAccordion label={t("nazioniAccordion.italia")} cantine={[]}>
               {REGIONI_ITALIA.filter((r) => r.key !== "toscana").map(
-                ({ key, label }) => (
+                ({ key }) => (
                   <ZonaBlock
                     key={key}
-                    label={label}
+                    label={t(`regioniItalia.${key}`)}
                     cantine={viniItaliaNonToscana.filter(
                       (c) => c.regione === key,
                     )}
@@ -282,11 +285,11 @@ export default function CantineSection({ cantine }: Props) {
 
           {/* Francia */}
           {viniFrancia.length > 0 && (
-            <StyledAccordion label="Francia" cantine={[]}>
-              {ZONE_FRANCIA.map(({ key, label }) => (
+            <StyledAccordion label={t("nazioniAccordion.francia")} cantine={[]}>
+              {ZONE_FRANCIA.map(({ key }) => (
                 <ZonaBlock
                   key={key}
-                  label={label}
+                  label={t(`zoneFrancia.${key}`)}
                   cantine={viniFrancia.filter((c) => c.zona_francia === key)}
                 />
               ))}
@@ -301,7 +304,7 @@ export default function CantineSection({ cantine }: Props) {
               ).map((nazione) => (
                 <ZonaBlock
                   key={nazione}
-                  label={capitalize(nazione ?? "")}
+                  label={tNazione(nazione ?? "")}
                   cantine={viniRestoMondo.filter(
                     (c) => c.nazione_vino === nazione,
                   )}
@@ -337,16 +340,28 @@ export default function CantineSection({ cantine }: Props) {
               {t("spiritsTitle")}
             </Typography>
             {superItalia.length > 0 && (
-              <StyledAccordion label="Italia" cantine={superItalia} />
+              <StyledAccordion
+                label={t("nazioniAccordion.italia")}
+                cantine={superItalia}
+              />
             )}
             {superFrancia.length > 0 && (
-              <StyledAccordion label="Francia" cantine={superFrancia} />
+              <StyledAccordion
+                label={t("nazioniAccordion.francia")}
+                cantine={superFrancia}
+              />
             )}
             {superScozia.length > 0 && (
-              <StyledAccordion label="Scozia" cantine={superScozia} />
+              <StyledAccordion
+                label={t("nazioniAccordion.scozia")}
+                cantine={superScozia}
+              />
             )}
             {superIrlanda.length > 0 && (
-              <StyledAccordion label="Irlanda" cantine={superIrlanda} />
+              <StyledAccordion
+                label={t("nazioniAccordion.irlanda")}
+                cantine={superIrlanda}
+              />
             )}
             {superUsa.length > 0 && (
               <StyledAccordion label={t("usa")} cantine={superUsa} />

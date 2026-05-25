@@ -444,20 +444,6 @@ export default async function FotoPage({
           <source src="/videos/storie-prefooter.mp4" type="video/mp4" />
         </Box>
 
-        {/* Overlay gradiente: copre tutto su mobile, solo metà destra su desktop */}
-        <Box
-          aria-hidden
-          sx={{
-            position: "absolute",
-            inset: 0,
-            background: {
-              xs: `linear-gradient(to bottom, ${colors.darkDeep} 40%, rgba(53,10,22,0.5) 100%)`,
-              md: `linear-gradient(to left, ${colors.darkDeep} 50%, rgba(53,10,22,0.8) 55%, transparent 100%)`,
-            },
-            zIndex: 1,
-          }}
-        />
-
         {/* Testo */}
         <Box
           sx={{

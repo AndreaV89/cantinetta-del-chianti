@@ -9,20 +9,30 @@ import { decodeHtmlEntities } from "@/lib/wordpress";
 import { useTranslations } from "next-intl";
 
 const tipologiaColors: Record<string, string> = {
-  Rosso: colors.merlot,
-  Bianco: colors.beige,
-  Rosato: "#C4768A",
-  Bollicine: colors.textLight,
-  Distillato: colors.dark,
+  red: colors.merlot,
+  white: colors.beige,
+  rosé: "#C4768A",
+  "sparkling wines": colors.textLight,
+  distillato: colors.dark,
 };
 
 const ORDINE_TIPOLOGIE = [
-  "rosso",
-  "bianco",
-  "rosato",
-  "bollicine",
+  "red",
+  "white",
+  "rosé",
+  "sparkling wines",
   "distillato",
 ];
+
+const wpmlNormalize: Record<string, string> = {
+  rosso: "red",
+  bianco: "white",
+  rosato: "rosé",
+  bollicine: "sparkling wines",
+};
+
+const normalizeTipologia = (t: string) =>
+  wpmlNormalize[t.toLowerCase()] ?? t.toLowerCase();
 
 function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
   return (
@@ -99,7 +109,9 @@ function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
               fontWeight: 400,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: tipologiaColors[vino.acf.tipologia] || colors.textLight,
+              color:
+                tipologiaColors[normalizeTipologia(vino.acf.tipologia ?? "")] ||
+                colors.textLight,
             }}
           >
             {vino.acf.tipologia}
@@ -180,16 +192,16 @@ export default function ViniGrid({ vini }: ViniGridProps) {
   ];
 
   const tipologieMap: Record<string, string> = {
-    [tTipo("rosso")]: "rosso",
-    [tTipo("bianco")]: "bianco",
-    [tTipo("rosato")]: "rosato",
-    [tTipo("bollicine")]: "bollicine",
+    [tTipo("rosso")]: "red",
+    [tTipo("bianco")]: "white",
+    [tTipo("rosato")]: "rosé",
+    [tTipo("bollicine")]: "sparkling wines",
     [tTipo("distillato")]: "distillato",
   };
 
   console.log(
-    "vini tipologie:",
-    vini.map((v) => v.acf.tipologia),
+    "vini tipologie raw:",
+    vini.map((v) => `"${v.acf.tipologia}"`),
   );
 
   const conteggi = tipologie.reduce(
@@ -198,10 +210,9 @@ export default function ViniGrid({ vini }: ViniGridProps) {
         tipo === t("tutti")
           ? vini.length
           : vini.filter((v) => {
-              const tipologia = v.acf.tipologia?.toLowerCase() ?? "";
+              const tipologia = normalizeTipologia(v.acf.tipologia ?? "");
               const chiave = tipologieMap[tipo];
-              // matcha sia "rosso" (IT) che "red" (EN da WordPress)
-              return tipologia === chiave || tipologia === tipo.toLowerCase();
+              return tipologia === chiave;
             }).length;
       return acc;
     },
@@ -212,16 +223,16 @@ export default function ViniGrid({ vini }: ViniGridProps) {
     filtro === t("tutti")
       ? vini
       : vini.filter((v) => {
-          const tipologia = v.acf.tipologia?.toLowerCase() ?? "";
-          const chiave = tipologieMap[filtro] ?? filtro.toLowerCase();
-          return tipologia === chiave || tipologia === filtro.toLowerCase();
+          const tipologia = normalizeTipologia(v.acf.tipologia ?? "");
+          const chiave = tipologieMap[filtro];
+          return tipologia === chiave;
         })
   ).sort((a, b) => {
     const indexA = ORDINE_TIPOLOGIE.indexOf(
-      a.acf.tipologia?.toLowerCase() ?? "",
+      normalizeTipologia(a.acf.tipologia ?? ""),
     );
     const indexB = ORDINE_TIPOLOGIE.indexOf(
-      b.acf.tipologia?.toLowerCase() ?? "",
+      normalizeTipologia(b.acf.tipologia ?? ""),
     );
     return indexA - indexB;
   });
