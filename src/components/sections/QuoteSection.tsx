@@ -31,7 +31,7 @@ export default function QuoteSection({ quote, author }: QuoteSectionProps) {
           transform: "translateY(-50%)",
           fontFamily: '"Apple Chancery", Palatino, serif',
           fontStyle: "italic",
-          fontSize: { xs: "8rem", md: "20rem" },
+          fontSize: { xs: "5rem", md: "20rem" },
           lineHeight: 1,
           color: "rgba(255,255,255,0.04)",
           userSelect: "none",

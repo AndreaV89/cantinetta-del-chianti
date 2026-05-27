@@ -11,7 +11,7 @@ export default async function HeroVideo() {
       component="section"
       sx={{
         position: "relative",
-        height: "100vh",
+        height: { xs: "100dvh", md: "100vh" },
         minHeight: 600,
         overflow: "hidden",
         display: "flex",
@@ -42,8 +42,10 @@ export default async function HeroVideo() {
         sx={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(to right, rgba(5,4,3,0.82) 0%, rgba(5,4,3,0.35) 55%, rgba(5,4,3,0.0) 100%)",
+          background: {
+            xs: "linear-gradient(to bottom, rgba(5,4,3,0.75) 0%, rgba(5,4,3,0.55) 60%, rgba(5,4,3,0.3) 100%)",
+            md: "linear-gradient(to right, rgba(5,4,3,0.82) 0%, rgba(5,4,3,0.35) 55%, rgba(5,4,3,0.0) 100%)",
+          },
           zIndex: 1,
         }}
       />
@@ -128,7 +130,14 @@ export default async function HeroVideo() {
         </Typography>
 
         {/* CTA buttons */}
-        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            flexDirection: { xs: "column", sm: "row" },
+            flexWrap: "wrap",
+          }}
+        >
           <Button
             variant="contained"
             href={`/${locale}/vini`}
@@ -137,6 +146,7 @@ export default async function HeroVideo() {
               color: "#FFFFFF",
               px: 4,
               py: 1.5,
+              width: { xs: "100%", sm: "auto" },
               "&:hover": { backgroundColor: colors.merlotHover },
             }}
           >
@@ -150,6 +160,7 @@ export default async function HeroVideo() {
               color: "#FFFFFF",
               px: 4,
               py: 1.5,
+              width: { xs: "100%", sm: "auto" },
               "&:hover": {
                 borderColor: "#FFFFFF",
                 backgroundColor: "transparent",

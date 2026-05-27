@@ -42,7 +42,7 @@ export default async function ServicesSection() {
         }}
       >
         {/* Header */}
-        <Box sx={{ mb: 8 }}>
+        <Box sx={{ mb: { xs: 5, md: 8 } }}>
           <Typography
             sx={{
               fontFamily: '"DM Sans", sans-serif',
@@ -144,7 +144,15 @@ export default async function ServicesSection() {
         </Box>
 
         {/* CTA servizi */}
-        <Box sx={{ mt: 6, display: "flex", alignItems: "center", gap: 2 }}>
+        <Box
+          sx={{
+            mt: 6,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            justifyContent: { xs: "center", md: "flex-start" },
+          }}
+        >
           <Typography
             component="a"
             href={`/${locale}/servizi`}

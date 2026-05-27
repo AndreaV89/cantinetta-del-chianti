@@ -234,7 +234,7 @@ export default async function WineSection({ vini }: WineSectionProps) {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: { md: "flex-end" },
-            mb: 7,
+            mb: { xs: 5, md: 7 },
           }}
         >
           <Box>
@@ -307,10 +307,11 @@ export default async function WineSection({ vini }: WineSectionProps) {
             sx={{
               display: "grid",
               gridTemplateColumns: {
-                xs: "1fr",
+                xs: "minmax(0, 380px)",
                 sm: "1fr 1fr",
                 md: "repeat(3, 1fr)",
               },
+              justifyContent: { xs: "center", sm: "stretch" },
               gap: 4,
             }}
           >
@@ -321,7 +322,15 @@ export default async function WineSection({ vini }: WineSectionProps) {
         )}
 
         {/* CTA catalogo */}
-        <Box sx={{ mt: 6, display: "flex", alignItems: "center", gap: 2 }}>
+        <Box
+          sx={{
+            mt: 6,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            justifyContent: { xs: "center", md: "flex-start" },
+          }}
+        >
           <Typography
             component="a"
             href={`/${locale}/vini`}

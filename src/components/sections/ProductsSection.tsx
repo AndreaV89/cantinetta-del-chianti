@@ -29,7 +29,7 @@ export default async function ProductsSection() {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: { md: "flex-end" },
-            mb: 7,
+            mb: { xs: 5, md: 7 },
           }}
         >
           <Box>
@@ -109,10 +109,14 @@ export default async function ProductsSection() {
             {t("body")}
           </Typography>
 
-          <Link href={`/${locale}/prodotti`} style={{ textDecoration: "none" }}>
+          <Link
+            href={`/${locale}/prodotti`}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
             <Button
               variant="outlined"
               sx={{
+                width: { xs: "100%", md: "auto" },
                 fontFamily: '"DM Sans", sans-serif',
                 fontSize: "0.75rem",
                 letterSpacing: "0.2em",

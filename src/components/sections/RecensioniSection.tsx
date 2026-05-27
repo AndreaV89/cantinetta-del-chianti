@@ -24,7 +24,7 @@ export default function RecensioniSection() {
         }}
       >
         {/* Header */}
-        <Box sx={{ mb: 6, textAlign: "center" }}>
+        <Box sx={{ mb: { xs: 5, md: 6 }, textAlign: "center" }}>
           <Typography
             sx={{
               fontFamily: '"DM Sans", sans-serif',

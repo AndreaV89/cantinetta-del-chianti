@@ -34,7 +34,7 @@ export default async function AboutSection() {
         <Box
           sx={{
             position: "relative",
-            minHeight: { xs: 300, md: 580 },
+            minHeight: { xs: 260, md: 580 },
             overflow: "hidden",
           }}
         >
@@ -56,6 +56,10 @@ export default async function AboutSection() {
             px: { xs: 3, md: 7 },
             py: { xs: 6, md: 8 },
             borderRight: { md: "1px solid rgba(196, 168, 130, 0.15)" },
+            borderBottom: {
+              xs: "1px solid rgba(196, 168, 130, 0.15)",
+              md: "none",
+            },
           }}
         >
           <Typography

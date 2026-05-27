@@ -36,12 +36,21 @@ export default async function Pillars() {
             key={pillar.num}
             sx={{
               px: { md: 6 },
+              textAlign: { xs: "center", md: "left" },
               borderRight: {
                 md:
                   index < pillars.length - 1
                     ? "1px solid rgba(255,255,255,0.1)"
                     : "none",
               },
+              borderBottom: {
+                xs:
+                  index < pillars.length - 1
+                    ? "1px solid rgba(255,255,255,0.1)"
+                    : "none",
+                md: "none",
+              },
+              pb: { xs: index < pillars.length - 1 ? 4 : 0, md: 0 },
               "&:first-of-type": { pl: { md: 0 } },
               "&:last-of-type": { pr: { md: 0 } },
             }}
