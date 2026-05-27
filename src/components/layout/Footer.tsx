@@ -71,8 +71,12 @@ export default async function Footer() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "2fr 1fr 1fr 1fr" },
-            gap: { xs: 5, md: 8 },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              md: "2fr 1fr 1fr 1fr",
+            },
+            gap: { xs: 3, md: 8 },
             pb: 6,
             borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
           }}
@@ -244,7 +248,7 @@ export default async function Footer() {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
-            alignItems: { md: "center" },
+            alignItems: { xs: "center", md: "center" },
             gap: 1,
             pt: 3,
           }}
@@ -255,6 +259,7 @@ export default async function Footer() {
               fontWeight: 300,
               fontSize: "0.75rem",
               color: "rgba(255,255,255,0.3)",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             © {new Date().getFullYear()} La Cantinetta del Chianti ·{" "}
@@ -266,6 +271,7 @@ export default async function Footer() {
               fontWeight: 300,
               fontSize: "0.75rem",
               color: "rgba(255,255,255,0.3)",
+              textAlign: { xs: "center", md: "right" },
             }}
           >
             {t("credit")}{" "}

@@ -37,6 +37,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <AppBar
       position="fixed"
@@ -64,11 +71,15 @@ export default function Navbar() {
           href={`/${locale}`}
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
-            fontSize: "1.125rem",
+            fontSize: { xs: "0.95rem", sm: "1.125rem" },
             color: scrolled ? colors.dark : "#FFFFFF",
             textDecoration: "none",
             letterSpacing: "0.02em",
             transition: "color 0.3s ease",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: { xs: "calc(100vw - 80px)", md: "none" },
           }}
         >
           La Cantinetta del Chianti
@@ -167,70 +178,99 @@ export default function Navbar() {
         </IconButton>
       </Toolbar>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <Box
-          sx={{
-            display: { xs: "flex", md: "none" },
-            flexDirection: "column",
-            backgroundColor: colors.bg,
-            borderTop: `1px solid ${colors.border}`,
-            px: 3,
-            py: 2,
-            gap: 1,
-          }}
-        >
-          {navLinks.map((link) => (
+      {/* Menu Mobile */}
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+          flexDirection: "column",
+          position: "fixed",
+          top: 72,
+          left: 0,
+          right: 0,
+          height: "calc(100dvh - 72px)",
+          minHeight: "calc(100svh - 72px)",
+          backgroundColor: colors.bg,
+          px: 3,
+          pt: 2,
+          pb: 4,
+          overflowY: "auto",
+          opacity: mobileOpen ? 1 : 0,
+          pointerEvents: mobileOpen ? "auto" : "none",
+          transform: mobileOpen ? "translateY(0)" : "translateY(-8px)",
+          transition: "opacity 0.25s ease, transform 0.25s ease",
+          zIndex: 1200,
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
             <Typography
               key={link.href}
               component="a"
               href={link.href}
+              onClick={() => setMobileOpen(false)}
               sx={{
                 fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.875rem",
-                letterSpacing: "0.1em",
+                fontSize: "1rem",
+                letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: colors.dark,
+                color: isActive ? colors.merlot : colors.dark,
+                fontWeight: isActive ? 600 : 400,
                 textDecoration: "none",
-                py: 1.5,
+                py: 2,
                 borderBottom: `1px solid ${colors.border}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                "&::after": isActive
+                  ? {
+                      content: '"·"',
+                      color: colors.merlot,
+                      fontSize: "1.25rem",
+                    }
+                  : {},
               }}
             >
               {link.label}
             </Typography>
+          );
+        })}
+
+        {/* Lang switcher mobile */}
+        <Box sx={{ display: "flex", gap: 0, pt: 2, pb: 1 }}>
+          {["it", "en"].map((lang, i) => (
+            <Box key={lang} sx={{ display: "flex", alignItems: "center" }}>
+              {i > 0 && (
+                <Typography
+                  sx={{ fontSize: "0.75rem", color: colors.border, px: 1 }}
+                >
+                  /
+                </Typography>
+              )}
+              <Typography
+                component="button"
+                onClick={() => {
+                  switchLocale(lang);
+                  setMobileOpen(false);
+                }}
+                sx={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "8px 4px",
+                  fontSize: "0.8rem",
+                  letterSpacing: "0.12em",
+                  color: locale === lang ? colors.merlot : colors.textLight,
+                  fontWeight: locale === lang ? 600 : 400,
+                }}
+              >
+                {lang.toUpperCase()}
+              </Typography>
+            </Box>
           ))}
-          <Box sx={{ display: "flex", gap: 2, pt: 1 }}>
-            <Typography
-              component="button"
-              onClick={() => switchLocale("it")}
-              sx={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                fontSize: "0.75rem",
-                color: colors.textLight,
-              }}
-            >
-              IT
-            </Typography>
-            <Typography
-              component="button"
-              onClick={() => switchLocale("en")}
-              sx={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                fontSize: "0.75rem",
-                color: colors.textLight,
-              }}
-            >
-              EN
-            </Typography>
-          </Box>
         </Box>
-      )}
+      </Box>
     </AppBar>
   );
 }
