@@ -59,7 +59,7 @@ export default async function ViniPage({
             right: "-0.05em",
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
-            fontSize: { xs: "8rem", md: "16rem" },
+            fontSize: { xs: "5rem", md: "16rem" },
             lineHeight: 1,
             color: "rgba(255,255,255,0.03)",
             userSelect: "none",
@@ -143,8 +143,8 @@ export default async function ViniPage({
             mx: "auto",
             px: { xs: 3, md: 20 },
             display: "grid",
-            gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(3, 1fr)" },
-            gap: { xs: 4, md: 6 },
+            gridTemplateColumns: { xs: "repeat(3, 1fr)", md: "repeat(3, 1fr)" },
+            gap: { xs: 2, md: 6 },
           }}
         >
           {stats.map((stat) => (
@@ -153,7 +153,7 @@ export default async function ViniPage({
                 sx={{
                   fontFamily: '"Apple Chancery", Palatino, serif',
                   fontStyle: "italic",
-                  fontSize: { xs: "3rem", md: "4.5rem" },
+                  fontSize: { xs: "2.25rem", md: "4.5rem" },
                   lineHeight: 1,
                   color: colors.merlot,
                   mb: 1,
@@ -219,9 +219,9 @@ export default async function ViniPage({
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: { xs: "1rem", md: "1.3rem" },
-              lineHeight: 1.9,
+              lineHeight: { xs: 1.75, md: 1.9 },
               color: "rgba(255,255,255,0.75)",
-              mb: 3,
+              mb: { xs: 2, md: 3 },
             }}
           >
             {t("testo.body1")}
@@ -232,9 +232,9 @@ export default async function ViniPage({
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: { xs: "1rem", md: "1.3rem" },
-              lineHeight: 1.9,
+              lineHeight: { xs: 1.75, md: 1.9 },
               color: "rgba(255,255,255,0.75)",
-              mb: 6,
+              mb: { xs: 2, md: 3 },
             }}
           >
             {t("testo.body2")}

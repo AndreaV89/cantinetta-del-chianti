@@ -163,9 +163,9 @@ export default async function ProdottiPage({
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: { xs: "1rem", md: "1.4rem" },
-              lineHeight: 1.9,
+              lineHeight: { xs: 1.75, md: 1.9 },
               color: "rgba(255,255,255,0.8)",
-              mb: 3,
+              mb: { xs: 2, md: 3 },
             }}
           >
             {t("testo.body")}

@@ -10,6 +10,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { colors } from "@/styles/colors";
 import { useTranslations } from "next-intl";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 interface AlbumStripProps {
   album: Album;
@@ -23,7 +25,10 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeftRef = useRef(0);
+  const touchStartX = useRef(0);
   const t = useTranslations("albumStrip");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const foto = album.acf.foto || [];
   const isEven = index % 2 === 0;
@@ -68,8 +73,10 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
           px: { xs: 3, md: 10 },
           mb: 4,
           display: "flex",
-          alignItems: "flex-end",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "flex-start", md: "flex-end" },
           justifyContent: "space-between",
+          gap: { xs: 2, md: 0 },
         }}
       >
         <Box sx={{ maxWidth: 600 }}>
@@ -176,6 +183,15 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
         onMouseLeave={() => {
           isDragging.current = false;
         }}
+        onTouchStart={(e) => {
+          touchStartX.current = e.targetTouches[0].clientX;
+        }}
+        onTouchMove={(e) => {
+          if (!scrollRef.current) return;
+          const diff = touchStartX.current - e.targetTouches[0].clientX;
+          scrollRef.current.scrollLeft += diff * 0.8;
+          touchStartX.current = e.targetTouches[0].clientX;
+        }}
         sx={{
           display: "flex",
           gap: 2,
@@ -193,8 +209,14 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
           const isPortrait = f.media_details.height > f.media_details.width;
           const imgUrl =
             f.media_details.sizes?.large?.source_url || f.full_image_url;
-          const w = isPortrait ? 260 : 400;
-          const h = 320;
+          const w = isMobile
+            ? isPortrait
+              ? 200
+              : 300
+            : isPortrait
+              ? 260
+              : 400;
+          const h = isMobile ? 260 : 320;
 
           return (
             <Box
@@ -214,9 +236,14 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
                   transform: "scale(1.02)",
                   boxShadow: "0 8px 24px rgba(74, 14, 30, 0.15)",
                 },
-                // Prima foto dell'album leggermente più grande
                 ...(i === 0 && {
-                  width: isPortrait ? 320 : 520,
+                  width: isMobile
+                    ? isPortrait
+                      ? 240
+                      : 380
+                    : isPortrait
+                      ? 320
+                      : 520,
                 }),
               }}
             >

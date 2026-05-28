@@ -25,16 +25,24 @@ export default function ProdottoCard({
   isFeatured = false,
 }: ProdottoCardProps) {
   const [hovered, setHovered] = useState(false);
+  const [tapped, setTapped] = useState(false);
+  const isMobile =
+    typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
   const hasDescrizione = Boolean(prodotto.acf.descrizione_breve);
+  const showDesc = isFeatured && hasDescrizione && (hovered || tapped);
   const hasProduttore = Boolean(prodotto.acf.produttore);
   const accentColor = CATEGORIA_COLORS[prodotto.acf.categoria] || colors.beige;
   const t = useTranslations("categorieLabels");
+  const tGrid = useTranslations("prodottiGrid");
 
   return (
     <Box sx={{ height: { xs: 480, md: 520 } }}>
       <motion.div
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
+        onClick={() => {
+          if (isMobile) setTapped((v) => !v);
+        }}
         animate={{
           boxShadow:
             "0 8px 32px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.1)",
@@ -50,7 +58,7 @@ export default function ProdottoCard({
           height: "100%",
           borderRadius: "24px",
           overflow: "hidden",
-          cursor: "default",
+          cursor: isMobile ? "pointer" : "default",
         }}
       >
         {/* Immagine o fallback */}
@@ -78,7 +86,6 @@ export default function ProdottoCard({
           )}
         </motion.div>
 
-        {/* Gradiente scuro dal basso */}
         {/* Gradiente scuro dal basso */}
         <motion.div
           animate={{
@@ -158,7 +165,7 @@ export default function ProdottoCard({
               {prodotto.title}
             </Typography>
 
-            {/* Produttore — sempre visibile */}
+            {/* Produttore */}
             {hasProduttore && (
               <Typography
                 sx={{
@@ -174,9 +181,23 @@ export default function ProdottoCard({
             )}
           </motion.div>
 
-          {/* Descrizione — solo sulla card in evidenza al hover */}
+          {isMobile && isFeatured && hasDescrizione && !tapped && (
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.6875rem",
+                color: "rgba(255,255,255,0.4)",
+                mt: 1,
+                letterSpacing: "0.06em",
+              }}
+            >
+              {tGrid("scopriDiPiu")}
+            </Typography>
+          )}
+
+          {/* Descrizione */}
           <AnimatePresence>
-            {isFeatured && hovered && hasDescrizione && (
+            {showDesc && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}

@@ -126,7 +126,9 @@
     "subtitle": "Una selezione delle etichette disponibili in bottega — il catalogo completo ne conta oltre 200.",
     "vino": "vino",
     "vini": "vini",
-    "empty": "Nessun vino in questa categoria"
+    "empty": "Nessun vino in questa categoria",
+    "showMore": "Mostra tutto",
+    "showLess": "Mostra meno"
   },
   "tipologie": {
     "rosso": "Rosso",
@@ -256,7 +258,8 @@
     "tutti": "Tutti",
     "prodotto": "prodotto",
     "prodotti": "prodotti",
-    "empty": "Nessun prodotto in questa categoria"
+    "empty": "Nessun prodotto in questa categoria",
+    "scopriDiPiu": "↑ scopri di più"
   },
   "serviziPage": {
     "metadata": {

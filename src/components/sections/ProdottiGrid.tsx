@@ -107,6 +107,22 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
   const containerW = visibleN * cardW + (visibleN - 1) * CARD_GAP;
   const trackX = step * ((visibleN - 1) / 2 - activeIndex);
 
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) setActiveIndex((i) => Math.min(maxIndex, i + 1));
+      else setActiveIndex((i) => Math.max(0, i - 1));
+    }
+  };
+
   return (
     <Box
       component="section"
@@ -121,7 +137,7 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              gap: 1.5,
+              gap: 1,
               pb: 4,
               borderBottom: `1px solid ${colors.border}`,
             }}
@@ -138,8 +154,8 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                     display: "flex",
                     alignItems: "center",
                     gap: 1,
-                    px: 2.5,
-                    py: 1,
+                    px: 2,
+                    py: 0.875,
                     borderRadius: "2px",
                     border: "1px solid",
                     borderColor: isActive ? colors.merlot : colors.border,
@@ -157,9 +173,9 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                   <Typography
                     sx={{
                       fontFamily: '"DM Sans", sans-serif',
-                      fontSize: "0.75rem",
+                      fontSize: { xs: "0.6875rem", md: "0.75rem" },
                       fontWeight: isActive ? 500 : 400,
-                      letterSpacing: "0.08em",
+                      letterSpacing: "0.06em",
                       color: isActive ? "#FFFFFF" : colors.dark,
                       userSelect: "none",
                     }}
@@ -295,6 +311,8 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                   overflowY: "visible",
                   py: 2,
                 }}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
                 <Box
                   sx={{
@@ -356,24 +374,32 @@ export default function ProdottiGrid({ prodotti }: ProdottiGridProps) {
                   justifyContent: "center",
                   alignItems: "center",
                   gap: 0.75,
+                  overflow: "hidden",
+                  maxWidth: { xs: 200, md: "100%" },
+                  mx: "auto",
                 }}
               >
-                {prodottiFiltrati.map((_, i) => (
-                  <Box
-                    key={i}
-                    onClick={() => setActiveIndex(i)}
-                    sx={{
-                      width: i === activeIndex ? 22 : 6,
-                      height: 4,
-                      borderRadius: "2px",
-                      backgroundColor:
-                        i === activeIndex ? colors.merlot : colors.border,
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      flexShrink: 0,
-                    }}
-                  />
-                ))}
+                {prodottiFiltrati.map((_, i) => {
+                  const distance = Math.abs(i - activeIndex);
+                  const isVisible = distance <= 3;
+                  if (!isVisible) return null;
+                  return (
+                    <Box
+                      key={i}
+                      onClick={() => setActiveIndex(i)}
+                      sx={{
+                        width: i === activeIndex ? 22 : 6,
+                        height: 4,
+                        borderRadius: "2px",
+                        backgroundColor:
+                          i === activeIndex ? colors.merlot : colors.border,
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        flexShrink: 0,
+                      }}
+                    />
+                  );
+                })}
               </Box>
             )}
           </Box>

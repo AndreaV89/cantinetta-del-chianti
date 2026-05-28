@@ -50,7 +50,7 @@ export default async function FotoPage({
             right: "-0.05em",
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
-            fontSize: { xs: "8rem", md: "16rem" },
+            fontSize: { xs: "5rem", md: "16rem" },
             lineHeight: 1,
             color: "rgba(255,255,255,0.03)",
             userSelect: "none",
@@ -135,7 +135,7 @@ export default async function FotoPage({
           <Box
             sx={{
               position: "relative",
-              minHeight: { xs: 400, md: 700 },
+              minHeight: { xs: 280, md: 700 },
               overflow: "hidden",
             }}
           >
@@ -326,7 +326,7 @@ export default async function FotoPage({
           <Box
             sx={{
               position: "relative",
-              minHeight: { xs: 400, md: 560 },
+              minHeight: { xs: 320, md: 560 },
               overflow: "hidden",
               order: { xs: 1, md: 2 },
               backgroundColor: colors.dark,
@@ -339,7 +339,7 @@ export default async function FotoPage({
               src="/images/riccardo-libro.jpeg"
               alt="Riccardo — 20 amici 40 ricette"
               fill
-              style={{ objectFit: "contain", objectPosition: "center" }}
+              style={{ objectFit: "cover", objectPosition: "center 43%" }}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </Box>
@@ -411,7 +411,6 @@ export default async function FotoPage({
       </Box>
 
       {/* Pre-footer CTA */}
-
       <Box
         component="section"
         sx={{
@@ -423,7 +422,7 @@ export default async function FotoPage({
           alignItems: "stretch",
         }}
       >
-        {/* Video sfondo (destra) */}
+        {/* Video sinistra */}
         <Box
           component="video"
           autoPlay
@@ -444,11 +443,22 @@ export default async function FotoPage({
           <source src="/videos/storie-prefooter.mp4" type="video/mp4" />
         </Box>
 
+        <Box
+          sx={{
+            display: { xs: "block", md: "none" },
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "rgba(26, 8, 16, 0.62)",
+            zIndex: 1,
+          }}
+        />
+
         {/* Testo */}
         <Box
           sx={{
             position: "relative",
             zIndex: 2,
+            minHeight: { xs: 480, md: 520 },
             width: { xs: "100%", md: "45%" },
             ml: { md: "auto" },
             px: { xs: 3, md: 10 },

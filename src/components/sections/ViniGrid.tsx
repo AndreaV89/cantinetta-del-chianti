@@ -35,6 +35,17 @@ const normalizeTipologia = (t: string) =>
   wpmlNormalize[t.toLowerCase()] ?? t.toLowerCase();
 
 function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
+  const [expanded, setExpanded] = useState(false);
+  const t = useTranslations("viniGrid");
+
+  const descrizione = vino.acf.descrizione_breve ?? "";
+  const LIMIT = 80;
+  const isTruncatable = descrizione.length > LIMIT;
+  const displayText =
+    expanded || !isTruncatable
+      ? descrizione
+      : descrizione.slice(0, LIMIT).trimEnd() + "…";
+
   return (
     <Box
       sx={{
@@ -56,7 +67,7 @@ function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
         sx={{
           position: "relative",
           width: "100%",
-          aspectRatio: "3/4",
+          aspectRatio: { xs: "2/3", md: "3/4" },
           backgroundColor: colors.bgAlt,
         }}
       >
@@ -66,7 +77,7 @@ function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
             alt={vino.featuredImage.alt || vino.title}
             fill
             style={{ objectFit: "cover" }}
-            sizes="(max-width: 768px) 100vw, 25vw"
+            sizes="(max-width: 768px) 50vw, 25vw"
           />
         ) : (
           <Box
@@ -93,7 +104,14 @@ function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
       </Box>
 
       {/* Info */}
-      <Box sx={{ p: 2.5, flex: 1, display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          p: { xs: 1.5, md: 2.5 },
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -153,20 +171,43 @@ function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
           {vino.acf.denominazione ? ` · ${vino.acf.denominazione}` : ""}
         </Typography>
 
-        {vino.acf.descrizione_breve && (
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.8125rem",
-              lineHeight: 1.7,
-              color: colors.textLight,
-              mb: 2,
-              flex: 1,
-            }}
-          >
-            {vino.acf.descrizione_breve}
-          </Typography>
+        {descrizione && (
+          <>
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 300,
+                fontSize: "0.8125rem",
+                lineHeight: 1.7,
+                color: colors.textLight,
+                mb: isTruncatable ? 0.5 : 2,
+                flex: 1,
+              }}
+            >
+              {displayText}
+            </Typography>
+
+            {isTruncatable && (
+              <Typography
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setExpanded(!expanded);
+                }}
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: "0.75rem",
+                  fontWeight: 500,
+                  color: colors.merlot,
+                  cursor: "pointer",
+                  mb: 1,
+                  userSelect: "none",
+                  "&:hover": { textDecoration: "underline" },
+                }}
+              >
+                {expanded ? t("showLess") : t("showMore")}
+              </Typography>
+            )}
+          </>
         )}
       </Box>
     </Box>
@@ -198,11 +239,6 @@ export default function ViniGrid({ vini }: ViniGridProps) {
     [tTipo("bollicine")]: "sparkling wines",
     [tTipo("distillato")]: "distillato",
   };
-
-  console.log(
-    "vini tipologie raw:",
-    vini.map((v) => `"${v.acf.tipologia}"`),
-  );
 
   const conteggi = tipologie.reduce(
     (acc, tipo) => {
@@ -293,11 +329,14 @@ export default function ViniGrid({ vini }: ViniGridProps) {
         <Box
           sx={{
             display: "flex",
-            flexWrap: "wrap",
+            flexWrap: { xs: "nowrap", sm: "wrap" },
+            overflowX: { xs: "auto", sm: "visible" },
             gap: 1.5,
             mb: 6,
-            pb: 4,
+            pb: { xs: 2, sm: 4 },
             borderBottom: `1px solid ${colors.border}`,
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
           }}
         >
           {tipologie.map((tipo) => {
@@ -397,7 +436,8 @@ export default function ViniGrid({ vini }: ViniGridProps) {
                 md: "repeat(4, 1fr)",
                 lg: "repeat(5, 1fr)",
               },
-              gap: 3,
+              gap: { xs: 2, sm: 3 },
+              alignItems: { xs: "start", md: "stretch" },
             }}
           >
             {viniFiltrati.map((vino) => (

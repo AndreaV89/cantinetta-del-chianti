@@ -85,7 +85,7 @@ export default async function ServiziPage() {
             right: "-0.05em",
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
-            fontSize: { xs: "8rem", md: "16rem" },
+            fontSize: { xs: "5rem", md: "16rem" },
             lineHeight: 1,
             color: "rgba(255,255,255,0.03)",
             userSelect: "none",
@@ -173,7 +173,7 @@ export default async function ServiziPage() {
               <Box
                 sx={{
                   position: "relative",
-                  minHeight: { xs: 280, md: 560 },
+                  minHeight: { xs: 320, md: 560 },
                   overflow: "hidden",
                   direction: "ltr",
                 }}
@@ -277,8 +277,9 @@ export default async function ServiziPage() {
                     fontSize: "0.8125rem",
                     color: colors.beige,
                     letterSpacing: "0.05em",
-                    borderTop: `1px solid ${colors.border}`,
+                    mt: 3,
                     pt: 3,
+                    borderTop: `1px solid ${colors.border}`,
                   }}
                 >
                   {servizio.info}

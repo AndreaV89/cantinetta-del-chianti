@@ -91,7 +91,7 @@ export default async function ContattiPage() {
             right: "-0.05em",
             fontFamily: '"Apple Chancery", Palatino, serif',
             fontStyle: "italic",
-            fontSize: { xs: "8rem", md: "16rem" },
+            fontSize: { xs: "5rem", md: "16rem" },
             lineHeight: 1,
             color: "rgba(255,255,255,0.03)",
             userSelect: "none",
@@ -181,7 +181,7 @@ export default async function ContattiPage() {
           <Box
             sx={{
               position: "relative",
-              aspectRatio: "3/4",
+              aspectRatio: { xs: "1/1", md: "3/4" },
               borderRadius: "2px",
               overflow: "hidden",
               backgroundColor: "#E8E0D5",
@@ -631,7 +631,7 @@ export default async function ContattiPage() {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1454.5219861959454!2d11.432594559854813!3d43.46827196535392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132bc961d38932bd%3A0x14627c0a7fca0b1a!2sEnoteca%20La%20Cantinetta%20Del%20Chianti%20S.A.S.%20Di%20Azzato%20Riccardo%20Michele!5e0!3m2!1sit!2sit!4v1779113785632!5m2!1sit!2sit"
                 sx={{
                   width: "100%",
-                  height: 400,
+                  height: { xs: 280, md: 400 },
                   border: "none",
                   borderRadius: "2px",
                   mt: 2,

@@ -126,7 +126,9 @@
     "subtitle": "A selection of labels available in the shop — the full catalogue counts over 200.",
     "vino": "wine",
     "vini": "wines",
-    "empty": "No wines in this category"
+    "empty": "No wines in this category",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
   "tipologie": {
     "rosso": "Red",
@@ -256,7 +258,8 @@
     "tutti": "All",
     "prodotto": "product",
     "prodotti": "products",
-    "empty": "No products in this category"
+    "empty": "No products in this category",
+    "scopriDiPiu": "↑ discover more"
   },
   "serviziPage": {
     "metadata": {
