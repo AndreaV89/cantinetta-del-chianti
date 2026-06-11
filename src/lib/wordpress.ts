@@ -51,13 +51,13 @@ export async function getVini(locale = "it"): Promise<Vino[]> {
     fetch(
       `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 3600 },
       },
     ),
     fetch(
       `${WP_URL}/wp-json/acf/v3/vini?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 3600 },
       },
     ),
   ]);
@@ -95,13 +95,13 @@ export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
     fetch(
       `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 3600 },
       },
     ),
     fetch(
       `${WP_URL}/wp-json/acf/v3/prodotti?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 3600 },
       },
     ),
   ]);
@@ -140,7 +140,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
   const res = await fetch(
     `${WP_URL}/wp-json/wp/v2/album?per_page=100&lang=${locale}`,
     {
-      next: { revalidate: 0 },
+      next: { revalidate: 3600 },
     },
   );
 
@@ -151,7 +151,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
     data.map(async (item) => {
       const resSingle = await fetch(
         `${WP_URL}/wp-json/wp/v2/album/${item.id}?lang=${locale}`,
-        { next: { revalidate: 0 } },
+        { next: { revalidate: 3600 } },
       );
 
       if (!resSingle.ok) return null;
@@ -188,7 +188,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
 // ─── Cantine ─────────────────────────────────────────────
 
 export async function getCantine(): Promise<Cantina[]> {
-  const options = { cache: "no-store" as const };
+  const options = { next: { revalidate: 3600 } } as const;
 
   const [page1, page2] = await Promise.all([
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Box, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { Prodotto } from "@/types";
@@ -26,8 +26,15 @@ export default function ProdottoCard({
 }: ProdottoCardProps) {
   const [hovered, setHovered] = useState(false);
   const [tapped, setTapped] = useState(false);
-  const isMobile =
-    typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+  const isMobile = useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(hover: none)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(hover: none)").matches,
+    () => false, // server snapshot
+  );
   const hasDescrizione = Boolean(prodotto.acf.descrizione_breve);
   const showDesc = isFeatured && hasDescrizione && (hovered || tapped);
   const hasProduttore = Boolean(prodotto.acf.produttore);

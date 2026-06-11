@@ -205,7 +205,6 @@ export default function AlbumStrip({ album, index }: AlbumStripProps) {
         }}
       >
         {foto.map((f, i) => {
-          console.log("foto", i, f);
           const isPortrait = f.media_details.height > f.media_details.width;
           const imgUrl =
             f.media_details.sizes?.large?.source_url || f.full_image_url;

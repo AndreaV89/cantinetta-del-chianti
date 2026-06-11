@@ -22,6 +22,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
   return {
+    metadataBase: new URL("https://lacantinettadelchianti.it"),
     title: {
       default: t("title"),
       template: `%s | La Cantinetta del Chianti`,
@@ -32,6 +33,14 @@ export async function generateMetadata({
       siteName: "La Cantinetta del Chianti",
       locale: locale === "it" ? "it_IT" : "en_GB",
       type: "website",
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: "La Cantinetta del Chianti",
+        },
+      ],
     },
     icons: {
       icon: "/favicon.svg",

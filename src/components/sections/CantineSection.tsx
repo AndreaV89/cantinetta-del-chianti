@@ -10,7 +10,7 @@ import {
 import { FaChevronDown } from "react-icons/fa";
 import { colors } from "@/styles/colors";
 import type { Cantina, ZonaToscana, ZonaFrancia, RegioneItalia } from "@/types";
-import { useTranslations } from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 
 interface Props {
   cantine: Cantina[];
@@ -164,12 +164,13 @@ function StyledAccordion({
 
 export default function CantineSection({ cantine }: Props) {
   const t = useTranslations("cantineSection");
-  const tNazione = (key: string) => {
-    try {
-      return t(`nazioni.${key}` as Parameters<typeof t>[0]);
-    } catch {
-      return key.replace(/_/g, " ");
-    }
+  const messages = useMessages();
+  const nazioniMessages = (messages.cantineSection as Record<string, unknown>)
+    ?.nazioni as Record<string, string> | undefined;
+
+  const tNazione = (key: string): string => {
+    if (nazioniMessages?.[key]) return nazioniMessages[key];
+    return key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
   const vini = cantine.filter((c) => c.tipologia === "vino");
   const superalcolici = cantine.filter((c) => c.tipologia === "superalcolico");
@@ -194,21 +195,23 @@ export default function CantineSection({ cantine }: Props) {
   );
 
   // Gruppi superalcolici
-  const superItalia = superalcolici.filter(
-    (c) => c.nazione_superalcolico === "italia",
-  );
-  const superScozia = superalcolici.filter(
-    (c) => c.nazione_superalcolico === "scozia",
-  );
-  const superIrlanda = superalcolici.filter(
-    (c) => c.nazione_superalcolico === "irlanda",
-  );
-  const superUsa = superalcolici.filter(
-    (c) => c.nazione_superalcolico === "usa",
-  );
-  const superFrancia = superalcolici.filter(
-    (c) => c.nazione_superalcolico === "francia",
-  );
+  const superNazioniNote = ["italia", "francia", "scozia", "irlanda", "usa"];
+  const superNazioniCustom = Array.from(
+    new Set(
+      superalcolici
+        .map((c) => c.nazione_superalcolico)
+        .filter((n) => n && !superNazioniNote.includes(n.toLowerCase())),
+    ),
+  ) as string[];
+
+  const superNazioni = [
+    ...superNazioniNote.filter((nazione) =>
+      superalcolici.some(
+        (c) => c.nazione_superalcolico?.toLowerCase() === nazione,
+      ),
+    ),
+    ...superNazioniCustom,
+  ];
 
   return (
     <Box
@@ -339,33 +342,23 @@ export default function CantineSection({ cantine }: Props) {
             >
               {t("spiritsTitle")}
             </Typography>
-            {superItalia.length > 0 && (
+            {superNazioni.map((nazione) => (
               <StyledAccordion
-                label={t("nazioniAccordion.italia")}
-                cantine={superItalia}
+                key={nazione}
+                label={
+                  superNazioniNote.includes(nazione.toLowerCase())
+                    ? t(
+                        `nazioniAccordion.${nazione.toLowerCase()}` as Parameters<
+                          typeof t
+                        >[0],
+                      )
+                    : tNazione(nazione)
+                }
+                cantine={superalcolici.filter(
+                  (c) => c.nazione_superalcolico === nazione,
+                )}
               />
-            )}
-            {superFrancia.length > 0 && (
-              <StyledAccordion
-                label={t("nazioniAccordion.francia")}
-                cantine={superFrancia}
-              />
-            )}
-            {superScozia.length > 0 && (
-              <StyledAccordion
-                label={t("nazioniAccordion.scozia")}
-                cantine={superScozia}
-              />
-            )}
-            {superIrlanda.length > 0 && (
-              <StyledAccordion
-                label={t("nazioniAccordion.irlanda")}
-                cantine={superIrlanda}
-              />
-            )}
-            {superUsa.length > 0 && (
-              <StyledAccordion label={t("usa")} cantine={superUsa} />
-            )}
+            ))}
           </>
         )}
       </Box>

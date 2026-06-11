@@ -18,8 +18,8 @@ export const colors = {
   beigeLight: "#D9C4AA", // beige più chiaro
 
   // Sezioni scure
-  dark: "#4A0E1E", // sfondo sezioni scure (Pillars, Quote, hero pagine)
-  darkDeep: "#350A16", // pre-footer
+  darkDeep: "#4A0E1E", // sfondo sezioni scure (Pillars, Quote, hero pagine)
+  dark: "#350A16", // pre-footer
 
   // Footer
   footer: "#1E1414", // sfondo footer
@@ -30,5 +30,22 @@ export const colors = {
   // Bianchi
   white: "#FFFFFF",
 } as const;
+
+// Palette alternativa
+// export const colors = {
+//   bg: "#FAFAFA",
+//   bgAlt: "#F0EEEE",
+//   text: "#111111",
+//   textLight: "#555555",
+//   merlot: "#1A1A1A",
+//   merlotHover: "#3D3D3D",
+//   beige: "#C4A882",
+//   beigeLight: "#D9C4AA",
+//   dark: "#111111",
+//   darkDeep: "#000000",
+//   footer: "#0A0A0A",
+//   border: "#E0DCDC",
+//   white: "#FFFFFF",
+// } as const;
 
 export type ColorKey = keyof typeof colors;
