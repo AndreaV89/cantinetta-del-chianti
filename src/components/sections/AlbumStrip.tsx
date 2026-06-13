@@ -1,0 +1,311 @@
+"use client";
+
+import { useState, useRef } from "react";
+import { Box, Typography, IconButton } from "@mui/material";
+import Image from "next/image";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { Album } from "@/types";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { colors } from "@/styles/colors";
+import { useTranslations } from "next-intl";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
+interface AlbumStripProps {
+  album: Album;
+  index: number;
+}
+
+export default function AlbumStrip({ album, index }: AlbumStripProps) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const touchStartX = useRef(0);
+  const t = useTranslations("albumStrip");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const foto = album.acf.foto || [];
+  const isEven = index % 2 === 0;
+
+  const slides = foto.map((f) => ({
+    src: f.full_image_url,
+    width: f.media_details.width,
+    height: f.media_details.height,
+    alt: f.alt_text || f.title,
+    description: f.caption || "",
+  }));
+
+  const scroll = (dir: "left" | "right") => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({
+      left: dir === "right" ? 400 : -400,
+      behavior: "smooth",
+    });
+  };
+
+  const openLightbox = (i: number) => {
+    setLightboxIndex(i);
+    setLightboxOpen(true);
+  };
+
+  if (foto.length === 0) return null;
+
+  return (
+    <Box
+      component="section"
+      sx={{
+        backgroundColor: isEven ? colors.bg : colors.bgAlt,
+        py: { xs: 6, md: 8 },
+        borderBottom: "1px solid rgba(224, 216, 206, 0.5)",
+      }}
+    >
+      {/* Header album */}
+      <Box
+        sx={{
+          maxWidth: 1920,
+          mx: "auto",
+          px: { xs: 3, md: 10 },
+          mb: 4,
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "flex-start", md: "flex-end" },
+          justifyContent: "space-between",
+          gap: { xs: 2, md: 0 },
+        }}
+      >
+        <Box sx={{ maxWidth: 600 }}>
+          <Typography
+            component="h2"
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontSize: { xs: "1.75rem", md: "2.5rem" },
+              fontWeight: 400,
+              color: colors.dark,
+              lineHeight: 1.2,
+              mb: 1,
+            }}
+          >
+            {album.title}
+          </Typography>
+
+          {album.acf.descrizione && (
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 300,
+                fontSize: "0.9375rem",
+                color: colors.textLight,
+                mb: 1,
+              }}
+            >
+              {album.acf.descrizione}
+            </Typography>
+          )}
+
+          {album.acf.data && (
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.75rem",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: colors.beige,
+              }}
+            >
+              {album.acf.data.replace(/(\d{4})(\d{2})(\d{2})/, "$3/$2/$1")}
+            </Typography>
+          )}
+        </Box>
+
+        {/* Contatore foto + frecce */}
+        <Box
+          sx={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.75rem",
+              color: colors.textLight,
+              mr: 1,
+            }}
+          >
+            {foto.length} {t("foto")}
+          </Typography>
+          <IconButton
+            onClick={() => scroll("left")}
+            size="small"
+            sx={{
+              border: `1px solid ${colors.border}`,
+              color: colors.dark,
+              "&:hover": { borderColor: colors.beige, color: colors.beige },
+            }}
+          >
+            <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
+          </IconButton>
+          <IconButton
+            onClick={() => scroll("right")}
+            size="small"
+            sx={{
+              border: `1px solid ${colors.border}`,
+              color: colors.dark,
+              "&:hover": { borderColor: colors.beige, color: colors.beige },
+            }}
+          >
+            <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
+          </IconButton>
+        </Box>
+      </Box>
+
+      {/* Strip foto orizzontale */}
+      <Box
+        ref={scrollRef}
+        onMouseDown={(e) => {
+          isDragging.current = true;
+          startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
+          scrollLeftRef.current = scrollRef.current?.scrollLeft || 0;
+        }}
+        onMouseMove={(e) => {
+          if (!isDragging.current || !scrollRef.current) return;
+          e.preventDefault();
+          const x = e.pageX - (scrollRef.current.offsetLeft || 0);
+          const walk = (x - startX.current) * 1.5;
+          scrollRef.current.scrollLeft = scrollLeftRef.current - walk;
+        }}
+        onMouseUp={() => {
+          isDragging.current = false;
+        }}
+        onMouseLeave={() => {
+          isDragging.current = false;
+        }}
+        onTouchStart={(e) => {
+          touchStartX.current = e.targetTouches[0].clientX;
+        }}
+        onTouchMove={(e) => {
+          if (!scrollRef.current) return;
+          const diff = touchStartX.current - e.targetTouches[0].clientX;
+          scrollRef.current.scrollLeft += diff * 0.8;
+          touchStartX.current = e.targetTouches[0].clientX;
+        }}
+        sx={{
+          display: "flex",
+          gap: 2,
+          overflowX: "auto",
+          px: { xs: 3, md: 10 },
+          pb: 1,
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
+          cursor: "grab",
+          "&:active": { cursor: "grabbing" },
+        }}
+      >
+        {foto.map((f, i) => {
+          const isPortrait = f.media_details.height > f.media_details.width;
+          const imgUrl =
+            f.media_details.sizes?.large?.source_url || f.full_image_url;
+          const w = isMobile
+            ? isPortrait
+              ? 200
+              : 300
+            : isPortrait
+              ? 260
+              : 400;
+          const h = isMobile ? 260 : 320;
+
+          return (
+            <Box
+              key={f.id}
+              onClick={() => openLightbox(i)}
+              sx={{
+                position: "relative",
+                flexShrink: 0,
+                width: w,
+                height: h,
+                borderRadius: "2px",
+                overflow: "hidden",
+                cursor: "pointer",
+                backgroundColor: "#E8E0D5",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "scale(1.02)",
+                  boxShadow: "0 8px 24px rgba(74, 14, 30, 0.15)",
+                },
+                ...(i === 0 && {
+                  width: isMobile
+                    ? isPortrait
+                      ? 240
+                      : 380
+                    : isPortrait
+                      ? 320
+                      : 520,
+                }),
+              }}
+            >
+              <Image
+                src={imgUrl}
+                alt={f.alt_text || f.title}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 768px) 80vw, 400px"
+              />
+              {/* Overlay hover */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundColor: "rgba(74, 14, 30, 0)",
+                  transition: "background-color 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "rgba(74, 14, 30, 0.15)",
+                  },
+                }}
+              />
+              {f.caption && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: "rgba(74, 14, 30, 0.72)",
+                    backdropFilter: "blur(4px)",
+                    px: 2,
+                    py: 1,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: '"Apple Chancery", Palatino, serif',
+                      fontSize: "1.125rem",
+                      color: colors.white,
+                      lineHeight: 1.4,
+                      textAlign: "center",
+                    }}
+                  >
+                    {f.caption}
+                  </Typography>
+                </Box>
+              )}
+            </Box>
+          );
+        })}
+      </Box>
+
+      {/* Lightbox */}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={slides}
+        styles={{
+          container: { backgroundColor: "rgba(74, 14, 30, 0.97)" },
+        }}
+      />
+    </Box>
+  );
+}

@@ -1,33 +1,66 @@
 import { Box, Typography } from "@mui/material";
+import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
+import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-const footerLinks = {
-  esplora: [
-    { label: "I Nostri Vini", href: "/vini" },
-    { label: "Prodotti Tipici", href: "/prodotti" },
-    { label: "Servizi", href: "/servizi" },
-    { label: "Foto", href: "/foto" },
-  ],
-  info: [
-    { label: "Chi Siamo", href: "/#chi-siamo" },
-    { label: "Contattaci", href: "/contatti" },
-    { label: "Privacy Policy", href: "/privacy" },
-  ],
-  social: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "Facebook", href: "https://facebook.com" },
-    { label: "TripAdvisor", href: "https://tripadvisor.com" },
-  ],
-};
+export default async function Footer() {
+  const t = await getTranslations("footer");
+  const locale = await getLocale();
 
-export default function Footer() {
+  const footerLinks = {
+    esplora: [
+      { label: t("links.vini"), href: `/${locale}/vini` },
+      { label: t("links.prodotti"), href: `/${locale}/prodotti` },
+      { label: t("links.servizi"), href: `/${locale}/servizi` },
+      { label: t("links.storie"), href: `/${locale}/storie` },
+    ],
+    info: [
+      { label: t("links.chiSiamo"), href: `/${locale}/chi-siamo` },
+      {
+        label: t("links.contattaci"),
+        href: "https://wa.me/39XXXXXXXXXX",
+        target: "_blank",
+      },
+      {
+        label: "Privacy Policy",
+        href: "https://www.iubenda.com/privacy-policy/89647461",
+      },
+      {
+        label: "Cookie Policy",
+        href: "https://www.iubenda.com/privacy-policy/89647461/cookie-policy",
+      },
+    ],
+    social: [
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/la.cantinetta_del_chianti/",
+        icon: <FaInstagram size={16} />,
+      },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/lacantinettadelchianti",
+        icon: <FaFacebookF size={16} />,
+      },
+      {
+        label: "TripAdvisor",
+        href: "https://www.tripadvisor.it/Restaurant_Review-g616196-d2371663-Reviews-La_Cantinetta_del_Chianti-Gaiole_in_Chianti_Tuscany.html",
+        icon: <FaTripadvisor size={16} />,
+      },
+    ],
+  };
+
   return (
     <Box
       component="footer"
-      sx={{ backgroundColor: "#3A2E28", color: "#FFFFFF" }}
+      sx={{
+        backgroundColor: colors.dark,
+        color: "#FFFFFF",
+        borderTop: `2px solid ${colors.beige}`,
+      }}
     >
       <Box
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           mx: "auto",
           px: { xs: 3, md: 10 },
           pt: { xs: 6, md: 8 },
@@ -38,10 +71,14 @@ export default function Footer() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "2fr 1fr 1fr 1fr" },
-            gap: { xs: 5, md: 8 },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              md: "2fr 1fr 1fr 1fr",
+            },
+            gap: { xs: 3, md: 8 },
             pb: 6,
-            borderBottom: "1px solid rgba(201, 168, 108, 0.2)",
+            borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
           }}
         >
           {/* Brand */}
@@ -66,8 +103,7 @@ export default function Footer() {
                 maxWidth: 260,
               }}
             >
-              Bottega enogastronomica nel cuore del Chianti Classico, a Gaiole
-              in Chianti, Toscana.
+              {t("tagline")}
             </Typography>
           </Box>
 
@@ -80,16 +116,16 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: colors.beige,
                 mb: 2.5,
               }}
             >
-              Esplora
+              {t("esplora")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {footerLinks.esplora.map((link) => (
                 <Typography
-                  key={link.href}
+                  key={link.label}
                   component="a"
                   href={link.href}
                   sx={{
@@ -117,18 +153,26 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: colors.beige,
                 mb: 2.5,
               }}
             >
-              Info
+              {t("info")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {footerLinks.info.map((link) => (
                 <Typography
-                  key={link.href}
+                  key={link.label}
                   component="a"
                   href={link.href}
+                  target={
+                    link.href.startsWith("https://wa.me") ? "_blank" : undefined
+                  }
+                  rel={
+                    link.href.startsWith("https://wa.me")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   sx={{
                     fontFamily: '"DM Sans", sans-serif',
                     fontWeight: 300,
@@ -154,18 +198,18 @@ export default function Footer() {
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C9A86C",
+                color: colors.beige,
                 mb: 2.5,
               }}
             >
-              Seguici
+              {t("seguici")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
-              {footerLinks.social.map((link) => (
+              {footerLinks.social.map((social) => (
                 <Typography
-                  key={link.href}
+                  key={social.label}
                   component="a"
-                  href={link.href}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -174,11 +218,24 @@ export default function Footer() {
                     fontSize: "0.875rem",
                     color: "rgba(255,255,255,0.6)",
                     textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.5,
                     "&:hover": { color: "#FFFFFF" },
                     transition: "color 0.2s ease",
                   }}
                 >
-                  {link.label}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "inherit",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {social.icon}
+                  </Box>
+                  {social.label}
                 </Typography>
               ))}
             </Box>
@@ -191,7 +248,7 @@ export default function Footer() {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
-            alignItems: { md: "center" },
+            alignItems: { xs: "center", md: "center" },
             gap: 1,
             pt: 3,
           }}
@@ -202,10 +259,11 @@ export default function Footer() {
               fontWeight: 300,
               fontSize: "0.75rem",
               color: "rgba(255,255,255,0.3)",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
-            © {new Date().getFullYear()} La Cantinetta del Chianti · Gaiole in
-            Chianti, Siena
+            © {new Date().getFullYear()} La Cantinetta del Chianti ·{" "}
+            {t("copyright")}
           </Typography>
           <Typography
             sx={{
@@ -213,20 +271,21 @@ export default function Footer() {
               fontWeight: 300,
               fontSize: "0.75rem",
               color: "rgba(255,255,255,0.3)",
+              textAlign: { xs: "center", md: "right" },
             }}
           >
-            Design & sviluppo by{" "}
+            {t("credit")}{" "}
             <Typography
               component="a"
               href="https://andreavannetti.dev"
               target="_blank"
               sx={{
-                color: "rgba(201, 168, 108, 0.6)",
+                color: "rgba(196, 168, 130, 0.6)",
                 textDecoration: "none",
                 fontSize: "inherit",
                 fontFamily: "inherit",
                 fontWeight: "inherit",
-                "&:hover": { color: "#C9A86C" },
+                "&:hover": { color: colors.beige },
               }}
             >
               vannetti.dev

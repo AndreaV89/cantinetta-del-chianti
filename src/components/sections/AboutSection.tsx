@@ -1,51 +1,164 @@
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
+import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export default function AboutSection() {
+export default async function AboutSection() {
+  const t = await getTranslations("aboutSection");
+  const locale = await getLocale();
+
+  const infoItems = [
+    {
+      label: t("doveSiamo.indirizzo.label"),
+      value: t("doveSiamo.indirizzo.value"),
+    },
+    { label: t("doveSiamo.orari.label"), value: t("doveSiamo.orari.value") },
+    {
+      label: t("doveSiamo.contatti.label"),
+      value: t("doveSiamo.contatti.value"),
+    },
+  ];
+
   return (
-    <Box
-      component="section"
-      sx={{ backgroundColor: "#FDFAF6", py: { xs: 8, md: 0 } }}
-    >
+    <Box component="section" sx={{ backgroundColor: colors.darkDeep }}>
       <Box
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           mx: "auto",
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
           minHeight: { md: 580 },
         }}
       >
-        {/* Foto sinistra */}
+        {/* Colonna 1 — Foto */}
         <Box
           sx={{
             position: "relative",
-            minHeight: { xs: 300, md: 580 },
-            backgroundColor: "#E8E0D5",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            minHeight: { xs: 260, md: 580 },
+            overflow: "hidden",
           }}
         >
-          {/* Sostituire con <Image> quando il cliente fornisce la foto */}
-          <Typography
-            sx={{
-              fontFamily: '"Apple Chancery", Palatino, serif',
-              fontStyle: "italic",
-              fontSize: "1rem",
-              color: "rgba(115, 97, 86, 0.4)",
-            }}
-          >
-            [ foto locale ]
-          </Typography>
+          <Image
+            src="/images/about.webp"
+            alt="La Cantinetta del Chianti"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
         </Box>
 
-        {/* Testo destra */}
+        {/* Colonna 2 — Testo Chi Siamo */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            px: { xs: 3, md: 8 },
+            px: { xs: 3, md: 7 },
+            py: { xs: 6, md: 8 },
+            borderRight: { md: "1px solid rgba(196, 168, 130, 0.15)" },
+            borderBottom: {
+              xs: "1px solid rgba(196, 168, 130, 0.15)",
+              md: "none",
+            },
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.6875rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: colors.beige,
+              mb: 1,
+            }}
+          >
+            {t("chiSiamo.label")}
+          </Typography>
+          <Box
+            sx={{
+              width: 32,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 3,
+            }}
+          />
+
+          <Typography
+            component="h2"
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontSize: { xs: "2rem", md: "2.5rem" },
+              fontStyle: "italic",
+              fontWeight: 400,
+              color: "#FFFFFF",
+              lineHeight: 1.25,
+              mb: 4,
+              whiteSpace: "pre-line",
+            }}
+          >
+            {t("chiSiamo.title")}
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.9375rem",
+              lineHeight: 1.85,
+              color: "rgba(255,255,255,0.65)",
+              mb: 3,
+            }}
+          >
+            {t("chiSiamo.body1")}
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.9375rem",
+              lineHeight: 1.85,
+              color: "rgba(255,255,255,0.65)",
+              mb: 5,
+            }}
+          >
+            {t("chiSiamo.body2")}
+          </Typography>
+
+          <Box
+            sx={{
+              width: 48,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 5,
+            }}
+          />
+
+          <Typography
+            component="a"
+            href={`/${locale}/chi-siamo`}
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 500,
+              fontSize: "0.8125rem",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: colors.beige,
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            }}
+          >
+            {t("chiSiamo.cta")}
+          </Typography>
+        </Box>
+
+        {/* Colonna 3 — Info contatti */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            px: { xs: 3, md: 7 },
             py: { xs: 6, md: 8 },
           }}
         >
@@ -55,14 +168,19 @@ export default function AboutSection() {
               fontSize: "0.6875rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C9A86C",
+              color: colors.beige,
               mb: 1,
             }}
           >
-            Chi Siamo
+            {t("doveSiamo.label")}
           </Typography>
           <Box
-            sx={{ width: 32, height: 1, backgroundColor: "#C9A86C", mb: 3 }}
+            sx={{
+              width: 32,
+              height: "1px",
+              backgroundColor: colors.beige,
+              mb: 3,
+            }}
           />
 
           <Typography
@@ -70,69 +188,64 @@ export default function AboutSection() {
             sx={{
               fontFamily: '"Apple Chancery", Palatino, serif',
               fontSize: { xs: "2rem", md: "2.5rem" },
+              fontStyle: "italic",
               fontWeight: 400,
-              color: "#3A2E28",
+              color: "#FFFFFF",
               lineHeight: 1.25,
-              mb: 4,
-            }}
-          >
-            Una storia di vino
-            <br />e territorio
-          </Typography>
-
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.9375rem",
-              lineHeight: 1.85,
-              color: "#736156",
-              mb: 3,
-            }}
-          >
-            Benvenuto a La Cantinetta, nel paese di Gaiole in Chianti. Una
-            bottega specializzata che seleziona con cura le migliori etichette
-            del territorio, con una passione autentica per la cultura
-            enogastronomica toscana.
-          </Typography>
-
-          <Typography
-            sx={{
-              fontFamily: '"DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "0.9375rem",
-              lineHeight: 1.85,
-              color: "#736156",
               mb: 5,
             }}
           >
-            Se stai cercando i vini buoni e i cibi gustosi del Chianti — e non
-            solo — sei arrivato nel posto giusto.
+            {t("doveSiamo.title")}
           </Typography>
 
-          {/* Divider gold */}
-          <Box
-            sx={{ width: 48, height: 1, backgroundColor: "#C9A86C", mb: 5 }}
-          />
+          {infoItems.map((item) => (
+            <Box key={item.label} sx={{ mb: 3.5 }}>
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: "0.625rem",
+                  fontWeight: 400,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: colors.beige,
+                  mb: 0.75,
+                }}
+              >
+                {item.label}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: 300,
+                  fontSize: "0.9375rem",
+                  lineHeight: 1.75,
+                  color: "rgba(255,255,255,0.65)",
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {item.value}
+              </Typography>
+            </Box>
+          ))}
 
           <Typography
             component="a"
-            href="/contatti"
+            href="https://www.google.com/maps/dir/?api=1&destination=Via+B.+Ricasoli+33,+53013+Gaiole+in+Chianti+SI,+Italia"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
+              mt: 1,
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 500,
               fontSize: "0.8125rem",
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#8B1A2F",
+              color: colors.beige,
               textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 1,
-              "&:hover": { gap: 2, transition: "gap 0.2s ease" },
+              "&:hover": { textDecoration: "underline" },
             }}
           >
-            Vieni a trovarci →
+            {t("doveSiamo.directions")}
           </Typography>
         </Box>
       </Box>

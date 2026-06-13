@@ -23,11 +23,11 @@
 
 - **Font titoli:** Apple Chancery, Palatino, serif
 - **Font body:** DM Sans, sans-serif
-- **Sfondo:** #FDFAF6 (crema caldo) / #F8F5F0 (sezioni alternate)
-- **Testo:** #3A2E28 (scuro) / #736156 (medio)
-- **Oro:** #C9A86C (accenti, label, divider)
-- **Merlot:** #8B1A2F (CTA, bottoni primari)
-- **Bordo:** #E0D8CE
+- **Sfondo:** #FEFCFB (crema caldo) / #F5F0EF (sezioni alternate)
+- **Testo:** #4A0E1E (scuro) / #5E4444 (medio)
+- **Oro:** #C4A882 (accenti, label, divider)
+- **Merlot:** #7D1A2C (CTA, bottoni primari)
+- **Bordo:** #E5DADA
 
 ## Convenzioni
 
@@ -56,7 +56,69 @@
 Il cliente vuole citazioni sul vino sparse nelle pagine come elementi decorativi.
 
 - Font: Apple Chancery italic
-- Colore: #C9A86C (oro)
+- Colore: #C4A882 (oro)
 - Posizionamento: tra una sezione e l'altra, o come elementi di sfondo
 - Citazione confermata: "Wine not?"
 - Tono: spiritoso ma elegante, non pacchiano
+
+## Regola sezioni scure
+
+- Footer: #4A0E1E (il più scuro)
+- Sezione immediatamente sopra il footer: #350A16
+- Sezioni scure intermedie (Pillars, QuoteSection): #4A0E1E
+- Mai mettere due sezioni dello stesso colore scuro adiacenti
+
+## Ordine sezioni Home
+
+1. HeroVideo
+2. Pillars (#4A0E1E — scuro)
+3. WineSection (#FEFCFB — chiaro)
+4. ProductsSection (#F5F0EF — chiaro alternato)
+5. QuoteSection (#4A0E1E — scuro, separatore)
+6. ServicesSection (#FEFCFB — chiaro)
+7. AboutSection (#350A16 — scuro, pre-footer)
+8. Footer (#4A0E1E)
+
+## Checklist pre go-live
+
+### Performance
+
+- [ ] Cambia tutti i `{ cache: 'no-store' }` in `{ next: { revalidate: 3600 } }` in `src/lib/wordpress.ts`
+
+### SEO
+
+- [ ] Aggiorna `baseUrl` in `src/app/sitemap.ts` con il dominio reale del cliente
+- [ ] Aggiorna `baseUrl` in `src/app/robots.ts` con il dominio reale del cliente
+- [ ] Aggiungi Open Graph images in `src/app/layout.tsx`:
+  - Crea immagine OG 1200×630px (foto del locale o dei vini)
+  - Aggiungi `openGraph.images` nel metadata globale
+  - Aggiungi `openGraph.images` in ogni pagina
+- [ ] Verifica meta description di ogni pagina
+
+### Contenuti
+
+- [x] Sostituire foto placeholder Unsplash nella pagina Servizi con foto reali
+- [x] Aggiungere video hero reale in `public/videos/hero.mp4`
+- [ ] Aggiornare indirizzo esatto in AboutSection, LocationSection e pagina Contatti
+- [x] Aggiornare telefono/email reali ovunque - da verificare a fine progetto
+- [ ] Caricare PDF catalogo vini in `public/catalogo-vini.pdf`
+- [ ] Aggiornare link WhatsApp con numero reale
+
+### Colori
+
+- [ ] Conferma palette definitiva con il cliente
+- [ ] Eseguire refactor completo con `src/styles/colors.ts`
+
+### Deploy
+
+- [ ] Collegare dominio reale del cliente su Vercel
+- [ ] Impostare CORS in Cloudways con dominio reale invece di `*`
+- [ ] Aggiornare `NEXT_PUBLIC_WP_URL` con dominio WordPress definitivo su Vercel
+- [ ] Testare responsive mobile su tutti i breakpoint
+- [ ] Testare su Safari iOS (Apple Chancery font)
+
+### i18n
+
+- [ ] Configurare `next-intl` per IT/EN
+- [ ] Tradurre tutti i testi statici
+- [ ] Configurare WPML in WordPress per vini e prodotti

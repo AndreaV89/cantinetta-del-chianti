@@ -1,34 +1,48 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  Button,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
-const navLinks = [
-  { label: "Vini", href: "/vini" },
-  { label: "Prodotti", href: "/prodotti" },
-  { label: "Servizi", href: "/servizi" },
-  { label: "Foto", href: "/foto" },
-  { label: "Contatti", href: "/contatti" },
-];
+import { colors } from "@/styles/colors";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const t = useTranslations("nav");
+  const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
+
+  const navLinks = [
+    { label: t("vini"), href: `/${locale}/vini` },
+    { label: t("prodotti"), href: `/${locale}/prodotti` },
+    { label: t("servizi"), href: `/${locale}/servizi` },
+    { label: t("storie"), href: `/${locale}/storie` },
+    { label: t("chiSiamo"), href: `/${locale}/chi-siamo` },
+  ];
+
+  const switchLocale = (newLocale: string) => {
+    const segments = pathname.split("/");
+    segments[1] = newLocale;
+    router.push(segments.join("/"));
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
     <AppBar
@@ -37,13 +51,13 @@ export default function Navbar() {
       sx={{
         backgroundColor: scrolled ? "rgba(253, 250, 246, 0.96)" : "transparent",
         backdropFilter: scrolled ? "blur(8px)" : "none",
-        borderBottom: scrolled ? "1px solid #E0D8CE" : "none",
+        borderBottom: scrolled ? `1px solid ${colors.border}` : "none",
         transition: "all 0.3s ease",
       }}
     >
       <Toolbar
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           width: "100%",
           mx: "auto",
           px: { xs: 3, md: 6 },
@@ -54,14 +68,18 @@ export default function Navbar() {
         {/* Logo */}
         <Typography
           component="a"
-          href="/"
+          href={`/${locale}`}
           sx={{
             fontFamily: '"Apple Chancery", Palatino, serif',
-            fontSize: "1.125rem",
-            color: scrolled ? "#3A2E28" : "#FFFFFF",
+            fontSize: { xs: "0.95rem", sm: "1.125rem" },
+            color: scrolled ? colors.dark : "#FFFFFF",
             textDecoration: "none",
             letterSpacing: "0.02em",
             transition: "color 0.3s ease",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: { xs: "calc(100vw - 80px)", md: "none" },
           }}
         >
           La Cantinetta del Chianti
@@ -83,11 +101,11 @@ export default function Navbar() {
                 fontWeight: 400,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: scrolled ? "#736156" : "rgba(255,255,255,0.85)",
+                color: scrolled ? colors.textLight : "rgba(255,255,255,0.85)",
                 textDecoration: "none",
                 transition: "color 0.2s ease",
                 "&:hover": {
-                  color: scrolled ? "#3A2E28" : "#FFFFFF",
+                  color: scrolled ? colors.dark : "#FFFFFF",
                 },
               }}
             >
@@ -105,15 +123,18 @@ export default function Navbar() {
           }}
         >
           <Typography
-            component="a"
-            href="/it"
+            onClick={() => switchLocale("it")}
+            component="button"
             sx={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
-              color: scrolled ? "#736156" : "rgba(255,255,255,0.7)",
-              textDecoration: "none",
-              "&:hover": { color: scrolled ? "#3A2E28" : "#FFFFFF" },
+              color: scrolled ? colors.textLight : "rgba(255,255,255,0.7)",
+              "&:hover": { color: scrolled ? colors.dark : "#FFFFFF" },
             }}
           >
             IT
@@ -121,21 +142,24 @@ export default function Navbar() {
           <Typography
             sx={{
               fontSize: "0.75rem",
-              color: scrolled ? "#E0D8CE" : "rgba(255,255,255,0.3)",
+              color: scrolled ? colors.border : "rgba(255,255,255,0.3)",
             }}
           >
             /
           </Typography>
           <Typography
-            component="a"
-            href="/en"
+            onClick={() => switchLocale("en")}
+            component="button"
             sx={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
               fontFamily: '"DM Sans", sans-serif',
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
-              color: scrolled ? "#736156" : "rgba(255,255,255,0.7)",
-              textDecoration: "none",
-              "&:hover": { color: scrolled ? "#3A2E28" : "#FFFFFF" },
+              color: scrolled ? colors.textLight : "rgba(255,255,255,0.7)",
+              "&:hover": { color: scrolled ? colors.dark : "#FFFFFF" },
             }}
           >
             EN
@@ -147,63 +171,106 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           sx={{
             display: { xs: "flex", md: "none" },
-            color: scrolled ? "#3A2E28" : "#FFFFFF",
+            color: scrolled ? colors.dark : "#FFFFFF",
           }}
         >
           {mobileOpen ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
       </Toolbar>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <Box
-          sx={{
-            display: { xs: "flex", md: "none" },
-            flexDirection: "column",
-            backgroundColor: "#FDFAF6",
-            borderTop: "1px solid #E0D8CE",
-            px: 3,
-            py: 2,
-            gap: 1,
-          }}
-        >
-          {navLinks.map((link) => (
+      {/* Menu Mobile */}
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+          flexDirection: "column",
+          position: "fixed",
+          top: 72,
+          left: 0,
+          right: 0,
+          height: "calc(100dvh - 72px)",
+          minHeight: "calc(100svh - 72px)",
+          backgroundColor: colors.bg,
+          px: 3,
+          pt: 2,
+          pb: 4,
+          overflowY: "auto",
+          opacity: mobileOpen ? 1 : 0,
+          pointerEvents: mobileOpen ? "auto" : "none",
+          transform: mobileOpen ? "translateY(0)" : "translateY(-8px)",
+          transition: "opacity 0.25s ease, transform 0.25s ease",
+          zIndex: 1200,
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
             <Typography
               key={link.href}
               component="a"
               href={link.href}
+              onClick={() => setMobileOpen(false)}
               sx={{
                 fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.875rem",
-                letterSpacing: "0.1em",
+                fontSize: "1rem",
+                letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "#3A2E28",
+                color: isActive ? colors.merlot : colors.dark,
+                fontWeight: isActive ? 600 : 400,
                 textDecoration: "none",
-                py: 1.5,
-                borderBottom: "1px solid #E0D8CE",
+                py: 2,
+                borderBottom: `1px solid ${colors.border}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                "&::after": isActive
+                  ? {
+                      content: '"·"',
+                      color: colors.merlot,
+                      fontSize: "1.25rem",
+                    }
+                  : {},
               }}
             >
               {link.label}
             </Typography>
+          );
+        })}
+
+        {/* Lang switcher mobile */}
+        <Box sx={{ display: "flex", gap: 0, pt: 2, pb: 1 }}>
+          {["it", "en"].map((lang, i) => (
+            <Box key={lang} sx={{ display: "flex", alignItems: "center" }}>
+              {i > 0 && (
+                <Typography
+                  sx={{ fontSize: "0.75rem", color: colors.border, px: 1 }}
+                >
+                  /
+                </Typography>
+              )}
+              <Typography
+                component="button"
+                onClick={() => {
+                  switchLocale(lang);
+                  setMobileOpen(false);
+                }}
+                sx={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "8px 4px",
+                  fontSize: "0.8rem",
+                  letterSpacing: "0.12em",
+                  color: locale === lang ? colors.merlot : colors.textLight,
+                  fontWeight: locale === lang ? 600 : 400,
+                }}
+              >
+                {lang.toUpperCase()}
+              </Typography>
+            </Box>
           ))}
-          <Box sx={{ display: "flex", gap: 2, pt: 1 }}>
-            <Typography
-              component="a"
-              href="/it"
-              sx={{ fontSize: "0.75rem", color: "#736156" }}
-            >
-              IT
-            </Typography>
-            <Typography
-              component="a"
-              href="/en"
-              sx={{ fontSize: "0.75rem", color: "#736156" }}
-            >
-              EN
-            </Typography>
-          </Box>
         </Box>
-      )}
+      </Box>
     </AppBar>
   );
 }

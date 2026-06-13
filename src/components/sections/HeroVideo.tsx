@@ -1,12 +1,17 @@
 import { Box, Typography, Button } from "@mui/material";
+import { colors } from "@/styles/colors";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export default function HeroVideo() {
+export default async function HeroVideo() {
+  const t = await getTranslations("hero");
+  const locale = await getLocale();
+
   return (
     <Box
       component="section"
       sx={{
         position: "relative",
-        height: "100vh",
+        height: { xs: "100dvh", md: "100vh" },
         minHeight: 600,
         overflow: "hidden",
         display: "flex",
@@ -37,8 +42,10 @@ export default function HeroVideo() {
         sx={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(to right, rgba(5,4,3,0.82) 0%, rgba(5,4,3,0.35) 55%, rgba(5,4,3,0.0) 100%)",
+          background: {
+            xs: "linear-gradient(to bottom, rgba(5,4,3,0.75) 0%, rgba(5,4,3,0.55) 60%, rgba(5,4,3,0.3) 100%)",
+            md: "linear-gradient(to right, rgba(5,4,3,0.82) 0%, rgba(5,4,3,0.35) 55%, rgba(5,4,3,0.0) 100%)",
+          },
           zIndex: 1,
         }}
       />
@@ -48,7 +55,7 @@ export default function HeroVideo() {
         sx={{
           position: "relative",
           zIndex: 2,
-          maxWidth: 1440,
+          maxWidth: 1920,
           width: "100%",
           mx: "auto",
           px: { xs: 3, md: 10 },
@@ -62,15 +69,17 @@ export default function HeroVideo() {
             fontWeight: 400,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#C9A86C",
+            color: colors.beige,
             mb: 1.5,
           }}
         >
-          Gaiole in Chianti, Toscana
+          {t("location")}
         </Typography>
 
         {/* Linea gold */}
-        <Box sx={{ width: 32, height: 1, backgroundColor: "#C9A86C", mb: 3 }} />
+        <Box
+          sx={{ width: 32, height: 1, backgroundColor: colors.beige, mb: 3 }}
+        />
 
         {/* Titolo */}
         <Typography
@@ -79,13 +88,14 @@ export default function HeroVideo() {
             fontFamily:
               '"Apple Chancery", Palatino, "Palatino Linotype", serif',
             fontSize: { xs: "2.75rem", md: "4.5rem" },
+            fontStyle: "italic",
             fontWeight: 400,
             lineHeight: 1.15,
             color: "#FFFFFF",
             mb: 0,
           }}
         >
-          Il cuore del Chianti,
+          {t("title1")}
         </Typography>
         <Typography
           component="span"
@@ -97,11 +107,11 @@ export default function HeroVideo() {
             fontSize: { xs: "2.75rem", md: "4.5rem" },
             fontWeight: 400,
             lineHeight: 1.15,
-            color: "#C9A86C",
+            color: colors.beige,
             mb: 4,
           }}
         >
-          in ogni sorso.
+          {t("title2")}
         </Typography>
 
         {/* Subtitle */}
@@ -116,40 +126,48 @@ export default function HeroVideo() {
             mb: 5,
           }}
         >
-          Vini selezionati, prodotti tipici e aperitivi con vista sulle colline.
-          <br />A Gaiole in Chianti, dal mattino alla sera.
+          {t("subtitle")}
         </Typography>
 
         {/* CTA buttons */}
-        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            flexDirection: { xs: "column", sm: "row" },
+            flexWrap: "wrap",
+          }}
+        >
           <Button
             variant="contained"
-            href="/vini"
+            href={`/${locale}/vini`}
             sx={{
-              backgroundColor: "#8B1A2F",
+              backgroundColor: colors.merlot,
               color: "#FFFFFF",
               px: 4,
               py: 1.5,
-              "&:hover": { backgroundColor: "#7a1728" },
+              width: { xs: "100%", sm: "auto" },
+              "&:hover": { backgroundColor: colors.merlotHover },
             }}
           >
-            Scopri i vini
+            {t("ctaVini")}
           </Button>
           <Button
             variant="outlined"
-            href="/contatti"
+            href={`/${locale}/chi-siamo`}
             sx={{
               borderColor: "rgba(255,255,255,0.45)",
               color: "#FFFFFF",
               px: 4,
               py: 1.5,
+              width: { xs: "100%", sm: "auto" },
               "&:hover": {
                 borderColor: "#FFFFFF",
                 backgroundColor: "transparent",
               },
             }}
           >
-            Chi siamo
+            {t("ctaChiSiamo")}
           </Button>
         </Box>
       </Box>

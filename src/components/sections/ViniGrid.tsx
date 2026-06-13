@@ -1,0 +1,516 @@
+"use client";
+
+import { useState } from "react";
+import { Box, Typography } from "@mui/material";
+import Image from "next/image";
+import { Vino } from "@/types";
+import { colors } from "@/styles/colors";
+import { decodeHtmlEntities } from "@/lib/wordpress";
+import { useTranslations } from "next-intl";
+
+const tipologiaColors: Record<string, string> = {
+  red: colors.merlot,
+  white: colors.beige,
+  rosé: "#C4768A",
+  "sparkling wines": colors.textLight,
+  distillato: colors.dark,
+};
+
+const ORDINE_TIPOLOGIE = [
+  "red",
+  "white",
+  "rosé",
+  "sparkling wines",
+  "distillato",
+];
+
+const wpmlNormalize: Record<string, string> = {
+  rosso: "red",
+  bianco: "white",
+  rosato: "rosé",
+  bollicine: "sparkling wines",
+};
+
+const normalizeTipologia = (t: string) =>
+  wpmlNormalize[t.toLowerCase()] ?? t.toLowerCase();
+
+function VinoCard({ vino }: { vino: Vino; tTipo: (key: string) => string }) {
+  const [expanded, setExpanded] = useState(false);
+  const t = useTranslations("viniGrid");
+
+  const descrizione = vino.acf.descrizione_breve ?? "";
+  const LIMIT = 80;
+  const isTruncatable = descrizione.length > LIMIT;
+  const displayText =
+    expanded || !isTruncatable
+      ? descrizione
+      : descrizione.slice(0, LIMIT).trimEnd() + "…";
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#FFFFFF",
+        border: `1px solid ${colors.border}`,
+        borderRadius: 1,
+        overflow: "hidden",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 12px 32px rgba(74, 14, 30, 0.1)",
+        },
+      }}
+    >
+      {/* Immagine */}
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: { xs: "2/3", md: "3/4" },
+          backgroundColor: colors.bgAlt,
+        }}
+      >
+        {vino.featuredImage ? (
+          <Image
+            src={vino.featuredImage.url}
+            alt={vino.featuredImage.alt || vino.title}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 50vw, 25vw"
+          />
+        ) : (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: '"Apple Chancery", Palatino, serif',
+                fontStyle: "italic",
+                fontSize: "2rem",
+                color: "rgba(94, 68, 68, 0.25)",
+              }}
+            >
+              🍷
+            </Typography>
+          </Box>
+        )}
+      </Box>
+
+      {/* Info */}
+      <Box
+        sx={{
+          p: { xs: 1.5, md: 2.5 },
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            mb: 1,
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: "0.625rem",
+              fontWeight: 400,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color:
+                tipologiaColors[normalizeTipologia(vino.acf.tipologia ?? "")] ||
+                colors.textLight,
+            }}
+          >
+            {vino.acf.tipologia}
+          </Typography>
+          {vino.acf.annata > 0 && (
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.75rem",
+                color: colors.textLight,
+              }}
+            >
+              {vino.acf.annata}
+            </Typography>
+          )}
+        </Box>
+
+        <Typography
+          sx={{
+            fontFamily: '"Apple Chancery", Palatino, serif',
+            fontSize: "1.25rem",
+            color: colors.dark,
+            mb: 0.5,
+          }}
+        >
+          {decodeHtmlEntities(vino.title)}
+        </Typography>
+
+        <Typography
+          sx={{
+            fontFamily: '"DM Sans", sans-serif',
+            fontWeight: 300,
+            fontSize: "0.8125rem",
+            color: colors.textLight,
+            mb: 1.5,
+          }}
+        >
+          {vino.acf.produttore}
+          {vino.acf.denominazione ? ` · ${vino.acf.denominazione}` : ""}
+        </Typography>
+
+        {descrizione && (
+          <>
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 300,
+                fontSize: "0.8125rem",
+                lineHeight: 1.7,
+                color: colors.textLight,
+                mb: isTruncatable ? 0.5 : 2,
+                flex: 1,
+              }}
+            >
+              {displayText}
+            </Typography>
+
+            {isTruncatable && (
+              <Typography
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setExpanded(!expanded);
+                }}
+                sx={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: "0.75rem",
+                  fontWeight: 500,
+                  color: colors.merlot,
+                  cursor: "pointer",
+                  mb: 1,
+                  userSelect: "none",
+                  "&:hover": { textDecoration: "underline" },
+                }}
+              >
+                {expanded ? t("showLess") : t("showMore")}
+              </Typography>
+            )}
+          </>
+        )}
+      </Box>
+    </Box>
+  );
+}
+
+interface ViniGridProps {
+  vini: Vino[];
+}
+
+export default function ViniGrid({ vini }: ViniGridProps) {
+  const t = useTranslations("viniGrid");
+  const tTipo = useTranslations("tipologie");
+  const [filtro, setFiltro] = useState(t("tutti"));
+
+  const tipologie = [
+    t("tutti"),
+    tTipo("rosso"),
+    tTipo("bianco"),
+    tTipo("rosato"),
+    tTipo("bollicine"),
+    tTipo("distillato"),
+  ];
+
+  const tipologieMap: Record<string, string> = {
+    [tTipo("rosso")]: "red",
+    [tTipo("bianco")]: "white",
+    [tTipo("rosato")]: "rosé",
+    [tTipo("bollicine")]: "sparkling wines",
+    [tTipo("distillato")]: "distillato",
+  };
+
+  const conteggi = tipologie.reduce(
+    (acc, tipo) => {
+      acc[tipo] =
+        tipo === t("tutti")
+          ? vini.length
+          : vini.filter((v) => {
+              const tipologia = normalizeTipologia(v.acf.tipologia ?? "");
+              const chiave = tipologieMap[tipo];
+              return tipologia === chiave;
+            }).length;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  const viniFiltrati = (
+    filtro === t("tutti")
+      ? vini
+      : vini.filter((v) => {
+          const tipologia = normalizeTipologia(v.acf.tipologia ?? "");
+          const chiave = tipologieMap[filtro];
+          return tipologia === chiave;
+        })
+  ).sort((a, b) => {
+    const indexA = ORDINE_TIPOLOGIE.indexOf(
+      normalizeTipologia(a.acf.tipologia ?? ""),
+    );
+    const indexB = ORDINE_TIPOLOGIE.indexOf(
+      normalizeTipologia(b.acf.tipologia ?? ""),
+    );
+    return indexA - indexB;
+  });
+
+  return (
+    <Box
+      component="section"
+      sx={{ backgroundColor: colors.bg, py: { xs: 8, md: 10 } }}
+    >
+      <Box
+        sx={{
+          maxWidth: 1920,
+          mx: "auto",
+          px: { xs: 3, md: 10 },
+        }}
+      >
+        {/* Intestazione sezione */}
+        <Box sx={{ mb: 6 }}>
+          <Typography
+            sx={{
+              fontFamily: '"Apple Chancery", Palatino, serif',
+              fontStyle: "italic",
+              fontSize: { xs: "1.75rem", md: "2.25rem" },
+              color: colors.dark,
+              mb: 1,
+            }}
+          >
+            {t("title")}
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.9375rem",
+              color: colors.textLight,
+            }}
+          >
+            {t("subtitle")}
+          </Typography>
+        </Box>
+
+        {/* Risultati */}
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.875rem",
+              color: colors.textLight,
+            }}
+          >
+            {viniFiltrati.length} {viniFiltrati.length === 1 ? "vino" : "vini"}
+            {filtro !== "Tutti" ? ` · ${filtro}` : ""}
+          </Typography>
+        </Box>
+
+        {/* Filtri */}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: { xs: "nowrap", sm: "wrap" },
+            overflowX: { xs: "auto", sm: "visible" },
+            gap: 1.5,
+            mb: 6,
+            pb: { xs: 2, sm: 4 },
+            borderBottom: `1px solid ${colors.border}`,
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          {tipologie.map((tipo) => {
+            const count = conteggi[tipo];
+            if (count === 0 && tipo !== t("tutti")) return null;
+            const isActive = filtro === tipo;
+            return (
+              <Box
+                key={tipo}
+                onClick={() => setFiltro(tipo)}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  px: 2.5,
+                  py: 1,
+                  borderRadius: "2px",
+                  border: "1px solid",
+                  borderColor: isActive ? colors.merlot : colors.border,
+                  backgroundColor: isActive ? colors.merlot : "transparent",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    borderColor: colors.merlot,
+                    backgroundColor: isActive
+                      ? colors.merlot
+                      : "rgba(107, 26, 40, 0.05)",
+                  },
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: "0.75rem",
+                    fontWeight: isActive ? 500 : 400,
+                    letterSpacing: "0.08em",
+                    color: isActive ? "#FFFFFF" : colors.dark,
+                    userSelect: "none",
+                  }}
+                >
+                  {tipo}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: "0.625rem",
+                    color: isActive
+                      ? "rgba(255,255,255,0.7)"
+                      : colors.textLight,
+                    userSelect: "none",
+                  }}
+                >
+                  {count}
+                </Typography>
+              </Box>
+            );
+          })}
+        </Box>
+
+        {/* Risultati */}
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 300,
+              fontSize: "0.875rem",
+              color: colors.textLight,
+            }}
+          >
+            {viniFiltrati.length}{" "}
+            {viniFiltrati.length === 1 ? t("vino") : t("vini")}
+            {filtro !== t("tutti") ? ` · ${filtro}` : ""}
+          </Typography>
+        </Box>
+
+        {/* Griglia */}
+        {viniFiltrati.length === 0 ? (
+          <Box sx={{ py: 10, textAlign: "center" }}>
+            <Typography
+              sx={{
+                fontFamily: '"Apple Chancery", Palatino, serif',
+                fontStyle: "italic",
+                fontSize: "1.25rem",
+                color: "rgba(94, 68, 68, 0.4)",
+              }}
+            >
+              {t("empty")}
+            </Typography>
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr 1fr",
+                sm: "repeat(3, 1fr)",
+                md: "repeat(4, 1fr)",
+                lg: "repeat(5, 1fr)",
+              },
+              gap: { xs: 2, sm: 3 },
+              alignItems: { xs: "start", md: "stretch" },
+            }}
+          >
+            {viniFiltrati.map((vino) => (
+              <VinoCard key={vino.id} vino={vino} tTipo={tTipo} />
+            ))}
+          </Box>
+        )}
+
+        {/* CTA catalogo --- Momentaneamente tolto */}
+        {/* <Box
+          sx={{
+            mt: 4,
+            pt: 6,
+            borderTop: `1px solid ${colors.border}`,
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: { md: "center" },
+            justifyContent: "space-between",
+            gap: 3,
+          }}
+        >
+          <Box>
+            <Typography
+              sx={{
+                fontFamily: '"Apple Chancery", Palatino, serif',
+                fontStyle: "italic",
+                fontSize: { xs: "1.5rem", md: "1.75rem" },
+                color: colors.dark,
+                mb: 0.5,
+              }}
+            >
+              Vuoi scoprire tutte le etichette?
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 300,
+                fontSize: "0.9375rem",
+                color: colors.textLight,
+              }}
+            >
+              Oltre 200 vini ti aspettano in bottega.
+            </Typography>
+          </Box>
+          <Typography
+            component="a"
+            href="/catalogo-vini.pdf"
+            target="_blank"
+            sx={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 500,
+              fontSize: "0.8125rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: colors.merlot,
+              textDecoration: "none",
+              border: `1px solid ${colors.merlot}`,
+              px: 4,
+              py: 1.75,
+              borderRadius: "2px",
+              display: "inline-block",
+              flexShrink: 0,
+              "&:hover": {
+                backgroundColor: colors.merlot,
+                color: "#FFFFFF",
+              },
+              transition: "all 0.2s ease",
+            }}
+          >
+            Scarica il catalogo PDF →
+          </Typography>
+        </Box> */}
+      </Box>
+    </Box>
+  );
+}

@@ -1,36 +1,28 @@
 import { Box, Typography } from "@mui/material";
+import { colors } from "@/styles/colors";
+import { getTranslations } from "next-intl/server";
 
-const pillars = [
-  {
-    num: "01",
-    title: "Vini del Territorio",
-    desc: "Chianti Classico, Supertuscan e etichette artigianali selezionate direttamente dai produttori locali.",
-  },
-  {
-    num: "02",
-    title: "Prodotti Tipici",
-    desc: "Salumi, formaggi, conserve e pasta fresca — tutto ciò che la Toscana sa offrire di meglio.",
-  },
-  {
-    num: "03",
-    title: "Aperitivi & Taglieri",
-    desc: "Un tavolo fuori, il sole del Chianti e un calice da assaporare con calma.",
-  },
-];
+export default async function Pillars() {
+  const t = await getTranslations("pillars");
 
-export default function Pillars() {
+  const pillars = [
+    { num: "01", title: t("01.title"), desc: t("01.desc") },
+    { num: "02", title: t("02.title"), desc: t("02.desc") },
+    { num: "03", title: t("03.title"), desc: t("03.desc") },
+  ];
+
   return (
     <Box
       component="section"
       sx={{
-        backgroundColor: "#F8F5F0",
-        borderTop: "1px solid rgba(201, 168, 108, 0.3)",
-        borderBottom: "1px solid rgba(201, 168, 108, 0.3)",
+        backgroundColor: colors.dark,
+        borderTop: "1px solid rgba(196, 168, 130, 0.2)",
+        borderBottom: "1px solid rgba(196, 168, 130, 0.2)",
       }}
     >
       <Box
         sx={{
-          maxWidth: 1440,
+          maxWidth: 1920,
           mx: "auto",
           px: { xs: 3, md: 10 },
           py: { xs: 6, md: 7 },
@@ -44,9 +36,21 @@ export default function Pillars() {
             key={pillar.num}
             sx={{
               px: { md: 6 },
+              textAlign: { xs: "center", md: "left" },
               borderRight: {
-                md: index < pillars.length - 1 ? "1px solid #E0D8CE" : "none",
+                md:
+                  index < pillars.length - 1
+                    ? "1px solid rgba(255,255,255,0.1)"
+                    : "none",
               },
+              borderBottom: {
+                xs:
+                  index < pillars.length - 1
+                    ? "1px solid rgba(255,255,255,0.1)"
+                    : "none",
+                md: "none",
+              },
+              pb: { xs: index < pillars.length - 1 ? 4 : 0, md: 0 },
               "&:first-of-type": { pl: { md: 0 } },
               "&:last-of-type": { pr: { md: 0 } },
             }}
@@ -57,7 +61,7 @@ export default function Pillars() {
                 fontFamily: '"Apple Chancery", Palatino, serif',
                 fontStyle: "italic",
                 fontSize: "2rem",
-                color: "rgba(201, 168, 108, 0.6)",
+                color: "rgba(196, 168, 130, 0.7)",
                 lineHeight: 1,
                 mb: 2,
               }}
@@ -69,9 +73,10 @@ export default function Pillars() {
             <Typography
               sx={{
                 fontFamily: '"Apple Chancery", Palatino, serif',
-                fontSize: "1rem",
+                fontSize: "2rem",
+                fontStyle: "italic",
                 fontWeight: 400,
-                color: "#3A2E28",
+                color: "#FFFFFF",
                 mb: 1.5,
               }}
             >
@@ -85,7 +90,7 @@ export default function Pillars() {
                 fontWeight: 300,
                 fontSize: "0.875rem",
                 lineHeight: 1.75,
-                color: "#736156",
+                color: "rgba(255,255,255,0.6)",
               }}
             >
               {pillar.desc}
