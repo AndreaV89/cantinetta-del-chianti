@@ -87,7 +87,7 @@ export default async function HeroVideo() {
           sx={{
             fontFamily:
               '"Apple Chancery", Palatino, "Palatino Linotype", serif',
-            fontSize: { xs: "2.75rem", md: "4.5rem" },
+            fontSize: { xs: "2.75rem", md: "5rem", lg: "5.5rem" },
             fontStyle: "italic",
             fontWeight: 400,
             lineHeight: 1.15,
@@ -104,7 +104,7 @@ export default async function HeroVideo() {
             fontFamily:
               '"Apple Chancery", Palatino, "Palatino Linotype", serif',
             fontStyle: "italic",
-            fontSize: { xs: "2.75rem", md: "4.5rem" },
+            fontSize: { xs: "2.75rem", md: "5rem", lg: "5.5rem" },
             fontWeight: 400,
             lineHeight: 1.15,
             color: colors.beige,
