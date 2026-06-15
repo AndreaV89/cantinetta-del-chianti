@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# La Cantinetta del Chianti
 
-## Getting Started
+Sito vetrina per un'enoteca storica nel cuore del Chianti Classico, attiva dal 2003 a Gaiole in Chianti (SI).
 
-First, run the development server:
+🌐 **Live:** [lacantinettadelchianti.it](https://www.lacantinettadelchianti.it)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Stack
+
+| Layer            | Tecnologia                                           |
+| ---------------- | ---------------------------------------------------- |
+| Frontend         | Next.js 15 (App Router), TypeScript                  |
+| UI               | Material UI v6                                       |
+| CMS              | WordPress headless + ACF, REST API                   |
+| i18n             | next-intl (IT / EN)                                  |
+| Galleria         | ACF Photo Gallery Field + yet-another-react-lightbox |
+| Hosting frontend | Vercel                                               |
+| Hosting CMS      | Cloudways (DigitalOcean Amsterdam)                   |
+
+---
+
+## Funzionalità principali
+
+- **Architettura headless** — WordPress come CMS, Next.js come frontend
+- **Multilingua IT/EN** con next-intl e WPML
+- **Custom Post Types** — Vini, Prodotti, Album, Cantine
+- **Filtri dinamici** per tipologia vino e categoria prodotto
+- **Galleria fotografica** con scorrimento orizzontale, drag-to-scroll e lightbox fullscreen
+- **Video hero** a piena schermata
+- **Open Graph** e SEO ottimizzati per ogni pagina
+- **ISR** — revalidazione automatica ogni ora (`revalidate: 3600`)
+
+---
+
+## Struttura del progetto
+
+```
+src/
+  app/
+    [locale]/
+      page.tsx              # Home
+      vini/page.tsx
+      prodotti/page.tsx
+      servizi/page.tsx
+      storie/page.tsx
+      chi-siamo/page.tsx
+      layout.tsx
+    sitemap.ts
+    robots.ts
+  components/
+    layout/                 # Navbar, Footer
+    sections/               # Sezioni delle pagine
+    ui/                     # Componenti condivisi (ThemeRegistry, ProdottoCard…)
+  lib/
+    wordpress.ts            # Fetch helpers REST API
+  styles/
+    theme.ts                # MUI theme
+    colors.ts               # Palette centralizzata
+  types/
+    index.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variabili d'ambiente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Crea un file `.env.local` nella root del progetto:
 
-## Learn More
+```env
+NEXT_PUBLIC_WP_URL=https://your-wordpress-instance.cloudwaysapps.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Avvio in locale
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Installa le dipendenze
+npm install
 
-## Deploy on Vercel
+# Avvia il server di sviluppo
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> **Nota:** In sviluppo locale, se vuoi dati sempre freschi puoi impostare temporaneamente `cache: 'no-store'` nei fetch in `src/lib/wordpress.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Per forzare il rebuild della cache Next.js (es. dopo aggiornamento immagini in `public/`):
+
+```bash
+rm -rf .next && npm run dev
+```
+
+---
+
+## WordPress REST API
+
+Gli endpoint principali esposti dal CMS:
+
+```
+/wp-json/wp/v2/vini        — lista vini
+/wp-json/wp/v2/prodotti    — lista prodotti
+/wp-json/wp/v2/album       — lista album
+/wp-json/wp/v2/cantine     — lista cantine
+/wp-json/acf/v3/vini       — campi ACF vini
+/wp-json/acf/v3/prodotti   — campi ACF prodotti
+```
+
+> **Importante:** Non usare il parametro `_fields` sugli endpoint lista — causa risultati incompleti con i Custom Post Types.
+
+---
+
+## Note tecniche
+
+### ACF Photo Gallery — struttura risposta
+
+Le foto dell'album sono in un array annidato:
+
+```typescript
+const fotoRaw = acf.photo_gallery?.foto;
+const foto =
+  Array.isArray(fotoRaw) && Array.isArray(fotoRaw[0]) ? fotoRaw[0] : [];
+```
+
+### Domini autorizzati per `next/image`
+
+Configurati in `next.config.ts`:
+
+- `wordpress-1573725-6349681.cloudwaysapps.com`
+- `images.unsplash.com`
+
+---
+
+## Design System
+
+**Font**
+
+- Titoli: `Apple Chancery, Palatino, serif`
+- Body: `DM Sans` (Google Fonts via `next/font`)
+
+**Palette principale**
+
+| Token    | Valore    | Uso                   |
+| -------- | --------- | --------------------- |
+| `merlot` | `#7D1A2C` | CTA, bottoni, accenti |
+| `beige`  | `#C4A882` | Label, divider        |
+| `bg`     | `#FEFCFB` | Sfondo principale     |
+| `dark`   | `#4A0E1E` | Sezioni scure         |
+| `text`   | `#1E1414` | Testo principale      |
+
+---
+
+## Sviluppato da
+
+[Andrea Vannetti](https://andreavannetti.dev) — Sviluppatore web freelance nel Chianti

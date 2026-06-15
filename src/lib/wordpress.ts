@@ -31,7 +31,6 @@ export function decodeHtmlEntities(text: string): string {
 }
 
 // ─── Helper: parsing immagine featured ────────────────────
-
 function parseFeaturedImage(raw: WPRawPost) {
   const media = raw._embedded?.["wp:featuredmedia"]?.[0];
   if (!media) return null;
@@ -45,7 +44,6 @@ function parseFeaturedImage(raw: WPRawPost) {
 }
 
 // ─── Vini ─────────────────────────────────────────────────
-
 export async function getVini(locale = "it"): Promise<Vino[]> {
   const [listRes, acfRes] = await Promise.all([
     fetch(
@@ -65,7 +63,6 @@ export async function getVini(locale = "it"): Promise<Vino[]> {
   if (!listRes.ok) return [];
   const listData: WPRawPost[] = await listRes.json();
 
-  // Mappa id → acf fields dall'endpoint ACF
   const acfMap: Record<number, Vino["acf"]> = {};
   if (acfRes.ok) {
     const acfData = await acfRes.json();
@@ -89,7 +86,6 @@ export async function getViniInEvidenza(locale = "it"): Promise<Vino[]> {
 }
 
 // ─── Prodotti ─────────────────────────────────────────────
-
 export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
   const [listRes, acfRes] = await Promise.all([
     fetch(
@@ -109,7 +105,6 @@ export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
   if (!listRes.ok) return [];
   const listData: WPRawPost[] = await listRes.json();
 
-  // Mappa id → acf fields dall'endpoint ACF
   const acfMap: Record<number, Prodotto["acf"]> = {};
   if (acfRes.ok) {
     const acfData = await acfRes.json();
@@ -135,7 +130,6 @@ export async function getProdottiInEvidenza(
 }
 
 // ─── Album ─────────────────────────────────────────────
-
 export async function getAlbum(locale = "it"): Promise<Album[]> {
   const res = await fetch(
     `${WP_URL}/wp-json/wp/v2/album?per_page=100&lang=${locale}`,
@@ -186,7 +180,6 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
 }
 
 // ─── Cantine ─────────────────────────────────────────────
-
 export async function getCantine(): Promise<Cantina[]> {
   const options = { next: { revalidate: 3600 } } as const;
 
