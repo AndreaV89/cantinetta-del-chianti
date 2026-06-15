@@ -1,5 +1,3 @@
-// ─── WordPress REST API — risposta generica ───────────────
-
 export interface WPImage {
   id: number;
   url: string;
@@ -9,7 +7,6 @@ export interface WPImage {
 }
 
 // ─── Vino ─────────────────────────────────────────────────
-
 export interface Vino {
   id: number;
   slug: string;
@@ -26,7 +23,6 @@ export interface Vino {
 }
 
 // ─── Prodotto ─────────────────────────────────────────────
-
 export interface Prodotto {
   id: number;
   slug: string;
@@ -111,7 +107,6 @@ export interface CantinaRaw {
 }
 
 // ─── WordPress raw response ────────────────────────────────
-// Quello che arriva dalla REST API prima del parsing
 
 export interface WPRawPost {
   id: number;
@@ -133,7 +128,6 @@ export interface WPRawPost {
 }
 
 // ─── Foto (da ACF Photo Gallery) ──────────────────────────
-
 export interface FotoGallery {
   id: number;
   title: string;
@@ -153,7 +147,6 @@ export interface FotoGallery {
 }
 
 // ─── Album ────────────────────────────────────────────────
-
 export interface Album {
   id: number;
   slug: string;

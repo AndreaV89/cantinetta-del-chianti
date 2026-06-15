@@ -121,11 +121,6 @@ export default function ProdottoCard({
             zIndex: 2,
           }}
         >
-          {/*
-           * layout=true: quando la descrizione appare/scompare,
-           * Framer Motion anima smoothly lo spostamento verso l'alto
-           * invece di saltare di scatto.
-           */}
           <motion.div
             layout
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
