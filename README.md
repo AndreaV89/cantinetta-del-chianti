@@ -152,4 +152,4 @@ Configurati in `next.config.ts`:
 
 ## Sviluppato da
 
-[Andrea Vannetti](https://andreavannetti.dev) — Sviluppatore web freelance nel Chianti
+[Andrea Vannetti](https://andreavannetti.dev) — Sviluppatore web freelance
