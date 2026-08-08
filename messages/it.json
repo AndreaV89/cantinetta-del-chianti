@@ -102,7 +102,7 @@
       },
       "orari": {
         "label": "Orari",
-        "value": "Dom/Lun/Mer: 10:00–19:30\nGio/Ven: 09:45–20:00\nSab: 10:00–20:00\nMar: Chiuso"
+        "value": "Dom/Lun/Mer: 10:00–19:30\nGio/Ven: 09:45–20:00\nSab: 10:00–20:00\nMar: 16:00-20:30"
       },
       "contatti": {
         "label": "Contatti",
