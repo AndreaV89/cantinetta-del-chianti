@@ -3,6 +3,13 @@ import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
 import { colors } from "@/styles/colors";
 import { getTranslations, getLocale } from "next-intl/server";
 
+const COMPANY = {
+  name: "Enoteca La Cantinetta del Chianti S.A.S. di Azzato Riccardo Michele",
+  address: "Via Ricasoli 33, 53013 Gaiole in Chianti (SI)",
+  vat: "00970520524",
+  rea: "SI-110318",
+};
+
 export default async function Footer() {
   const t = await getTranslations("footer");
   const locale = await getLocale();
@@ -18,7 +25,7 @@ export default async function Footer() {
       { label: t("links.chiSiamo"), href: `/${locale}/chi-siamo` },
       {
         label: t("links.contattaci"),
-        href: "https://wa.me/39XXXXXXXXXX",
+        href: "https://wa.me/393339687729",
         target: "_blank",
       },
       {
@@ -248,7 +255,7 @@ export default async function Footer() {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
-            alignItems: { xs: "center", md: "center" },
+            alignItems: { xs: "center", md: "flex-end" },
             gap: 1,
             pt: 3,
           }}
@@ -258,12 +265,14 @@ export default async function Footer() {
               fontFamily: '"DM Sans", sans-serif',
               fontWeight: 300,
               fontSize: "0.75rem",
+              lineHeight: 1.7,
               color: "rgba(255,255,255,0.3)",
               textAlign: { xs: "center", md: "left" },
             }}
           >
-            © {new Date().getFullYear()} La Cantinetta del Chianti ·{" "}
-            {t("copyright")}
+            © {new Date().getFullYear()} {COMPANY.name} · {t("copyright")}
+            <br />
+            {COMPANY.address} · {t("vat")} {COMPANY.vat} · REA {COMPANY.rea}
           </Typography>
           <Typography
             sx={{
