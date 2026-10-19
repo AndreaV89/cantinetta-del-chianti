@@ -52,13 +52,13 @@ export default async function ContattiPage() {
   ];
 
   const orariItems = [
-    { label: t("orari.domenica"), value: "10:00 – 19:30" },
-    { label: t("orari.lunedi"), value: "10:00 – 19:30" },
+    { label: t("orari.domenica"), value: "10:00 – 13:00 · 16:00 – 19:00" },
+    { label: t("orari.lunedi"), value: "10:00 – 13:00 · 16:00 – 19:00" },
     { label: t("orari.martedi"), value: t("orari.chiuso") },
-    { label: t("orari.mercoledi"), value: "10:00 – 19:30" },
-    { label: t("orari.giovedi"), value: "09:45 – 19:30" },
-    { label: t("orari.venerdi"), value: "09:45 – 20:00" },
-    { label: t("orari.sabato"), value: "10:00 – 20:00" },
+    { label: t("orari.mercoledi"), value: "10:00 – 13:00 · 16:00 – 19:00" },
+    { label: t("orari.giovedi"), value: "10:00 – 13:00 · 16:00 – 19:00" },
+    { label: t("orari.venerdi"), value: "10:00 – 13:00 · 16:00 – 19:30" },
+    { label: t("orari.sabato"), value: "10:00 – 13:00 · 16:00 – 19:30" },
   ];
 
   const indicazioni = [
