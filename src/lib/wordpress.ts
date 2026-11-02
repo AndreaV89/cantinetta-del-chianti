@@ -14,6 +14,22 @@ import {
 
 const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
 
+async function safeJson<T>(res: Response, fallback: T): Promise<T> {
+  if (!res.ok) return fallback;
+  const text = await res.text();
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    console.error(
+      "WP non-JSON response",
+      res.status,
+      res.url,
+      text.slice(0, 300),
+    );
+    return fallback;
+  }
+}
+
 // ─── Helper: decodifica entità HTML ───────────────────────
 export function decodeHtmlEntities(text: string): string {
   return text
@@ -60,8 +76,7 @@ export async function getVini(locale = "it"): Promise<Vino[]> {
     ),
   ]);
 
-  if (!listRes.ok) return [];
-  const listData: WPRawPost[] = await listRes.json();
+  const listData = await safeJson<WPRawPost[]>(listRes, []);
 
   const acfMap: Record<number, Vino["acf"]> = {};
   if (acfRes.ok) {
