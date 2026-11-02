@@ -61,40 +61,19 @@ function parseFeaturedImage(raw: WPRawPost) {
 
 // ─── Vini ─────────────────────────────────────────────────
 export async function getVini(locale = "it"): Promise<Vino[]> {
-  const [listRes, acfRes] = await Promise.all([
-    fetch(
-      `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-    fetch(
-      `${WP_URL}/wp-json/acf/v3/vini?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-  ]);
+  const listRes = await fetch(
+    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+    { next: { revalidate: 60 } },
+  );
 
   const listData = await safeJson<WPRawPost[]>(listRes, []);
-
-  const acfMap: Record<number, Vino["acf"]> = {};
-  const acfData = await safeJson<{ id: number; acf: Vino["acf"] }[] | null>(
-    acfRes,
-    null,
-  );
-  if (Array.isArray(acfData)) {
-    for (const item of acfData) {
-      acfMap[item.id] = item.acf;
-    }
-  }
 
   return listData.map((item) => ({
     id: item.id,
     slug: item.slug,
     title: decodeHtmlEntities(item.title.rendered),
     featuredImage: parseFeaturedImage(item),
-    acf: acfMap[item.id] ?? (item.acf as Vino["acf"]),
+    acf: item.acf as Vino["acf"],
   }));
 }
 
