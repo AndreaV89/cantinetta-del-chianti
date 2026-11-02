@@ -163,14 +163,14 @@ export async function getCantine(): Promise<Cantina[]> {
 
   const [page1, page2] = await Promise.all([
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(
-      (r) => r.json(),
+      (r) => safeJson<CantinaRaw[]>(r, []),
     ),
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=2`, options).then(
-      (r) => r.json(),
+      (r) => safeJson<CantinaRaw[]>(r, []),
     ),
   ]);
 
-  const all = [...page1, ...(Array.isArray(page2) ? page2 : [])];
+  const all = [...page1, ...page2];
 
   return all.map((c: CantinaRaw) => ({
     id: c.id,
