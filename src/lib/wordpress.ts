@@ -84,38 +84,19 @@ export async function getViniInEvidenza(locale = "it"): Promise<Vino[]> {
 
 // ─── Prodotti ─────────────────────────────────────────────
 export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
-  const [listRes, acfRes] = await Promise.all([
-    fetch(
-      `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-    fetch(
-      `${WP_URL}/wp-json/acf/v3/prodotti?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-  ]);
+  const listRes = await fetch(
+    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+    { next: { revalidate: 60 } },
+  );
 
-  if (!listRes.ok) return [];
-  const listData: WPRawPost[] = await listRes.json();
-
-  const acfMap: Record<number, Prodotto["acf"]> = {};
-  if (acfRes.ok) {
-    const acfData = await acfRes.json();
-    for (const item of acfData.posts ?? acfData) {
-      acfMap[item.id] = item.acf;
-    }
-  }
+  const listData = await safeJson<WPRawPost[]>(listRes, []);
 
   return listData.map((item) => ({
     id: item.id,
     slug: item.slug,
     title: decodeHtmlEntities(item.title.rendered),
     featuredImage: parseFeaturedImage(item),
-    acf: acfMap[item.id] ?? (item.acf as Prodotto["acf"]),
+    acf: item.acf as Prodotto["acf"],
   }));
 }
 
