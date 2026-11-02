@@ -61,40 +61,19 @@ function parseFeaturedImage(raw: WPRawPost) {
 
 // ─── Vini ─────────────────────────────────────────────────
 export async function getVini(locale = "it"): Promise<Vino[]> {
-  const [listRes, acfRes] = await Promise.all([
-    fetch(
-      `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-    fetch(
-      `${WP_URL}/wp-json/acf/v3/vini?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-  ]);
+  const listRes = await fetch(
+    `${WP_URL}/wp-json/wp/v2/vini?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+    { next: { revalidate: 60 } },
+  );
 
   const listData = await safeJson<WPRawPost[]>(listRes, []);
-
-  const acfMap: Record<number, Vino["acf"]> = {};
-  const acfData = await safeJson<{ id: number; acf: Vino["acf"] }[] | null>(
-    acfRes,
-    null,
-  );
-  if (Array.isArray(acfData)) {
-    for (const item of acfData) {
-      acfMap[item.id] = item.acf;
-    }
-  }
 
   return listData.map((item) => ({
     id: item.id,
     slug: item.slug,
     title: decodeHtmlEntities(item.title.rendered),
     featuredImage: parseFeaturedImage(item),
-    acf: acfMap[item.id] ?? (item.acf as Vino["acf"]),
+    acf: item.acf as Vino["acf"],
   }));
 }
 
@@ -105,38 +84,19 @@ export async function getViniInEvidenza(locale = "it"): Promise<Vino[]> {
 
 // ─── Prodotti ─────────────────────────────────────────────
 export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
-  const [listRes, acfRes] = await Promise.all([
-    fetch(
-      `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-    fetch(
-      `${WP_URL}/wp-json/acf/v3/prodotti?per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
-      {
-        next: { revalidate: 60 },
-      },
-    ),
-  ]);
+  const listRes = await fetch(
+    `${WP_URL}/wp-json/wp/v2/prodotti?_embed&per_page=100&orderby=menu_order&order=asc&lang=${locale}`,
+    { next: { revalidate: 60 } },
+  );
 
-  if (!listRes.ok) return [];
-  const listData: WPRawPost[] = await listRes.json();
-
-  const acfMap: Record<number, Prodotto["acf"]> = {};
-  if (acfRes.ok) {
-    const acfData = await acfRes.json();
-    for (const item of acfData.posts ?? acfData) {
-      acfMap[item.id] = item.acf;
-    }
-  }
+  const listData = await safeJson<WPRawPost[]>(listRes, []);
 
   return listData.map((item) => ({
     id: item.id,
     slug: item.slug,
     title: decodeHtmlEntities(item.title.rendered),
     featuredImage: parseFeaturedImage(item),
-    acf: acfMap[item.id] ?? (item.acf as Prodotto["acf"]),
+    acf: item.acf as Prodotto["acf"],
   }));
 }
 
@@ -156,8 +116,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
     },
   );
 
-  if (!res.ok) return [];
-  const data: WPRawAlbum[] = await res.json();
+  const data = await safeJson<WPRawAlbum[]>(res, []);
 
   const albumCompleti = await Promise.all(
     data.map(async (item) => {
@@ -166,9 +125,8 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
         { next: { revalidate: 60 } },
       );
 
-      if (!resSingle.ok) return null;
-
-      const single: WPRawAlbum = await resSingle.json();
+      const single = await safeJson<WPRawAlbum | null>(resSingle, null);
+      if (!single) return null;
       const rawAcf = single.acf as Record<string, unknown>;
       const photoGallery = rawAcf.photo_gallery as
         | Record<string, unknown>
@@ -203,14 +161,14 @@ export async function getCantine(): Promise<Cantina[]> {
 
   const [page1, page2] = await Promise.all([
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(
-      (r) => r.json(),
+      (r) => safeJson<CantinaRaw[]>(r, []),
     ),
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=2`, options).then(
-      (r) => r.json(),
+      (r) => safeJson<CantinaRaw[]>(r, []),
     ),
   ]);
 
-  const all = [...page1, ...(Array.isArray(page2) ? page2 : [])];
+  const all = [...page1, ...page2];
 
   return all.map((c: CantinaRaw) => ({
     id: c.id,
