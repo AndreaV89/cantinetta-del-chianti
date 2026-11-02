@@ -79,9 +79,12 @@ export async function getVini(locale = "it"): Promise<Vino[]> {
   const listData = await safeJson<WPRawPost[]>(listRes, []);
 
   const acfMap: Record<number, Vino["acf"]> = {};
-  if (acfRes.ok) {
-    const acfData = await acfRes.json();
-    for (const item of acfData.posts ?? acfData) {
+  const acfData = await safeJson<{ id: number; acf: Vino["acf"] }[] | null>(
+    acfRes,
+    null,
+  );
+  if (Array.isArray(acfData)) {
+    for (const item of acfData) {
       acfMap[item.id] = item.acf;
     }
   }
