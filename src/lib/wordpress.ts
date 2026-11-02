@@ -116,8 +116,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
     },
   );
 
-  if (!res.ok) return [];
-  const data: WPRawAlbum[] = await res.json();
+  const data = await safeJson<WPRawAlbum[]>(res, []);
 
   const albumCompleti = await Promise.all(
     data.map(async (item) => {
@@ -126,9 +125,8 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
         { next: { revalidate: 60 } },
       );
 
-      if (!resSingle.ok) return null;
-
-      const single: WPRawAlbum = await resSingle.json();
+      const single = await safeJson<WPRawAlbum | null>(resSingle, null);
+      if (!single) return null;
       const rawAcf = single.acf as Record<string, unknown>;
       const photoGallery = rawAcf.photo_gallery as
         | Record<string, unknown>
