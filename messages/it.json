@@ -425,5 +425,11 @@
     "title": "La Cantinetta del Chianti — Enoteca a Gaiole in Chianti",
     "description": "Enoteca a Gaiole in Chianti dal 2003. Vini selezionati, prodotti tipici toscani, degustazioni guidate e aperitivi nel cuore del Chianti Classico.",
     "keywords": "enoteca,Chianti,vini,Gaiole in Chianti,Chianti Classico,degustazione,prodotti tipici toscani"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Pagina non trovata",
+    "description": "La pagina che cerchi non esiste o è stata spostata.",
+    "cta": "Torna alla home →"
   }
 }

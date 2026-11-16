@@ -6,8 +6,8 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import AboutSection from "@/components/sections/AboutSection";
 import QuoteSection from "@/components/sections/QuoteSection";
 import RecensioniSection from "@/components/sections/RecensioniSection";
-import { getViniInEvidenza } from "@/lib/wordpress";
-import { getTranslations } from "next-intl/server";
+import { getViniInEvidenza, withFallback } from "@/lib/wordpress";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -28,7 +28,8 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const vini = await getViniInEvidenza(locale);
+  setRequestLocale(locale);
+  const vini = await withFallback(getViniInEvidenza(locale), []);
 
   return (
     <main>

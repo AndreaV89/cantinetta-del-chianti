@@ -3,7 +3,7 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { colors } from "@/styles/colors";
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -21,9 +21,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ServiziPage() {
+export default async function ServiziPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("serviziPage");
-  const locale = await getLocale();
 
   const servizi = [
     {

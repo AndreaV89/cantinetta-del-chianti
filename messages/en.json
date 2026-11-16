@@ -425,5 +425,11 @@
     "title": "La Cantinetta del Chianti — Wine Shop in Gaiole in Chianti",
     "description": "Wine shop in Gaiole in Chianti since 2003. Selected wines, Tuscan typical products, guided tastings and aperitivo in the heart of Chianti Classico.",
     "keywords": "wine shop,Chianti,wines,Gaiole in Chianti,Chianti Classico,tasting,Tuscan products"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "cta": "Back to home →"
   }
 }

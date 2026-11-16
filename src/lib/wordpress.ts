@@ -11,11 +11,20 @@ import {
   ZonaFrancia,
   ZonaToscana,
 } from "@/types";
+import { PHASE_PRODUCTION_BUILD } from "next/constants";
 
 const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
 
-async function safeJson<T>(res: Response, fallback: T): Promise<T> {
-  if (!res.ok) return fallback;
+// Legge la risposta di WordPress come JSON.
+// Se lo status non è ok o arriva HTML (es. pagina anti-bot di Cloudways)
+// logga status + endpoint e lancia un errore invece di restituire [],
+// così il render fallisce e Next non salva in cache una pagina vuota.
+async function parseWpJson<T>(res: Response): Promise<T> {
+  const endpoint = res.url.replace(WP_URL ?? "", "");
+  if (!res.ok) {
+    console.error("WP error response", res.status, endpoint);
+    throw new Error(`WordPress ${res.status} su ${endpoint}`);
+  }
   const text = await res.text();
   try {
     return JSON.parse(text) as T;
@@ -23,9 +32,30 @@ async function safeJson<T>(res: Response, fallback: T): Promise<T> {
     console.error(
       "WP non-JSON response",
       res.status,
-      res.url,
+      endpoint,
       text.slice(0, 300),
     );
+    throw new Error(`WordPress risposta non JSON su ${endpoint}`);
+  }
+}
+
+// Da usare nelle pagine attorno alle funzioni WordPress.
+// - A runtime (rigenerazione ISR) l'errore viene rilanciato: Next scarta il
+//   nuovo render e continua a servire l'ultima versione valida in cache.
+// - In build o in dev non esiste ancora una versione in cache: si usa il
+//   fallback (es. lista vuota) e la pagina mostra lo stato vuoto.
+export async function withFallback<T>(
+  promise: Promise<T>,
+  fallback: T,
+): Promise<T> {
+  try {
+    return await promise;
+  } catch (error) {
+    const noCachedVersion =
+      process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD ||
+      process.env.NODE_ENV === "development";
+    if (!noCachedVersion) throw error;
+    console.error("WP non disponibile, uso il fallback:", error);
     return fallback;
   }
 }
@@ -66,7 +96,7 @@ export async function getVini(locale = "it"): Promise<Vino[]> {
     { next: { revalidate: 60 } },
   );
 
-  const listData = await safeJson<WPRawPost[]>(listRes, []);
+  const listData = await parseWpJson<WPRawPost[]>(listRes);
 
   return listData.map((item) => ({
     id: item.id,
@@ -89,7 +119,7 @@ export async function getProdotti(locale = "it"): Promise<Prodotto[]> {
     { next: { revalidate: 60 } },
   );
 
-  const listData = await safeJson<WPRawPost[]>(listRes, []);
+  const listData = await parseWpJson<WPRawPost[]>(listRes);
 
   return listData.map((item) => ({
     id: item.id,
@@ -116,7 +146,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
     },
   );
 
-  const data = await safeJson<WPRawAlbum[]>(res, []);
+  const data = await parseWpJson<WPRawAlbum[]>(res);
 
   const albumCompleti = await Promise.all(
     data.map(async (item) => {
@@ -125,8 +155,7 @@ export async function getAlbum(locale = "it"): Promise<Album[]> {
         { next: { revalidate: 60 } },
       );
 
-      const single = await safeJson<WPRawAlbum | null>(resSingle, null);
-      if (!single) return null;
+      const single = await parseWpJson<WPRawAlbum>(resSingle);
       const rawAcf = single.acf as Record<string, unknown>;
       const photoGallery = rawAcf.photo_gallery as
         | Record<string, unknown>
@@ -161,10 +190,11 @@ export async function getCantine(): Promise<Cantina[]> {
 
   const [page1, page2] = await Promise.all([
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=1`, options).then(
-      (r) => safeJson<CantinaRaw[]>(r, []),
+      (r) => parseWpJson<CantinaRaw[]>(r),
     ),
     fetch(`${WP_URL}/wp-json/wp/v2/cantine?per_page=100&page=2`, options).then(
-      (r) => safeJson<CantinaRaw[]>(r, []),
+      // WordPress risponde 400 se la pagina 2 non esiste (meno di 100 cantine)
+      (r) => (r.status === 400 ? [] : parseWpJson<CantinaRaw[]>(r)),
     ),
   ]);
 

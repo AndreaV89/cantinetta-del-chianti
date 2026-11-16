@@ -1,6 +1,8 @@
 import { DM_Sans } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import ThemeRegistry from "@/components/ui/ThemeRegistry";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -14,12 +16,18 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
+// Prerender delle sole lingue supportate (it, en)
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: "metadata" });
   return {
     metadataBase: new URL("https://lacantinettadelchianti.it"),
@@ -43,8 +51,11 @@ export async function generateMetadata({
       ],
     },
     icons: {
-      icon: "/favicon.svg",
-      apple: "/favicon.svg",
+      icon: [
+        { url: "/favicon.ico", sizes: "32x32" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+      apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
     },
     other: {
       "format-detection": "telephone=no",
@@ -66,6 +77,9 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // Lingua non supportata (es. /phpinfo.php finisce in [locale]) → 404
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
