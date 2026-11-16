@@ -38,6 +38,7 @@
 - Preferire Server Components dove possibile
 - I fetch WordPress vanno sempre in `src/lib/wordpress.ts`
 - I tipi TypeScript vanno in `src/types/index.ts`
+- Le lingue vanno sempre validate con `hasLocale` in `src/i18n/request.ts` e nel layout `[locale]`
 
 ## WordPress REST API
 

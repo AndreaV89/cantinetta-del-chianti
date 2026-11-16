@@ -1,11 +1,11 @@
 // Storie page
 
 import { Box, Typography } from "@mui/material";
-import { getAlbum } from "@/lib/wordpress";
+import { getAlbum, withFallback } from "@/lib/wordpress";
 import AlbumStrip from "@/components/sections/AlbumStrip";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -26,8 +26,9 @@ export default async function FotoPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("storiePage");
-  const album = await getAlbum(locale);
+  const album = await withFallback(getAlbum(locale), []);
 
   return (
     <>

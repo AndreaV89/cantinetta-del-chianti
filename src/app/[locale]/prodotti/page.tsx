@@ -2,10 +2,10 @@
 
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { getProdotti } from "@/lib/wordpress";
+import { getProdotti, withFallback } from "@/lib/wordpress";
 import ProdottiGrid from "@/components/sections/ProdottiGrid";
 import { colors } from "@/styles/colors";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -29,8 +29,9 @@ export default async function ProdottiPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("prodottiPage");
-  const prodotti = await getProdotti(locale);
+  const prodotti = await withFallback(getProdotti(locale), []);
 
   return (
     <>

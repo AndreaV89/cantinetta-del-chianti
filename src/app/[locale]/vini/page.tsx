@@ -2,12 +2,12 @@
 
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { getVini } from "@/lib/wordpress";
+import { getVini, withFallback } from "@/lib/wordpress";
 import ViniGrid from "@/components/sections/ViniGrid";
 import { colors } from "@/styles/colors";
 import CantineSection from "@/components/sections/CantineSection";
 import { getCantine } from "@/lib/wordpress";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -28,8 +28,12 @@ export default async function ViniPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("viniPage");
-  const [vini, cantine] = await Promise.all([getVini(locale), getCantine()]);
+  const [vini, cantine] = await Promise.all([
+    withFallback(getVini(locale), []),
+    withFallback(getCantine(), []),
+  ]);
   const viniNonInEvidenza = vini.filter((v) => !v.acf.in_evidenza);
 
   const stats = [
